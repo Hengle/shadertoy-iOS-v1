@@ -1,5 +1,5 @@
 //
-//  ParallaxView.h
+//  ParallaxViewController.h
 //  ShaderToy
 //
 //  Created by Ricardo Chavarria on 5/1/13.
@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ParallaxView : UIView
+@interface ParallaxViewController : UIViewController
 
-@property (strong, nonatomic) IBOutlet UILabel *name;
-@property (strong, nonatomic) IBOutlet UILabel *authorName;
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
+@property (strong, nonatomic) IBOutlet UILabel *nameLabel;
+@property (strong, nonatomic) IBOutlet UILabel *authorLabel;
 
 @end

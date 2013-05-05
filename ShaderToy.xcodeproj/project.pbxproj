@@ -23,8 +23,9 @@
 		AEA3B56D1731105700786DA2 /* Shader_3.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA3B56A1731105700786DA2 /* Shader_3.png */; };
 		AEA3B56E1731105700786DA2 /* Shader_2.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA3B56B1731105700786DA2 /* Shader_2.png */; };
 		AEA3B56F1731105700786DA2 /* Shader_1.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA3B56C1731105700786DA2 /* Shader_1.png */; };
-		AEA3B5751731141300786DA2 /* ParallaxView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B5741731141300786DA2 /* ParallaxView.m */; };
-		AEA3B5771731143B00786DA2 /* ParallaxView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA3B5761731143B00786DA2 /* ParallaxView.xib */; };
+		AEA3B57B1732327200786DA2 /* ParallaxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B5791732327200786DA2 /* ParallaxViewController.m */; };
+		AEA3B57C1732327200786DA2 /* ParallaxViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA3B57A1732327200786DA2 /* ParallaxViewController.xib */; };
+		AEA3B58617360BBA00786DA2 /* ShaderMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B58517360BBA00786DA2 /* ShaderMenuViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,9 +51,11 @@
 		AEA3B56A1731105700786DA2 /* Shader_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Shader_3.png; sourceTree = "<group>"; };
 		AEA3B56B1731105700786DA2 /* Shader_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Shader_2.png; sourceTree = "<group>"; };
 		AEA3B56C1731105700786DA2 /* Shader_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Shader_1.png; sourceTree = "<group>"; };
-		AEA3B5731731141300786DA2 /* ParallaxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParallaxView.h; sourceTree = "<group>"; };
-		AEA3B5741731141300786DA2 /* ParallaxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParallaxView.m; sourceTree = "<group>"; };
-		AEA3B5761731143B00786DA2 /* ParallaxView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParallaxView.xib; sourceTree = "<group>"; };
+		AEA3B5781732327200786DA2 /* ParallaxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParallaxViewController.h; sourceTree = "<group>"; };
+		AEA3B5791732327200786DA2 /* ParallaxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParallaxViewController.m; sourceTree = "<group>"; };
+		AEA3B57A1732327200786DA2 /* ParallaxViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParallaxViewController.xib; sourceTree = "<group>"; };
+		AEA3B58417360BBA00786DA2 /* ShaderMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderMenuViewController.h; sourceTree = "<group>"; };
+		AEA3B58517360BBA00786DA2 /* ShaderMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShaderMenuViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,9 +107,11 @@
 				AEA3B54F1730E6C700786DA2 /* AppDelegate.m */,
 				AEA3B55D1730E6C700786DA2 /* GalleryViewController.h */,
 				AEA3B55E1730E6C700786DA2 /* GalleryViewController.m */,
-				AEA3B5731731141300786DA2 /* ParallaxView.h */,
-				AEA3B5741731141300786DA2 /* ParallaxView.m */,
-				AEA3B5761731143B00786DA2 /* ParallaxView.xib */,
+				AEA3B5781732327200786DA2 /* ParallaxViewController.h */,
+				AEA3B5791732327200786DA2 /* ParallaxViewController.m */,
+				AEA3B58417360BBA00786DA2 /* ShaderMenuViewController.h */,
+				AEA3B58517360BBA00786DA2 /* ShaderMenuViewController.m */,
+				AEA3B57A1732327200786DA2 /* ParallaxViewController.xib */,
 				AEA3B5571730E6C700786DA2 /* MainStoryboard_iPhone.storyboard */,
 				AEA3B55A1730E6C700786DA2 /* MainStoryboard_iPad.storyboard */,
 				AEA3B5691731104A00786DA2 /* Resources */,
@@ -208,7 +213,7 @@
 				AEA3B56D1731105700786DA2 /* Shader_3.png in Resources */,
 				AEA3B56E1731105700786DA2 /* Shader_2.png in Resources */,
 				AEA3B56F1731105700786DA2 /* Shader_1.png in Resources */,
-				AEA3B5771731143B00786DA2 /* ParallaxView.xib in Resources */,
+				AEA3B57C1732327200786DA2 /* ParallaxViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,7 +228,8 @@
 				AEA3B5501730E6C700786DA2 /* AppDelegate.m in Sources */,
 				AEA3B55F1730E6C700786DA2 /* GalleryViewController.m in Sources */,
 				AEA3B5681730E70500786DA2 /* SWRevealViewController.m in Sources */,
-				AEA3B5751731141300786DA2 /* ParallaxView.m in Sources */,
+				AEA3B57B1732327200786DA2 /* ParallaxViewController.m in Sources */,
+				AEA3B58617360BBA00786DA2 /* ShaderMenuViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -356,6 +362,7 @@
 				AEA3B5641730E6C700786DA2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

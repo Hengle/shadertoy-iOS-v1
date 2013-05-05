@@ -8,9 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GalleryViewController : UIViewController
+@interface GalleryViewController : UIPageViewController <UIPageViewControllerDelegate, UIPageViewControllerDataSource, SWRevealViewControllerDelegate>
+{
+    bool revealControllerShowing;
+    NSArray *colors;
+    NSMutableArray *viewControllers;
+}
 
-@property (strong, nonatomic) IBOutlet UIButton *revealButton;
-@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *revealButton;
 
 @end
