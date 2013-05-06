@@ -10,6 +10,11 @@
 		AE933D5F1736F725009EAF41 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE933D5E1736F725009EAF41 /* OpenGLES.framework */; };
 		AE933D611736F731009EAF41 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE933D601736F731009EAF41 /* GLKit.framework */; };
 		AE933D6317370EE0009EAF41 /* cellbg.png in Resources */ = {isa = PBXBuildFile; fileRef = AE933D6217370EE0009EAF41 /* cellbg.png */; };
+		AE933D691737A78B009EAF41 /* facebook-like-5-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AE933D641737A78B009EAF41 /* facebook-like-5-icon.png */; };
+		AE933D6A1737A78B009EAF41 /* favorite-2-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AE933D651737A78B009EAF41 /* favorite-2-icon.png */; };
+		AE933D6B1737A78B009EAF41 /* favorite-3-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AE933D661737A78B009EAF41 /* favorite-3-icon.png */; };
+		AE933D6C1737A78B009EAF41 /* inbox-8-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AE933D671737A78B009EAF41 /* inbox-8-icon.png */; };
+		AE933D6D1737A78B009EAF41 /* twitter-5-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AE933D681737A78B009EAF41 /* twitter-5-icon.png */; };
 		AEA3B5401730E6C700786DA2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEA3B53F1730E6C700786DA2 /* UIKit.framework */; };
 		AEA3B5421730E6C700786DA2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEA3B5411730E6C700786DA2 /* Foundation.framework */; };
 		AEA3B5441730E6C700786DA2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEA3B5431730E6C700786DA2 /* CoreGraphics.framework */; };
@@ -40,6 +45,11 @@
 		AE933D5E1736F725009EAF41 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		AE933D601736F731009EAF41 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		AE933D6217370EE0009EAF41 /* cellbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cellbg.png; sourceTree = "<group>"; };
+		AE933D641737A78B009EAF41 /* facebook-like-5-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook-like-5-icon.png"; sourceTree = "<group>"; };
+		AE933D651737A78B009EAF41 /* favorite-2-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "favorite-2-icon.png"; sourceTree = "<group>"; };
+		AE933D661737A78B009EAF41 /* favorite-3-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "favorite-3-icon.png"; sourceTree = "<group>"; };
+		AE933D671737A78B009EAF41 /* inbox-8-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inbox-8-icon.png"; sourceTree = "<group>"; };
+		AE933D681737A78B009EAF41 /* twitter-5-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter-5-icon.png"; sourceTree = "<group>"; };
 		AEA3B53C1730E6C700786DA2 /* ShaderToy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShaderToy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEA3B53F1730E6C700786DA2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AEA3B5411730E6C700786DA2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -197,6 +207,11 @@
 		AEA3B5931736EE9100786DA2 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				AE933D641737A78B009EAF41 /* facebook-like-5-icon.png */,
+				AE933D651737A78B009EAF41 /* favorite-2-icon.png */,
+				AE933D661737A78B009EAF41 /* favorite-3-icon.png */,
+				AE933D671737A78B009EAF41 /* inbox-8-icon.png */,
+				AE933D681737A78B009EAF41 /* twitter-5-icon.png */,
 				AEA3B58F1736EE8500786DA2 /* danger-8-icon.png */,
 				AEA3B5961736F3C200786DA2 /* dashboard-5-icon.png */,
 				AEA3B5911736EE8B00786DA2 /* list-view-icon.png */,
@@ -268,6 +283,11 @@
 				AEA3B5971736F3C200786DA2 /* dashboard-5-icon.png in Resources */,
 				AEA3B5991736F50000786DA2 /* shuffle-3-icon.png in Resources */,
 				AE933D6317370EE0009EAF41 /* cellbg.png in Resources */,
+				AE933D691737A78B009EAF41 /* facebook-like-5-icon.png in Resources */,
+				AE933D6A1737A78B009EAF41 /* favorite-2-icon.png in Resources */,
+				AE933D6B1737A78B009EAF41 /* favorite-3-icon.png in Resources */,
+				AE933D6C1737A78B009EAF41 /* inbox-8-icon.png in Resources */,
+				AE933D6D1737A78B009EAF41 /* twitter-5-icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
