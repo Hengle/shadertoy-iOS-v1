@@ -24,7 +24,8 @@
 
 - (void)awakeFromNib
 {
-    NSLog(@"here");
+    self.backgroundView = [UIView new];
+    self.backgroundView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"cellbg"]];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

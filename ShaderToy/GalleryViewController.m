@@ -45,10 +45,6 @@
     tapGesture.numberOfTapsRequired = 1;
     
     [self.view addGestureRecognizer:tapGesture];
-    
-    UIButton* button = [[UIButton alloc] initWithFrame:CGRectMake(500, 500, 30, 30)];
-    
-    [self.view addSubview:button];
 }
 
 - (void)didReceiveMemoryWarning

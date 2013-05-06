@@ -35,7 +35,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    self.tableView.backgroundColor = [[UIColor colorWithWhite:0.102 alpha:1.000] colorWithNoiseWithOpacity:0.2f];
+    self.tableView.backgroundColor = [UIColor darkGrayColor];
 }
 
 - (void)didReceiveMemoryWarning
@@ -99,9 +99,6 @@
 {
     static NSString *CellIdentifier = @"ShaderMenuCell";
     ShaderMenuCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
-    cell.backgroundView = [KGNoiseView new];
-    cell.backgroundView.backgroundColor = [UIColor colorWithPatternImage:[[UIImage imageNamed:@"cellbg"] imageWithNoiseOpacity:0.2f]];
     
     if (indexPath.section == 0)
     {

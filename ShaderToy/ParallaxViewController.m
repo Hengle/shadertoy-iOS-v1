@@ -165,7 +165,17 @@ GLfloat gCubeVertexData[216] =
     
     self.effect = [[GLKBaseEffect alloc] init];
     self.effect.light0.enabled = GL_TRUE;
-    self.effect.light0.diffuseColor = GLKVector4Make(1.0f, 0.4f, 0.4f, 1.0f);
+    
+    float randomR = ((float)(arc4random() % 100) / 100.0f);
+    float randomG = ((float)(arc4random() % 100) / 100.0f);
+    float randomB = ((float)(arc4random() % 100) / 100.0f);
+    
+    self.effect.light0.diffuseColor = GLKVector4Make(randomR, randomG, randomB, 1.0f);
+    
+    self.nameLabel.text = [NSString stringWithFormat:@"Diffuse Color: r:%.2f g:%.2f b:%2.f", randomR, randomG, randomB];
+    
+    // GLKViewController properties
+    self.preferredFramesPerSecond = 60.0f;
     
     glEnable(GL_DEPTH_TEST);
     
