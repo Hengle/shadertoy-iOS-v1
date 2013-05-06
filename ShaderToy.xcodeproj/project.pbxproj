@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AE933D5F1736F725009EAF41 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE933D5E1736F725009EAF41 /* OpenGLES.framework */; };
+		AE933D611736F731009EAF41 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE933D601736F731009EAF41 /* GLKit.framework */; };
+		AE933D6317370EE0009EAF41 /* cellbg.png in Resources */ = {isa = PBXBuildFile; fileRef = AE933D6217370EE0009EAF41 /* cellbg.png */; };
 		AEA3B5401730E6C700786DA2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEA3B53F1730E6C700786DA2 /* UIKit.framework */; };
 		AEA3B5421730E6C700786DA2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEA3B5411730E6C700786DA2 /* Foundation.framework */; };
 		AEA3B5441730E6C700786DA2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEA3B5431730E6C700786DA2 /* CoreGraphics.framework */; };
@@ -20,15 +23,23 @@
 		AEA3B55C1730E6C700786DA2 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEA3B55A1730E6C700786DA2 /* MainStoryboard_iPad.storyboard */; };
 		AEA3B55F1730E6C700786DA2 /* GalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B55E1730E6C700786DA2 /* GalleryViewController.m */; };
 		AEA3B5681730E70500786DA2 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B5671730E70500786DA2 /* SWRevealViewController.m */; };
-		AEA3B56D1731105700786DA2 /* Shader_3.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA3B56A1731105700786DA2 /* Shader_3.png */; };
-		AEA3B56E1731105700786DA2 /* Shader_2.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA3B56B1731105700786DA2 /* Shader_2.png */; };
-		AEA3B56F1731105700786DA2 /* Shader_1.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA3B56C1731105700786DA2 /* Shader_1.png */; };
 		AEA3B57B1732327200786DA2 /* ParallaxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B5791732327200786DA2 /* ParallaxViewController.m */; };
 		AEA3B57C1732327200786DA2 /* ParallaxViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA3B57A1732327200786DA2 /* ParallaxViewController.xib */; };
 		AEA3B58617360BBA00786DA2 /* ShaderMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B58517360BBA00786DA2 /* ShaderMenuViewController.m */; };
+		AEA3B58A1736E7B700786DA2 /* KGNoise.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B5891736E7B700786DA2 /* KGNoise.m */; };
+		AEA3B58E1736E82A00786DA2 /* ShaderMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B58D1736E82A00786DA2 /* ShaderMenuCell.m */; };
+		AEA3B5901736EE8500786DA2 /* danger-8-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA3B58F1736EE8500786DA2 /* danger-8-icon.png */; };
+		AEA3B5921736EE8B00786DA2 /* list-view-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA3B5911736EE8B00786DA2 /* list-view-icon.png */; };
+		AEA3B5971736F3C200786DA2 /* dashboard-5-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA3B5961736F3C200786DA2 /* dashboard-5-icon.png */; };
+		AEA3B5991736F50000786DA2 /* shuffle-3-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA3B5981736F50000786DA2 /* shuffle-3-icon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AE933D571736F601009EAF41 /* Shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.fsh; sourceTree = "<group>"; };
+		AE933D581736F601009EAF41 /* Shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.vsh; sourceTree = "<group>"; };
+		AE933D5E1736F725009EAF41 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		AE933D601736F731009EAF41 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		AE933D6217370EE0009EAF41 /* cellbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cellbg.png; sourceTree = "<group>"; };
 		AEA3B53C1730E6C700786DA2 /* ShaderToy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShaderToy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEA3B53F1730E6C700786DA2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AEA3B5411730E6C700786DA2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -48,14 +59,19 @@
 		AEA3B55E1730E6C700786DA2 /* GalleryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GalleryViewController.m; sourceTree = "<group>"; };
 		AEA3B5661730E70500786DA2 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		AEA3B5671730E70500786DA2 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
-		AEA3B56A1731105700786DA2 /* Shader_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Shader_3.png; sourceTree = "<group>"; };
-		AEA3B56B1731105700786DA2 /* Shader_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Shader_2.png; sourceTree = "<group>"; };
-		AEA3B56C1731105700786DA2 /* Shader_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Shader_1.png; sourceTree = "<group>"; };
 		AEA3B5781732327200786DA2 /* ParallaxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParallaxViewController.h; sourceTree = "<group>"; };
 		AEA3B5791732327200786DA2 /* ParallaxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParallaxViewController.m; sourceTree = "<group>"; };
 		AEA3B57A1732327200786DA2 /* ParallaxViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParallaxViewController.xib; sourceTree = "<group>"; };
 		AEA3B58417360BBA00786DA2 /* ShaderMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderMenuViewController.h; sourceTree = "<group>"; };
 		AEA3B58517360BBA00786DA2 /* ShaderMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShaderMenuViewController.m; sourceTree = "<group>"; };
+		AEA3B5881736E7B700786DA2 /* KGNoise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGNoise.h; sourceTree = "<group>"; };
+		AEA3B5891736E7B700786DA2 /* KGNoise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGNoise.m; sourceTree = "<group>"; };
+		AEA3B58C1736E82A00786DA2 /* ShaderMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderMenuCell.h; sourceTree = "<group>"; };
+		AEA3B58D1736E82A00786DA2 /* ShaderMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShaderMenuCell.m; sourceTree = "<group>"; };
+		AEA3B58F1736EE8500786DA2 /* danger-8-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "danger-8-icon.png"; sourceTree = "<group>"; };
+		AEA3B5911736EE8B00786DA2 /* list-view-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list-view-icon.png"; sourceTree = "<group>"; };
+		AEA3B5961736F3C200786DA2 /* dashboard-5-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dashboard-5-icon.png"; sourceTree = "<group>"; };
+		AEA3B5981736F50000786DA2 /* shuffle-3-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shuffle-3-icon.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +79,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE933D611736F731009EAF41 /* GLKit.framework in Frameworks */,
+				AE933D5F1736F725009EAF41 /* OpenGLES.framework in Frameworks */,
 				AEA3B5401730E6C700786DA2 /* UIKit.framework in Frameworks */,
 				AEA3B5421730E6C700786DA2 /* Foundation.framework in Frameworks */,
 				AEA3B5441730E6C700786DA2 /* CoreGraphics.framework in Frameworks */,
@@ -92,9 +110,11 @@
 		AEA3B53E1730E6C700786DA2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				AEA3B53F1730E6C700786DA2 /* UIKit.framework */,
-				AEA3B5411730E6C700786DA2 /* Foundation.framework */,
 				AEA3B5431730E6C700786DA2 /* CoreGraphics.framework */,
+				AEA3B5411730E6C700786DA2 /* Foundation.framework */,
+				AE933D601736F731009EAF41 /* GLKit.framework */,
+				AE933D5E1736F725009EAF41 /* OpenGLES.framework */,
+				AEA3B53F1730E6C700786DA2 /* UIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -102,7 +122,7 @@
 		AEA3B5451730E6C700786DA2 /* ShaderToy */ = {
 			isa = PBXGroup;
 			children = (
-				AEA3B5651730E70500786DA2 /* SWRevealViewController */,
+				AEA3B58B1736E7C500786DA2 /* Components */,
 				AEA3B54E1730E6C700786DA2 /* AppDelegate.h */,
 				AEA3B54F1730E6C700786DA2 /* AppDelegate.m */,
 				AEA3B55D1730E6C700786DA2 /* GalleryViewController.h */,
@@ -111,6 +131,8 @@
 				AEA3B5791732327200786DA2 /* ParallaxViewController.m */,
 				AEA3B58417360BBA00786DA2 /* ShaderMenuViewController.h */,
 				AEA3B58517360BBA00786DA2 /* ShaderMenuViewController.m */,
+				AEA3B58C1736E82A00786DA2 /* ShaderMenuCell.h */,
+				AEA3B58D1736E82A00786DA2 /* ShaderMenuCell.m */,
 				AEA3B57A1732327200786DA2 /* ParallaxViewController.xib */,
 				AEA3B5571730E6C700786DA2 /* MainStoryboard_iPhone.storyboard */,
 				AEA3B55A1730E6C700786DA2 /* MainStoryboard_iPad.storyboard */,
@@ -146,11 +168,41 @@
 		AEA3B5691731104A00786DA2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				AEA3B56C1731105700786DA2 /* Shader_1.png */,
-				AEA3B56B1731105700786DA2 /* Shader_2.png */,
-				AEA3B56A1731105700786DA2 /* Shader_3.png */,
+				AE933D571736F601009EAF41 /* Shader.fsh */,
+				AE933D581736F601009EAF41 /* Shader.vsh */,
+				AE933D6217370EE0009EAF41 /* cellbg.png */,
+				AEA3B5931736EE9100786DA2 /* Icons */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		AEA3B5871736E7A900786DA2 /* KGNoise */ = {
+			isa = PBXGroup;
+			children = (
+				AEA3B5881736E7B700786DA2 /* KGNoise.h */,
+				AEA3B5891736E7B700786DA2 /* KGNoise.m */,
+			);
+			name = KGNoise;
+			sourceTree = "<group>";
+		};
+		AEA3B58B1736E7C500786DA2 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				AEA3B5871736E7A900786DA2 /* KGNoise */,
+				AEA3B5651730E70500786DA2 /* SWRevealViewController */,
+			);
+			name = Components;
+			sourceTree = "<group>";
+		};
+		AEA3B5931736EE9100786DA2 /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				AEA3B58F1736EE8500786DA2 /* danger-8-icon.png */,
+				AEA3B5961736F3C200786DA2 /* dashboard-5-icon.png */,
+				AEA3B5911736EE8B00786DA2 /* list-view-icon.png */,
+				AEA3B5981736F50000786DA2 /* shuffle-3-icon.png */,
+			);
+			name = Icons;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -210,10 +262,12 @@
 				AEA3B5561730E6C700786DA2 /* Default-568h@2x.png in Resources */,
 				AEA3B5591730E6C700786DA2 /* MainStoryboard_iPhone.storyboard in Resources */,
 				AEA3B55C1730E6C700786DA2 /* MainStoryboard_iPad.storyboard in Resources */,
-				AEA3B56D1731105700786DA2 /* Shader_3.png in Resources */,
-				AEA3B56E1731105700786DA2 /* Shader_2.png in Resources */,
-				AEA3B56F1731105700786DA2 /* Shader_1.png in Resources */,
 				AEA3B57C1732327200786DA2 /* ParallaxViewController.xib in Resources */,
+				AEA3B5901736EE8500786DA2 /* danger-8-icon.png in Resources */,
+				AEA3B5921736EE8B00786DA2 /* list-view-icon.png in Resources */,
+				AEA3B5971736F3C200786DA2 /* dashboard-5-icon.png in Resources */,
+				AEA3B5991736F50000786DA2 /* shuffle-3-icon.png in Resources */,
+				AE933D6317370EE0009EAF41 /* cellbg.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,6 +284,8 @@
 				AEA3B5681730E70500786DA2 /* SWRevealViewController.m in Sources */,
 				AEA3B57B1732327200786DA2 /* ParallaxViewController.m in Sources */,
 				AEA3B58617360BBA00786DA2 /* ShaderMenuViewController.m in Sources */,
+				AEA3B58A1736E7B700786DA2 /* KGNoise.m in Sources */,
+				AEA3B58E1736E82A00786DA2 /* ShaderMenuCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -31,8 +31,6 @@
     for (int i = 0; i < colors.count; i++)
     {
         ParallaxViewController* viewController = [[ParallaxViewController alloc] initWithNibName:@"ParallaxViewController" bundle:nil];
-        viewController.view.backgroundColor = colors[i];
-        viewController.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"Shader_%d", (i + 1)]];
         
         [viewControllers addObject:viewController];
     }
@@ -47,6 +45,10 @@
     tapGesture.numberOfTapsRequired = 1;
     
     [self.view addGestureRecognizer:tapGesture];
+    
+    UIButton* button = [[UIButton alloc] initWithFrame:CGRectMake(500, 500, 30, 30)];
+    
+    [self.view addSubview:button];
 }
 
 - (void)didReceiveMemoryWarning

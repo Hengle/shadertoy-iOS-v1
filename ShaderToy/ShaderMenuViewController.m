@@ -7,6 +7,7 @@
 //
 
 #import "ShaderMenuViewController.h"
+#import "ShaderMenuCell.h"
 
 @interface ShaderMenuViewController ()
 
@@ -17,7 +18,8 @@
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
-    if (self) {
+    if (self)
+    {
         // Custom initialization
     }
     return self;
@@ -32,6 +34,8 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    self.tableView.backgroundColor = [[UIColor colorWithWhite:0.102 alpha:1.000] colorWithNoiseWithOpacity:0.2f];
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,24 +48,84 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
+    int cells = 0;
+    
     // Return the number of rows in the section.
-    return 0;
+    switch (section)
+    {
+        case 0:
+            cells = 3;
+            break;
+            
+        case 1:
+            cells = 0;
+            break;
+    }
+    
+    return cells;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    NSString* name = nil;
+    switch (section)
+    {
+        case 0:
+            name = @"Shaders";
+            break;
+            
+        case 1:
+            name = @"Favorites";
+            break;
+    }
+    
+    return name;
+}
+
+- (UIView* )tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    KGNoiseView* view = [KGNoiseView new];
+    
+    return view;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    static NSString *CellIdentifier = @"ShaderMenuCell";
+    ShaderMenuCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    // Configure the cell...
+    cell.backgroundView = [KGNoiseView new];
+    cell.backgroundView.backgroundColor = [UIColor colorWithPatternImage:[[UIImage imageNamed:@"cellbg"] imageWithNoiseOpacity:0.2f]];
+    
+    if (indexPath.section == 0)
+    {
+        switch (indexPath.row)
+        {
+            case 0:
+                cell.textLabel.text = @"Shader of the Week";
+                cell.imageView.image = [UIImage imageNamed:@"danger-8-icon"];
+                break;
+                
+            case 1:
+                cell.textLabel.text = @"Popular";
+                cell.imageView.image = [UIImage imageNamed:@"dashboard-5-icon"];
+                break;
+                
+            case 2:
+                cell.textLabel.text = @"Random";
+                cell.imageView.image = [UIImage imageNamed:@"shuffle-3-icon"];
+                break;
+                
+            default:
+                break;
+        }
+    }
     
     return cell;
 }
@@ -116,6 +180,8 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end
