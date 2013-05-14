@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <GLKit/GLKit.h>
 
-@interface ParallaxViewController : GLKViewController
+@class ShaderInformationViewController;
 
-@property (strong, nonatomic) IBOutlet UILabel *nameLabel;
-@property (strong, nonatomic) IBOutlet UILabel *authorLabel;
+@interface ParallaxViewController : UIViewController <GLKViewDelegate>
+
+@property (strong, nonatomic) ShaderInformationViewController *informationViewController;
 
 @end

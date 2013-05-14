@@ -7,7 +7,6 @@
 //
 
 #import "ShaderMenuCell.h"
-#import "KGNoise.h"
 
 @implementation ShaderMenuCell
 

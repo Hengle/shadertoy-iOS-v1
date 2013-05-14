@@ -88,12 +88,12 @@
     return name;
 }
 
-- (UIView* )tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    KGNoiseView* view = [KGNoiseView new];
-    
-    return view;
-}
+//- (UIView* )tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+//{
+//    KGNoiseView* view = [KGNoiseView new];
+//    
+//    return view;
+//}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {

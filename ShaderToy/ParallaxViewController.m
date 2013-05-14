@@ -7,6 +7,10 @@
 //
 
 #import "ParallaxViewController.h"
+#import "ShaderInformation.h"
+#import "ShaderInformationViewController.h"
+
+#import <QuartzCore/QuartzCore.h>
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
 
@@ -84,7 +88,13 @@ GLfloat gCubeVertexData[216] =
     
     GLuint _vertexArray;
     GLuint _vertexBuffer;
+    
+    CADisplayLink* displayLink;
+    
+    dispatch_semaphore_t frameRenderingSemaphore;
+    dispatch_queue_t openGLESContextQueue;
 }
+
 @property (strong, nonatomic) EAGLContext *context;
 @property (strong, nonatomic) GLKBaseEffect *effect;
 
@@ -95,6 +105,7 @@ GLfloat gCubeVertexData[216] =
 - (BOOL)compileShader:(GLuint *)shader type:(GLenum)type file:(NSString *)file;
 - (BOOL)linkProgram:(GLuint)prog;
 - (BOOL)validateProgram:(GLuint)prog;
+
 @end
 
 @implementation ParallaxViewController
@@ -120,11 +131,26 @@ GLfloat gCubeVertexData[216] =
         NSLog(@"Failed to create ES context");
     }
     
+    ShaderInformation* info = [ShaderInformation new];
+    info.shaderName = [NSString stringWithFormat:@"Test %d", rand()];
+    info.authorName = @"Yep No";
+    
+    self.informationViewController = [[ShaderInformationViewController alloc] initWithNibName:@"ShaderInformationViewController" bundle:nil];
+    self.informationViewController.shaderInformation = info;
+    [self.view addSubview:self.informationViewController.view];
+    
     GLKView *view = (GLKView *)self.view;
     view.context = self.context;
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
+    view.enableSetNeedsDisplay = NO;
+    
+    openGLESContextQueue = dispatch_queue_create("com.shadertoy.openGLESContextQueue", NULL);
+    frameRenderingSemaphore = dispatch_semaphore_create(1);
     
     [self setupGL];
+    
+    displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(render:)];
+    [displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
 }
 
 - (void)dealloc
@@ -159,55 +185,78 @@ GLfloat gCubeVertexData[216] =
 
 - (void)setupGL
 {
-    [EAGLContext setCurrentContext:self.context];
-    
-    [self loadShaders];
-    
-    self.effect = [[GLKBaseEffect alloc] init];
-    self.effect.light0.enabled = GL_TRUE;
-    
-    float randomR = ((float)(arc4random() % 100) / 100.0f);
-    float randomG = ((float)(arc4random() % 100) / 100.0f);
-    float randomB = ((float)(arc4random() % 100) / 100.0f);
-    
-    self.effect.light0.diffuseColor = GLKVector4Make(randomR, randomG, randomB, 1.0f);
-    
-    self.nameLabel.text = [NSString stringWithFormat:@"Diffuse Color: r:%.2f g:%.2f b:%2.f", randomR, randomG, randomB];
-    
-    // GLKViewController properties
-    self.preferredFramesPerSecond = 60.0f;
-    
-    glEnable(GL_DEPTH_TEST);
-    
-    glGenVertexArraysOES(1, &_vertexArray);
-    glBindVertexArrayOES(_vertexArray);
-    
-    glGenBuffers(1, &_vertexBuffer);
-    glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(gCubeVertexData), gCubeVertexData, GL_STATIC_DRAW);
-    
-    glEnableVertexAttribArray(GLKVertexAttribPosition);
-    glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, 24, BUFFER_OFFSET(0));
-    glEnableVertexAttribArray(GLKVertexAttribNormal);
-    glVertexAttribPointer(GLKVertexAttribNormal, 3, GL_FLOAT, GL_FALSE, 24, BUFFER_OFFSET(12));
-    
-    glBindVertexArrayOES(0);
+    dispatch_async(openGLESContextQueue, ^
+                   {
+                       [EAGLContext setCurrentContext:self.context];
+                       
+                       [self loadShaders];
+                       
+                       self.effect = [[GLKBaseEffect alloc] init];
+                       self.effect.light0.enabled = GL_TRUE;
+                       
+                       float randomR = ((float)(arc4random() % 100) / 100.0f);
+                       float randomG = ((float)(arc4random() % 100) / 100.0f);
+                       float randomB = ((float)(arc4random() % 100) / 100.0f);
+                       
+                       self.effect.light0.diffuseColor = GLKVector4Make(randomR, randomG, randomB, 1.0f);
+                       
+                       //self.nameLabel.text = [NSString stringWithFormat:@"Diffuse Color: r:%.2f g:%.2f b:%2.f", randomR, randomG, randomB];
+                       
+                       glEnable(GL_DEPTH_TEST);
+                       
+                       glGenVertexArraysOES(1, &_vertexArray);
+                       glBindVertexArrayOES(_vertexArray);
+                       
+                       glGenBuffers(1, &_vertexBuffer);
+                       glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
+                       glBufferData(GL_ARRAY_BUFFER, sizeof(gCubeVertexData), gCubeVertexData, GL_STATIC_DRAW);
+                       
+                       glEnableVertexAttribArray(GLKVertexAttribPosition);
+                       glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, 24, BUFFER_OFFSET(0));
+                       glEnableVertexAttribArray(GLKVertexAttribNormal);
+                       glVertexAttribPointer(GLKVertexAttribNormal, 3, GL_FLOAT, GL_FALSE, 24, BUFFER_OFFSET(12));
+                       
+                       glBindVertexArrayOES(0);
+                   });
 }
 
 - (void)tearDownGL
 {
-    [EAGLContext setCurrentContext:self.context];
+    dispatch_async(openGLESContextQueue, ^
+                   {
+                       [EAGLContext setCurrentContext:self.context];
+                       
+                       glDeleteBuffers(1, &_vertexBuffer);
+                       glDeleteVertexArraysOES(1, &_vertexArray);
+                       
+                       self.effect = nil;
+                       
+                       if (_program)
+                       {
+                           glDeleteProgram(_program);
+                           _program = 0;
+                       }
+                   });
+}
+
+- (void)render:(CADisplayLink *)link
+{
+    GLKView* view = (GLKView *)self.view;
     
-    glDeleteBuffers(1, &_vertexBuffer);
-    glDeleteVertexArraysOES(1, &_vertexArray);
-    
-    self.effect = nil;
-    
-    if (_program)
+    if (dispatch_semaphore_wait(frameRenderingSemaphore, DISPATCH_TIME_NOW) != 0)
     {
-        glDeleteProgram(_program);
-        _program = 0;
+        return;
     }
+    
+    dispatch_async(openGLESContextQueue, ^
+                   {
+                       [EAGLContext setCurrentContext:self.context];
+                       
+                       [self update];
+                       [view display];
+                       
+                       dispatch_semaphore_signal(frameRenderingSemaphore);
+                   });
 }
 
 #pragma mark - GLKView and GLKViewController delegate methods
@@ -238,7 +287,7 @@ GLfloat gCubeVertexData[216] =
     
     _modelViewProjectionMatrix = GLKMatrix4Multiply(projectionMatrix, modelViewMatrix);
     
-    _rotation += self.timeSinceLastUpdate * 0.5f;
+    _rotation += 0.01f;
 }
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
