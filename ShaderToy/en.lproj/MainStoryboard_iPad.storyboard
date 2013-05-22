@@ -11,27 +11,11 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
                         <segue destination="d5S-BE-qZm" kind="custom" identifier="sw_rear" customClass="SWRevealViewControllerSegue" id="8iK-ev-Zyw"/>
-                        <segue destination="aXo-Tj-VFd" kind="custom" identifier="sw_front" customClass="SWRevealViewControllerSegue" id="jZE-h7-ay0"/>
+                        <segue destination="LhN-1R-qvp" kind="custom" identifier="sw_front" customClass="SWRevealViewControllerSegue" id="H9s-bE-diC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3" sceneMemberID="firstResponder"/>
             </objects>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="cKc-gg-2o1">
-            <objects>
-                <navigationController definesPresentationContext="YES" id="aXo-Tj-VFd" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="blackTranslucent" id="Goa-Wn-F2T">
-                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="LhN-1R-qvp" kind="relationship" relationship="rootViewController" id="uaa-rC-JDe"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SVw-OC-bf1" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1099" y="775"/>
         </scene>
         <!--Gallery View Controller-->
         <scene sceneID="TVU-1f-OW4">
@@ -46,7 +30,7 @@
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vCn-MI-HQu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2004" y="775"/>
+            <point key="canvasLocation" x="1085" y="707"/>
         </scene>
         <!--Shader Menu View Controller-->
         <scene sceneID="sNx-5X-8Wl">
@@ -83,7 +67,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0X0-zZ-X2e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1105" y="-955"/>
+            <point key="canvasLocation" x="1085" y="-947"/>
         </scene>
     </scenes>
     <classes>

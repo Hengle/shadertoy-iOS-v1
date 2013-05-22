@@ -25,12 +25,12 @@
     
     self.revealViewController.delegate = self;
     
-    colors = [NSArray arrayWithObjects:[UIColor redColor], [UIColor greenColor], [UIColor blueColor], nil];
     viewControllers = [NSMutableArray new];
     
-    for (int i = 0; i < colors.count; i++)
+    for (int i = 0; i < 3; i++)
     {
         ParallaxViewController* viewController = [[ParallaxViewController alloc] initWithNibName:@"ParallaxViewController" bundle:nil];
+        viewController.index = i;
         
         [viewControllers addObject:viewController];
     }

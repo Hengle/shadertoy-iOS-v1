@@ -11,7 +11,6 @@
 @interface GalleryViewController : UIPageViewController <UIPageViewControllerDelegate, UIPageViewControllerDataSource, SWRevealViewControllerDelegate>
 {
     bool revealControllerShowing;
-    NSArray *colors;
     NSMutableArray *viewControllers;
 }
 

@@ -9,10 +9,28 @@
 #import <UIKit/UIKit.h>
 #import <GLKit/GLKit.h>
 
+@class Plane;
+
 @class ShaderInformationViewController;
 
 @interface ParallaxViewController : UIViewController <GLKViewDelegate>
+{
+    float contentScale;
+    
+    NSDate* startTime;
+    
+    Plane* planeObject;
+    
+    // Rendering loop
+    CADisplayLink* displayLink;
+    
+    // Multithreading support
+    dispatch_semaphore_t frameRenderingSemaphore;
+    dispatch_queue_t openGLESContextQueue;
+}
 
 @property (strong, nonatomic) ShaderInformationViewController *informationViewController;
+@property (strong, nonatomic) GLKView* view;
+@property (assign) int index;
 
 @end

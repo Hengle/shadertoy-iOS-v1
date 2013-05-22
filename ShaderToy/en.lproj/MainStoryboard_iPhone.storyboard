@@ -11,7 +11,7 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
                         <segue destination="cae-g1-DMN" kind="custom" identifier="sw_rear" customClass="SWRevealViewControllerSegue" id="7lt-92-NDu"/>
-                        <segue destination="Orz-gn-EeN" kind="custom" identifier="sw_front" customClass="SWRevealViewControllerSegue" id="5sE-CR-Woc"/>
+                        <segue destination="Rhv-Es-AOn" kind="custom" identifier="sw_front" customClass="SWRevealViewControllerSegue" id="d0M-FJ-aGK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
@@ -64,35 +64,11 @@
                 <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="Rhv-Es-AOn" customClass="GalleryViewController" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="Cwz-yu-BGP">
                         <nil key="title"/>
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="OS8-4W-s3R"/>
                     </navigationItem>
-                    <connections>
-                        <outlet property="revealButton" destination="OS8-4W-s3R" id="ZQ3-fN-lod"/>
-                    </connections>
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1l4-kb-VGf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1454" y="544"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="seE-Sj-Tc1">
-            <objects>
-                <navigationController definesPresentationContext="YES" id="Orz-gn-EeN" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="blackTranslucent" id="esV-y8-2kp">
-                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="RVY-x4-D2I">
-                        <rect key="frame" x="0.0" y="416" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </toolbar>
-                    <connections>
-                        <segue destination="Rhv-Es-AOn" kind="relationship" relationship="rootViewController" id="PxN-B8-gwH"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zDM-gM-Ab0" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="957" y="544"/>
+            <point key="canvasLocation" x="957" y="566"/>
         </scene>
     </scenes>
     <classes>
