@@ -42,16 +42,13 @@
     
     startTime = [NSDate date];
     
-    contentScale = 1.0f;
-    if ([[UIScreen mainScreen] respondsToSelector:@selector(displayLinkWithTarget:selector:)])
-    {
-        contentScale = [[UIScreen mainScreen] scale];
-    }
-    
     self.view.context = self.context;
     self.view.enableSetNeedsDisplay = NO;
+    self.view.contentScaleFactor = 1.0f;
+    self.view.drawableMultisample = GLKViewDrawableMultisample4X;
     
-    openGLESContextQueue = dispatch_queue_create("com.shadertoy.openGLESContextQueue", NULL);
+    openGLESContextQueue =
+    ("com.shadertoy.openGLESContextQueue", NULL);
     frameRenderingSemaphore = dispatch_semaphore_create(1);
     
     [self setupGL];
@@ -59,6 +56,7 @@
     displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(render:)];
     [displayLink setFrameInterval:1];
     [displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+//    [displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
 }
 
 - (void)dealloc
@@ -89,6 +87,17 @@
     }
     
     // Dispose of any resources that can be recreated.
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskAll;
+}
+
+// Support for earlier than iOS 6.0
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    return YES;
 }
 
 - (void)setupGL
@@ -136,12 +145,13 @@
 
 - (void)update
 {
+    
 }
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
 {
-    float width = self.view.frame.size.width * contentScale;
-    float height = self.view.frame.size.height * contentScale;
+    float width = self.view.drawableWidth;
+    float height = self.view.drawableHeight;
     float time = [[NSDate date] timeIntervalSinceDate:startTime];
     
     glClearColor(0.65f, 0.65f, 0.65f, 1.0f);
@@ -150,8 +160,11 @@
     glViewport(0, 0, width, height);
     
     [planeObject drawAtResolution:GLKVector3Make(width, height, 0.0f) andTime:time];
-    
-    [_context presentRenderbuffer:GL_RENDERBUFFER];
+}
+
+- (IBAction)toggleMenu:(id)sender
+{
+    [self.revealViewController revealToggleAnimated:YES];
 }
 
 @end

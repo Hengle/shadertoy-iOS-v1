@@ -29,7 +29,7 @@
     
     for (int i = 0; i < 3; i++)
     {
-        ParallaxViewController* viewController = [[ParallaxViewController alloc] initWithNibName:@"ParallaxViewController" bundle:nil];
+        ParallaxViewController* viewController = (ParallaxViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"ShaderView"];
         viewController.index = i;
         
         [viewControllers addObject:viewController];

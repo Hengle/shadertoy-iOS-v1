@@ -32,7 +32,6 @@
 		AEA3B55F1730E6C700786DA2 /* GalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B55E1730E6C700786DA2 /* GalleryViewController.m */; };
 		AEA3B5681730E70500786DA2 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B5671730E70500786DA2 /* SWRevealViewController.m */; };
 		AEA3B57B1732327200786DA2 /* ParallaxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B5791732327200786DA2 /* ParallaxViewController.m */; };
-		AEA3B57C1732327200786DA2 /* ParallaxViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA3B57A1732327200786DA2 /* ParallaxViewController.xib */; };
 		AEA3B58617360BBA00786DA2 /* ShaderMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B58517360BBA00786DA2 /* ShaderMenuViewController.m */; };
 		AEA3B58E1736E82A00786DA2 /* ShaderMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B58D1736E82A00786DA2 /* ShaderMenuCell.m */; };
 		AEA3B5901736EE8500786DA2 /* danger-8-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA3B58F1736EE8500786DA2 /* danger-8-icon.png */; };
@@ -40,10 +39,11 @@
 		AEA3B5971736F3C200786DA2 /* dashboard-5-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA3B5961736F3C200786DA2 /* dashboard-5-icon.png */; };
 		AEA3B5991736F50000786DA2 /* shuffle-3-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA3B5981736F50000786DA2 /* shuffle-3-icon.png */; };
 		AEAE17F5174B637000764D5B /* Plane.m in Sources */ = {isa = PBXBuildFile; fileRef = AEAE17F4174B637000764D5B /* Plane.m */; };
-		AEAE17F7174CB5E200764D5B /* Shader_1.fsh in Sources */ = {isa = PBXBuildFile; fileRef = AEAE17F6174CB5E200764D5B /* Shader_1.fsh */; };
-		AEAE17F8174CC63A00764D5B /* Shader_1.fsh in Resources */ = {isa = PBXBuildFile; fileRef = AEAE17F6174CB5E200764D5B /* Shader_1.fsh */; };
-		AEAE17FA174CC8FA00764D5B /* Shader_0.fsh in Sources */ = {isa = PBXBuildFile; fileRef = AEAE17F9174CC8FA00764D5B /* Shader_0.fsh */; };
+		AEAE17F8174CC63A00764D5B /* Shader_5.fsh in Resources */ = {isa = PBXBuildFile; fileRef = AEAE17F6174CB5E200764D5B /* Shader_5.fsh */; };
 		AEAE17FB174CCAFD00764D5B /* Shader_0.fsh in Resources */ = {isa = PBXBuildFile; fileRef = AEAE17F9174CC8FA00764D5B /* Shader_0.fsh */; };
+		AEAE17FD174E0E3C00764D5B /* Shader_3.fsh in Resources */ = {isa = PBXBuildFile; fileRef = AEAE17FC174E0E3C00764D5B /* Shader_3.fsh */; };
+		AEAE1800174E100700764D5B /* Shader_4.fsh in Resources */ = {isa = PBXBuildFile; fileRef = AEAE17FE174E0FC400764D5B /* Shader_4.fsh */; };
+		AEAE1803174E109B00764D5B /* Shader_1.fsh in Resources */ = {isa = PBXBuildFile; fileRef = AEAE1801174E106E00764D5B /* Shader_1.fsh */; };
 		AEAEEA6017421489003F74D3 /* ShaderInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEAEEA5E17421489003F74D3 /* ShaderInformationViewController.m */; };
 		AEAEEA6117421489003F74D3 /* ShaderInformationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEAEEA5F17421489003F74D3 /* ShaderInformationViewController.xib */; };
 		AEAEEA6317422650003F74D3 /* share-4-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AEAEEA6217422650003F74D3 /* share-4-icon.png */; };
@@ -84,7 +84,6 @@
 		AEA3B5671730E70500786DA2 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		AEA3B5781732327200786DA2 /* ParallaxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParallaxViewController.h; sourceTree = "<group>"; };
 		AEA3B5791732327200786DA2 /* ParallaxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParallaxViewController.m; sourceTree = "<group>"; };
-		AEA3B57A1732327200786DA2 /* ParallaxViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParallaxViewController.xib; sourceTree = "<group>"; };
 		AEA3B58417360BBA00786DA2 /* ShaderMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderMenuViewController.h; sourceTree = "<group>"; };
 		AEA3B58517360BBA00786DA2 /* ShaderMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShaderMenuViewController.m; sourceTree = "<group>"; };
 		AEA3B58C1736E82A00786DA2 /* ShaderMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderMenuCell.h; sourceTree = "<group>"; };
@@ -95,8 +94,11 @@
 		AEA3B5981736F50000786DA2 /* shuffle-3-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shuffle-3-icon.png"; sourceTree = "<group>"; };
 		AEAE17F3174B637000764D5B /* Plane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plane.h; sourceTree = "<group>"; };
 		AEAE17F4174B637000764D5B /* Plane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plane.m; sourceTree = "<group>"; };
-		AEAE17F6174CB5E200764D5B /* Shader_1.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader_1.fsh; sourceTree = "<group>"; };
+		AEAE17F6174CB5E200764D5B /* Shader_5.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader_5.fsh; sourceTree = "<group>"; };
 		AEAE17F9174CC8FA00764D5B /* Shader_0.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader_0.fsh; sourceTree = "<group>"; };
+		AEAE17FC174E0E3C00764D5B /* Shader_3.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader_3.fsh; sourceTree = "<group>"; };
+		AEAE17FE174E0FC400764D5B /* Shader_4.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader_4.fsh; sourceTree = "<group>"; };
+		AEAE1801174E106E00764D5B /* Shader_1.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader_1.fsh; sourceTree = "<group>"; };
 		AEAEEA5D17421489003F74D3 /* ShaderInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderInformationViewController.h; sourceTree = "<group>"; };
 		AEAEEA5E17421489003F74D3 /* ShaderInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShaderInformationViewController.m; sourceTree = "<group>"; };
 		AEAEEA5F17421489003F74D3 /* ShaderInformationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShaderInformationViewController.xib; sourceTree = "<group>"; };
@@ -166,7 +168,6 @@
 				AEA3B55E1730E6C700786DA2 /* GalleryViewController.m */,
 				AEA3B5781732327200786DA2 /* ParallaxViewController.h */,
 				AEA3B5791732327200786DA2 /* ParallaxViewController.m */,
-				AEA3B57A1732327200786DA2 /* ParallaxViewController.xib */,
 				AEA3B58417360BBA00786DA2 /* ShaderMenuViewController.h */,
 				AEA3B58517360BBA00786DA2 /* ShaderMenuViewController.m */,
 				AEAEEA6417422A13003F74D3 /* ShaderInformation.h */,
@@ -210,12 +211,15 @@
 		AEA3B5691731104A00786DA2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				AEAE17F9174CC8FA00764D5B /* Shader_0.fsh */,
-				AEAE17F6174CB5E200764D5B /* Shader_1.fsh */,
-				AE933D571736F601009EAF41 /* Shader_2.fsh */,
-				AE933D581736F601009EAF41 /* Shader.vsh */,
 				AE933D6217370EE0009EAF41 /* cellbg.png */,
 				AEA3B5931736EE9100786DA2 /* Icons */,
+				AE933D581736F601009EAF41 /* Shader.vsh */,
+				AEAE17F9174CC8FA00764D5B /* Shader_0.fsh */,
+				AEAE1801174E106E00764D5B /* Shader_1.fsh */,
+				AE933D571736F601009EAF41 /* Shader_2.fsh */,
+				AEAE17FC174E0E3C00764D5B /* Shader_3.fsh */,
+				AEAE17FE174E0FC400764D5B /* Shader_4.fsh */,
+				AEAE17F6174CB5E200764D5B /* Shader_5.fsh */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -311,7 +315,6 @@
 				AEA3B5561730E6C700786DA2 /* Default-568h@2x.png in Resources */,
 				AEA3B5591730E6C700786DA2 /* MainStoryboard_iPhone.storyboard in Resources */,
 				AEA3B55C1730E6C700786DA2 /* MainStoryboard_iPad.storyboard in Resources */,
-				AEA3B57C1732327200786DA2 /* ParallaxViewController.xib in Resources */,
 				AEA3B5901736EE8500786DA2 /* danger-8-icon.png in Resources */,
 				AEA3B5921736EE8B00786DA2 /* list-view-icon.png in Resources */,
 				AEA3B5971736F3C200786DA2 /* dashboard-5-icon.png in Resources */,
@@ -323,8 +326,11 @@
 				AE933D6C1737A78B009EAF41 /* inbox-8-icon.png in Resources */,
 				AE933D6D1737A78B009EAF41 /* twitter-5-icon.png in Resources */,
 				AEAE17FB174CCAFD00764D5B /* Shader_0.fsh in Resources */,
-				AEAE17F8174CC63A00764D5B /* Shader_1.fsh in Resources */,
+				AEAE17F8174CC63A00764D5B /* Shader_5.fsh in Resources */,
 				AE933D70173A4B6E009EAF41 /* Shader_2.fsh in Resources */,
+				AEAE17FD174E0E3C00764D5B /* Shader_3.fsh in Resources */,
+				AEAE1800174E100700764D5B /* Shader_4.fsh in Resources */,
+				AEAE1803174E109B00764D5B /* Shader_1.fsh in Resources */,
 				AE933D71173A4B6E009EAF41 /* Shader.vsh in Resources */,
 				AEAEEA6117421489003F74D3 /* ShaderInformationViewController.xib in Resources */,
 				AEAEEA6317422650003F74D3 /* share-4-icon.png in Resources */,
@@ -348,8 +354,6 @@
 				AEAEEA6017421489003F74D3 /* ShaderInformationViewController.m in Sources */,
 				AEAEEA6617422A13003F74D3 /* ShaderInformation.m in Sources */,
 				AEAE17F5174B637000764D5B /* Plane.m in Sources */,
-				AEAE17F7174CB5E200764D5B /* Shader_1.fsh in Sources */,
-				AEAE17FA174CC8FA00764D5B /* Shader_0.fsh in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

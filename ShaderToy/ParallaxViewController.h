@@ -27,10 +27,15 @@
     // Multithreading support
     dispatch_semaphore_t frameRenderingSemaphore;
     dispatch_queue_t openGLESContextQueue;
+    
+    CGPoint lastTouch;
 }
 
 @property (strong, nonatomic) ShaderInformationViewController *informationViewController;
 @property (strong, nonatomic) GLKView* view;
+@property (strong, nonatomic) IBOutlet UIButton *menuButton;
 @property (assign) int index;
+
+- (IBAction)toggleMenu:(id)sender;
 
 @end
