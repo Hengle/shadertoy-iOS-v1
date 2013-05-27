@@ -31,7 +31,7 @@
 		AEA3B55C1730E6C700786DA2 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEA3B55A1730E6C700786DA2 /* MainStoryboard_iPad.storyboard */; };
 		AEA3B55F1730E6C700786DA2 /* GalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B55E1730E6C700786DA2 /* GalleryViewController.m */; };
 		AEA3B5681730E70500786DA2 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B5671730E70500786DA2 /* SWRevealViewController.m */; };
-		AEA3B57B1732327200786DA2 /* ParallaxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B5791732327200786DA2 /* ParallaxViewController.m */; };
+		AEA3B57B1732327200786DA2 /* ShaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B5791732327200786DA2 /* ShaderViewController.m */; };
 		AEA3B58617360BBA00786DA2 /* ShaderMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B58517360BBA00786DA2 /* ShaderMenuViewController.m */; };
 		AEA3B58E1736E82A00786DA2 /* ShaderMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B58D1736E82A00786DA2 /* ShaderMenuCell.m */; };
 		AEA3B5901736EE8500786DA2 /* danger-8-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA3B58F1736EE8500786DA2 /* danger-8-icon.png */; };
@@ -82,8 +82,8 @@
 		AEA3B55E1730E6C700786DA2 /* GalleryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GalleryViewController.m; sourceTree = "<group>"; };
 		AEA3B5661730E70500786DA2 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		AEA3B5671730E70500786DA2 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
-		AEA3B5781732327200786DA2 /* ParallaxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParallaxViewController.h; sourceTree = "<group>"; };
-		AEA3B5791732327200786DA2 /* ParallaxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParallaxViewController.m; sourceTree = "<group>"; };
+		AEA3B5781732327200786DA2 /* ShaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderViewController.h; sourceTree = "<group>"; };
+		AEA3B5791732327200786DA2 /* ShaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShaderViewController.m; sourceTree = "<group>"; };
 		AEA3B58417360BBA00786DA2 /* ShaderMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderMenuViewController.h; sourceTree = "<group>"; };
 		AEA3B58517360BBA00786DA2 /* ShaderMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShaderMenuViewController.m; sourceTree = "<group>"; };
 		AEA3B58C1736E82A00786DA2 /* ShaderMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderMenuCell.h; sourceTree = "<group>"; };
@@ -166,8 +166,8 @@
 				AEA3B54F1730E6C700786DA2 /* AppDelegate.m */,
 				AEA3B55D1730E6C700786DA2 /* GalleryViewController.h */,
 				AEA3B55E1730E6C700786DA2 /* GalleryViewController.m */,
-				AEA3B5781732327200786DA2 /* ParallaxViewController.h */,
-				AEA3B5791732327200786DA2 /* ParallaxViewController.m */,
+				AEA3B5781732327200786DA2 /* ShaderViewController.h */,
+				AEA3B5791732327200786DA2 /* ShaderViewController.m */,
 				AEA3B58417360BBA00786DA2 /* ShaderMenuViewController.h */,
 				AEA3B58517360BBA00786DA2 /* ShaderMenuViewController.m */,
 				AEAEEA6417422A13003F74D3 /* ShaderInformation.h */,
@@ -348,7 +348,7 @@
 				AEA3B5501730E6C700786DA2 /* AppDelegate.m in Sources */,
 				AEA3B55F1730E6C700786DA2 /* GalleryViewController.m in Sources */,
 				AEA3B5681730E70500786DA2 /* SWRevealViewController.m in Sources */,
-				AEA3B57B1732327200786DA2 /* ParallaxViewController.m in Sources */,
+				AEA3B57B1732327200786DA2 /* ShaderViewController.m in Sources */,
 				AEA3B58617360BBA00786DA2 /* ShaderMenuViewController.m in Sources */,
 				AEA3B58E1736E82A00786DA2 /* ShaderMenuCell.m in Sources */,
 				AEAEEA6017421489003F74D3 /* ShaderInformationViewController.m in Sources */,
