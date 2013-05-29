@@ -49,6 +49,7 @@
 		AEAEEA6317422650003F74D3 /* share-4-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AEAEEA6217422650003F74D3 /* share-4-icon.png */; };
 		AEAEEA6617422A13003F74D3 /* ShaderInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = AEAEEA6517422A13003F74D3 /* ShaderInformation.m */; };
 		AEAEEA6817422B1D003F74D3 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEAEEA6717422B1D003F74D3 /* Social.framework */; };
+		AEB028281753F26100757AF8 /* ShaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB028271753F26100757AF8 /* ShaderView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -106,6 +107,8 @@
 		AEAEEA6417422A13003F74D3 /* ShaderInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderInformation.h; sourceTree = "<group>"; };
 		AEAEEA6517422A13003F74D3 /* ShaderInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShaderInformation.m; sourceTree = "<group>"; };
 		AEAEEA6717422B1D003F74D3 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		AEB028261753F26100757AF8 /* ShaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderView.h; sourceTree = "<group>"; };
+		AEB028271753F26100757AF8 /* ShaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShaderView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,16 +163,12 @@
 		AEA3B5451730E6C700786DA2 /* ShaderToy */ = {
 			isa = PBXGroup;
 			children = (
-				AEAE17F2174B635600764D5B /* Rendering */,
 				AEA3B58B1736E7C500786DA2 /* Components */,
+				AEAE17F2174B635600764D5B /* Rendering */,
 				AEA3B54E1730E6C700786DA2 /* AppDelegate.h */,
 				AEA3B54F1730E6C700786DA2 /* AppDelegate.m */,
 				AEA3B55D1730E6C700786DA2 /* GalleryViewController.h */,
 				AEA3B55E1730E6C700786DA2 /* GalleryViewController.m */,
-				AEA3B5781732327200786DA2 /* ShaderViewController.h */,
-				AEA3B5791732327200786DA2 /* ShaderViewController.m */,
-				AEA3B58417360BBA00786DA2 /* ShaderMenuViewController.h */,
-				AEA3B58517360BBA00786DA2 /* ShaderMenuViewController.m */,
 				AEAEEA6417422A13003F74D3 /* ShaderInformation.h */,
 				AEAEEA6517422A13003F74D3 /* ShaderInformation.m */,
 				AEAEEA5D17421489003F74D3 /* ShaderInformationViewController.h */,
@@ -177,8 +176,14 @@
 				AEAEEA5F17421489003F74D3 /* ShaderInformationViewController.xib */,
 				AEA3B58C1736E82A00786DA2 /* ShaderMenuCell.h */,
 				AEA3B58D1736E82A00786DA2 /* ShaderMenuCell.m */,
-				AEA3B5571730E6C700786DA2 /* MainStoryboard_iPhone.storyboard */,
+				AEA3B58417360BBA00786DA2 /* ShaderMenuViewController.h */,
+				AEA3B58517360BBA00786DA2 /* ShaderMenuViewController.m */,
+				AEA3B5781732327200786DA2 /* ShaderViewController.h */,
+				AEA3B5791732327200786DA2 /* ShaderViewController.m */,
+				AEB028261753F26100757AF8 /* ShaderView.h */,
+				AEB028271753F26100757AF8 /* ShaderView.m */,
 				AEA3B55A1730E6C700786DA2 /* MainStoryboard_iPad.storyboard */,
+				AEA3B5571730E6C700786DA2 /* MainStoryboard_iPhone.storyboard */,
 				AEA3B5691731104A00786DA2 /* Resources */,
 				AEA3B5461730E6C700786DA2 /* Supporting Files */,
 			);
@@ -354,6 +359,7 @@
 				AEAEEA6017421489003F74D3 /* ShaderInformationViewController.m in Sources */,
 				AEAEEA6617422A13003F74D3 /* ShaderInformation.m in Sources */,
 				AEAE17F5174B637000764D5B /* Plane.m in Sources */,
+				AEB028281753F26100757AF8 /* ShaderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

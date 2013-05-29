@@ -12,8 +12,7 @@
 {
     bool revealControllerShowing;
     NSMutableArray *viewControllers;
+    NSArray *shaders;
 }
-
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *revealButton;
 
 @end

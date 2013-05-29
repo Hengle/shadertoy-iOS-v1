@@ -10,6 +10,7 @@
 
 @interface Plane ()
 
+- (BOOL)loadShader:(NSString *)name;
 - (BOOL)compileShader:(GLuint *)shader type:(GLenum)type file:(NSString *)file;
 - (BOOL)linkProgram:(GLuint)prog;
 - (BOOL)validateProgram:(GLuint)prog;
@@ -20,10 +21,10 @@
 
 - (id)init
 {
-    return [self initWithSize:1.0f shaderName:@"Shader_1"];
+    return [self initWithSize:1.0f];
 }
 
-- (id)initWithSize:(float)size shaderName:(NSString *)name
+- (id)initWithSize:(float)size
 {
     self = [super init];
     if (self)
@@ -44,7 +45,7 @@
         
         indicesToDraw = 6;
         
-        [self loadShaders:name];
+        [self loadShader:@"Shader_0.fsh"];
         
         glGenVertexArraysOES(1, &_vertexArray);
         glBindVertexArrayOES(_vertexArray);
@@ -87,28 +88,43 @@
 
 - (void)update:(float)deltaTime
 {
-    
+    if (_pendingShader != nil)
+    {
+        if (_program)
+        {
+            glDeleteProgram(_program);
+            _program = 0;
+        }
+        
+        [self loadShader:_pendingShader];
+        _pendingShader = nil;
+    }
 }
 
 - (void)drawAtResolution:(GLKVector3)resolution andTime:(float)time
 {
-    glUseProgram(_program);
-    
-    glUniform3f(_resolutionUniform, resolution.x, resolution.y, resolution.z);
-    glUniform1f(_timeUniform, time);
-    
-    glBindVertexArrayOES(_vertexArray);
-    
-    glDrawElements(GL_TRIANGLES, indicesToDraw, GL_UNSIGNED_SHORT, 0);
+    if (_program)
+    {
+        glUseProgram(_program);
+        
+        glUniform3f(_resolutionUniform, resolution.x, resolution.y, resolution.z);
+        glUniform1f(_timeUniform, time);
+        
+        glBindVertexArrayOES(_vertexArray);
+        
+        glDrawElements(GL_TRIANGLES, indicesToDraw, GL_UNSIGNED_SHORT, 0);
+    }
 }
 
-- (BOOL)loadShaders:(NSString *)name
+- (void)useShader:(NSString *)name
+{
+    _pendingShader = name.lastPathComponent;
+}
+
+- (BOOL)loadShader:(NSString *)name
 {
     GLuint vertShader, fragShader;
     NSString *vertShaderPathname, *fragShaderPathname;
-    
-    // Create shader program.
-    _program = glCreateProgram();
     
     // Create and compile vertex shader.
     vertShaderPathname = [[NSBundle mainBundle] pathForResource:@"Shader" ofType:@"vsh"];
@@ -119,12 +135,15 @@
     }
     
     // Create and compile fragment shader.
-    fragShaderPathname = [[NSBundle mainBundle] pathForResource:name ofType:@"fsh"];
+    fragShaderPathname = [[NSBundle mainBundle] pathForResource:name ofType:nil];
     if (![self compileShader:&fragShader type:GL_FRAGMENT_SHADER file:fragShaderPathname])
     {
-        NSLog(@"Failed to compile fragment shader");
+        NSLog(@"Failed to compile fragment shader %@", name);
         return NO;
     }
+    
+    // Create shader program.
+    _program = glCreateProgram();
     
     // Attach vertex shader to program.
     glAttachShader(_program, vertShader);
@@ -135,7 +154,7 @@
     // Link program.
     if (![self linkProgram:_program])
     {
-        NSLog(@"Failed to link program: %d", _program);
+        NSLog(@"Failed to link program: %@(%d)", name, _program);
         
         if (vertShader)
         {

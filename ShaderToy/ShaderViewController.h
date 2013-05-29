@@ -10,32 +10,39 @@
 #import <GLKit/GLKit.h>
 
 @class Plane;
-
+@class ShaderView;
 @class ShaderInformationViewController;
 
-@interface ParallaxViewController : UIViewController <GLKViewDelegate>
+@interface ShaderViewController : UIViewController
 {
-    float contentScale;
+    bool _running;
+    bool _animating;
+    bool _initialized;
+    unsigned long _frameDropCounter;
     
-    NSDate* startTime;
+    Plane* _planeObject;
     
-    Plane* planeObject;
-    
-    // Rendering loop
-    CADisplayLink* displayLink;
+    NSDate* _startTime;
     
     // Multithreading support
-    dispatch_semaphore_t frameRenderingSemaphore;
-    dispatch_queue_t openGLESContextQueue;
+    NSThread* _renderThread;
+    NSRunLoop* _renderLoop;
+    dispatch_queue_t _renderQueue;
     
-    CGPoint lastTouch;
+    CGPoint _lastTouchLocation;
 }
 
 @property (strong, nonatomic) ShaderInformationViewController *informationViewController;
-@property (strong, nonatomic) GLKView* view;
+@property (strong, nonatomic) ShaderView* view;
 @property (strong, nonatomic) IBOutlet UIButton *menuButton;
-@property (assign) int index;
+@property (strong, nonatomic) EAGLContext *context;
+@property (strong, nonatomic) EAGLSharegroup *sharegroup;
+@property (strong, readonly) NSString* currentShader;
 
 - (IBAction)toggleMenu:(id)sender;
+
+- (void)startAnimation;
+- (void)stopAnimation;
+- (void)setShader:(NSString *)name;
 
 @end

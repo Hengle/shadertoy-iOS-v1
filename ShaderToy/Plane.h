@@ -33,13 +33,15 @@ typedef struct
     GLuint _timeUniform;
     
     int indicesToDraw;
+    
+    NSString * _pendingShader;
 }
 
-- (id)initWithSize:(float)size shaderName:(NSString *)name;
+- (id)initWithSize:(float)size;
 
 - (void)update:(float)deltaTime;
 - (void)drawAtResolution:(GLKVector3)resolution andTime:(float)time;
 
-- (BOOL)loadShaders:(NSString *)name;
+- (void)useShader:(NSString *)name;
 
 @end

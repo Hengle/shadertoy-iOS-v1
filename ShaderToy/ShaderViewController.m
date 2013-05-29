@@ -6,7 +6,8 @@
 //  Copyright (c) 2013 Ricardo Chavarria. All rights reserved.
 //
 
-#import "ParallaxViewController.h"
+#import "ShaderViewController.h"
+#import "ShaderView.h"
 #import "ShaderInformation.h"
 #import "ShaderInformationViewController.h"
 #import "Plane.h"
@@ -14,59 +15,49 @@
 #import <QuartzCore/QuartzCore.h>
 
 
-@interface ParallaxViewController ()
+@interface ShaderViewController ()
 
-@property (strong, nonatomic) EAGLContext *context;
-
-- (void)setupGL;
-- (void)tearDownGL;
-
-- (void)render:(CADisplayLink *)link;
-- (void)renderAsync;
+- (void)tearDown;
+- (void)drawFrame;
+- (void)triggerDrawFrame;
+- (void)threadMainLoop;
 
 @end
 
-@implementation ParallaxViewController
+@implementation ShaderViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    self.context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
+    if (self.sharegroup == nil)
+    {
+        _context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
+    }
+    else
+    {
+        _context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2 sharegroup:self.sharegroup];
+    }
     
-    if (!self.context)
+    if (!_context)
     {
         NSLog(@"Failed to create ES context");
         exit(0);
     }
     
-    startTime = [NSDate date];
-    
-    self.view.context = self.context;
-    self.view.enableSetNeedsDisplay = NO;
     self.view.contentScaleFactor = 1.0f;
-    self.view.drawableMultisample = GLKViewDrawableMultisample4X;
     
-    openGLESContextQueue =
-    ("com.shadertoy.openGLESContextQueue", NULL);
-    frameRenderingSemaphore = dispatch_semaphore_create(1);
-    
-    [self setupGL];
-    
-    displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(render:)];
-    [displayLink setFrameInterval:1];
-    [displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
-//    [displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+    _renderThread = nil;
+    _animating = false;
+    _running = false;
+    _initialized = false;
+    _frameDropCounter = 0;
+    _renderQueue = dispatch_queue_create("com.shadertoy.threadedgcdqueue", NULL);
 }
 
 - (void)dealloc
 {
-    [self tearDownGL];
-    
-    if ([EAGLContext currentContext] == self.context)
-    {
-        [EAGLContext setCurrentContext:nil];
-    }
+    [self tearDown];
 }
 
 - (void)didReceiveMemoryWarning
@@ -77,13 +68,7 @@
     {
         self.view = nil;
         
-        [self tearDownGL];
-        
-        if ([EAGLContext currentContext] == self.context)
-        {
-            [EAGLContext setCurrentContext:nil];
-        }
-        self.context = nil;
+        [self tearDown];
     }
     
     // Dispose of any resources that can be recreated.
@@ -100,66 +85,143 @@
     return YES;
 }
 
-- (void)setupGL
+- (void)startAnimation
 {
-    dispatch_async(openGLESContextQueue, ^
+    _startTime = [NSDate date];
+    
+    if (!_animating)
     {
-        [EAGLContext setCurrentContext:self.context];
-        planeObject = [[Plane alloc] initWithSize:1.0f shaderName:[NSString stringWithFormat:@"Shader_%d", self.index]];
-    });
+        _animating = true;
+        _renderThread = [[NSThread alloc] initWithTarget:self selector:@selector(threadMainLoop) object:nil];
+        
+        [_renderThread start];
+    }
 }
 
-- (void)tearDownGL
+- (void)stopAnimation
 {
-    dispatch_async(openGLESContextQueue, ^
+    if (_animating)
     {
-        [EAGLContext setCurrentContext:self.context];
-        planeObject = nil;
-    });
+        _animating = false;
+        
+        CFRunLoopStop([_renderLoop getCFRunLoop]);
+        
+        // Wait for the thread to finish
+        @synchronized(_renderThread)
+        {
+            _renderThread = nil;
+        }
+    }
 }
 
-- (void)render:(CADisplayLink *)link
+- (void)setShader:(NSString *)name
 {
-    if (dispatch_semaphore_wait(frameRenderingSemaphore, DISPATCH_TIME_NOW) != 0)
+    _currentShader = name;
+    
+    if (_planeObject)
     {
-        return;
+        [_planeObject useShader:name];
     }
     
-    [self renderAsync];
+    NSLog(@"Settings shader to %@", name);
 }
 
-- (void)renderAsync
+- (void)tearDown
 {
-    dispatch_async(openGLESContextQueue, ^
+    [self stopAnimation];
+    
+    @synchronized(_context)
     {
-        [EAGLContext setCurrentContext:self.context];
+        if (_context)
+        {
+            if (_context == [EAGLContext currentContext])
+            {
+                _planeObject = nil;
+                [EAGLContext setCurrentContext:nil];
+            }
+            
+            _context = nil;
+        }
+    }
+}
+
+- (void)drawFrame
+{
+    @synchronized(_context)
+    {
+        [EAGLContext setCurrentContext:_context];
+        
+        [self.view setFramebuffer];
+        
+        if (!_initialized)
+        {
+            self.view.context = _context;
+            _initialized = true;
+            _planeObject = [[Plane alloc] initWithSize:1.0f];
+            //[_planeObject useShader:_currentShader];
+        }
+        
+        float width = self.view.backingWidth;
+        float height = self.view.backingHeight;
+        float time = [[NSDate date] timeIntervalSinceDate:_startTime];
         
         [self update];
-        [self.view display];
         
-        dispatch_semaphore_signal(frameRenderingSemaphore);
-    });
+        glClearColor(0.65f, 0.65f, 0.65f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+        
+        glViewport(0, 0, width, height);
+        
+        [_planeObject drawAtResolution:GLKVector3Make(width, height, 0.0f) andTime:time];
+        
+        [self.view presentFramebuffer];
+        
+        [EAGLContext setCurrentContext:nil];
+    }
+}
+
+- (void)triggerDrawFrame
+{
+    if (!_running)
+    {
+        _running = true;
+        dispatch_async(_renderQueue, ^
+        {
+            [self drawFrame];
+            _running = false;
+        });
+    }
+    else
+    {
+        _frameDropCounter++;
+    }
+}
+
+- (void)threadMainLoop
+{
+    @synchronized(_renderThread)
+    {
+        @autoreleasepool
+        {
+            _renderLoop = [NSRunLoop currentRunLoop];
+            
+            CADisplayLink* link = [[UIScreen mainScreen] displayLinkWithTarget:self selector:@selector(triggerDrawFrame)];
+            [link setFrameInterval:1];
+            [link addToRunLoop:_renderLoop forMode:NSDefaultRunLoopMode];
+            
+            CFRunLoopRun();
+            
+            [link invalidate];
+            _renderLoop = nil;
+        }
+    }
 }
 
 #pragma mark - GLKView and GLKViewController delegate methods
 
 - (void)update
 {
-    
-}
-
-- (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
-{
-    float width = self.view.drawableWidth;
-    float height = self.view.drawableHeight;
-    float time = [[NSDate date] timeIntervalSinceDate:startTime];
-    
-    glClearColor(0.65f, 0.65f, 0.65f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
-    
-    glViewport(0, 0, width, height);
-    
-    [planeObject drawAtResolution:GLKVector3Make(width, height, 0.0f) andTime:time];
+    [_planeObject update:1.0f];
 }
 
 - (IBAction)toggleMenu:(id)sender
