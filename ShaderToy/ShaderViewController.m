@@ -157,8 +157,7 @@
         {
             self.view.context = _context;
             _initialized = true;
-            _planeObject = [[Plane alloc] initWithSize:1.0f];
-            //[_planeObject useShader:_currentShader];
+            _planeObject = [[Plane alloc] initShader:_currentShader];
         }
         
         float width = self.view.backingWidth;

@@ -19,22 +19,17 @@
 
 @implementation Plane
 
-- (id)init
-{
-    return [self initWithSize:1.0f];
-}
-
-- (id)initWithSize:(float)size
+- (id)initShader:(NSString *)name;
 {
     self = [super init];
     if (self)
     {
         Vertex vertices[] =
         {
-            {{size,  -size, 0}, 0, {0, 1, 0}, 0, {1.0f, 0.0f, 0.0f, 1.0f}, {1.0f, 1.0f}},
-            {{size,   size, 0}, 0, {0, 1, 0}, 0, {0.0f, 1.0f, 0.0f, 1.0f}, {1.0f, 0.0f}},
-            {{-size,  size, 0}, 0, {0, 1, 0}, 0, {0.0f, 0.0f, 1.0f, 1.0f}, {0.0f, 0.0f}},
-            {{-size, -size, 0}, 0, {0, 1, 0}, 0, {0.0f, 0.0f, 0.0f, 1.0f}, {0.0f, 1.0f}}
+            {{1.0f,  -1.0f, 0}},
+            {{1.0f,   1.0f, 0}},
+            {{-1.0f,  1.0f, 0}},
+            {{-1.0f, -1.0f, 0}}
         };
         
         GLushort indices[] =
@@ -45,7 +40,7 @@
         
         indicesToDraw = 6;
         
-        [self loadShader:@"Shader_0.fsh"];
+        [self loadShader:name];
         
         glGenVertexArraysOES(1, &_vertexArray);
         glBindVertexArrayOES(_vertexArray);
@@ -61,10 +56,6 @@
         // Enable the Position attribute
         glEnableVertexAttribArray(_positionSlot);
         glVertexAttribPointer(_positionSlot, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const GLvoid*)offsetof(Vertex, position));
-        
-        // Enable the Color Attribute
-        glEnableVertexAttribArray(_colorSlot);
-        glVertexAttribPointer(_colorSlot, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const GLvoid*)offsetof(Vertex, color));
         
         glBindVertexArrayOES(0);
     }
@@ -180,7 +171,6 @@
     glUseProgram(_program);
     
     _positionSlot = glGetAttribLocation(_program, "position");
-    _colorSlot = glGetAttribLocation(_program, "color");
     
     _resolutionUniform = glGetUniformLocation(_program, "iResolution");
     _timeUniform = glGetUniformLocation(_program, "iGlobalTime");

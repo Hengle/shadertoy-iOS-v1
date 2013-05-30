@@ -12,11 +12,6 @@
 typedef struct
 {
     float position[3];
-    float pad1;         // Align normals to 4-byte word boundary
-    float normal[3];
-    float pad2;         // Align color to 4-byte word boundary
-    float color[4];
-    float uv[2];
 } Vertex;
 
 @interface Plane : NSObject
@@ -27,7 +22,6 @@ typedef struct
     GLuint _program;
     
     GLuint _positionSlot;
-    GLuint _colorSlot;
     
     GLuint _resolutionUniform;
     GLuint _timeUniform;
@@ -37,7 +31,7 @@ typedef struct
     NSString * _pendingShader;
 }
 
-- (id)initWithSize:(float)size;
+- (id)initShader:(NSString *)name;
 
 - (void)update:(float)deltaTime;
 - (void)drawAtResolution:(GLKVector3)resolution andTime:(float)time;

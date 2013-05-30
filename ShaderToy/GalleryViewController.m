@@ -43,7 +43,7 @@
         ShaderViewController* viewController = (ShaderViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"ShaderView"];
         
         NSString* shaderName = shaders[i];
-        [viewController setShader:shaderName.lastPathComponent];
+        [viewController setShader:shaderName];
         
         [viewControllers addObject:viewController];
     }

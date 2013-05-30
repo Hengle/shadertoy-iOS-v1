@@ -7,13 +7,8 @@
 //
 
 attribute vec4 position;
-attribute vec4 color;
-
-varying lowp vec4 colorVarying;
 
 void main()
 {
-    colorVarying = color;
-    
     gl_Position = position;
 }

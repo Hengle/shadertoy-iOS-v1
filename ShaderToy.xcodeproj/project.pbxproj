@@ -50,6 +50,13 @@
 		AEAEEA6617422A13003F74D3 /* ShaderInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = AEAEEA6517422A13003F74D3 /* ShaderInformation.m */; };
 		AEAEEA6817422B1D003F74D3 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEAEEA6717422B1D003F74D3 /* Social.framework */; };
 		AEB028281753F26100757AF8 /* ShaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB028271753F26100757AF8 /* ShaderView.m */; };
+		AEBF32A31757503A00DEEF71 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AEBF32A21757503A00DEEF71 /* Default@2x.png */; };
+		AEBF32A51757504400DEEF71 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = AEBF32A41757504400DEEF71 /* Default.png */; };
+		AEBF32A71757504C00DEEF71 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AEBF32A61757504C00DEEF71 /* Default-568h@2x.png */; };
+		AEBF32A91757506B00DEEF71 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = AEBF32A81757506B00DEEF71 /* Default-Portrait~ipad.png */; };
+		AEBF32AB1757506D00DEEF71 /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = AEBF32AA1757506D00DEEF71 /* Default-Portrait@2x~ipad.png */; };
+		AEBF32AD1757507300DEEF71 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = AEBF32AC1757507300DEEF71 /* Default-Landscape~ipad.png */; };
+		AEBF32AF1757507500DEEF71 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = AEBF32AE1757507500DEEF71 /* Default-Landscape@2x~ipad.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -109,6 +116,13 @@
 		AEAEEA6717422B1D003F74D3 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		AEB028261753F26100757AF8 /* ShaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderView.h; sourceTree = "<group>"; };
 		AEB028271753F26100757AF8 /* ShaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShaderView.m; sourceTree = "<group>"; };
+		AEBF32A21757503A00DEEF71 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
+		AEBF32A41757504400DEEF71 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
+		AEBF32A61757504C00DEEF71 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
+		AEBF32A81757506B00DEEF71 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait~ipad.png"; path = "../Default-Portrait~ipad.png"; sourceTree = "<group>"; };
+		AEBF32AA1757506D00DEEF71 /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait@2x~ipad.png"; path = "../Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
+		AEBF32AC1757507300DEEF71 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape~ipad.png"; path = "../Default-Landscape~ipad.png"; sourceTree = "<group>"; };
+		AEBF32AE1757507500DEEF71 /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape@2x~ipad.png"; path = "../Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,6 +207,13 @@
 		AEA3B5461730E6C700786DA2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AEBF32AE1757507500DEEF71 /* Default-Landscape@2x~ipad.png */,
+				AEBF32AC1757507300DEEF71 /* Default-Landscape~ipad.png */,
+				AEBF32AA1757506D00DEEF71 /* Default-Portrait@2x~ipad.png */,
+				AEBF32A81757506B00DEEF71 /* Default-Portrait~ipad.png */,
+				AEBF32A61757504C00DEEF71 /* Default-568h@2x.png */,
+				AEBF32A41757504400DEEF71 /* Default.png */,
+				AEBF32A21757503A00DEEF71 /* Default@2x.png */,
 				AEA3B5471730E6C700786DA2 /* ShaderToy-Info.plist */,
 				AEA3B5481730E6C700786DA2 /* InfoPlist.strings */,
 				AEA3B54B1730E6C700786DA2 /* main.m */,
@@ -339,6 +360,13 @@
 				AE933D71173A4B6E009EAF41 /* Shader.vsh in Resources */,
 				AEAEEA6117421489003F74D3 /* ShaderInformationViewController.xib in Resources */,
 				AEAEEA6317422650003F74D3 /* share-4-icon.png in Resources */,
+				AEBF32A31757503A00DEEF71 /* Default@2x.png in Resources */,
+				AEBF32A51757504400DEEF71 /* Default.png in Resources */,
+				AEBF32A71757504C00DEEF71 /* Default-568h@2x.png in Resources */,
+				AEBF32A91757506B00DEEF71 /* Default-Portrait~ipad.png in Resources */,
+				AEBF32AB1757506D00DEEF71 /* Default-Portrait@2x~ipad.png in Resources */,
+				AEBF32AD1757507300DEEF71 /* Default-Landscape~ipad.png in Resources */,
+				AEBF32AF1757507500DEEF71 /* Default-Landscape@2x~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
