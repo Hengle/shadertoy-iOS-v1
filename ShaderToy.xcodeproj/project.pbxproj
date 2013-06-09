@@ -57,6 +57,8 @@
 		AEBF32AB1757506D00DEEF71 /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = AEBF32AA1757506D00DEEF71 /* Default-Portrait@2x~ipad.png */; };
 		AEBF32AD1757507300DEEF71 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = AEBF32AC1757507300DEEF71 /* Default-Landscape~ipad.png */; };
 		AEBF32AF1757507500DEEF71 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = AEBF32AE1757507500DEEF71 /* Default-Landscape@2x~ipad.png */; };
+		AEBF32B1175873E200DEEF71 /* shaders.json in Resources */ = {isa = PBXBuildFile; fileRef = AEBF32B0175873E200DEEF71 /* shaders.json */; };
+		AEBF32B4176457EB00DEEF71 /* ShaderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBF32B3176457EB00DEEF71 /* ShaderManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -123,6 +125,9 @@
 		AEBF32AA1757506D00DEEF71 /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait@2x~ipad.png"; path = "../Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
 		AEBF32AC1757507300DEEF71 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape~ipad.png"; path = "../Default-Landscape~ipad.png"; sourceTree = "<group>"; };
 		AEBF32AE1757507500DEEF71 /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape@2x~ipad.png"; path = "../Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
+		AEBF32B0175873E200DEEF71 /* shaders.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = shaders.json; sourceTree = "<group>"; };
+		AEBF32B2176457EB00DEEF71 /* ShaderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderManager.h; sourceTree = "<group>"; };
+		AEBF32B3176457EB00DEEF71 /* ShaderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShaderManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -238,6 +243,7 @@
 			isa = PBXGroup;
 			children = (
 				AE933D6217370EE0009EAF41 /* cellbg.png */,
+				AEBF32B0175873E200DEEF71 /* shaders.json */,
 				AEA3B5931736EE9100786DA2 /* Icons */,
 				AE933D581736F601009EAF41 /* Shader.vsh */,
 				AEAE17F9174CC8FA00764D5B /* Shader_0.fsh */,
@@ -278,6 +284,8 @@
 		AEAE17F2174B635600764D5B /* Rendering */ = {
 			isa = PBXGroup;
 			children = (
+				AEBF32B2176457EB00DEEF71 /* ShaderManager.h */,
+				AEBF32B3176457EB00DEEF71 /* ShaderManager.m */,
 				AEAE17F3174B637000764D5B /* Plane.h */,
 				AEAE17F4174B637000764D5B /* Plane.m */,
 			);
@@ -367,6 +375,7 @@
 				AEBF32AB1757506D00DEEF71 /* Default-Portrait@2x~ipad.png in Resources */,
 				AEBF32AD1757507300DEEF71 /* Default-Landscape~ipad.png in Resources */,
 				AEBF32AF1757507500DEEF71 /* Default-Landscape@2x~ipad.png in Resources */,
+				AEBF32B1175873E200DEEF71 /* shaders.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,6 +397,7 @@
 				AEAEEA6617422A13003F74D3 /* ShaderInformation.m in Sources */,
 				AEAE17F5174B637000764D5B /* Plane.m in Sources */,
 				AEB028281753F26100757AF8 /* ShaderView.m in Sources */,
+				AEBF32B4176457EB00DEEF71 /* ShaderManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

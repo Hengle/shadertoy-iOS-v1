@@ -33,6 +33,7 @@
     if (self.sharegroup == nil)
     {
         _context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
+        _sharegroup = _context.sharegroup;
     }
     else
     {

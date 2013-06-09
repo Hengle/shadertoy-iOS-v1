@@ -113,6 +113,12 @@
     if (shaderIndex < shaders.count)
     {
         newController = viewControllers[shaderIndex % 3];
+        
+        if (newController.sharegroup == nil)
+        {
+            newController.sharegroup = viewController.sharegroup;
+        }
+        
         NSString* shaderName = shaders[shaderIndex];
         [newController setShader:shaderName];
     }

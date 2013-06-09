@@ -121,6 +121,11 @@
 {
     [super layoutSubviews];
     
+    if (_context == nil)
+    {
+        return;
+    }
+    
     @synchronized(_context)
     {
         [EAGLContext setCurrentContext:_context];
@@ -128,7 +133,7 @@
         [self destroyBuffers];
         [self createBuffers];
         
-        [EAGLContext setCurrentContext:_context];
+        [EAGLContext setCurrentContext:nil];
     }
 }
 
