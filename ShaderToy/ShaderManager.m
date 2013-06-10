@@ -10,6 +10,7 @@
 
 @interface ShaderManager ()
 
+- (GLuint)compileShader:(NSString *)name;
 - (BOOL)compileShader:(GLuint *)shader type:(GLenum)type file:(NSString *)file;
 - (BOOL)linkProgram:(GLuint)prog;
 - (BOOL)validateProgram:(GLuint)prog;
@@ -37,10 +38,32 @@
     
     if (self)
     {
+        pendingShaders = [NSMutableArray new];
         shaderDictionary = [NSMutableDictionary new];
     }
     
     return self;
+}
+
+- (void)addShader:(NSString *)name
+{
+    [pendingShaders addObject:name];
+}
+
+- (void)deferCompilation
+{
+    for (NSString* name in pendingShaders)
+    {
+        if ([shaderDictionary objectForKey:name] == nil)
+        {
+            GLuint program = [self compileShader:name];
+            [self storeShader:program withName:name];
+            
+            NSLog(@"Created program %d for shader %@", program, name);
+        }
+    }
+    
+    [pendingShaders removeAllObjects];
 }
 
 - (void)storeShader:(GLuint)program withName:(NSString *)name
@@ -60,77 +83,83 @@
     }
     else
     {
-        GLuint vertShader, fragShader;
-        NSString *vertShaderPathname, *fragShaderPathname;
-            
-        // Create and compile vertex shader.
-        vertShaderPathname = [[NSBundle mainBundle] pathForResource:@"Shader" ofType:@"vsh"];
-        if (![self compileShader:&vertShader type:GL_VERTEX_SHADER file:vertShaderPathname])
-        {
-            NSLog(@"Failed to compile vertex shader");
-            return 0;
-        }
+        program = [self compileShader:name];
         
-        // Create and compile fragment shader.
-        fragShaderPathname = [[NSBundle mainBundle] pathForResource:name ofType:nil];
-        if (![self compileShader:&fragShader type:GL_FRAGMENT_SHADER file:fragShaderPathname])
-        {
-            NSLog(@"Failed to compile fragment shader %@", name);
-            return 0;
-        }
-        
-        // Create shader program.
-        program = glCreateProgram();
-        
-        // Attach vertex shader to program.
-        glAttachShader(program, vertShader);
-        
-        // Attach fragment shader to program.
-        glAttachShader(program, fragShader);
-        
-        // Link program.
-        if (![self linkProgram:program])
-        {
-            NSLog(@"Failed to link program: %@(%d)", name, program);
-            
-            if (vertShader)
-            {
-                glDeleteShader(vertShader);
-                vertShader = 0;
-            }
-            
-            if (fragShader)
-            {
-                glDeleteShader(fragShader);
-                fragShader = 0;
-            }
-            
-            if (program)
-            {
-                glDeleteProgram(program);
-                program = 0;
-            }
-        }
-        else
-        {
-            // Release vertex and fragment shaders.
-            if (vertShader)
-            {
-                glDetachShader(program, vertShader);
-                glDeleteShader(vertShader);
-            }
-            
-            if (fragShader)
-            {
-                glDetachShader(program, fragShader);
-                glDeleteShader(fragShader);
-            }
-        }
+        [self storeShader:program withName:name];
         
         NSLog(@"Created program %d for shader %@", program, name);
+    }
+    
+    return program;
+}
+
+- (GLuint)compileShader:(NSString *)name
+{
+    GLuint program, vertShader, fragShader;
+    NSString *vertShaderPathname, *fragShaderPathname;
+    
+    // Create and compile vertex shader.
+    vertShaderPathname = [[NSBundle mainBundle] pathForResource:@"Shader" ofType:@"vsh"];
+    if (![self compileShader:&vertShader type:GL_VERTEX_SHADER file:vertShaderPathname])
+    {
+        NSLog(@"Failed to compile vertex shader");
+        return 0;
+    }
+    
+    // Create and compile fragment shader.
+    fragShaderPathname = [[NSBundle mainBundle] pathForResource:name ofType:nil];
+    if (![self compileShader:&fragShader type:GL_FRAGMENT_SHADER file:fragShaderPathname])
+    {
+        NSLog(@"Failed to compile fragment shader %@", name);
+        return 0;
+    }
+    
+    // Create shader program.
+    program = glCreateProgram();
+    
+    // Attach vertex shader to program.
+    glAttachShader(program, vertShader);
+    
+    // Attach fragment shader to program.
+    glAttachShader(program, fragShader);
+    
+    // Link program.
+    if (![self linkProgram:program])
+    {
+        NSLog(@"Failed to link program: %@(%d)", name, program);
         
-        programObject = [NSNumber numberWithUnsignedInt:program];
-        [shaderDictionary setObject:programObject forKey:name];
+        if (vertShader)
+        {
+            glDeleteShader(vertShader);
+            vertShader = 0;
+        }
+        
+        if (fragShader)
+        {
+            glDeleteShader(fragShader);
+            fragShader = 0;
+        }
+        
+        if (program)
+        {
+            glDeleteProgram(program);
+            program = 0;
+        }
+    }
+    else
+    {
+        // Release vertex and fragment shaders.
+        if (vertShader)
+        {
+            glDetachShader(program, vertShader);
+            glDeleteShader(vertShader);
+        }
+        
+        if (fragShader)
+        {
+            glDetachShader(program, fragShader);
+            glDeleteShader(fragShader);
+        }
     }
     
     return program;

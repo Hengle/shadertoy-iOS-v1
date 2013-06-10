@@ -10,10 +10,14 @@
 
 @interface ShaderManager : NSObject
 {
+    NSMutableArray* pendingShaders;
     NSMutableDictionary* shaderDictionary;
 }
 
 + (ShaderManager *)sharedInstance;
+
+- (void)addShader:(NSString *)name;
+- (void)deferCompilation;
 
 - (void)storeShader:(GLuint)program withName:(NSString *)name;
 - (GLuint)getShaderWithName:(NSString *)name;

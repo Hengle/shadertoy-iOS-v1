@@ -77,6 +77,8 @@
 
 - (void)update:(float)deltaTime
 {
+    [[ShaderManager sharedInstance] deferCompilation];
+    
     if (_pendingShader != nil)
     {
         [self loadShader:_pendingShader];

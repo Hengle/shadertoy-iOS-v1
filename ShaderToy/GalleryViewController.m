@@ -8,6 +8,7 @@
 
 #import "GalleryViewController.h"
 #import "ShaderViewController.h"
+#import "ShaderManager.h"
 
 @interface GalleryViewController ()
 
@@ -54,6 +55,13 @@
     
     // Start the animation
     [firstController startAnimation];
+    
+    // Pre-compile shaders
+    ShaderManager* shaderManager = [ShaderManager sharedInstance];
+    for (NSString* name in shaders)
+    {
+        [shaderManager addShader:name];
+    }
     
     // Tap gesture recognizer to collapse reveal view controller
     UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
