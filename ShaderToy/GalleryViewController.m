@@ -83,6 +83,10 @@
 {
     ShaderViewController* next = (ShaderViewController *)pendingViewControllers[0];
     [next startAnimation];
+    
+    pendingController = next;
+    
+    NSLog(@"Started Animation for next controller %@", next);
 }
 
 - (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed
@@ -91,7 +95,19 @@
     {
         ShaderViewController* previous = (ShaderViewController *)previousViewControllers[0];
         [previous stopAnimation];
+        
+        NSLog(@"Stopped Animation for previews controller");
     }
+    else if (pendingController != nil)
+    {
+        // If the animation didn't complete, our next view controller is rendering
+        // we need to stop it's rendering as the animation failed
+        [pendingController stopAnimation];
+        
+        NSLog(@"Stopped Animation for pending controller");
+    }
+    
+    pendingController = nil;
 }
 
 

@@ -8,11 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class ShaderViewController;
+
 @interface GalleryViewController : UIPageViewController <UIPageViewControllerDelegate, UIPageViewControllerDataSource, SWRevealViewControllerDelegate>
 {
     bool revealControllerShowing;
     NSMutableArray *viewControllers;
     NSArray *shaders;
+    ShaderViewController* pendingController;
 }
 
 @end

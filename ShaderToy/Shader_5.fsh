@@ -13,7 +13,7 @@ float beat = 0.;
 
 void main(void)
 {
-	float ct = 0.0;//iChannelTime[0];
+	float ct = iGlobalTime;
 	if ((ct > 8.0 && ct < 33.5)
 	|| (ct > 38.0 && ct < 88.5)
 	|| (ct > 93.0 && ct < 194.5))
