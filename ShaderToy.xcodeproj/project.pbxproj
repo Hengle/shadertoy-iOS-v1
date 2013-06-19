@@ -24,8 +24,6 @@
 		AEA3B54A1730E6C700786DA2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AEA3B5481730E6C700786DA2 /* InfoPlist.strings */; };
 		AEA3B54C1730E6C700786DA2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B54B1730E6C700786DA2 /* main.m */; };
 		AEA3B5501730E6C700786DA2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B54F1730E6C700786DA2 /* AppDelegate.m */; };
-		AEA3B5521730E6C700786DA2 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA3B5511730E6C700786DA2 /* Default.png */; };
-		AEA3B5541730E6C700786DA2 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA3B5531730E6C700786DA2 /* Default@2x.png */; };
 		AEA3B5561730E6C700786DA2 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA3B5551730E6C700786DA2 /* Default-568h@2x.png */; };
 		AEA3B5591730E6C700786DA2 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEA3B5571730E6C700786DA2 /* MainStoryboard_iPhone.storyboard */; };
 		AEA3B55C1730E6C700786DA2 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEA3B55A1730E6C700786DA2 /* MainStoryboard_iPad.storyboard */; };
@@ -320,6 +318,11 @@
 			attributes = {
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Ricardo Chavarria";
+				TargetAttributes = {
+					AEA3B53B1730E6C700786DA2 = {
+						DevelopmentTeam = S6BWLQXDC7;
+					};
+				};
 			};
 			buildConfigurationList = AEA3B5371730E6C700786DA2 /* Build configuration list for PBXProject "ShaderToy" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -344,8 +347,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AEA3B54A1730E6C700786DA2 /* InfoPlist.strings in Resources */,
-				AEA3B5521730E6C700786DA2 /* Default.png in Resources */,
-				AEA3B5541730E6C700786DA2 /* Default@2x.png in Resources */,
 				AEA3B5561730E6C700786DA2 /* Default-568h@2x.png in Resources */,
 				AEA3B5591730E6C700786DA2 /* MainStoryboard_iPhone.storyboard in Resources */,
 				AEA3B55C1730E6C700786DA2 /* MainStoryboard_iPad.storyboard in Resources */,
@@ -492,6 +493,7 @@
 		AEA3B5631730E6C700786DA2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ShaderToy/ShaderToy-Prefix.pch";
 				INFOPLIST_FILE = "ShaderToy/ShaderToy-Info.plist";
@@ -503,6 +505,7 @@
 		AEA3B5641730E6C700786DA2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ShaderToy/ShaderToy-Prefix.pch";
 				INFOPLIST_FILE = "ShaderToy/ShaderToy-Info.plist";

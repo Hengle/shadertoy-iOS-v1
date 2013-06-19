@@ -12,10 +12,10 @@
 
 @interface GalleryViewController : UIPageViewController <UIPageViewControllerDelegate, UIPageViewControllerDataSource, SWRevealViewControllerDelegate>
 {
-    bool revealControllerShowing;
-    NSMutableArray *viewControllers;
-    NSArray *shaders;
-    ShaderViewController* pendingController;
+    bool _revealControllerShowing;
+    NSMutableArray *_viewControllers;
+    NSArray *_shaders;
+    NSMutableArray* _pendingControllers;
 }
 
 @end

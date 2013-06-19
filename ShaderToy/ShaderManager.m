@@ -59,7 +59,7 @@
             GLuint program = [self compileShader:name];
             [self storeShader:program withName:name];
             
-            NSLog(@"Created program %d for shader %@", program, name);
+            NSLog(@"Created program %u for shader %@", program, name);
         }
     }
     
@@ -78,8 +78,8 @@
     
     if (programObject != nil)
     {
-        NSLog(@"Retrieved program %d for shader %@", program, name);
         program = programObject.unsignedIntValue;
+        NSLog(@"Retrieved program %u for shader %@", program, name);
     }
     else
     {
@@ -87,7 +87,7 @@
         
         [self storeShader:program withName:name];
         
-        NSLog(@"Created program %d for shader %@", program, name);
+        NSLog(@"Created program %u for shader %@", program, name);
     }
     
     return program;
@@ -126,7 +126,7 @@
     // Link program.
     if (![self linkProgram:program])
     {
-        NSLog(@"Failed to link program: %@(%d)", name, program);
+        NSLog(@"Failed to link program: %@(%u)", name, program);
         
         if (vertShader)
         {

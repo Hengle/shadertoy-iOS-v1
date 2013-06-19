@@ -26,31 +26,33 @@
     
     self.revealViewController.delegate = self;
     
+    _pendingControllers = [NSMutableArray new];
+    
     // Retrieve the shaders we have available and filter the list to only include name.extension
-    shaders = [[NSBundle mainBundle] pathsForResourcesOfType:@"fsh" inDirectory:nil];
+    _shaders = [[NSBundle mainBundle] pathsForResourcesOfType:@"fsh" inDirectory:nil];
     
     NSMutableArray* filteredlist = [NSMutableArray new];
-    for (NSString* path in shaders)
+    for (NSString* path in _shaders)
     {
         [filteredlist addObject:path.lastPathComponent];
     }
     
-    shaders = filteredlist;
+    _shaders = filteredlist;
     
-    viewControllers = [NSMutableArray new];
+    _viewControllers = [NSMutableArray new];
     
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 4; i++)
     {
         ShaderViewController* viewController = (ShaderViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"ShaderView"];
-        
-        NSString* shaderName = shaders[i];
+
+        NSString* shaderName = _shaders[i];
         [viewController setShader:shaderName];
-        
-        [viewControllers addObject:viewController];
+ 
+        [_viewControllers addObject:viewController];
     }
     
     // Set the first page controller
-    ShaderViewController* firstController = viewControllers[0];
+    ShaderViewController* firstController = _viewControllers[0];
     [self setViewControllers:@[firstController] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
     
     // Start the animation
@@ -58,7 +60,7 @@
     
     // Pre-compile shaders
     ShaderManager* shaderManager = [ShaderManager sharedInstance];
-    for (NSString* name in shaders)
+    for (NSString* name in _shaders)
     {
         [shaderManager addShader:name];
     }
@@ -84,8 +86,12 @@
     ShaderViewController* next = (ShaderViewController *)pendingViewControllers[0];
     [next startAnimation];
     
-    pendingController = next;
+    if (![_pendingControllers containsObject:next])
+    {
+        [_pendingControllers addObject:next];
+    }
     
+    NSLog(@"Pending controller %d", _pendingControllers.count);
     NSLog(@"Started Animation for next controller %@", next);
 }
 
@@ -96,18 +102,31 @@
         ShaderViewController* previous = (ShaderViewController *)previousViewControllers[0];
         [previous stopAnimation];
         
-        NSLog(@"Stopped Animation for previews controller");
-    }
-    else if (pendingController != nil)
-    {
-        // If the animation didn't complete, our next view controller is rendering
-        // we need to stop it's rendering as the animation failed
-        [pendingController stopAnimation];
+        for (ShaderViewController* controller in _pendingControllers)
+        {
+            if (controller != pageViewController.viewControllers[0])
+            {
+                [controller stopAnimation];
+                
+                NSLog(@"Stopped Animation for previews controller");
+            }
+        }
         
-        NSLog(@"Stopped Animation for pending controller");
+        // Pre-warm the controller, get the next shader in
+        // the list and set the next free controller to use it
     }
-    
-    pendingController = nil;
+    else
+    {
+        // If the animation didn't complete, our next view controllers are rendering
+        // we need to stop its rendering as the animation failed
+        for (ShaderViewController* controller in _pendingControllers)
+        {
+            [controller stopAnimation];
+            NSLog(@"Stopped Animation for pending controller");
+        }
+    }
+
+    [_pendingControllers removeAllObjects];
 }
 
 
@@ -117,13 +136,15 @@
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(ShaderViewController *)viewController
 {
     ShaderViewController* newController = nil;
-    int shaderIndex = [shaders indexOfObject:viewController.currentShader] - 1;
+    int shaderIndex = [_shaders indexOfObject:viewController.currentShader] - 1;
     
     if (shaderIndex >= 0)
     {
-        newController = viewControllers[shaderIndex % 3];
-        NSString* shaderName = shaders[shaderIndex];
+        newController = _viewControllers[shaderIndex % _viewControllers.count];
+        NSString* shaderName = _shaders[shaderIndex];
         [newController setShader:shaderName];
+        
+        NSLog(@"Setting VC %d to shader %@", shaderIndex % _viewControllers.count, shaderName);
     }
     
     return newController;
@@ -132,19 +153,21 @@
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(ShaderViewController *)viewController
 {
     ShaderViewController* newController = nil;
-    int shaderIndex = [shaders indexOfObject:viewController.currentShader] + 1;
+    int shaderIndex = [_shaders indexOfObject:viewController.currentShader] + 1;
     
-    if (shaderIndex < shaders.count)
+    if (shaderIndex < _shaders.count)
     {
-        newController = viewControllers[shaderIndex % 3];
+        newController = _viewControllers[shaderIndex % _viewControllers.count];
         
         if (newController.sharegroup == nil)
         {
             newController.sharegroup = viewController.sharegroup;
         }
         
-        NSString* shaderName = shaders[shaderIndex];
+        NSString* shaderName = _shaders[shaderIndex];
         [newController setShader:shaderName];
+        
+        NSLog(@"Setting VC %d to shader %@", shaderIndex % _viewControllers.count, shaderName);
     }
     
     return newController;
@@ -159,7 +182,7 @@
     if (sender.state == UIGestureRecognizerStateEnded)
     {
         // Only allow tap to reveal when the menu is revealed
-        if (revealControllerShowing)
+        if (_revealControllerShowing)
         {
             [self.revealViewController revealToggleAnimated:YES];
         }
@@ -171,7 +194,7 @@
 
 - (void)revealController:(SWRevealViewController *)revealController didMoveToPosition:(FrontViewPosition)position
 {
-    revealControllerShowing = (position == FrontViewPositionRight);
+    _revealControllerShowing = (position == FrontViewPositionRight);
 }
 
 @end
