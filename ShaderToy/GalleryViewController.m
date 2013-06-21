@@ -9,6 +9,7 @@
 #import "GalleryViewController.h"
 #import "ShaderViewController.h"
 #import "ShaderManager.h"
+#import "ShaderInfo.h"
 
 @interface GalleryViewController ()
 
@@ -19,7 +20,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
     
     self.dataSource = self;
     self.delegate = self;
@@ -27,43 +27,77 @@
     self.revealViewController.delegate = self;
     
     _pendingControllers = [NSMutableArray new];
+    _shaders = [NSMutableArray new];
     
-    // Retrieve the shaders we have available and filter the list to only include name.extension
-    _shaders = [[NSBundle mainBundle] pathsForResourcesOfType:@"fsh" inDirectory:nil];
-    
-    NSMutableArray* filteredlist = [NSMutableArray new];
-    for (NSString* path in _shaders)
+    // Background loading of shaders
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
     {
-        [filteredlist addObject:path.lastPathComponent];
-    }
-    
-    _shaders = filteredlist;
-    
-    _viewControllers = [NSMutableArray new];
-    
-    for (int i = 0; i < 4; i++)
-    {
-        ShaderViewController* viewController = (ShaderViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"ShaderView"];
-
-        NSString* shaderName = _shaders[i];
-        [viewController setShader:shaderName];
- 
-        [_viewControllers addObject:viewController];
-    }
-    
-    // Set the first page controller
-    ShaderViewController* firstController = _viewControllers[0];
-    [self setViewControllers:@[firstController] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
-    
-    // Start the animation
-    [firstController startAnimation];
-    
-    // Pre-compile shaders
-    ShaderManager* shaderManager = [ShaderManager sharedInstance];
-    for (NSString* name in _shaders)
-    {
-        [shaderManager addShader:name];
-    }
+        NSData* shaderListData = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"https://www.shadertoy.com/mobile.htm?sort=newest"]];
+        
+        if (shaderListData != nil)
+        {
+            NSError* jsonError = nil;
+            NSArray* shaderList = [NSJSONSerialization JSONObjectWithData:shaderListData options:kNilOptions error:&jsonError];
+            
+            if (jsonError == nil)
+            {
+                for (NSString* shaderID in shaderList)
+                {
+                    NSData* shaderDetailsData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://www.shadertoy.com/mobile.htm?s=%@", shaderID]]];
+                    
+                    NSArray* shaderDetails = [NSJSONSerialization JSONObjectWithData:shaderDetailsData options:kNilOptions error:&jsonError];
+                    
+                    ShaderInfo* shader = [[ShaderInfo alloc] initWithJSONDictionary:shaderDetails[0]];
+                    
+                    [_shaders addObject:shader];
+                }
+                
+                dispatch_async(dispatch_get_main_queue(), ^
+                {
+//                    // Retrieve the shaders we have available and filter the list to only include name.extension
+//                    _shaders = [[[NSBundle mainBundle] pathsForResourcesOfType:@"fsh" inDirectory:nil] mutableCopy];
+//                    
+//                    NSMutableArray* filteredlist = [NSMutableArray new];
+//                    for (NSString* path in _shaders)
+//                    {
+//                        [filteredlist addObject:path.lastPathComponent];
+//                    }
+//                    
+//                    _shaders = filteredlist;
+                    
+                    _viewControllers = [NSMutableArray new];
+                    
+                    for (int i = 0; i < 4; i++)
+                    {
+                        ShaderViewController* viewController = (ShaderViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"ShaderView"];
+                        
+                        ShaderInfo* shader = _shaders[i];
+                        [viewController setShader:shader];
+                        
+                        [_viewControllers addObject:viewController];
+                    }
+                    
+                    // Set the first page controller
+                    ShaderViewController* firstController = _viewControllers[0];
+                    [self setViewControllers:@[firstController] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+                    
+                    // Start the animation
+                    [firstController startAnimation];
+                    
+                    // Pre-compile shaders
+                    ShaderManager* shaderManager = [ShaderManager sharedInstance];
+                    for (ShaderInfo* shader in _shaders)
+                    {
+                        [shaderManager addShader:shader];
+                    }
+                });
+            }
+            else
+            {
+                NSLog(@"Error loading shader list %@", jsonError.localizedDescription);
+            }
+        }
+    });
     
     // Tap gesture recognizer to collapse reveal view controller
     UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
@@ -141,10 +175,10 @@
     if (shaderIndex >= 0)
     {
         newController = _viewControllers[shaderIndex % _viewControllers.count];
-        NSString* shaderName = _shaders[shaderIndex];
-        [newController setShader:shaderName];
+        ShaderInfo* shader = _shaders[shaderIndex];
+        [newController setShader:shader];
         
-        NSLog(@"Setting VC %d to shader %@", shaderIndex % _viewControllers.count, shaderName);
+        NSLog(@"Setting VC %d to shader %@", shaderIndex % _viewControllers.count, shader.name);
     }
     
     return newController;
@@ -164,10 +198,10 @@
             newController.sharegroup = viewController.sharegroup;
         }
         
-        NSString* shaderName = _shaders[shaderIndex];
-        [newController setShader:shaderName];
+        ShaderInfo* shader = _shaders[shaderIndex];
+        [newController setShader:shader];
         
-        NSLog(@"Setting VC %d to shader %@", shaderIndex % _viewControllers.count, shaderName);
+        NSLog(@"Setting VC %d to shader %@", shaderIndex % _viewControllers.count, shader.name);
     }
     
     return newController;

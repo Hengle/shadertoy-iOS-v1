@@ -14,6 +14,18 @@ typedef struct
     float position[3];
 } Vertex;
 
+typedef struct
+{
+    GLKVector3 resolution;
+    float time;
+    float channelTime[4];
+    GLKVector4 mouseCoordinates;
+    GLuint channelInfo[4];
+    GLKVector4 date;
+} UniformParams;
+
+@class ShaderInfo;
+
 @interface Plane : NSObject
 {
     GLuint _vertexArray;
@@ -22,20 +34,23 @@ typedef struct
     GLuint _program;
     
     GLuint _positionSlot;
-    
     GLuint _resolutionUniform;
     GLuint _timeUniform;
+    GLuint _channelTimeUniform;
+    GLuint _mouseUniform;
+    GLuint _channelUniform[4];
+    GLuint _dateUniform;
     
     int indicesToDraw;
     
-    NSString * _pendingShader;
+    ShaderInfo * _pendingShader;
 }
 
-- (id)initShader:(NSString *)name;
+- (id)initWithShader:(ShaderInfo *)shader;
 
 - (void)update:(float)deltaTime;
-- (void)drawAtResolution:(GLKVector3)resolution andTime:(float)time;
+- (void)draw:(UniformParams *)params;
 
-- (void)useShader:(NSString *)name;
+- (void)useShader:(ShaderInfo *)shader;
 
 @end

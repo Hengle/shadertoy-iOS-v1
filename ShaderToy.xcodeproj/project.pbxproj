@@ -28,7 +28,6 @@
 		AEA3B5591730E6C700786DA2 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEA3B5571730E6C700786DA2 /* MainStoryboard_iPhone.storyboard */; };
 		AEA3B55C1730E6C700786DA2 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEA3B55A1730E6C700786DA2 /* MainStoryboard_iPad.storyboard */; };
 		AEA3B55F1730E6C700786DA2 /* GalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B55E1730E6C700786DA2 /* GalleryViewController.m */; };
-		AEA3B5681730E70500786DA2 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B5671730E70500786DA2 /* SWRevealViewController.m */; };
 		AEA3B57B1732327200786DA2 /* ShaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B5791732327200786DA2 /* ShaderViewController.m */; };
 		AEA3B58617360BBA00786DA2 /* ShaderMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B58517360BBA00786DA2 /* ShaderMenuViewController.m */; };
 		AEA3B58E1736E82A00786DA2 /* ShaderMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B58D1736E82A00786DA2 /* ShaderMenuCell.m */; };
@@ -48,6 +47,9 @@
 		AEAEEA6617422A13003F74D3 /* ShaderInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = AEAEEA6517422A13003F74D3 /* ShaderInformation.m */; };
 		AEAEEA6817422B1D003F74D3 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEAEEA6717422B1D003F74D3 /* Social.framework */; };
 		AEB028281753F26100757AF8 /* ShaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB028271753F26100757AF8 /* ShaderView.m */; };
+		AEBC414F1771B3B40024D73C /* ShaderInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1EF6081771923000A1251C /* ShaderInfo.m */; };
+		AEBC415A177305D40024D73C /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBC4159177305D40024D73C /* SWRevealViewController.m */; };
+		AEBC415D177444AF0024D73C /* TextureManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBC415C177444AF0024D73C /* TextureManager.m */; };
 		AEBF32A31757503A00DEEF71 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AEBF32A21757503A00DEEF71 /* Default@2x.png */; };
 		AEBF32A51757504400DEEF71 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = AEBF32A41757504400DEEF71 /* Default.png */; };
 		AEBF32A71757504C00DEEF71 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AEBF32A61757504C00DEEF71 /* Default-568h@2x.png */; };
@@ -55,11 +57,12 @@
 		AEBF32AB1757506D00DEEF71 /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = AEBF32AA1757506D00DEEF71 /* Default-Portrait@2x~ipad.png */; };
 		AEBF32AD1757507300DEEF71 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = AEBF32AC1757507300DEEF71 /* Default-Landscape~ipad.png */; };
 		AEBF32AF1757507500DEEF71 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = AEBF32AE1757507500DEEF71 /* Default-Landscape@2x~ipad.png */; };
-		AEBF32B1175873E200DEEF71 /* shaders.json in Resources */ = {isa = PBXBuildFile; fileRef = AEBF32B0175873E200DEEF71 /* shaders.json */; };
 		AEBF32B4176457EB00DEEF71 /* ShaderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBF32B3176457EB00DEEF71 /* ShaderManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AE1EF6071771923000A1251C /* ShaderInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShaderInfo.h; sourceTree = "<group>"; };
+		AE1EF6081771923000A1251C /* ShaderInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShaderInfo.m; sourceTree = "<group>"; };
 		AE933D571736F601009EAF41 /* Shader_2.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader_2.fsh; sourceTree = "<group>"; };
 		AE933D581736F601009EAF41 /* Shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.vsh; sourceTree = "<group>"; };
 		AE933D5E1736F725009EAF41 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -88,8 +91,6 @@
 		AEA3B55B1730E6C700786DA2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		AEA3B55D1730E6C700786DA2 /* GalleryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GalleryViewController.h; sourceTree = "<group>"; };
 		AEA3B55E1730E6C700786DA2 /* GalleryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GalleryViewController.m; sourceTree = "<group>"; };
-		AEA3B5661730E70500786DA2 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
-		AEA3B5671730E70500786DA2 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		AEA3B5781732327200786DA2 /* ShaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderViewController.h; sourceTree = "<group>"; };
 		AEA3B5791732327200786DA2 /* ShaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShaderViewController.m; sourceTree = "<group>"; };
 		AEA3B58417360BBA00786DA2 /* ShaderMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderMenuViewController.h; sourceTree = "<group>"; };
@@ -116,6 +117,10 @@
 		AEAEEA6717422B1D003F74D3 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		AEB028261753F26100757AF8 /* ShaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderView.h; sourceTree = "<group>"; };
 		AEB028271753F26100757AF8 /* ShaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShaderView.m; sourceTree = "<group>"; };
+		AEBC4158177305D40024D73C /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
+		AEBC4159177305D40024D73C /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
+		AEBC415B177444AF0024D73C /* TextureManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureManager.h; sourceTree = "<group>"; };
+		AEBC415C177444AF0024D73C /* TextureManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextureManager.m; sourceTree = "<group>"; };
 		AEBF32A21757503A00DEEF71 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
 		AEBF32A41757504400DEEF71 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
 		AEBF32A61757504C00DEEF71 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -123,7 +128,6 @@
 		AEBF32AA1757506D00DEEF71 /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait@2x~ipad.png"; path = "../Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
 		AEBF32AC1757507300DEEF71 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape~ipad.png"; path = "../Default-Landscape~ipad.png"; sourceTree = "<group>"; };
 		AEBF32AE1757507500DEEF71 /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape@2x~ipad.png"; path = "../Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
-		AEBF32B0175873E200DEEF71 /* shaders.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = shaders.json; sourceTree = "<group>"; };
 		AEBF32B2176457EB00DEEF71 /* ShaderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderManager.h; sourceTree = "<group>"; };
 		AEBF32B3176457EB00DEEF71 /* ShaderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShaderManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -146,6 +150,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AE1EF6061771921000A1251C /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				AE1EF6071771923000A1251C /* ShaderInfo.h */,
+				AE1EF6081771923000A1251C /* ShaderInfo.m */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
 		AEA3B5331730E6C700786DA2 = {
 			isa = PBXGroup;
 			children = (
@@ -182,6 +195,7 @@
 			children = (
 				AEA3B58B1736E7C500786DA2 /* Components */,
 				AEAE17F2174B635600764D5B /* Rendering */,
+				AE1EF6061771921000A1251C /* Data */,
 				AEA3B54E1730E6C700786DA2 /* AppDelegate.h */,
 				AEA3B54F1730E6C700786DA2 /* AppDelegate.m */,
 				AEA3B55D1730E6C700786DA2 /* GalleryViewController.h */,
@@ -228,20 +242,10 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		AEA3B5651730E70500786DA2 /* SWRevealViewController */ = {
-			isa = PBXGroup;
-			children = (
-				AEA3B5661730E70500786DA2 /* SWRevealViewController.h */,
-				AEA3B5671730E70500786DA2 /* SWRevealViewController.m */,
-			);
-			path = SWRevealViewController;
-			sourceTree = "<group>";
-		};
 		AEA3B5691731104A00786DA2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				AE933D6217370EE0009EAF41 /* cellbg.png */,
-				AEBF32B0175873E200DEEF71 /* shaders.json */,
 				AEA3B5931736EE9100786DA2 /* Icons */,
 				AE933D581736F601009EAF41 /* Shader.vsh */,
 				AEAE17F9174CC8FA00764D5B /* Shader_0.fsh */,
@@ -257,7 +261,7 @@
 		AEA3B58B1736E7C500786DA2 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				AEA3B5651730E70500786DA2 /* SWRevealViewController */,
+				AEBC4157177305D40024D73C /* SWRevealViewController */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -284,10 +288,21 @@
 			children = (
 				AEBF32B2176457EB00DEEF71 /* ShaderManager.h */,
 				AEBF32B3176457EB00DEEF71 /* ShaderManager.m */,
+				AEBC415B177444AF0024D73C /* TextureManager.h */,
+				AEBC415C177444AF0024D73C /* TextureManager.m */,
 				AEAE17F3174B637000764D5B /* Plane.h */,
 				AEAE17F4174B637000764D5B /* Plane.m */,
 			);
 			name = Rendering;
+			sourceTree = "<group>";
+		};
+		AEBC4157177305D40024D73C /* SWRevealViewController */ = {
+			isa = PBXGroup;
+			children = (
+				AEBC4158177305D40024D73C /* SWRevealViewController.h */,
+				AEBC4159177305D40024D73C /* SWRevealViewController.m */,
+			);
+			path = SWRevealViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -376,7 +391,6 @@
 				AEBF32AB1757506D00DEEF71 /* Default-Portrait@2x~ipad.png in Resources */,
 				AEBF32AD1757507300DEEF71 /* Default-Landscape~ipad.png in Resources */,
 				AEBF32AF1757507500DEEF71 /* Default-Landscape@2x~ipad.png in Resources */,
-				AEBF32B1175873E200DEEF71 /* shaders.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,10 +401,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEBC415A177305D40024D73C /* SWRevealViewController.m in Sources */,
+				AEBC415D177444AF0024D73C /* TextureManager.m in Sources */,
+				AEBC414F1771B3B40024D73C /* ShaderInfo.m in Sources */,
 				AEA3B54C1730E6C700786DA2 /* main.m in Sources */,
 				AEA3B5501730E6C700786DA2 /* AppDelegate.m in Sources */,
 				AEA3B55F1730E6C700786DA2 /* GalleryViewController.m in Sources */,
-				AEA3B5681730E70500786DA2 /* SWRevealViewController.m in Sources */,
 				AEA3B57B1732327200786DA2 /* ShaderViewController.m in Sources */,
 				AEA3B58617360BBA00786DA2 /* ShaderMenuViewController.m in Sources */,
 				AEA3B58E1736E82A00786DA2 /* ShaderMenuCell.m in Sources */,

@@ -8,16 +8,18 @@
 
 #import "Plane.h"
 #import "ShaderManager.h"
+#import "ShaderInfo.h"
+
 
 @interface Plane ()
 
-- (void)loadShader:(NSString *)name;
+- (void)loadShader:(ShaderInfo *)shader;
 
 @end
 
 @implementation Plane
 
-- (id)initShader:(NSString *)name;
+- (id)initWithShader:(ShaderInfo *)shader
 {
     self = [super init];
     if (self)
@@ -38,7 +40,7 @@
         
         indicesToDraw = 6;
         
-        [self loadShader:name];
+        [self loadShader:shader];
         
         glGenVertexArraysOES(1, &_vertexArray);
         glBindVertexArrayOES(_vertexArray);
@@ -77,8 +79,6 @@
 
 - (void)update:(float)deltaTime
 {
-    [[ShaderManager sharedInstance] deferCompilation];
-    
     if (_pendingShader != nil)
     {
         [self loadShader:_pendingShader];
@@ -86,29 +86,37 @@
     }
 }
 
-- (void)drawAtResolution:(GLKVector3)resolution andTime:(float)time
+- (void)draw:(UniformParams *)params
 {
     if (_program)
     {
         glUseProgram(_program);
         
-        glUniform3f(_resolutionUniform, resolution.x, resolution.y, resolution.z);
-        glUniform1f(_timeUniform, time);
+        glUniform3fv(_resolutionUniform, 3, params->resolution.v);
+        glUniform1f(_timeUniform, params->time);
+        glUniform1fv(_channelTimeUniform, 4, params->channelTime);
+        glUniform4fv(_mouseUniform, 4, params->mouseCoordinates.v);
+        glUniform4fv(_dateUniform, 4, params->date.v);
+        
+        for (int i = 0; i < 4; i++)
+        {
+            glUniform1i(_channelUniform[i], params->channelInfo[i]);
+        }
         
         glBindVertexArrayOES(_vertexArray);
         
-        glDrawElements(GL_TRIANGLES, indicesToDraw, GL_UNSIGNED_SHORT, 0);
+        glDrawElements(GL_TRIANGLES, indicesToDraw, GL_UNSIGNED_SHORT, 0); 
     }
 }
 
-- (void)useShader:(NSString *)name
+- (void)useShader:(ShaderInfo *)shader
 {
-    _pendingShader = name.lastPathComponent;
+    _pendingShader = shader;
 }
 
-- (void)loadShader:(NSString *)name
+- (void)loadShader:(ShaderInfo *)shader;
 {
-    GLuint program = [[ShaderManager sharedInstance] getShaderWithName:name];
+    GLuint program = [[ShaderManager sharedInstance] getShader:shader];
     
     _program = program;
     glUseProgram(_program);
@@ -117,6 +125,15 @@
     
     _resolutionUniform = glGetUniformLocation(_program, "iResolution");
     _timeUniform = glGetUniformLocation(_program, "iGlobalTime");
+    _channelTimeUniform = glGetUniformLocation(_program, "iChannelTime");
+    _mouseUniform = glGetUniformLocation(_program, "iMouse");
+    _dateUniform = glGetUniformLocation(_program, "iDate");
+    
+    for (int i = 0; i < 4; i++)
+    {
+        NSString* channel = [NSString stringWithFormat:@"iChannel%d", i];
+        _channelUniform[i] = glGetUniformLocation(_program, channel.UTF8String);
+    }
 }
 
 @end

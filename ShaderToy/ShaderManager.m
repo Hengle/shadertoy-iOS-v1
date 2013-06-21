@@ -7,11 +7,30 @@
 //
 
 #import "ShaderManager.h"
+#import "ShaderInfo.h"
+
+#import "TextureManager.h"
+
+NSString *const ShaderHeader =
+@"// Auto-generated header to define uniforms\n\
+precision highp float;\n\
+precision lowp int;\n\
+uniform highp vec3 iResolution;\n\
+uniform float iGlobalTime;\n\
+uniform float iChannelTime[4];\n\
+uniform sampler2D iChannel0;\n\
+uniform sampler2D iChannel1;\n\
+uniform sampler2D iChannel2;\n\
+uniform sampler2D iChannel3;\n\
+uniform highp vec4 iDate;\n\n\
+\n\
+//Shader code follows\n\n";
 
 @interface ShaderManager ()
 
-- (GLuint)compileShader:(NSString *)name;
-- (BOOL)compileShader:(GLuint *)shader type:(GLenum)type file:(NSString *)file;
+- (GLuint)compileShaderFile:(NSString *)fileName;
+- (GLuint)compileShaderCode:(NSString *)code;
+- (BOOL)compileShader:(GLuint *)shader type:(GLenum)type source:(NSString *)code;
 - (BOOL)linkProgram:(GLuint)prog;
 - (BOOL)validateProgram:(GLuint)prog;
 
@@ -45,25 +64,44 @@
     return self;
 }
 
-- (void)addShader:(NSString *)name
+- (void)addShader:(ShaderInfo *)shader
 {
-    [pendingShaders addObject:name];
+    [pendingShaders addObject:shader];
 }
 
 - (void)deferCompilation
 {
-    for (NSString* name in pendingShaders)
+    @synchronized(self)
     {
-        if ([shaderDictionary objectForKey:name] == nil)
+        for (ShaderInfo* shader in pendingShaders)
         {
-            GLuint program = [self compileShader:name];
-            [self storeShader:program withName:name];
-            
-            NSLog(@"Created program %u for shader %@", program, name);
+            if ([shaderDictionary objectForKey:shader.ID] == nil)
+            {
+                ShaderRenderPass* renderpass = shader.renderpasses[0];
+                GLuint program = [self compileShaderCode:renderpass.code];
+                
+                if (program > 0)
+                {
+                    [self storeShader:program withName:shader.ID];
+                
+                    NSLog(@"Created program %u for shader %@", program, shader.name);
+                    
+                    for (ShaderRenderPass* renderpass in shader.renderpasses)
+                    {
+                        for (ShaderInput* input in renderpass.inputs)
+                        {
+                            if ([input.type isEqual: @"texture"])
+                            {
+                                [[TextureManager sharedInstance] addTexture:input.source];
+                            }
+                        }
+                    }
+                }
+            }
         }
+        
+        [pendingShaders removeAllObjects];
     }
-    
-    [pendingShaders removeAllObjects];
 }
 
 - (void)storeShader:(GLuint)program withName:(NSString *)name
@@ -71,46 +109,54 @@
     [shaderDictionary setObject:[NSNumber numberWithUnsignedInt:program] forKey:name];
 }
 
-- (GLuint)getShaderWithName:(NSString *)name
+- (GLuint)getShader:(ShaderInfo *)shader
 {
-    NSNumber* programObject = [shaderDictionary objectForKey:name];
+    NSNumber* programObject = [shaderDictionary objectForKey:shader.ID];
     GLuint program = 0;
     
     if (programObject != nil)
     {
         program = programObject.unsignedIntValue;
-        NSLog(@"Retrieved program %u for shader %@", program, name);
+        NSLog(@"Retrieved program %u for shader %@", program, shader.name);
     }
     else
     {
-        program = [self compileShader:name];
-        
-        [self storeShader:program withName:name];
-        
-        NSLog(@"Created program %u for shader %@", program, name);
+        ShaderRenderPass* renderpass = shader.renderpasses[0];
+        program = [self compileShaderCode:renderpass.code];
+        [self storeShader:program withName:shader.ID];
+
+        NSLog(@"Created program %u for shader %@", program, shader.name);
     }
     
     return program;
 }
 
-- (GLuint)compileShader:(NSString *)name
+- (GLuint)compileShaderFile:(NSString *)fileName
+{
+    NSString* fragShaderPathname = [[NSBundle mainBundle] pathForResource:fileName ofType:nil];
+    NSString* code = [NSString stringWithContentsOfFile:fragShaderPathname encoding:NSUTF8StringEncoding error:nil];
+    
+    return [self compileShaderCode:code];
+}
+
+- (GLuint)compileShaderCode:(NSString *)code
 {
     GLuint program, vertShader, fragShader;
-    NSString *vertShaderPathname, *fragShaderPathname;
     
     // Create and compile vertex shader.
-    vertShaderPathname = [[NSBundle mainBundle] pathForResource:@"Shader" ofType:@"vsh"];
-    if (![self compileShader:&vertShader type:GL_VERTEX_SHADER file:vertShaderPathname])
+    NSString* vertShaderPathname = [[NSBundle mainBundle] pathForResource:@"Shader" ofType:@"vsh"];
+    NSString* vertCode = [NSString stringWithContentsOfFile:vertShaderPathname encoding:NSUTF8StringEncoding error:nil];
+    if (![self compileShader:&vertShader type:GL_VERTEX_SHADER source:vertCode])
     {
         NSLog(@"Failed to compile vertex shader");
         return 0;
     }
     
     // Create and compile fragment shader.
-    fragShaderPathname = [[NSBundle mainBundle] pathForResource:name ofType:nil];
-    if (![self compileShader:&fragShader type:GL_FRAGMENT_SHADER file:fragShaderPathname])
+    NSString* fragCode = [ShaderHeader stringByAppendingString:code];
+    if (![self compileShader:&fragShader type:GL_FRAGMENT_SHADER source:fragCode])
     {
-        NSLog(@"Failed to compile fragment shader %@", name);
+        NSLog(@"Failed to compile fragment shader");
         return 0;
     }
     
@@ -126,7 +172,7 @@
     // Link program.
     if (![self linkProgram:program])
     {
-        NSLog(@"Failed to link program: %@(%u)", name, program);
+        NSLog(@"Failed to link program:%u", program);
         
         if (vertShader)
         {
@@ -165,15 +211,13 @@
     return program;
 }
 
-- (BOOL)compileShader:(GLuint *)shader type:(GLenum)type file:(NSString *)file
+- (BOOL)compileShader:(GLuint *)shader type:(GLenum)type source:(NSString *)code
 {
     GLint status;
-    const GLchar *source;
-    
-    source = (GLchar *)[[NSString stringWithContentsOfFile:file encoding:NSUTF8StringEncoding error:nil] UTF8String];
+    const GLchar* source = (GLchar *)code.UTF8String;
     if (!source)
     {
-        NSLog(@"Failed to load vertex shader");
+        NSLog(@"Failed to load %d shader", type);
         return NO;
     }
     

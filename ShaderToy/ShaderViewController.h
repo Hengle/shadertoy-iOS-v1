@@ -12,6 +12,7 @@
 @class Plane;
 @class ShaderView;
 @class ShaderInformationViewController;
+@class ShaderInfo;
 
 @interface ShaderViewController : UIViewController
 {
@@ -29,7 +30,7 @@
     NSRunLoop* _renderLoop;
     dispatch_queue_t _renderQueue;
     
-    CGPoint _lastTouchLocation;
+    UITouch* _touchLocation;
 }
 
 @property (strong, nonatomic) ShaderInformationViewController *informationViewController;
@@ -37,12 +38,12 @@
 @property (strong, nonatomic) IBOutlet UIButton *menuButton;
 @property (strong, nonatomic) EAGLContext *context;
 @property (strong, nonatomic) EAGLSharegroup *sharegroup;
-@property (strong, readonly) NSString* currentShader;
+@property (strong, readonly) ShaderInfo* currentShader;
 
 - (IBAction)toggleMenu:(id)sender;
 
 - (void)startAnimation;
 - (void)stopAnimation;
-- (void)setShader:(NSString *)name;
+- (void)setShader:(ShaderInfo *)shader;
 
 @end

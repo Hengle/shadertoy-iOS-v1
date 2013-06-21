@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class ShaderInfo;
+
 @interface ShaderManager : NSObject
 {
     NSMutableArray* pendingShaders;
@@ -16,10 +18,10 @@
 
 + (ShaderManager *)sharedInstance;
 
-- (void)addShader:(NSString *)name;
+- (void)addShader:(ShaderInfo *)shader;
 - (void)deferCompilation;
 
 - (void)storeShader:(GLuint)program withName:(NSString *)name;
-- (GLuint)getShaderWithName:(NSString *)name;
+- (GLuint)getShader:(ShaderInfo *)shader;
 
 @end

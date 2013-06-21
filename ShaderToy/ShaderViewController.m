@@ -7,10 +7,13 @@
 //
 
 #import "ShaderViewController.h"
-#import "ShaderView.h"
 #import "ShaderInformation.h"
 #import "ShaderInformationViewController.h"
+#import "ShaderManager.h"
+#import "ShaderInfo.h"
+#import "ShaderView.h"
 #import "Plane.h"
+#import "TextureManager.h"
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -115,16 +118,16 @@
     }
 }
 
-- (void)setShader:(NSString *)name
+- (void)setShader:(ShaderInfo *)shader
 {
-    _currentShader = name;
+    _currentShader = shader;
     
     if (_planeObject)
     {
-        [_planeObject useShader:name];
+        [_planeObject useShader:shader];
     }
     
-    NSLog(@"Settings shader to %@", name);
+    NSLog(@"Settings shader to %@", shader.ID);
 }
 
 - (void)tearDown
@@ -150,34 +153,92 @@
 {
     @synchronized(_context)
     {
+        // Stare the date and the calculate the date components (year/month/day/minute/second)
+        NSDate* date = [NSDate date];
+        NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitMinute | NSCalendarUnitSecond fromDate:date];
+        
+        // Set the context and framebuffer
         [EAGLContext setCurrentContext:_context];
         
         [self.view setFramebuffer];
         
+        // If we haven't initialized our objects, do so now
+        // This is done in the first frame as we have no access to the context
+        // until we are in the correct thread and with the correct context bound
         if (!_initialized)
         {
             self.view.context = _context;
             _initialized = true;
-            _planeObject = [[Plane alloc] initShader:_currentShader];
+            _planeObject = [[Plane alloc] initWithShader:_currentShader];
         }
         
+        // Calculate the width and height of the view
         float width = self.view.backingWidth;
         float height = self.view.backingHeight;
-        float time = [[NSDate date] timeIntervalSinceDate:_startTime];
+        
+        // Calculate the time since since rendering start
+        float time = [date timeIntervalSinceDate:_startTime];
         
         [self update];
         
+        // Clear the context
         glClearColor(0.65f, 0.65f, 0.65f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
         
         glViewport(0, 0, width, height);
         
-        [_planeObject drawAtResolution:GLKVector3Make(width, height, 0.0f) andTime:time];
+        // Setup the parameters that are sent to the shader
+        UniformParams* params = (UniformParams *)malloc(sizeof(UniformParams));
+        params->resolution = GLKVector3Make(width, height, 0.0f);
+        params->time = time;
+        params->channelTime[0] = 0.0f;
+        params->channelTime[1] = 0.0f;
+        params->channelTime[2] = 0.0f;
+        params->channelTime[3] = 0.0f;
+        params->channelInfo[0] = 0;
+        params->channelInfo[1] = 0;
+        params->channelInfo[2] = 0;
+        params->channelInfo[3] = 0;
+        params->date = GLKVector4Make(components.year, components.month, components.day, (components.minute * 60) + components.second);
+        
+        if (_touchLocation != nil)
+        {
+            CGPoint point = [_touchLocation locationInView:self.view];
+            params->mouseCoordinates = GLKVector4Make(point.x, point.y, 1.0f, 1.0f);
+        }
+        else
+        {
+            params->mouseCoordinates = GLKVector4Make(0.0f, 0.0f, 0.0f, 0.0f);
+        }
+        
+        for (ShaderRenderPass* renderpass in _currentShader.renderpasses)
+        {
+            for (ShaderInput* input in renderpass.inputs)
+            {
+                if ([input.type isEqual: @"texture"])
+                {
+                    params->channelInfo[input.channel] = [[TextureManager sharedInstance] getTexture:input.source];
+                }
+            }
+        }
+        
+        // Draw the plane
+        [_planeObject draw:params];
+        
+        free(params);
         
         [self.view presentFramebuffer];
         
         [EAGLContext setCurrentContext:nil];
     }
+}
+
+- (void)update
+{
+    [[ShaderManager sharedInstance] deferCompilation];
+    [[TextureManager sharedInstance] deferLoading];
+    
+    [_planeObject update:1.0f];
 }
 
 - (void)triggerDrawFrame
@@ -217,12 +278,26 @@
     }
 }
 
-#pragma mark - GLKView and GLKViewController delegate methods
 
-- (void)update
+#pragma mark - Touches
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    [_planeObject update:1.0f];
+    _touchLocation = touches.anyObject;
 }
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    _touchLocation = touches.anyObject;
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    _touchLocation = nil;
+}
+
+
+#pragma mark - Actions
 
 - (IBAction)toggleMenu:(id)sender
 {

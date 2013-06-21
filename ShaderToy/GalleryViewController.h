@@ -14,7 +14,7 @@
 {
     bool _revealControllerShowing;
     NSMutableArray *_viewControllers;
-    NSArray *_shaders;
+    NSMutableArray *_shaders;
     NSMutableArray* _pendingControllers;
 }
 
