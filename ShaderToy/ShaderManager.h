@@ -9,12 +9,24 @@
 #import <Foundation/Foundation.h>
 
 @class ShaderInfo;
+@class ShaderManager;
+
+@protocol ShaderManagerDelegate <NSObject>
+
+- (void)shaderManagerDidFinishCompiling:(ShaderManager *)manager;
+
+@end
 
 @interface ShaderManager : NSObject
 {
     NSMutableArray* pendingShaders;
     NSMutableDictionary* shaderDictionary;
+    
+    ShaderInfo* _defaultShader;
 }
+
+@property (nonatomic, readonly) ShaderInfo* defaultShader;
+@property (nonatomic, retain) id<ShaderManagerDelegate> delegate;
 
 + (ShaderManager *)sharedInstance;
 

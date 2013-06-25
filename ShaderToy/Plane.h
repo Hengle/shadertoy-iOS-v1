@@ -12,19 +12,11 @@
 typedef struct
 {
     float position[3];
+    float uv[2];
 } Vertex;
 
-typedef struct
-{
-    GLKVector3 resolution;
-    float time;
-    float channelTime[4];
-    GLKVector4 mouseCoordinates;
-    GLuint channelInfo[4];
-    GLKVector4 date;
-} UniformParams;
-
 @class ShaderInfo;
+@class ShaderParameters;
 
 @interface Plane : NSObject
 {
@@ -34,6 +26,7 @@ typedef struct
     GLuint _program;
     
     GLuint _positionSlot;
+    GLuint _uvSlot;
     GLuint _resolutionUniform;
     GLuint _timeUniform;
     GLuint _channelTimeUniform;
@@ -49,7 +42,7 @@ typedef struct
 - (id)initWithShader:(ShaderInfo *)shader;
 
 - (void)update:(float)deltaTime;
-- (void)draw:(UniformParams *)params;
+- (void)draw:(ShaderParameters *)params;
 
 - (void)useShader:(ShaderInfo *)shader;
 

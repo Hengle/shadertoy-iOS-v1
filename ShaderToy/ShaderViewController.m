@@ -7,8 +7,6 @@
 //
 
 #import "ShaderViewController.h"
-#import "ShaderInformation.h"
-#import "ShaderInformationViewController.h"
 #import "ShaderManager.h"
 #import "ShaderInfo.h"
 #import "ShaderView.h"
@@ -21,6 +19,7 @@
 @interface ShaderViewController ()
 
 - (void)tearDown;
+- (void)initialize;
 - (void)drawFrame;
 - (void)triggerDrawFrame;
 - (void)threadMainLoop;
@@ -56,6 +55,7 @@
     _running = false;
     _initialized = false;
     _frameDropCounter = 0;
+    _lastFrameTime = [NSDate date];
     _renderQueue = dispatch_queue_create("com.shadertoy.threadedgcdqueue", NULL);
 }
 
@@ -149,37 +149,28 @@
     }
 }
 
+- (void)initialize
+{
+    if (!_initialized)
+    {
+        self.view.context = _context;
+        _initialized = true;
+        _planeObject = [[Plane alloc] initWithShader:_currentShader];
+    }
+}
+
 - (void)drawFrame
 {
     @synchronized(_context)
     {
-        // Stare the date and the calculate the date components (year/month/day/minute/second)
-        NSDate* date = [NSDate date];
-        NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitMinute | NSCalendarUnitSecond fromDate:date];
-        
-        // Set the context and framebuffer
-        [EAGLContext setCurrentContext:_context];
-        
         [self.view setFramebuffer];
-        
-        // If we haven't initialized our objects, do so now
-        // This is done in the first frame as we have no access to the context
-        // until we are in the correct thread and with the correct context bound
-        if (!_initialized)
-        {
-            self.view.context = _context;
-            _initialized = true;
-            _planeObject = [[Plane alloc] initWithShader:_currentShader];
-        }
         
         // Calculate the width and height of the view
         float width = self.view.backingWidth;
         float height = self.view.backingHeight;
         
         // Calculate the time since since rendering start
-        float time = [date timeIntervalSinceDate:_startTime];
-        
-        [self update];
+        float time = [[NSDate date] timeIntervalSinceDate:_startTime];
         
         // Clear the context
         glClearColor(0.65f, 0.65f, 0.65f, 1.0f);
@@ -187,58 +178,51 @@
         
         glViewport(0, 0, width, height);
         
-        // Setup the parameters that are sent to the shader
-        UniformParams* params = (UniformParams *)malloc(sizeof(UniformParams));
-        params->resolution = GLKVector3Make(width, height, 0.0f);
-        params->time = time;
-        params->channelTime[0] = 0.0f;
-        params->channelTime[1] = 0.0f;
-        params->channelTime[2] = 0.0f;
-        params->channelTime[3] = 0.0f;
-        params->channelInfo[0] = 0;
-        params->channelInfo[1] = 0;
-        params->channelInfo[2] = 0;
-        params->channelInfo[3] = 0;
-        params->date = GLKVector4Make(components.year, components.month, components.day, (components.minute * 60) + components.second);
-        
-        if (_touchLocation != nil)
-        {
-            CGPoint point = [_touchLocation locationInView:self.view];
-            params->mouseCoordinates = GLKVector4Make(point.x, point.y, 1.0f, 1.0f);
-        }
-        else
-        {
-            params->mouseCoordinates = GLKVector4Make(0.0f, 0.0f, 0.0f, 0.0f);
-        }
-        
+        // Iterate over renderpasses and send the appropriate values to the shader
         for (ShaderRenderPass* renderpass in _currentShader.renderpasses)
         {
+            // Setup the parameters that are sent to the shader
+            ShaderParameters* params = [[ShaderParameters alloc] initWithChannelCount:renderpass.inputs.count];
+            params.resolution = GLKVector3Make(width, height, 1.0f);
+            params.time = time;
+            
+            // Send touch locations, if valid, otherwise send 0
+            if (_touchLocation != nil)
+            {
+                CGPoint point = [_touchLocation locationInView:self.view];
+                params.mouseCoordinates = GLKVector4Make(point.x, point.y, 1.0f, 1.0f);
+            }
+            else
+            {
+                params.mouseCoordinates = GLKVector4Make(0.0f, 0.0f, 0.0f, 0.0f);
+            }
+            
             for (ShaderInput* input in renderpass.inputs)
             {
                 if ([input.type isEqual: @"texture"])
                 {
-                    params->channelInfo[input.channel] = [[TextureManager sharedInstance] getTexture:input.source];
+                    params.channelInfo[input.channel] = [[TextureManager sharedInstance] getTexture:input.source];
                 }
             }
+            
+            // Draw the plane
+            [_planeObject draw:params];
         }
         
-        // Draw the plane
-        [_planeObject draw:params];
-        
-        free(params);
-        
         [self.view presentFramebuffer];
-        
-        [EAGLContext setCurrentContext:nil];
     }
 }
 
 - (void)update
 {
+    float time = [[NSDate date] timeIntervalSinceDate:_lastFrameTime];
+    
     [[ShaderManager sharedInstance] deferCompilation];
     [[TextureManager sharedInstance] deferLoading];
     
-    [_planeObject update:1.0f];
+    [_planeObject update:time];
+    
+    _lastFrameTime = [NSDate date];
 }
 
 - (void)triggerDrawFrame
@@ -248,7 +232,21 @@
         _running = true;
         dispatch_async(_renderQueue, ^
         {
+            // Set the context and framebuffer
+            [EAGLContext setCurrentContext:_context];
+            
+            [self update];
             [self drawFrame];
+            
+#if DEBUG
+            GLenum error = glGetError();
+            if (error > 0x0)
+            {
+                NSLog(@"GL Error = %x", error);
+            }
+#endif
+            [EAGLContext setCurrentContext:nil];
+            
             _running = false;
         });
     }
@@ -264,6 +262,16 @@
     {
         @autoreleasepool
         {
+            // Set the context and framebuffer
+            [EAGLContext setCurrentContext:_context];
+            
+            // Initialize the controller
+            [self initialize];
+            
+            [EAGLContext setCurrentContext:nil];
+            
+            
+            // Create the render loop and start it
             _renderLoop = [NSRunLoop currentRunLoop];
             
             CADisplayLink* link = [[UIScreen mainScreen] displayLinkWithTarget:self selector:@selector(triggerDrawFrame)];

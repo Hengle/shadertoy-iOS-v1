@@ -7,6 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <GLKit/GLKMath.h>
+
+@interface ShaderParameters : NSObject
+
+@property (nonatomic, assign) GLKVector3 resolution;
+@property (nonatomic, assign) float time;
+@property (nonatomic, assign) float *channelTime;
+@property (nonatomic, assign) GLKVector4 mouseCoordinates;
+@property (nonatomic, assign) GLuint *channelInfo;
+@property (nonatomic, readonly) GLKVector4 date;
+@property (nonatomic, readonly) int channelCount;
+
+- (id)initWithChannelCount:(int)count;
+
+@end
 
 @interface ShaderInput : NSObject
 

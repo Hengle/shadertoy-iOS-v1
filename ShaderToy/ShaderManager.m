@@ -8,27 +8,11 @@
 
 #import "ShaderManager.h"
 #import "ShaderInfo.h"
-
 #import "TextureManager.h"
-
-NSString *const ShaderHeader =
-@"// Auto-generated header to define uniforms\n\
-precision highp float;\n\
-precision lowp int;\n\
-uniform highp vec3 iResolution;\n\
-uniform float iGlobalTime;\n\
-uniform float iChannelTime[4];\n\
-uniform sampler2D iChannel0;\n\
-uniform sampler2D iChannel1;\n\
-uniform sampler2D iChannel2;\n\
-uniform sampler2D iChannel3;\n\
-uniform highp vec4 iDate;\n\n\
-\n\
-//Shader code follows\n\n";
 
 @interface ShaderManager ()
 
-- (GLuint)compileShaderFile:(NSString *)fileName;
+- (NSString *)prepareRenderPassCode:(ShaderRenderPass *)renderpass;
 - (GLuint)compileShaderCode:(NSString *)code;
 - (BOOL)compileShader:(GLuint *)shader type:(GLenum)type source:(NSString *)code;
 - (BOOL)linkProgram:(GLuint)prog;
@@ -64,44 +48,58 @@ uniform highp vec4 iDate;\n\n\
     return self;
 }
 
-- (void)addShader:(ShaderInfo *)shader
-{
-    [pendingShaders addObject:shader];
-}
-
 - (void)deferCompilation
 {
     @synchronized(self)
     {
+        // Compile any available shaders
         for (ShaderInfo* shader in pendingShaders)
         {
             if ([shaderDictionary objectForKey:shader.ID] == nil)
             {
-                ShaderRenderPass* renderpass = shader.renderpasses[0];
-                GLuint program = [self compileShaderCode:renderpass.code];
-                
-                if (program > 0)
+                for (ShaderRenderPass* renderpass in shader.renderpasses)
                 {
-                    [self storeShader:program withName:shader.ID];
+                    GLuint program = [self compileShaderCode:[self prepareRenderPassCode:renderpass]];
                 
-                    NSLog(@"Created program %u for shader %@", program, shader.name);
-                    
-                    for (ShaderRenderPass* renderpass in shader.renderpasses)
+                    if (program > 0)
                     {
-                        for (ShaderInput* input in renderpass.inputs)
-                        {
-                            if ([input.type isEqual: @"texture"])
-                            {
-                                [[TextureManager sharedInstance] addTexture:input.source];
-                            }
-                        }
+                        [self storeShader:program withName:shader.ID];
+                
+                        NSLog(@"Created program %u for shader %@", program, shader.name);
                     }
                 }
             }
         }
         
-        [pendingShaders removeAllObjects];
+        // If we compiled shaders, remove them and notify our delegate
+        if (pendingShaders.count > 0)
+        {
+            [pendingShaders removeAllObjects];
+            [_delegate shaderManagerDidFinishCompiling:self];
+        }
     }
+}
+
+- (ShaderInfo *)defaultShader
+{
+    if (_defaultShader == nil)
+    {
+        NSError* error = nil;
+        NSString* pathname = [[NSBundle mainBundle] pathForResource:@"logo.json" ofType:nil];
+        NSDictionary* dictionary = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:pathname] options:kNilOptions error:&error];
+        
+        if (error == nil)
+        {
+            _defaultShader = [[ShaderInfo alloc] initWithJSONDictionary:dictionary];
+        }
+    }
+    
+    return _defaultShader;
+}
+
+- (void)addShader:(ShaderInfo *)shader
+{
+    [pendingShaders addObject:shader];
 }
 
 - (void)storeShader:(GLuint)program withName:(NSString *)name
@@ -121,22 +119,52 @@ uniform highp vec4 iDate;\n\n\
     }
     else
     {
-        ShaderRenderPass* renderpass = shader.renderpasses[0];
-        program = [self compileShaderCode:renderpass.code];
-        [self storeShader:program withName:shader.ID];
+        for (ShaderRenderPass* renderpass in shader.renderpasses)
+        {
+            program = [self compileShaderCode:[self prepareRenderPassCode:renderpass]];
+            [self storeShader:program withName:shader.ID];
 
-        NSLog(@"Created program %u for shader %@", program, shader.name);
+            NSLog(@"Created program %u for shader %@", program, shader.name);
+        }
     }
     
     return program;
 }
 
-- (GLuint)compileShaderFile:(NSString *)fileName
+- (NSString *)prepareRenderPassCode:(ShaderRenderPass *)renderpass
 {
-    NSString* fragShaderPathname = [[NSBundle mainBundle] pathForResource:fileName ofType:nil];
-    NSString* code = [NSString stringWithContentsOfFile:fragShaderPathname encoding:NSUTF8StringEncoding error:nil];
+    // Create the header for this particular shader
+    NSMutableString* header = [NSMutableString stringWithString:@"// Auto-generated header to define uniforms\n"];
+    [header appendString:@"precision highp float;\n"];
+    [header appendString:@"uniform vec3     iResolution;\n"];
+    [header appendString:@"uniform float    iGlobalTime;\n"];
+    [header appendString:@"uniform float    iChannelTime[4];\n"];
+    [header appendString:@"uniform vec4     iMouse;\n\n"];
+    [header appendString:@"uniform vec4     iDate;\n"];
+    [header appendString:@"varying vec2     texCoords;\n\n"];
     
-    return [self compileShaderCode:code];
+    // Create the necessary channels
+    for (int i = 0; i < renderpass.inputs.count; i++)
+    {
+        ShaderInput* input = renderpass.inputs[i];
+        if ([input.type isEqualToString:@"cubemap"])
+        {
+            [header appendFormat:@"uniform samplerCube iChannel%d;\n", i];
+            [[TextureManager sharedInstance] addTexture:input.source];
+        }
+        else if ([input.type isEqualToString:@"texture"])
+        {
+            [header appendFormat:@"uniform sampler2D iChannel%d;\n", i];
+            [[TextureManager sharedInstance] addTexture:input.source];
+        }
+    }
+    
+    [header appendString:@"// Shader code follows\n\n"];
+    
+    // Append the shader code to the header
+    [header appendString:renderpass.code];
+    
+    return header;
 }
 
 - (GLuint)compileShaderCode:(NSString *)code
@@ -153,8 +181,7 @@ uniform highp vec4 iDate;\n\n\
     }
     
     // Create and compile fragment shader.
-    NSString* fragCode = [ShaderHeader stringByAppendingString:code];
-    if (![self compileShader:&fragShader type:GL_FRAGMENT_SHADER source:fragCode])
+    if (![self compileShader:&fragShader type:GL_FRAGMENT_SHADER source:code])
     {
         NSLog(@"Failed to compile fragment shader");
         return 0;
@@ -232,7 +259,7 @@ uniform highp vec4 iDate;\n\n\
     {
         GLchar *log = (GLchar *)malloc(logLength);
         glGetShaderInfoLog(*shader, logLength, &logLength, log);
-        NSLog(@"Shader compile log:\n%s", log);
+        NSLog(@"Shader (%u) compile log:\n%s", *shader, log);
         free(log);
     }
 #endif
@@ -259,7 +286,7 @@ uniform highp vec4 iDate;\n\n\
     {
         GLchar *log = (GLchar *)malloc(logLength);
         glGetProgramInfoLog(prog, logLength, &logLength, log);
-        NSLog(@"Program link log:\n%s", log);
+        NSLog(@"Program (%u) link log:\n%s", prog, log);
         free(log);
     }
 #endif

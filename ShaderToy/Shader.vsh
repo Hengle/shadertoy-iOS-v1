@@ -7,8 +7,12 @@
 //
 
 attribute vec4 position;
+attribute vec2 uv;
+
+varying vec2 texCoords;
 
 void main()
 {
+    texCoords = uv;
     gl_Position = position;
 }

@@ -24,6 +24,7 @@
     Plane* _planeObject;
     
     NSDate* _startTime;
+    NSDate* _lastFrameTime;
     
     // Multithreading support
     NSThread* _renderThread;

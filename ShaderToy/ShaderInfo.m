@@ -8,6 +8,42 @@
 
 #import "ShaderInfo.h"
 
+@implementation ShaderParameters
+
+- (id)initWithChannelCount:(int)count
+{
+    self = [super init];
+    if (self)
+    {
+        _channelInfo = malloc(sizeof(GLuint) * count);
+        _channelTime = malloc(sizeof(float) * 4);
+        
+        for (int i = 0; i < count; i++)
+        {
+            _channelInfo[i] = 0;
+        }
+        
+        for (int i = 0; i < 4; i++)
+        {
+            _channelTime[i] = 0.0f;
+        }
+        
+        _channelCount = count;
+    }
+    
+    return self;
+}
+
+- (GLKVector4)date
+{
+    NSDate* date = [NSDate date];
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:kCFCalendarUnitYear | kCFCalendarUnitMonth | kCFCalendarUnitDay | kCFCalendarUnitMinute | kCFCalendarUnitSecond fromDate:date];
+    
+    return GLKVector4Make(components.year, components.month, components.day, (components.minute * 60) + components.second);
+}
+
+@end
+
 @implementation ShaderInput
 
 - (id)initWithJSONDictionary:(NSDictionary*)inputData
@@ -16,7 +52,15 @@
     if (self)
     {
         _ID = ((NSNumber*)inputData[@"id"]).integerValue;
-        _source = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.shadertoy.com/%@", inputData[@"src"]]];
+        
+        // If the file is available locally, use the local file
+        // otherwise download it
+        NSString* source = inputData[@"src"];
+        _source = [[NSBundle mainBundle] URLForResource:source withExtension:nil];
+        if (_source == nil)
+        {
+            _source = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.shadertoy.com%@", source]];
+        }
         _type = inputData[@"ctype"];
         _channel = ((NSNumber*)inputData[@"channel"]).integerValue;
     }

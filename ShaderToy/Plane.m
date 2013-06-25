@@ -10,7 +10,6 @@
 #import "ShaderManager.h"
 #import "ShaderInfo.h"
 
-
 @interface Plane ()
 
 - (void)loadShader:(ShaderInfo *)shader;
@@ -26,10 +25,10 @@
     {
         Vertex vertices[] =
         {
-            {{1.0f,  -1.0f, 0}},
-            {{1.0f,   1.0f, 0}},
-            {{-1.0f,  1.0f, 0}},
-            {{-1.0f, -1.0f, 0}}
+            {{1.0f,  -1.0f, 0}, {1.0f, 1.0f}},
+            {{1.0f,   1.0f, 0}, {1.0f, 0.0f}},
+            {{-1.0f,  1.0f, 0}, {0.0f, 0.0f}},
+            {{-1.0f, -1.0f, 0}, {0.0f, 1.0f}}
         };
         
         GLushort indices[] =
@@ -56,6 +55,10 @@
         // Enable the Position attribute
         glEnableVertexAttribArray(_positionSlot);
         glVertexAttribPointer(_positionSlot, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const GLvoid*)offsetof(Vertex, position));
+        
+        // Enable the first Texture Coordinate atribute
+        glEnableVertexAttribArray(_uvSlot);
+        glVertexAttribPointer(_uvSlot, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const GLvoid*)offsetof(Vertex, uv));
         
         glBindVertexArrayOES(0);
     }
@@ -86,21 +89,32 @@
     }
 }
 
-- (void)draw:(UniformParams *)params
+- (void)draw:(ShaderParameters *)params
 {
     if (_program)
     {
         glUseProgram(_program);
         
-        glUniform3fv(_resolutionUniform, 3, params->resolution.v);
-        glUniform1f(_timeUniform, params->time);
-        glUniform1fv(_channelTimeUniform, 4, params->channelTime);
-        glUniform4fv(_mouseUniform, 4, params->mouseCoordinates.v);
-        glUniform4fv(_dateUniform, 4, params->date.v);
+        // Pixel shader uniforms
+        if (_resolutionUniform)
+            glUniform3fv(_resolutionUniform, 1, params.resolution.v);
         
-        for (int i = 0; i < 4; i++)
+        if (_timeUniform != -1)
+            glUniform1f(_timeUniform, params.time);
+        
+        if (_channelTimeUniform != -1)
+            glUniform1fv(_channelTimeUniform, 4, params.channelTime);
+        
+        if (_mouseUniform != -1)
+            glUniform4fv(_mouseUniform, 1, params.mouseCoordinates.v);
+        
+        if (_dateUniform != -1)
+            glUniform4fv(_dateUniform, 1, params.date.v);
+        
+        for (int i = 0; i < params.channelCount; i++)
         {
-            glUniform1i(_channelUniform[i], params->channelInfo[i]);
+            if (_channelUniform[i] != -1)
+                glUniform1i(_channelUniform[i], params.channelInfo[i]);
         }
         
         glBindVertexArrayOES(_vertexArray);
@@ -116,23 +130,27 @@
 
 - (void)loadShader:(ShaderInfo *)shader;
 {
-    GLuint program = [[ShaderManager sharedInstance] getShader:shader];
-    
-    _program = program;
-    glUseProgram(_program);
-    
-    _positionSlot = glGetAttribLocation(_program, "position");
-    
-    _resolutionUniform = glGetUniformLocation(_program, "iResolution");
-    _timeUniform = glGetUniformLocation(_program, "iGlobalTime");
-    _channelTimeUniform = glGetUniformLocation(_program, "iChannelTime");
-    _mouseUniform = glGetUniformLocation(_program, "iMouse");
-    _dateUniform = glGetUniformLocation(_program, "iDate");
-    
-    for (int i = 0; i < 4; i++)
+    for (ShaderRenderPass* renderpass in shader.renderpasses)
     {
-        NSString* channel = [NSString stringWithFormat:@"iChannel%d", i];
-        _channelUniform[i] = glGetUniformLocation(_program, channel.UTF8String);
+        GLuint program = [[ShaderManager sharedInstance] getShader:shader];
+    
+        _program = program;
+        glUseProgram(_program);
+    
+        _positionSlot = glGetAttribLocation(_program, "position");
+        _uvSlot = glGetAttribLocation(_program, "uv");
+    
+        _resolutionUniform = glGetUniformLocation(_program, "iResolution");
+        _timeUniform = glGetUniformLocation(_program, "iGlobalTime");
+        _channelTimeUniform = glGetUniformLocation(_program, "iChannelTime");
+        _mouseUniform = glGetUniformLocation(_program, "iMouse");
+        _dateUniform = glGetUniformLocation(_program, "iDate");
+    
+        for (int i = 0; i < renderpass.inputs.count; i++)
+        {
+            NSString* channel = [NSString stringWithFormat:@"iChannel%d", i];
+            _channelUniform[i] = glGetUniformLocation(_program, channel.UTF8String);
+        }
     }
 }
 

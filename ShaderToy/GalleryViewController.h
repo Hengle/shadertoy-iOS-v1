@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ShaderManager.h"
 
 @class ShaderViewController;
 
-@interface GalleryViewController : UIPageViewController <UIPageViewControllerDelegate, UIPageViewControllerDataSource, SWRevealViewControllerDelegate>
+@interface GalleryViewController : UIPageViewController <UIPageViewControllerDelegate, UIPageViewControllerDataSource, SWRevealViewControllerDelegate, ShaderManagerDelegate>
 {
     bool _revealControllerShowing;
+    bool _shadersReady;
     NSMutableArray *_viewControllers;
     NSMutableArray *_shaders;
     NSMutableArray* _pendingControllers;
