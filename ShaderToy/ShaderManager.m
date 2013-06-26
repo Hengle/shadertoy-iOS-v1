@@ -8,7 +8,7 @@
 
 #import "ShaderManager.h"
 #import "ShaderInfo.h"
-#import "TextureManager.h"
+#import "ChannelResourceManager.h"
 
 @interface ShaderManager ()
 
@@ -150,13 +150,14 @@
         if ([input.type isEqualToString:@"cubemap"])
         {
             [header appendFormat:@"uniform samplerCube iChannel%d;\n", i];
-            [[TextureManager sharedInstance] addTexture:input.source];
+            [[ChannelResourceManager sharedInstance] addResource:input.source ofType:input.type];
         }
-        else if ([input.type isEqualToString:@"texture"])
+        else if ([input.type isEqualToString:@"texture"] || [input.type isEqualToString:@"music"])
         {
             [header appendFormat:@"uniform sampler2D iChannel%d;\n", i];
-            [[TextureManager sharedInstance] addTexture:input.source];
         }
+        
+        [[ChannelResourceManager sharedInstance] addResource:input.source ofType:input.type];
     }
     
     [header appendString:@"// Shader code follows\n\n"];

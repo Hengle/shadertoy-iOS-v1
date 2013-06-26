@@ -11,7 +11,7 @@
 #import "ShaderInfo.h"
 #import "ShaderView.h"
 #import "Plane.h"
-#import "TextureManager.h"
+#import "ChannelResourceManager.h"
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -21,6 +21,7 @@
 - (void)tearDown;
 - (void)initialize;
 - (void)drawFrame;
+- (void)checkForErrors;
 - (void)triggerDrawFrame;
 - (void)threadMainLoop;
 
@@ -201,7 +202,7 @@
             {
                 if ([input.type isEqual: @"texture"])
                 {
-                    params.channelInfo[input.channel] = [[TextureManager sharedInstance] getTexture:input.source];
+                    params.channelInfo[input.channel] = [[ChannelResourceManager sharedInstance] getResourceWithName:input.source];
                 }
             }
             
@@ -218,11 +219,22 @@
     float time = [[NSDate date] timeIntervalSinceDate:_lastFrameTime];
     
     [[ShaderManager sharedInstance] deferCompilation];
-    [[TextureManager sharedInstance] deferLoading];
+    [[ChannelResourceManager sharedInstance] deferLoading];
     
     [_planeObject update:time];
     
     _lastFrameTime = [NSDate date];
+}
+
+- (void)checkForErrors
+{
+#if DEBUG
+    GLenum error = glGetError();
+    if (error > 0x0)
+    {
+        NSLog(@"GL Error = %x", error);
+    }
+#endif
 }
 
 - (void)triggerDrawFrame
@@ -237,14 +249,8 @@
             
             [self update];
             [self drawFrame];
+            [self checkForErrors];
             
-#if DEBUG
-            GLenum error = glGetError();
-            if (error > 0x0)
-            {
-                NSLog(@"GL Error = %x", error);
-            }
-#endif
             [EAGLContext setCurrentContext:nil];
             
             _running = false;
