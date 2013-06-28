@@ -25,6 +25,7 @@
     ShaderInfo* _defaultShader;
 }
 
+@property (nonatomic, retain) EAGLSharegroup *defaultSharegroup;
 @property (nonatomic, readonly) ShaderInfo* defaultShader;
 @property (nonatomic, retain) id<ShaderManagerDelegate> delegate;
 

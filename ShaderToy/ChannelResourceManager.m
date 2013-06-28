@@ -7,6 +7,7 @@
 //
 
 #import "ChannelResourceManager.h"
+#import "ShaderManager.h"
 
 @interface ResourceInfo : NSObject
 
@@ -34,6 +35,12 @@
 
 @end
 
+@interface ChannelResourceManager ()
+
+- (GLKTextureInfo *)loadTextureWithURL:(NSURL *)name;
+
+@end
+
 @implementation ChannelResourceManager
 
 + (ChannelResourceManager *)sharedInstance;
@@ -55,8 +62,8 @@
     
     if (self)
     {
-        pendingResources = [NSMutableArray new];
-        resourceDictionary = [NSMutableDictionary new];
+        _pendingResources = [NSMutableArray new];
+        _resourceDictionary = [NSMutableDictionary new];
     }
     
     return self;
@@ -65,50 +72,75 @@
 - (void)addResource:(NSURL *)path ofType:(NSString *)type;
 {
     ResourceInfo* info = [[ResourceInfo alloc] initWithType:type andPath:path];
-    [pendingResources addObject:info];
+    [_pendingResources addObject:info];
 }
 
 - (void)deferLoading
 {
     @synchronized(self)
     {
-        for (ResourceInfo* info in pendingResources)
+        for (ResourceInfo* info in _pendingResources)
         {
-            if ([resourceDictionary objectForKey:info.path.absoluteString] == nil)
+            if ([_resourceDictionary objectForKey:info.path.absoluteString] == nil)
             {
                 if ([info.type isEqualToString:@"texture"] || [info.type isEqualToString:@"cubemap"])
                 {
-                    NSError* error = nil;
-                    GLKTextureInfo* texture = [GLKTextureLoader textureWithContentsOfURL:info.path options:@{GLKTextureLoaderOriginBottomLeft: @YES} error:&error];
-                    
-                    if (error == nil)
-                    {
-                        [self storeResource:texture withName:info.path.absoluteString];
-                    
-                        NSLog(@"Loaded texture %u for path %@", texture.name, info.path.absoluteString);
-                    }
-                    else
-                    {
-                        NSLog(@"Error loading texture for path %@ - %@", info.path.absoluteString, error);
-                    }
+                    [self loadTextureWithURL:info.path];
                 }
             }
         }
         
-        [pendingResources removeAllObjects];
+        [_pendingResources removeAllObjects];
     }
 }
 
 - (void)storeResource:(NSObject *)resource withName:(NSString *)name;
 {
-    [resourceDictionary setObject:resource forKey:name];
+    [_resourceDictionary setObject:resource forKey:name];
 }
 
 - (GLuint)getResourceWithName:(NSURL *)name
 {
-    GLKTextureInfo* info = [resourceDictionary objectForKey:name.absoluteString];
+    GLKTextureInfo* info = [_resourceDictionary objectForKey:name.absoluteString];
+    GLuint resource = 0;
     
-    return info.name;
+    if (info != nil)
+    {
+        resource = info.name;
+    }
+    else
+    {
+        info = [self loadTextureWithURL:name];
+        
+        if (info != nil)
+        {
+            resource = info.name;
+            [self storeResource:info withName:name.absoluteString];
+        }
+        else
+        {
+            NSLog(@"Couldn't get resource for path %@", name.absoluteString);
+        }
+    }
+    
+    return resource;
+}
+
+- (GLKTextureInfo *)loadTextureWithURL:(NSURL *)name
+{
+    NSError* error = nil;
+    GLKTextureInfo* texture = [GLKTextureLoader textureWithContentsOfURL:name options:@{GLKTextureLoaderOriginBottomLeft: @YES} error:&error];
+    
+    if (error == nil)
+    {
+        NSLog(@"Loaded texture %u for path %@", texture.name, name.absoluteString);
+    }
+    else
+    {
+        NSLog(@"Error loading texture for path %@ - %@", name.absoluteString, error);
+    }
+    
+    return texture;
 }
 
 @end

@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@class ShaderMenuViewController;
+
+@protocol ShaderMenuDelegate <NSObject>
+
+- (void)shaderMenu:(ShaderMenuViewController *)shaderMenu choseShaderCategory:(NSString *)category;
+
+@end
+
 @interface ShaderMenuViewController : UITableViewController
+
+@property (nonatomic, retain) id<ShaderMenuDelegate> delegate;
 
 @end

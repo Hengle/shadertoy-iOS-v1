@@ -20,6 +20,7 @@
 @property (nonatomic, readonly) int channelCount;
 
 - (id)initWithChannelCount:(int)count;
+- (void)clearChannels;
 
 @end
 

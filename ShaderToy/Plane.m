@@ -23,12 +23,14 @@
     self = [super init];
     if (self)
     {
+        glPushGroupMarkerEXT(0, "Initialization");
+        
         Vertex vertices[] =
         {
-            {{1.0f,  -1.0f, 0}, {1.0f, 1.0f}},
-            {{1.0f,   1.0f, 0}, {1.0f, 0.0f}},
-            {{-1.0f,  1.0f, 0}, {0.0f, 0.0f}},
-            {{-1.0f, -1.0f, 0}, {0.0f, 1.0f}}
+            {{1.0f,  -1.0f, 0}},
+            {{1.0f,   1.0f, 0}},
+            {{-1.0f,  1.0f, 0}},
+            {{-1.0f, -1.0f, 0}}
         };
         
         GLushort indices[] =
@@ -55,12 +57,10 @@
         // Enable the Position attribute
         glEnableVertexAttribArray(_positionSlot);
         glVertexAttribPointer(_positionSlot, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const GLvoid*)offsetof(Vertex, position));
-        
-        // Enable the first Texture Coordinate atribute
-        glEnableVertexAttribArray(_uvSlot);
-        glVertexAttribPointer(_uvSlot, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const GLvoid*)offsetof(Vertex, uv));
-        
+
         glBindVertexArrayOES(0);
+        
+        glPopGroupMarkerEXT();
     }
     
     return self;
@@ -75,7 +75,6 @@
     
     if (_program)
     {
-        glDeleteProgram(_program);
         _program = 0;
     }
 }
@@ -93,6 +92,8 @@
 {
     if (_program)
     {
+        glPushGroupMarkerEXT(0, "Rendering");
+        
         glUseProgram(_program);
         
         // Pixel shader uniforms
@@ -111,15 +112,29 @@
         if (_dateUniform != -1)
             glUniform4fv(_dateUniform, 1, params.date.v);
         
-        for (int i = 0; i < params.channelCount; i++)
+        for (int i = 0; i < 4; i++)
         {
             if (_channelUniform[i] != -1)
-                glUniform1i(_channelUniform[i], params.channelInfo[i]);
+            {
+                if (params.channelInfo[i] > 0)
+                {
+                    glUniform1i(_channelUniform[i], params.channelInfo[i]);
+                    glActiveTexture(GL_TEXTURE0 + i);
+                    glBindTexture(GL_TEXTURE_2D, params.channelInfo[i]);
+                }
+//                else
+//                {
+//                    glActiveTexture(GL_TEXTURE0 + i);
+//                    glBindTexture(GL_TEXTURE_2D, 0);
+//                }
+            }
         }
         
         glBindVertexArrayOES(_vertexArray);
         
-        glDrawElements(GL_TRIANGLES, indicesToDraw, GL_UNSIGNED_SHORT, 0); 
+        glDrawElements(GL_TRIANGLES, indicesToDraw, GL_UNSIGNED_SHORT, 0);
+        
+        glPopGroupMarkerEXT();
     }
 }
 
@@ -132,25 +147,31 @@
 {
     for (ShaderRenderPass* renderpass in shader.renderpasses)
     {
+        glPushGroupMarkerEXT(0, "Uniform Caching");
+        
+        // Retrieve the program from the ShaderManager (and sharegroup by extension)
         GLuint program = [[ShaderManager sharedInstance] getShader:shader];
     
         _program = program;
-        glUseProgram(_program);
-    
+        
+        // Position uniform
         _positionSlot = glGetAttribLocation(_program, "position");
-        _uvSlot = glGetAttribLocation(_program, "uv");
-    
+        
+        // Frag Shader uniforms
         _resolutionUniform = glGetUniformLocation(_program, "iResolution");
         _timeUniform = glGetUniformLocation(_program, "iGlobalTime");
         _channelTimeUniform = glGetUniformLocation(_program, "iChannelTime");
         _mouseUniform = glGetUniformLocation(_program, "iMouse");
         _dateUniform = glGetUniformLocation(_program, "iDate");
     
-        for (int i = 0; i < renderpass.inputs.count; i++)
+        // Read the uniform locations for the existing channels
+        for (ShaderInput* input in renderpass.inputs)
         {
-            NSString* channel = [NSString stringWithFormat:@"iChannel%d", i];
-            _channelUniform[i] = glGetUniformLocation(_program, channel.UTF8String);
+            NSString* channel = [NSString stringWithFormat:@"iChannel%d", input.channel];
+            _channelUniform[input.channel] = glGetUniformLocation(_program, channel.UTF8String);
         }
+        
+        glPopGroupMarkerEXT();
     }
 }
 

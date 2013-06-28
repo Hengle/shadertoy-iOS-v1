@@ -33,14 +33,14 @@
 {
     [super viewDidLoad];
     
-    if (self.sharegroup == nil)
+    if ([ShaderManager sharedInstance].defaultSharegroup == nil)
     {
         _context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
-        _sharegroup = _context.sharegroup;
+        [ShaderManager sharedInstance].defaultSharegroup = _context.sharegroup;
     }
     else
     {
-        _context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2 sharegroup:self.sharegroup];
+        _context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2 sharegroup:[ShaderManager sharedInstance].defaultSharegroup];
     }
     
     if (!_context)
@@ -126,6 +126,20 @@
     if (_planeObject)
     {
         [_planeObject useShader:shader];
+        
+        [_params clearChannels];
+        
+        for (ShaderRenderPass* renderpass in _currentShader.renderpasses)
+        {
+            // Inputs are only set only on initialization, no need to re-set them
+            for (ShaderInput* input in renderpass.inputs)
+            {
+                if ([input.type isEqual: @"texture"])
+                {
+                    _params.channelInfo[input.channel] = [[ChannelResourceManager sharedInstance] getResourceWithName:input.source];
+                }
+            }
+        }
     }
     
     NSLog(@"Settings shader to %@", shader.ID);
@@ -157,6 +171,23 @@
         self.view.context = _context;
         _initialized = true;
         _planeObject = [[Plane alloc] initWithShader:_currentShader];
+        
+        // Create a params object for this shader
+        for (ShaderRenderPass* renderpass in _currentShader.renderpasses)
+        {
+            _params = [[ShaderParameters alloc] initWithChannelCount:renderpass.inputs.count];
+            
+            [_params clearChannels];
+            
+            // Inputs are only set only on initialization, no need to re-set them
+            for (ShaderInput* input in renderpass.inputs)
+            {
+                if ([input.type isEqual: @"texture"])
+                {
+                    _params.channelInfo[input.channel] = [[ChannelResourceManager sharedInstance] getResourceWithName:input.source];
+                }
+            }
+        }
     }
 }
 
@@ -164,6 +195,8 @@
 {
     @synchronized(_context)
     {
+        glPushGroupMarkerEXT(0, "Drawing");
+        
         [self.view setFramebuffer];
         
         // Calculate the width and height of the view
@@ -183,34 +216,27 @@
         for (ShaderRenderPass* renderpass in _currentShader.renderpasses)
         {
             // Setup the parameters that are sent to the shader
-            ShaderParameters* params = [[ShaderParameters alloc] initWithChannelCount:renderpass.inputs.count];
-            params.resolution = GLKVector3Make(width, height, 1.0f);
-            params.time = time;
+            _params.resolution = GLKVector3Make(width, height, 1.0f);
+            _params.time = time;
             
             // Send touch locations, if valid, otherwise send 0
             if (_touchLocation != nil)
             {
                 CGPoint point = [_touchLocation locationInView:self.view];
-                params.mouseCoordinates = GLKVector4Make(point.x, point.y, 1.0f, 1.0f);
+                _params.mouseCoordinates = GLKVector4Make(point.x, point.y, 1.0f, 1.0f);
             }
             else
             {
-                params.mouseCoordinates = GLKVector4Make(0.0f, 0.0f, 0.0f, 0.0f);
-            }
-            
-            for (ShaderInput* input in renderpass.inputs)
-            {
-                if ([input.type isEqual: @"texture"])
-                {
-                    params.channelInfo[input.channel] = [[ChannelResourceManager sharedInstance] getResourceWithName:input.source];
-                }
+                _params.mouseCoordinates = GLKVector4Make(0.0f, 0.0f, 0.0f, 0.0f);
             }
             
             // Draw the plane
-            [_planeObject draw:params];
+            [_planeObject draw:_params];
         }
         
         [self.view presentFramebuffer];
+        
+        glPopGroupMarkerEXT();
     }
 }
 

@@ -144,17 +144,16 @@
     [header appendString:@"varying vec2     texCoords;\n\n"];
     
     // Create the necessary channels
-    for (int i = 0; i < renderpass.inputs.count; i++)
+    for (ShaderInput* input in renderpass.inputs)
     {
-        ShaderInput* input = renderpass.inputs[i];
         if ([input.type isEqualToString:@"cubemap"])
         {
-            [header appendFormat:@"uniform samplerCube iChannel%d;\n", i];
+            [header appendFormat:@"uniform samplerCube iChannel%d;\n", input.channel];
             [[ChannelResourceManager sharedInstance] addResource:input.source ofType:input.type];
         }
         else if ([input.type isEqualToString:@"texture"] || [input.type isEqualToString:@"music"])
         {
-            [header appendFormat:@"uniform sampler2D iChannel%d;\n", i];
+            [header appendFormat:@"uniform lowp sampler2D iChannel%d;\n", input.channel];
         }
         
         [[ChannelResourceManager sharedInstance] addResource:input.source ofType:input.type];

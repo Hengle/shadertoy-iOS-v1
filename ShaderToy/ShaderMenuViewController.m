@@ -105,7 +105,7 @@
         switch (indexPath.row)
         {
             case 0:
-                cell.textLabel.text = @"Shader of the Week";
+                cell.textLabel.text = @"Newest";
                 cell.imageView.image = [UIImage imageNamed:@"danger-8-icon"];
                 break;
                 
@@ -115,8 +115,8 @@
                 break;
                 
             case 2:
-                cell.textLabel.text = @"Random";
-                cell.imageView.image = [UIImage imageNamed:@"shuffle-3-icon"];
+                cell.textLabel.text = @"Loved";
+                cell.imageView.image = [UIImage imageNamed:@"favorite-3-icon"];
                 break;
                 
             default:
@@ -170,15 +170,30 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    if (indexPath.section == 0)
+    {
+        NSString *category = nil;
+
+        switch (indexPath.row)
+        {
+            case 0:
+                category = @"newest";
+                break;
+                
+            case 1:
+                category = @"popular";
+                break;
+                
+            case 2:
+                category = @"love";
+                break;
+        }
+        
+        [self.delegate shaderMenu:self choseShaderCategory:category];
+    }
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self.revealViewController revealToggleAnimated:YES];
 }
 
 @end

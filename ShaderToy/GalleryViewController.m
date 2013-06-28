@@ -10,7 +10,11 @@
 #import "ShaderViewController.h"
 #import "ShaderInfo.h"
 
+#define MAX_CONTROLLERS 4
+
 @interface GalleryViewController ()
+
+- (void)loadShadersWithURL:(NSURL *)url;
 
 @end
 
@@ -32,53 +36,17 @@
     _shaders = [NSMutableArray new];
     _viewControllers = [NSMutableArray new];
     
+    // Create the first controller and start the animation
     ShaderViewController* viewController = (ShaderViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"ShaderView"];
     ShaderInfo* shader = [ShaderManager sharedInstance].defaultShader;
     [viewController setShader:shader];
     [_viewControllers addObject:viewController];
     
     [self setViewControllers:@[viewController] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
-    
     [viewController startAnimation];
     
-    // Background loading of shaders
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
-                   ^{
-                       NSData* shaderListData = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"https://www.shadertoy.com/mobile.htm?sort=newest"]];
-                       
-                       if (shaderListData != nil)
-                       {
-                           NSError* listError = nil;
-                           NSArray* shaderList = [NSJSONSerialization JSONObjectWithData:shaderListData options:kNilOptions error:&listError];
-                           
-                           if (listError == nil)
-                           {
-                               for (NSString* shaderID in shaderList)
-                               {
-                                   NSData* shaderDetailsData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://www.shadertoy.com/mobile.htm?s=%@", shaderID]]];
-                                   
-                                   NSError* detailError = nil;
-                                   NSArray* shaderDetails = [NSJSONSerialization JSONObjectWithData:shaderDetailsData options:kNilOptions error:&detailError];
-                                   
-                                   if (detailError == nil)
-                                   {
-                                       ShaderInfo* shader = [[ShaderInfo alloc] initWithJSONDictionary:shaderDetails[0]];
-                                       
-                                       [_shaders addObject:shader];
-                                       [[ShaderManager sharedInstance] addShader:shader];
-                                   }
-                                   else
-                                   {
-                                       NSLog(@"Error loading shader details %@", detailError.localizedDescription);
-                                   }
-                               }
-                           }
-                           else
-                           {
-                               NSLog(@"Error loading shader list %@", listError.localizedDescription);
-                           }
-                       }
-                   });
+//    NSURL* shadersURL = [NSURL URLWithString:@"https://www.shadertoy.com/mobile.htm?sort=newest&from=15&num=12"];
+//    [self loadShadersWithURL:shadersURL];
     
     // Tap gesture recognizer to collapse reveal view controller
     UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
@@ -91,6 +59,69 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)loadShadersWithURL:(NSURL *)url
+{
+    // Clear non-focused view controllers
+    for (ShaderViewController* controller in _viewControllers)
+    {
+        if (controller == self.viewControllers[0])
+        {
+            ShaderInfo* shader = [ShaderManager sharedInstance].defaultShader;
+            [controller setShader:shader];
+        }
+    }
+    
+    [_shaders removeAllObjects];
+    
+    NSLog(@"Loading shaders from URL %@", url);
+    
+    // Background loading of shaders
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
+                   ^{
+                       NSData* shaderListData = [NSData dataWithContentsOfURL:url];
+                       
+                       if (shaderListData != nil)
+                       {
+                           NSError* listError = nil;
+                           NSArray* shaderList = [NSJSONSerialization JSONObjectWithData:shaderListData options:kNilOptions error:&listError];
+                           
+                           if (listError == nil)
+                           {
+                               for (NSString* shaderID in shaderList)
+                               {
+                                   NSData* shaderDetailsData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://www.shadertoy.com/mobile.htm?s=%@", shaderID]]];
+                                   
+                                   if (shaderDetailsData != nil)
+                                   {
+                                       NSError* detailError = nil;
+                                       NSArray* shaderDetails = [NSJSONSerialization JSONObjectWithData:shaderDetailsData options:kNilOptions error:&detailError];
+                                       
+                                       if (detailError == nil)
+                                       {
+                                           ShaderInfo* shader = [[ShaderInfo alloc] initWithJSONDictionary:shaderDetails[0]];
+                                           
+                                           [_shaders addObject:shader];
+                                           [[ShaderManager sharedInstance] addShader:shader];
+                                       }
+                                       else
+                                       {
+                                           NSLog(@"Error loading shader details %@", detailError.localizedDescription);
+                                       }
+                                   }
+                                   else
+                                   {
+                                       NSLog(@"Error loading shader details for %@", shaderID);
+                                   }
+                               }
+                           }
+                           else
+                           {
+                               NSLog(@"Error loading shader list %@", listError.localizedDescription);
+                           }
+                       }
+                   });
 }
 
 
@@ -187,11 +218,6 @@
             {
                 newController = _viewControllers[shaderIndex % _viewControllers.count];
                 
-                if (newController.sharegroup == nil)
-                {
-                    newController.sharegroup = viewController.sharegroup;
-                }
-                
                 ShaderInfo* shader = _shaders[shaderIndex];
                 [newController setShader:shader];
                 
@@ -231,27 +257,33 @@
 
 - (void)shaderManagerDidFinishCompiling:(ShaderManager *)manager
 {
-    for (int i = 0; i < 3; i++)
+    if (_viewControllers.count < MAX_CONTROLLERS)
     {
-        ShaderViewController* viewController = (ShaderViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"ShaderView"];
-
-        ShaderInfo* shader = [ShaderManager sharedInstance].defaultShader;
-        [viewController setShader:shader];
-
-        [_viewControllers addObject:viewController];
+        // Create the controllers
+        for (int i = 0; i < MAX_CONTROLLERS - _viewControllers.count; i++)
+        {
+            ShaderViewController* controller = (ShaderViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"ShaderView"];
+            
+            ShaderInfo* shader = [ShaderManager sharedInstance].defaultShader;
+            [controller setShader:shader];
+            
+            [_viewControllers addObject:controller];
+        }
     }
     
     ShaderViewController* viewController = (ShaderViewController *)self.viewControllers[0];
     [viewController setShader:_shaders[0]];
     
     _shadersReady = true;
+}
 
-    // Set the first page controller
-    //ShaderViewController* firstController = _viewControllers[0];
-    //[self setViewControllers:@[firstController] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
-    
-    // Start the animation
-    //[firstController startAnimation];
+
+#pragma mark - ShaderMenuDelegate
+
+- (void)shaderMenu:(ShaderMenuViewController *)shaderMenu choseShaderCategory:(NSString *)category
+{
+    NSURL* shadersURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.shadertoy.com/mobile.htm?sort=%@&num=5", category]];
+    [self loadShadersWithURL:shadersURL];
 }
 
 @end

@@ -74,7 +74,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8J4-fy-3o2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2398" y="707"/>
+            <point key="canvasLocation" x="2350" y="707"/>
         </scene>
         <!--Shader Menu View Controller-->
         <scene sceneID="sNx-5X-8Wl">
@@ -119,33 +119,6 @@
     <resources>
         <image name="list-view-icon.png" width="512" height="512"/>
     </resources>
-    <classes>
-        <class className="GalleryViewController" superclassName="UIPageViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/GalleryViewController.h"/>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="SWRevealViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SWRevealViewController.h"/>
-        </class>
-        <class className="ShaderMenuCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ShaderMenuCell.h"/>
-        </class>
-        <class className="ShaderMenuViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ShaderMenuViewController.h"/>
-        </class>
-        <class className="ShaderView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ShaderView.h"/>
-        </class>
-        <class className="ShaderViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ShaderViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="toggleMenu:"/>
-                <relationship kind="outlet" name="menuButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackOpaque"/>
         <simulatedOrientationMetrics key="orientation"/>

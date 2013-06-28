@@ -13,6 +13,7 @@
 @class ShaderView;
 @class ShaderInformationViewController;
 @class ShaderInfo;
+@class ShaderParameters;
 
 @interface ShaderViewController : UIViewController
 {
@@ -22,6 +23,7 @@
     unsigned long _frameDropCounter;
     
     Plane* _planeObject;
+    ShaderParameters* _params;
     
     NSDate* _startTime;
     NSDate* _lastFrameTime;
@@ -38,7 +40,6 @@
 @property (strong, nonatomic) ShaderView* view;
 @property (strong, nonatomic) IBOutlet UIButton *menuButton;
 @property (strong, nonatomic) EAGLContext *context;
-@property (strong, nonatomic) EAGLSharegroup *sharegroup;
 @property (strong, readonly) ShaderInfo* currentShader;
 
 - (IBAction)toggleMenu:(id)sender;

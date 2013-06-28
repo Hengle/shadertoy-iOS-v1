@@ -15,16 +15,12 @@
     self = [super init];
     if (self)
     {
-        _channelInfo = malloc(sizeof(GLuint) * count);
+        _channelInfo = malloc(sizeof(GLuint) * 4);
         _channelTime = malloc(sizeof(float) * 4);
-        
-        for (int i = 0; i < count; i++)
-        {
-            _channelInfo[i] = 0;
-        }
         
         for (int i = 0; i < 4; i++)
         {
+            _channelInfo[i] = 0;
             _channelTime[i] = 0.0f;
         }
         
@@ -40,6 +36,15 @@
     NSDateComponents *components = [[NSCalendar currentCalendar] components:kCFCalendarUnitYear | kCFCalendarUnitMonth | kCFCalendarUnitDay | kCFCalendarUnitMinute | kCFCalendarUnitSecond fromDate:date];
     
     return GLKVector4Make(components.year, components.month, components.day, (components.minute * 60) + components.second);
+}
+
+- (void)clearChannels
+{
+    for (int i = 0; i < 4; i++)
+    {
+        _channelInfo[i] = 0;
+        _channelTime[i] = 0.0f;
+    }
 }
 
 @end

@@ -12,7 +12,6 @@
 typedef struct
 {
     float position[3];
-    float uv[2];
 } Vertex;
 
 @class ShaderInfo;
@@ -26,7 +25,6 @@ typedef struct
     GLuint _program;
     
     GLuint _positionSlot;
-    GLuint _uvSlot;
     GLuint _resolutionUniform;
     GLuint _timeUniform;
     GLuint _channelTimeUniform;

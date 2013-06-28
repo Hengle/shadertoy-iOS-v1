@@ -11,8 +11,8 @@
 
 @interface ChannelResourceManager : NSObject
 {
-    NSMutableArray* pendingResources;
-    NSMutableDictionary* resourceDictionary;
+    NSMutableArray* _pendingResources;
+    NSMutableDictionary* _resourceDictionary;
 }
 
 + (ChannelResourceManager *)sharedInstance;
