@@ -122,9 +122,9 @@
         for (ShaderRenderPass* renderpass in shader.renderpasses)
         {
             program = [self compileShaderCode:[self prepareRenderPassCode:renderpass]];
-            [self storeShader:program withName:shader.ID];
+            [self storeShader:program withName:[NSString stringWithFormat:@"%@_%@", shader.ID, renderpass.name]];
 
-            NSLog(@"Created program %u for shader %@", program, shader.name);
+            NSLog(@"Created program %u for shader %@, renderpass %@", program, shader.name, renderpass.name);
         }
     }
     
@@ -159,7 +159,7 @@
         [[ChannelResourceManager sharedInstance] addResource:input.source ofType:input.type];
     }
     
-    [header appendString:@"// Shader code follows\n\n"];
+    [header appendString:@"\n// Shader code follows\n\n"];
     
     // Append the shader code to the header
     [header appendString:renderpass.code];

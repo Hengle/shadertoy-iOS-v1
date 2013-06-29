@@ -10,7 +10,7 @@
 
 @implementation ShaderParameters
 
-- (id)initWithChannelCount:(int)count
+- (id)init
 {
     self = [super init];
     if (self)
@@ -23,8 +23,6 @@
             _channelInfo[i] = 0;
             _channelTime[i] = 0.0f;
         }
-        
-        _channelCount = count;
     }
     
     return self;

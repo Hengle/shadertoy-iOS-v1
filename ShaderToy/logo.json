@@ -15,17 +15,17 @@
     },
     "renderpass": [
         {
-            "code": "void main(void)\n{\n\tvec2 uv = gl_FragCoord.xy / iResolution.xy;\n\tvec3 ch = texture2D(iChannel0, uv).xyz;\n\n\tgl_FragColor = vec4(ch.xy, sin(iGlobalTime) * 0.5, 1.0);\n}",
+            "code": "void main(void)\n{\n\tvec2 uv = gl_FragCoord.xy / iResolution.xy;\n\tvec3 ch = texture2D(iChannel1, uv).xyz;\n\n\tgl_FragColor = vec4(ch.xyz, 1.0);\n}",
             "description": "",
+            "name": "main",
             "inputs": [
-                {
-                    "channel": 0,
-                    "ctype": "texture",
-                    "id": 0,
-                    "src": "Default-568h@2x.png"
-                }
+                       {
+                       "channel": 1,
+                       "ctype": "texture",
+                       "id": 0,
+                       "src": "Default-568h@2x.png"
+                       }
             ],
-            "name": "",
             "outputs": []
         }
     ],

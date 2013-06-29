@@ -17,9 +17,7 @@
 @property (nonatomic, assign) GLKVector4 mouseCoordinates;
 @property (nonatomic, assign) GLuint *channelInfo;
 @property (nonatomic, readonly) GLKVector4 date;
-@property (nonatomic, readonly) int channelCount;
 
-- (id)initWithChannelCount:(int)count;
 - (void)clearChannels;
 
 @end

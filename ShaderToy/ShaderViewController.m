@@ -175,7 +175,7 @@
         // Create a params object for this shader
         for (ShaderRenderPass* renderpass in _currentShader.renderpasses)
         {
-            _params = [[ShaderParameters alloc] initWithChannelCount:renderpass.inputs.count];
+            _params = [[ShaderParameters alloc] init];
             
             [_params clearChannels];
             

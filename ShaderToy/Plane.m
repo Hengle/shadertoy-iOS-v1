@@ -118,9 +118,9 @@
             {
                 if (params.channelInfo[i] > 0)
                 {
-                    glUniform1i(_channelUniform[i], params.channelInfo[i]);
                     glActiveTexture(GL_TEXTURE0 + i);
-                    glBindTexture(GL_TEXTURE_2D, params.channelInfo[i]);
+                    glBindTexture(GL_TEXTURE_2D, i);
+                    glUniform1i(_channelUniform[i], params.channelInfo[i]);
                 }
 //                else
 //                {
@@ -145,6 +145,12 @@
 
 - (void)loadShader:(ShaderInfo *)shader;
 {
+    // Clear the channel uniforms
+    for (int i = 0; i < 4; i++)
+    {
+        _channelUniform[i] = -1;
+    }
+    
     for (ShaderRenderPass* renderpass in shader.renderpasses)
     {
         glPushGroupMarkerEXT(0, "Uniform Caching");

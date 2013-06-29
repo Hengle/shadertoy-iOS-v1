@@ -24,13 +24,13 @@ typedef struct
     GLuint _indexBuffer;
     GLuint _program;
     
-    GLuint _positionSlot;
-    GLuint _resolutionUniform;
-    GLuint _timeUniform;
-    GLuint _channelTimeUniform;
-    GLuint _mouseUniform;
-    GLuint _channelUniform[4];
-    GLuint _dateUniform;
+    GLint _positionSlot;
+    GLint _resolutionUniform;
+    GLint _timeUniform;
+    GLint _channelTimeUniform;
+    GLint _mouseUniform;
+    GLint _channelUniform[4];
+    GLint _dateUniform;
     
     int indicesToDraw;
     
