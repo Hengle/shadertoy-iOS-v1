@@ -97,7 +97,8 @@
         glUseProgram(_program);
         
         // Pixel shader uniforms
-        if (_resolutionUniform)
+        // Check to see if the uniform is valid (invalid when it doesn't exist ie. -1)
+        if (_resolutionUniform != -1)
             glUniform3fv(_resolutionUniform, 1, params.resolution.v);
         
         if (_timeUniform != -1)
@@ -112,6 +113,7 @@
         if (_dateUniform != -1)
             glUniform4fv(_dateUniform, 1, params.date.v);
         
+        // Go through our uniform channel params and set the ones we need
         for (int i = 0; i < 4; i++)
         {
             if (_channelUniform[i] != -1)
@@ -119,14 +121,11 @@
                 if (params.channelInfo[i] > 0)
                 {
                     glActiveTexture(GL_TEXTURE0 + i);
-                    glBindTexture(GL_TEXTURE_2D, i);
-                    glUniform1i(_channelUniform[i], params.channelInfo[i]);
+                    glBindTexture(GL_TEXTURE_2D, params.channelInfo[i]);
+                    glUniform1i(_channelUniform[i], i);
+                    
+                    //NSLog(@"Binding texture %d to slot %d, uniform %d to unit %d", params.channelInfo[i], GL_TEXTURE0 + i, _channelUniform[i], i);
                 }
-//                else
-//                {
-//                    glActiveTexture(GL_TEXTURE0 + i);
-//                    glBindTexture(GL_TEXTURE_2D, 0);
-//                }
             }
         }
         

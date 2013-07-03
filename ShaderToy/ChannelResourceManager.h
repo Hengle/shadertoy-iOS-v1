@@ -21,6 +21,6 @@
 - (void)deferLoading;
 
 - (void)storeResource:(NSObject *)resource withName:(NSString *)name;
-- (GLuint)getResourceWithName:(NSURL *)name;
+- (NSData *)getResourceWithName:(NSURL *)name;
 
 @end

@@ -45,8 +45,8 @@
     [self setViewControllers:@[viewController] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
     [viewController startAnimation];
     
-//    NSURL* shadersURL = [NSURL URLWithString:@"https://www.shadertoy.com/mobile.htm?sort=newest&from=15&num=12"];
-//    [self loadShadersWithURL:shadersURL];
+    NSURL* shadersURL = [NSURL URLWithString:@"https://www.shadertoy.com/mobile.htm?sort=newest&from=8&num=1"];
+    [self loadShadersWithURL:shadersURL];
     
     // Tap gesture recognizer to collapse reveal view controller
     UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];

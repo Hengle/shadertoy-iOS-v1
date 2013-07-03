@@ -149,14 +149,13 @@
         if ([input.type isEqualToString:@"cubemap"])
         {
             [header appendFormat:@"uniform samplerCube iChannel%d;\n", input.channel];
-            [[ChannelResourceManager sharedInstance] addResource:input.source ofType:input.type];
         }
-        else if ([input.type isEqualToString:@"texture"] || [input.type isEqualToString:@"music"])
+        else //if ([input.type isEqualToString:@"texture"] || [input.type isEqualToString:@"music"] || [input.type isEqualToString:@"video"])
         {
             [header appendFormat:@"uniform lowp sampler2D iChannel%d;\n", input.channel];
         }
         
-        [[ChannelResourceManager sharedInstance] addResource:input.source ofType:input.type];
+        //[[ChannelResourceManager sharedInstance] addResource:input.source ofType:input.type];
     }
     
     [header appendString:@"\n// Shader code follows\n\n"];

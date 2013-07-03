@@ -37,7 +37,7 @@
 
 @interface ChannelResourceManager ()
 
-- (GLKTextureInfo *)loadTextureWithURL:(NSURL *)name;
+- (NSData *)loadDataFromURL:(NSURL *)path;
 
 @end
 
@@ -85,7 +85,7 @@
             {
                 if ([info.type isEqualToString:@"texture"] || [info.type isEqualToString:@"cubemap"])
                 {
-                    [self loadTextureWithURL:info.path];
+                    [self loadDataFromURL:info.path];
                 }
             }
         }
@@ -99,48 +99,31 @@
     [_resourceDictionary setObject:resource forKey:name];
 }
 
-- (GLuint)getResourceWithName:(NSURL *)name
+- (NSData *)getResourceWithName:(NSURL *)name
 {
-    GLKTextureInfo* info = [_resourceDictionary objectForKey:name.absoluteString];
-    GLuint resource = 0;
+    NSData* resource = [_resourceDictionary objectForKey:name.absoluteString];
     
-    if (info != nil)
+    if (resource == nil)
     {
-        resource = info.name;
-    }
-    else
-    {
-        info = [self loadTextureWithURL:name];
-        
-        if (info != nil)
-        {
-            resource = info.name;
-            [self storeResource:info withName:name.absoluteString];
-        }
-        else
-        {
-            NSLog(@"Couldn't get resource for path %@", name.absoluteString);
-        }
+        resource = [self loadDataFromURL:name];
     }
     
     return resource;
 }
 
-- (GLKTextureInfo *)loadTextureWithURL:(NSURL *)name
+- (NSData *)loadDataFromURL:(NSURL *)path
 {
-    NSError* error = nil;
-    GLKTextureInfo* texture = [GLKTextureLoader textureWithContentsOfURL:name options:@{GLKTextureLoaderOriginBottomLeft: @YES} error:&error];
-    
-    if (error == nil)
+    NSData* resource = [NSData dataWithContentsOfURL:path];
+    if (resource != nil)
     {
-        NSLog(@"Loaded texture %u for path %@", texture.name, name.absoluteString);
+        [self storeResource:resource withName:path.absoluteString];
     }
     else
     {
-        NSLog(@"Error loading texture for path %@ - %@", name.absoluteString, error);
+        NSLog(@"Couldn't get resource for path %@", path.absoluteString);
     }
     
-    return texture;
+    return resource;
 }
 
 @end
