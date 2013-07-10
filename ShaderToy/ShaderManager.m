@@ -13,6 +13,7 @@
 @interface ShaderManager ()
 
 - (NSString *)prepareRenderPassCode:(ShaderRenderPass *)renderpass;
+- (NSMutableString *)replaceReservedFunctionNames:(NSString *)codeString;
 - (GLuint)compileShaderCode:(NSString *)code;
 - (BOOL)compileShader:(GLuint *)shader type:(GLenum)type source:(NSString *)code;
 - (BOOL)linkProgram:(GLuint)prog;
@@ -134,36 +135,59 @@
 - (NSString *)prepareRenderPassCode:(ShaderRenderPass *)renderpass
 {
     // Create the header for this particular shader
-    NSMutableString* header = [NSMutableString stringWithString:@"// Auto-generated header to define uniforms\n"];
-    [header appendString:@"precision highp float;\n"];
-    [header appendString:@"uniform vec3     iResolution;\n"];
-    [header appendString:@"uniform float    iGlobalTime;\n"];
-    [header appendString:@"uniform float    iChannelTime[4];\n"];
-    [header appendString:@"uniform vec4     iMouse;\n\n"];
-    [header appendString:@"uniform vec4     iDate;\n"];
-    [header appendString:@"varying vec2     texCoords;\n\n"];
+    NSMutableString* codeString = [NSMutableString stringWithString:@"// Auto-generated header to define uniforms\n"];
+    [codeString appendString:@"precision highp float;\n"];
+    [codeString appendString:@"uniform vec3     iResolution;\n"];
+    [codeString appendString:@"uniform float    iGlobalTime;\n"];
+    [codeString appendString:@"uniform float    iChannelTime[4];\n"];
+    [codeString appendString:@"uniform vec4     iMouse;\n\n"];
+    [codeString appendString:@"uniform vec4     iDate;\n"];
+    [codeString appendString:@"varying vec2     texCoords;\n\n"];
     
     // Create the necessary channels
     for (ShaderInput* input in renderpass.inputs)
     {
         if ([input.type isEqualToString:@"cubemap"])
         {
-            [header appendFormat:@"uniform samplerCube iChannel%d;\n", input.channel];
+            [codeString appendFormat:@"uniform samplerCube iChannel%d;\n", input.channel];
         }
         else //if ([input.type isEqualToString:@"texture"] || [input.type isEqualToString:@"music"] || [input.type isEqualToString:@"video"])
         {
-            [header appendFormat:@"uniform lowp sampler2D iChannel%d;\n", input.channel];
+            [codeString appendFormat:@"uniform lowp sampler2D iChannel%d;\n", input.channel];
         }
         
-        //[[ChannelResourceManager sharedInstance] addResource:input.source ofType:input.type];
+        [[ChannelResourceManager sharedInstance] addResource:input.source ofType:input.type];
     }
     
-    [header appendString:@"\n// Shader code follows\n\n"];
+    [codeString appendString:@"\n// Shader code follows\n\n"];
     
     // Append the shader code to the header
-    [header appendString:renderpass.code];
+    [codeString appendString:renderpass.code];
     
-    return header;
+    // Replace reserved strings with prefix
+    codeString = [self replaceReservedFunctionNames:codeString];
+    
+    return codeString;
+}
+
+- (NSMutableString *)replaceReservedFunctionNames:(NSString *)codeString
+{
+    NSError *error = NULL;
+    
+    // Matches patterns like:
+    // noise(), noise1(), noise(a), noise2 ( a, b )
+    // and adds a ShaderToy_ suffix to the pattern
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(noise[1-4]*[\\s]*\\()" options:NSRegularExpressionCaseInsensitive error:&error];
+    NSString *modifiedString = [regex stringByReplacingMatchesInString:codeString options:0 range:NSMakeRange(0, codeString.length) withTemplate:@"ShaderToy_$1"];
+    
+    if (error != nil)
+    {
+        NSLog(@"Failed to prefix noise functions! %@", error.localizedDescription);
+        
+        return [codeString mutableCopy];
+    }
+    
+    return [modifiedString mutableCopy];
 }
 
 - (GLuint)compileShaderCode:(NSString *)code
