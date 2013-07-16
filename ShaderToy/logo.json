@@ -15,7 +15,7 @@
     },
     "renderpass": [
         {
-            "code": "void main(void)\n{\n\tvec2 uv = gl_FragCoord.xy / iResolution.xy;\n\tvec3 ch = texture2D(iChannel0, uv).xyz;\n\n\tgl_FragColor = vec4(ch.xyz, 1.0);\n}",
+            "code": "float noise1()\n{\n\treturn 0.5;\n}\nvoid main(void)\n{\n\tfloat noiseValue = noise1();\n\n\tvec2 uv = gl_FragCoord.xy / iResolution.xy;\n\tvec3 ch = texture2D(iChannel0, uv).xyz;\n\n\tgl_FragColor = vec4(ch.xyz, 1.0);\n}",
             "description": "",
             "name": "main",
             "inputs": [

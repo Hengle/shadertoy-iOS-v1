@@ -12,11 +12,16 @@
 #import "ShaderView.h"
 #import "Plane.h"
 #import "ChannelResourceManager.h"
+#import "ShaderInfoViewController.h"
 
 #import <QuartzCore/QuartzCore.h>
 
 
 @interface ShaderViewController ()
+{
+    ShaderInfoViewController* _infoViewController;
+    UIButton* _menuButton;
+}
 
 - (void)tearDown;
 - (void)initialize;
@@ -58,6 +63,14 @@
     _frameDropCounter = 0;
     _lastFrameTime = [NSDate date];
     _renderQueue = dispatch_queue_create("com.shadertoy.threadedgcdqueue", NULL);
+    
+    _infoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ShaderInfoOverlay"];
+    [self.view addSubview:_infoViewController.view];
+    
+    _menuButton = [[UIButton alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 30.0f, 30.0f)];
+    _menuButton.imageView.image = [UIImage imageNamed:@"list-view-icon.png"];
+    [_menuButton addTarget:self action:@selector(toggleMenu:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_menuButton];
 }
 
 - (void)dealloc
@@ -122,6 +135,7 @@
 - (void)setShader:(ShaderInfo *)shader
 {
     _currentShader = shader;
+    _infoViewController.shaderInfo = shader;
     
     if (_planeObject)
     {
@@ -260,6 +274,26 @@
         
         glPopGroupMarkerEXT();
     }
+}
+
+static UIImage *CFIImageFromView(UIView *view)
+{
+	CGSize size = view.bounds.size;
+    
+    CGFloat scale = UIScreen.mainScreen.scale;
+    size.width *= scale;
+    size.height *= scale;
+    
+    UIGraphicsBeginImageContextWithOptions(size, NO, UIScreen.mainScreen.scale);
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    CGContextScaleCTM(ctx, scale, scale);
+	
+    [view.layer renderInContext:ctx];
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
 }
 
 - (void)update

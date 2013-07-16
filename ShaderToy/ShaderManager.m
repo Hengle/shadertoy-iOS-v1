@@ -165,7 +165,7 @@
     [codeString appendString:renderpass.code];
     
     // Replace reserved strings with prefix
-    codeString = [self replaceReservedFunctionNames:codeString];
+    //codeString = [self replaceReservedFunctionNames:codeString];
     
     return codeString;
 }
@@ -175,7 +175,7 @@
     NSError *error = NULL;
     
     // Matches patterns like:
-    // noise(), noise1(), noise(a), noise2 ( a, b )
+    // noise1(), noise2(a), noise3 ( a, b ) noise4()
     // and adds a ShaderToy_ suffix to the pattern
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(noise[1-4]*[\\s]*\\()" options:NSRegularExpressionCaseInsensitive error:&error];
     NSString *modifiedString = [regex stringByReplacingMatchesInString:codeString options:0 range:NSMakeRange(0, codeString.length) withTemplate:@"ShaderToy_$1"];

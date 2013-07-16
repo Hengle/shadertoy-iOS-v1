@@ -11,7 +11,6 @@
 
 @class Plane;
 @class ShaderView;
-@class ShaderInformationViewController;
 @class ShaderInfo;
 @class ShaderParameters;
 
@@ -36,9 +35,7 @@
     UITouch* _touchLocation;
 }
 
-@property (strong, nonatomic) ShaderInformationViewController *informationViewController;
 @property (strong, nonatomic) ShaderView* view;
-@property (strong, nonatomic) IBOutlet UIButton *menuButton;
 @property (strong, nonatomic) EAGLContext *context;
 @property (strong, readonly) ShaderInfo* currentShader;
 
