@@ -68,7 +68,7 @@
     //[self.view addSubview:_infoViewController.view];
     
     _menuButton = [[UIButton alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 30.0f, 30.0f)];
-    _menuButton.imageView.image = [UIImage imageNamed:@"list-view-icon.png"];
+    [_menuButton setImage:[UIImage imageNamed:@"list-view-icon.png"] forState:UIControlStateNormal];
     [_menuButton addTarget:self action:@selector(toggleMenu:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_menuButton];
 }
@@ -259,7 +259,7 @@
             if (_touchLocation != nil)
             {
                 CGPoint point = [_touchLocation locationInView:self.view];
-                _params.mouseCoordinates = GLKVector4Make(point.x, point.y, 1.0f, 1.0f);
+                _params.mouseCoordinates = GLKVector4Make(point.x, self.view.bounds.size.height - point.y, 1.0f, 1.0f);
             }
             else
             {
