@@ -1,16 +1,16 @@
 {
     "info": {
         "date": "1367053740",
-        "description": "Logo in a texture for ShaderToy",
+        "description": "Logo in a texture for Shadertoy",
         "hasliked": 0,
         "id": "0427c640",
         "likes": 0,
-        "name": "ShaderToy Logo",
+        "name": "Shadertoy Logo",
         "published": 0,
         "tags": [
             "texturing","logo"
         ],
-        "username": "shadertoy",
+        "username": "Shadertoy",
         "viewed": 0
     },
     "renderpass": [

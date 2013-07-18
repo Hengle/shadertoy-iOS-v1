@@ -1,6 +1,6 @@
 //
 //  ShaderManager.m
-//  ShaderToy
+//  Shadertoy
 //
 //  Created by Ricardo Chavarria on 6/8/13.
 //  Copyright (c) 2013 Ricardo Chavarria. All rights reserved.
@@ -103,9 +103,19 @@
     [pendingShaders addObject:shader];
 }
 
+- (void)addShaders:(NSArray *)shaders
+{
+    [pendingShaders addObjectsFromArray:shaders];
+}
+
 - (void)storeShader:(GLuint)program withName:(NSString *)name
 {
     [shaderDictionary setObject:[NSNumber numberWithUnsignedInt:program] forKey:name];
+}
+
+- (BOOL)shaderExists:(ShaderInfo *)shader
+{
+    return ([shaderDictionary objectForKey:shader.ID] == nil);
 }
 
 - (GLuint)getShader:(ShaderInfo *)shader
@@ -165,7 +175,7 @@
     [codeString appendString:renderpass.code];
     
     // Replace reserved strings with prefix
-    //codeString = [self replaceReservedFunctionNames:codeString];
+    codeString = [self replaceReservedFunctionNames:codeString];
     
     return codeString;
 }
@@ -176,9 +186,9 @@
     
     // Matches patterns like:
     // noise1(), noise2(a), noise3 ( a, b ) noise4()
-    // and adds a ShaderToy_ suffix to the pattern
+    // and adds a Shadertoy_ suffix to the pattern
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(noise[1-4]*[\\s]*\\()" options:NSRegularExpressionCaseInsensitive error:&error];
-    NSString *modifiedString = [regex stringByReplacingMatchesInString:codeString options:0 range:NSMakeRange(0, codeString.length) withTemplate:@"ShaderToy_$1"];
+    NSString *modifiedString = [regex stringByReplacingMatchesInString:codeString options:0 range:NSMakeRange(0, codeString.length) withTemplate:@"Shadertoy_$1"];
     
     if (error != nil)
     {

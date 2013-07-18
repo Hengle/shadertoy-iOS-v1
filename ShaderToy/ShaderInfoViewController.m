@@ -1,6 +1,6 @@
 //
 //  ShaderInfoViewController.m
-//  ShaderToy
+//  Shadertoy
 //
 //  Created by skumancer on 7/14/13.
 //  Copyright (c) 2013 Ricardo Chavarria. All rights reserved.
@@ -49,11 +49,6 @@
     [self.scrollView setContentOffset:CGPointMake(0.0f, self.scrollView.contentSize.height - self.scrollView.bounds.size.height)];
     
     //[self.view addSubview: self.tableView];
-    
-    CALayer* layer = self.scrollView.layer;
-    
-    layer.rasterizationScale = 0.25f;
-    layer.shouldRasterize = TRUE;
 }
 
 //- (void)viewWillLayoutSubviews

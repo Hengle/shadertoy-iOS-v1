@@ -1,6 +1,6 @@
 //
 //  ParallaxViewController.m
-//  ShaderToy
+//  Shadertoy
 //
 //  Created by Ricardo Chavarria on 5/1/13.
 //  Copyright (c) 2013 Ricardo Chavarria. All rights reserved.
@@ -64,8 +64,8 @@
     _lastFrameTime = [NSDate date];
     _renderQueue = dispatch_queue_create("com.shadertoy.threadedgcdqueue", NULL);
     
-    _infoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ShaderInfoOverlay"];
-    [self.view addSubview:_infoViewController.view];
+    //_infoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ShaderInfoOverlay"];
+    //[self.view addSubview:_infoViewController.view];
     
     _menuButton = [[UIButton alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 30.0f, 30.0f)];
     _menuButton.imageView.image = [UIImage imageNamed:@"list-view-icon.png"];
@@ -135,7 +135,7 @@
 - (void)setShader:(ShaderInfo *)shader
 {
     _currentShader = shader;
-    _infoViewController.shaderInfo = shader;
+    //_infoViewController.shaderInfo = shader;
     
     if (_planeObject)
     {
@@ -167,7 +167,7 @@
         }
     }
     
-    NSLog(@"Settings shader to %@", shader.ID);
+    NSLog(@"Setting shader to %@", shader.name);
 }
 
 - (void)tearDown

@@ -1,6 +1,6 @@
 //
 //  ShaderMenuViewController.h
-//  ShaderToy
+//  Shadertoy
 //
 //  Created by Ricardo Chavarria on 5/4/13.
 //  Copyright (c) 2013 Ricardo Chavarria. All rights reserved.

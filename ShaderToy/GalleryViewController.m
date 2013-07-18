@@ -1,6 +1,6 @@
 //
 //  ViewController.m
-//  ShaderToy
+//  Shadertoy
 //
 //  Created by Ricardo Chavarria on 4/30/13.
 //  Copyright (c) 2013 Ricardo Chavarria. All rights reserved.
@@ -14,6 +14,7 @@
 
 @interface GalleryViewController ()
 
+- (void)clearViewsForSectionChange;
 - (void)loadShadersWithURL:(NSURL *)url;
 
 @end
@@ -31,7 +32,7 @@
     
     [ShaderManager sharedInstance].delegate = self;
     
-    _shadersReady = false;
+    _loadingShaders = false;
     _pendingControllers = [NSMutableArray new];
     _shaders = [NSMutableArray new];
     _viewControllers = [NSMutableArray new];
@@ -45,7 +46,7 @@
     [self setViewControllers:@[viewController] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
     [viewController startAnimation];
     
-    NSURL* shadersURL = [NSURL URLWithString:@"https://www.shadertoy.com/mobile.htm?sort=newest&from=0&num=10"];
+    NSURL* shadersURL = [NSURL URLWithString:@"https://www.shadertoy.com/mobile.htm?sort=newest&from=0&num=12"];
     [self loadShadersWithURL:shadersURL];
     
     // Tap gesture recognizer to collapse reveal view controller
@@ -61,7 +62,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)loadShadersWithURL:(NSURL *)url
+- (void)clearViewsForSectionChange
 {
     // Clear non-focused view controllers
     for (ShaderViewController* controller in _viewControllers)
@@ -74,6 +75,11 @@
     }
     
     [_shaders removeAllObjects];
+}
+
+- (void)loadShadersWithURL:(NSURL *)url
+{
+    _loadingShaders = true;
     
     NSLog(@"Loading shaders from URL %@", url);
     
@@ -81,6 +87,7 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
                    ^{
                        NSData* shaderListData = [NSData dataWithContentsOfURL:url];
+                       NSMutableArray* newShaders = [NSMutableArray new];
                        
                        if (shaderListData != nil)
                        {
@@ -102,8 +109,11 @@
                                        {
                                            ShaderInfo* shader = [[ShaderInfo alloc] initWithJSONDictionary:shaderDetails[0]];
                                            
-                                           [_shaders addObject:shader];
-                                           [[ShaderManager sharedInstance] addShader:shader];
+                                           // Check that the shader does not exist
+                                           if ([[ShaderManager sharedInstance] shaderExists:shader])
+                                           {
+                                               [newShaders addObject:shader];
+                                           }
                                        }
                                        else
                                        {
@@ -119,6 +129,15 @@
                            else
                            {
                                NSLog(@"Error loading shader list %@", listError.localizedDescription);
+                           }
+                       }
+                       
+                       if (newShaders.count > 0)
+                       {
+                           @synchronized(_shaders)
+                           {
+                               [_shaders addObjectsFromArray:newShaders];
+                               [[ShaderManager sharedInstance] addShaders:newShaders];
                            }
                        }
                    });
@@ -182,21 +201,17 @@
 {
     ShaderViewController* newController = nil;
     
-    if (_shadersReady)
+    int shaderIndex = [_shaders indexOfObject:viewController.currentShader];
+    if (shaderIndex != NSNotFound)
     {
-        int shaderIndex = [_shaders indexOfObject:viewController.currentShader];
-        
-        if (shaderIndex != NSNotFound)
+        shaderIndex -= 1;
+        if (shaderIndex >= 0)
         {
-            shaderIndex -= 1;
-            if (shaderIndex >= 0)
-            {
-                newController = _viewControllers[shaderIndex % _viewControllers.count];
-                ShaderInfo* shader = _shaders[shaderIndex];
-                [newController setShader:shader];
-                
-                NSLog(@"Setting VC %d to shader %@", shaderIndex % _viewControllers.count, shader.name);
-            }
+            newController = _viewControllers[shaderIndex % _viewControllers.count];
+            ShaderInfo* shader = _shaders[shaderIndex];
+            [newController setShader:shader];
+            
+            NSLog(@"Setting VC %d to shader %@", shaderIndex % _viewControllers.count, shader.name);
         }
     }
     
@@ -207,22 +222,26 @@
 {
     ShaderViewController* newController = nil;
     
-    if (_shadersReady)
+    int shaderIndex = [_shaders indexOfObject:viewController.currentShader];
+    if (shaderIndex != NSNotFound)
     {
-        int shaderIndex = [_shaders indexOfObject:viewController.currentShader];
+        shaderIndex += 1;
         
-        if (shaderIndex != NSNotFound)
+        if (shaderIndex < _shaders.count)
         {
-            shaderIndex += 1;
-            if (shaderIndex < _shaders.count)
+            newController = _viewControllers[shaderIndex % _viewControllers.count];
+            
+            ShaderInfo* shader = _shaders[shaderIndex];
+            [newController setShader:shader];
+            
+            // Load more shaders
+            if (!_loadingShaders && (shaderIndex > _shaders.count - 4))
             {
-                newController = _viewControllers[shaderIndex % _viewControllers.count];
-                
-                ShaderInfo* shader = _shaders[shaderIndex];
-                [newController setShader:shader];
-                
-                NSLog(@"Setting VC %d to shader %@", shaderIndex % _viewControllers.count, shader.name);
+                NSURL* shadersURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.shadertoy.com/mobile.htm?sort=newest&from=%d&num=12", _shaders.count]];
+                [self loadShadersWithURL:shadersURL];
             }
+            
+            NSLog(@"Setting VC %d to shader %@", shaderIndex % _viewControllers.count, shader.name);
         }
     }
     
@@ -260,7 +279,7 @@
     if (_viewControllers.count < MAX_CONTROLLERS)
     {
         // Create the controllers
-        for (int i = 0; i < MAX_CONTROLLERS - _viewControllers.count; i++)
+        while (_viewControllers.count < MAX_CONTROLLERS)
         {
             ShaderViewController* controller = (ShaderViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"ShaderView"];
             
@@ -269,12 +288,12 @@
             
             [_viewControllers addObject:controller];
         }
+        
+        ShaderViewController* viewController = (ShaderViewController *)self.viewControllers[0];
+        [viewController setShader:_shaders[0]];
     }
     
-    ShaderViewController* viewController = (ShaderViewController *)self.viewControllers[0];
-    [viewController setShader:_shaders[0]];
-    
-    _shadersReady = true;
+    _loadingShaders = false;
 }
 
 

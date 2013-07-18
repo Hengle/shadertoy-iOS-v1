@@ -1,6 +1,6 @@
 //
 //  ShaderManager.h
-//  ShaderToy
+//  Shadertoy
 //
 //  Created by Ricardo Chavarria on 6/8/13.
 //  Copyright (c) 2013 Ricardo Chavarria. All rights reserved.
@@ -32,9 +32,11 @@
 + (ShaderManager *)sharedInstance;
 
 - (void)addShader:(ShaderInfo *)shader;
+- (void)addShaders:(NSArray *)shaders;
 - (void)deferCompilation;
 
 - (void)storeShader:(GLuint)program withName:(NSString *)name;
+- (BOOL)shaderExists:(ShaderInfo *)shader;
 - (GLuint)getShader:(ShaderInfo *)shader;
 
 @end

@@ -1,6 +1,6 @@
 //
 //  ShaderMenuCell.h
-//  ShaderToy
+//  Shadertoy
 //
 //  Created by Ricardo Chavarria on 5/5/13.
 //  Copyright (c) 2013 Ricardo Chavarria. All rights reserved.
