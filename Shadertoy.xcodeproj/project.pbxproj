@@ -315,14 +315,14 @@
 			isa = PBXGroup;
 			children = (
 				AEAEEA6217422650003F74D3 /* share-4-icon.png */,
+				AE933D661737A78B009EAF41 /* favorite-3-icon.png */,
+				AEA3B5911736EE8B00786DA2 /* list-view-icon.png */,
 				AE933D641737A78B009EAF41 /* facebook-like-5-icon.png */,
 				AE933D651737A78B009EAF41 /* favorite-2-icon.png */,
-				AE933D661737A78B009EAF41 /* favorite-3-icon.png */,
 				AE933D671737A78B009EAF41 /* inbox-8-icon.png */,
 				AE933D681737A78B009EAF41 /* twitter-5-icon.png */,
 				AEA3B58F1736EE8500786DA2 /* danger-8-icon.png */,
 				AEA3B5961736F3C200786DA2 /* dashboard-5-icon.png */,
-				AEA3B5911736EE8B00786DA2 /* list-view-icon.png */,
 				AEA3B5981736F50000786DA2 /* shuffle-3-icon.png */,
 			);
 			name = Icons;

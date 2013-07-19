@@ -35,7 +35,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    self.tableView.backgroundColor = [UIColor darkGrayColor];
+    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background.png"]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -49,7 +49,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 2;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -71,22 +71,22 @@
     return cells;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    NSString* name = nil;
-    switch (section)
-    {
-        case 0:
-            name = @"Shaders";
-            break;
-            
-        case 1:
-            name = @"Favorites";
-            break;
-    }
-    
-    return name;
-}
+//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+//{
+//    NSString* name = nil;
+//    switch (section)
+//    {
+//        case 0:
+//            name = @"Shaders";
+//            break;
+//            
+//        case 1:
+//            name = @"Favorites";
+//            break;
+//    }
+//    
+//    return name;
+//}
 
 //- (UIView* )tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 //{
