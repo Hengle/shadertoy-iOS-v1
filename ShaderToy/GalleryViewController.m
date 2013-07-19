@@ -29,8 +29,11 @@
     self.delegate = self;
     
     self.revealViewController.delegate = self;
-    
+
     [ShaderManager sharedInstance].delegate = self;
+    
+    ShaderMenuViewController* menuController = (ShaderMenuViewController *)self.revealViewController.rearViewController;
+    menuController.delegate = self;
     
     _loadingShaders = false;
     _pendingControllers = [NSMutableArray new];
@@ -65,13 +68,10 @@
 - (void)clearViewsForSectionChange
 {
     // Clear non-focused view controllers
+    ShaderInfo* shader = [ShaderManager sharedInstance].defaultShader;
     for (ShaderViewController* controller in _viewControllers)
     {
-        if (controller == self.viewControllers[0])
-        {
-            ShaderInfo* shader = [ShaderManager sharedInstance].defaultShader;
-            [controller setShader:shader];
-        }
+        [controller setShader:shader];
     }
     
     [_shaders removeAllObjects];
@@ -288,8 +288,11 @@
             
             [_viewControllers addObject:controller];
         }
-        
-        ShaderViewController* viewController = (ShaderViewController *)self.viewControllers[0];
+    }
+    
+    ShaderViewController* viewController = (ShaderViewController *)self.viewControllers[0];
+    if (viewController.currentShader == [ShaderManager sharedInstance].defaultShader)
+    {
         [viewController setShader:_shaders[0]];
     }
     
@@ -301,7 +304,9 @@
 
 - (void)shaderMenu:(ShaderMenuViewController *)shaderMenu choseShaderCategory:(NSString *)category
 {
-    NSURL* shadersURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.shadertoy.com/mobile.htm?sort=%@&num=5", category]];
+    NSURL* shadersURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.shadertoy.com/mobile.htm?sort=%@&num=12", category]];
+    
+    [self clearViewsForSectionChange];
     [self loadShadersWithURL:shadersURL];
 }
 

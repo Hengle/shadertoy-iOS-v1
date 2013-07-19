@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
     <dependencies>
-        <deployment defaultVersion="1552" identifier="iOS"/>
         <development version="4600" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -12,8 +11,8 @@
                 <viewController id="2" customClass="SWRevealViewController" sceneMemberID="viewController">
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
-                        <segue destination="cae-g1-DMN" kind="custom" identifier="sw_rear" customClass="SWRevealViewControllerSegue" id="7lt-92-NDu"/>
                         <segue destination="Rhv-Es-AOn" kind="custom" identifier="sw_front" customClass="SWRevealViewControllerSegue" id="ERZ-XU-dJq"/>
+                        <segue destination="af9-NP-x63" kind="custom" identifier="sw_rear" customClass="SWRevealViewControllerSegue" id="l94-CS-i3k"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
@@ -21,44 +20,77 @@
             <point key="canvasLocation" x="-74" y="-65"/>
         </scene>
         <!--Shader Menu View Controller-->
-        <scene sceneID="UWv-uQ-3Za">
+        <scene sceneID="IjA-cD-xBw">
             <objects>
-                <tableViewController id="cae-g1-DMN" customClass="ShaderMenuViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="uzR-i9-ZYg">
+                <tableViewController id="af9-NP-x63" customClass="ShaderMenuViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="50" sectionHeaderHeight="22" sectionFooterHeight="22" id="jfQ-RU-Xle">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ShaderMenuCell" textLabel="5gX-ho-xWR" style="IBUITableViewCellStyleDefault" id="2GR-Rs-mvo" customClass="ShaderMenuCell">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MenuBasicCell" id="8WP-Pr-03R">
+                                <rect key="frame" x="0.0" y="22" width="320" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5gX-ho-xWR">
-                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="b1b-vE-Dxm">
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="38" id="0xP-qt-h8o"/>
+                                                <constraint firstAttribute="width" constant="38" id="g8X-sF-TYc"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="101" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N0h-ev-puy">
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="kVs-hh-Rs4"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="b1b-vE-Dxm" firstAttribute="centerY" secondItem="8WP-Pr-03R" secondAttribute="centerY" type="default" id="5fX-FA-Enc"/>
+                                    <constraint firstAttribute="trailing" secondItem="N0h-ev-puy" secondAttribute="trailing" constant="20" type="default" id="8hK-P3-G7x"/>
+                                    <constraint firstItem="N0h-ev-puy" firstAttribute="top" secondItem="8WP-Pr-03R" secondAttribute="top" constant="14" id="GZj-gU-W4b"/>
+                                    <constraint firstItem="b1b-vE-Dxm" firstAttribute="leading" secondItem="8WP-Pr-03R" secondAttribute="leading" constant="20" type="default" id="OQR-go-VOJ"/>
+                                    <constraint firstItem="N0h-ev-puy" firstAttribute="leading" secondItem="b1b-vE-Dxm" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="tBm-4H-CFh"/>
+                                </constraints>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MenuImageCell" id="QCx-gj-aTJ">
+                                <rect key="frame" x="0.0" y="72" width="320" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="pWi-bJ-f9z">
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="38" id="o4x-wy-8os"/>
+                                                <constraint firstAttribute="width" constant="220" id="wzO-tZ-OCs"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="pWi-bJ-f9z" firstAttribute="leading" secondItem="QCx-gj-aTJ" secondAttribute="leading" constant="20" type="default" id="9n9-H7-H4t"/>
+                                    <constraint firstItem="pWi-bJ-f9z" firstAttribute="centerY" secondItem="QCx-gj-aTJ" secondAttribute="centerY" type="default" id="onQ-8E-F18"/>
+                                </constraints>
                             </tableViewCell>
                         </prototypes>
-                        <sections/>
                         <connections>
-                            <outlet property="dataSource" destination="cae-g1-DMN" id="vgZ-OI-hls"/>
-                            <outlet property="delegate" destination="cae-g1-DMN" id="qYH-zj-us1"/>
+                            <outlet property="dataSource" destination="af9-NP-x63" id="jGJ-ar-qf4"/>
+                            <outlet property="delegate" destination="af9-NP-x63" id="3P6-h4-Vly"/>
                         </connections>
                     </tableView>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wfh-Cd-l79" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AYP-96-cFi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="477" y="-415"/>
+            <point key="canvasLocation" x="477" y="-433"/>
         </scene>
         <!--Shader View Controller-->
         <scene sceneID="wiQ-vm-Xd5">
@@ -86,18 +118,15 @@
                             <view opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VXV-Ug-aJL" userLabel="Overlay View">
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Shader Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="17" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G9l-zd-aJr">
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="34"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="34"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                         <color key="shadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <size key="shadowOffset" width="1" height="1"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Joe Shader" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="Y5c-rK-61M">
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="jQx-Sv-zuo"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="24"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="24"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                         <color key="shadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <size key="shadowOffset" width="1" height="1"/>
@@ -106,22 +135,21 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="rWB-nh-VPu"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="18"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                         <color key="shadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <size key="shadowOffset" width="1" height="1"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nbz-ja-YJx">
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="44" id="8Nc-yD-sEX"/>
+                                            <constraint firstAttribute="width" constant="44" id="A2E-hZ-qao"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="15"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                                         <inset key="contentEdgeInsets" minX="0.0" minY="-3" maxX="0.0" maxY="0.0"/>
-                                        <size key="titleShadowOffset" width="1" height="1"/>
-                                        <state key="normal" title="2" backgroundImage="favorite-3-icon.png">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="2" backgroundImage="love.png">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </state>
                                         <state key="highlighted">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -132,12 +160,12 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Izc-4r-wnW">
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="44" id="8yQ-gB-qJC"/>
-                                            <constraint firstAttribute="height" constant="44" id="Gwq-sU-2uh"/>
+                                            <constraint firstAttribute="height" constant="44" id="Ia6-tM-Y5d"/>
+                                            <constraint firstAttribute="width" constant="44" id="g0C-0K-IJ7"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <size key="titleShadowOffset" width="1" height="1"/>
-                                        <state key="normal" backgroundImage="share-4-icon.png">
+                                        <state key="normal" backgroundImage="share.png">
                                             <color key="titleShadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <state key="highlighted">
@@ -151,7 +179,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="b9U-RY-oen"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="18"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                         <color key="shadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -160,17 +188,17 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="0.5" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Y5c-rK-61M" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="3Uf-7n-i2C"/>
                                     <constraint firstItem="G9l-zd-aJr" firstAttribute="top" secondItem="VXV-Ug-aJL" secondAttribute="top" constant="20" symbolic="YES" type="default" id="Ajb-vA-qxS"/>
                                     <constraint firstItem="Nbz-ja-YJx" firstAttribute="top" secondItem="97n-Ci-gTY" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="B4f-G9-4bU"/>
                                     <constraint firstItem="97n-Ci-gTY" firstAttribute="trailing" secondItem="1Me-Tt-X9K" secondAttribute="trailing" type="default" id="FUN-9a-1bn"/>
                                     <constraint firstItem="Izc-4r-wnW" firstAttribute="top" secondItem="97n-Ci-gTY" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="GjN-e9-cn2"/>
                                     <constraint firstAttribute="trailing" secondItem="G9l-zd-aJr" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="HqO-yh-sKh"/>
+                                    <constraint firstItem="Y5c-rK-61M" firstAttribute="leading" secondItem="VXV-Ug-aJL" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="KtP-8r-hTl"/>
                                     <constraint firstAttribute="height" constant="270" id="MeU-f5-zpk"/>
-                                    <constraint firstItem="Y5c-rK-61M" firstAttribute="trailing" secondItem="G9l-zd-aJr" secondAttribute="trailing" type="default" id="R6S-8V-rCZ"/>
                                     <constraint firstItem="1Me-Tt-X9K" firstAttribute="top" secondItem="VXV-Ug-aJL" secondAttribute="top" constant="208" id="Ww5-OX-6Of"/>
-                                    <constraint firstItem="Y5c-rK-61M" firstAttribute="leading" secondItem="G9l-zd-aJr" secondAttribute="leading" type="default" id="aeB-H4-Cwz"/>
-                                    <constraint firstItem="Izc-4r-wnW" firstAttribute="bottom" secondItem="Nbz-ja-YJx" secondAttribute="bottom" type="default" id="al0-MJ-Eec"/>
                                     <constraint firstItem="Y5c-rK-61M" firstAttribute="top" secondItem="G9l-zd-aJr" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="aqe-53-2NI"/>
+                                    <constraint firstItem="Nbz-ja-YJx" firstAttribute="bottom" secondItem="Izc-4r-wnW" secondAttribute="bottom" type="default" id="bao-NR-fHL"/>
                                     <constraint firstItem="Izc-4r-wnW" firstAttribute="leading" secondItem="VXV-Ug-aJL" secondAttribute="leading" constant="112" id="ceC-xe-0nv"/>
                                     <constraint firstItem="G9l-zd-aJr" firstAttribute="leading" secondItem="VXV-Ug-aJL" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="fcy-7e-EOH"/>
                                     <constraint firstItem="Y5c-rK-61M" firstAttribute="trailing" secondItem="97n-Ci-gTY" secondAttribute="trailing" type="default" id="lL0-05-oA5"/>
@@ -219,9 +247,50 @@
         </scene>
     </scenes>
     <resources>
-        <image name="favorite-3-icon.png" width="512" height="512"/>
-        <image name="share-4-icon.png" width="512" height="512"/>
+        <image name="love.png" width="88" height="88"/>
+        <image name="share.png" width="88" height="88"/>
     </resources>
+    <classes>
+        <class className="GalleryViewController" superclassName="UIPageViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GalleryViewController.h"/>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="SWRevealViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SWRevealViewController.h"/>
+        </class>
+        <class className="ShaderInfoViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ShaderInfoViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="like:"/>
+                <relationship kind="action" name="share:"/>
+                <relationship kind="outlet" name="authorLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="descriptionLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="likeButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="nameLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="overlayView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="shareButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="tagsLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="ShaderMenuViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ShaderMenuViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="menuDelegate"/>
+            </relationships>
+        </class>
+        <class className="ShaderView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ShaderView.h"/>
+        </class>
+        <class className="ShaderViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ShaderViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="toggleMenu:"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

@@ -11,6 +11,9 @@
 
 @interface ShaderMenuViewController ()
 
+- (void)setIndexPath:(NSIndexPath *)indexPath selected:(BOOL)selected;
+- (UIImage *)imageForIndexPath:(NSIndexPath *)indexPath selected:(BOOL)selected;
+
 @end
 
 @implementation ShaderMenuViewController
@@ -28,20 +31,55 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background.png"]];
+    self.view.backgroundColor = [UIColor colorWithWhite:0.2f alpha:1.0f];
+    self.tableView.backgroundColor = [UIColor colorWithWhite:0.2f alpha:1.0f];
+    
+    _previousIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
 }
 
-- (void)didReceiveMemoryWarning
+- (void)setIndexPath:(NSIndexPath *)indexPath selected:(BOOL)selected
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    UITableViewCell* cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    UIImageView* imageView = (UIImageView *)[cell viewWithTag:100];
+    UILabel* textLabel = (UILabel *)[cell viewWithTag:101];
+    
+    if (selected)
+    {
+        textLabel.textColor = [UIColor colorWithRed:0 green:0.6823 blue:1.0 alpha:1.0];
+    }
+    else
+    {
+        textLabel.textColor = [UIColor lightGrayColor];
+    }
+    
+    imageView.image = [self imageForIndexPath:indexPath selected:selected];
+}
+
+- (UIImage *)imageForIndexPath:(NSIndexPath *)indexPath selected:(BOOL)selected
+{
+    UIImage *image = nil;
+    
+    switch (indexPath.row)
+    {
+        case 0:
+            image = [UIImage imageNamed:(selected ? @"time_selected.png" : @"time.png")];
+            break;
+            
+        case 1:
+            image = [UIImage imageNamed:(selected ? @"fire_selected.png" : @"fire.png")];
+            break;
+            
+        case 2:
+            image = [UIImage imageNamed:(selected ? @"love_hollow_selected.png" : @"love_hollow.png")];
+            break;
+            
+        case 4:
+            image = [UIImage imageNamed:@"logo-text.png"];
+            break;
+    }
+    
+    return image;
 }
 
 #pragma mark - Table view data source
@@ -60,7 +98,7 @@
     switch (section)
     {
         case 0:
-            cells = 3;
+            cells = 5;
             break;
             
         case 1:
@@ -71,52 +109,67 @@
     return cells;
 }
 
-//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-//{
-//    NSString* name = nil;
-//    switch (section)
-//    {
-//        case 0:
-//            name = @"Shaders";
-//            break;
-//            
-//        case 1:
-//            name = @"Favorites";
-//            break;
-//    }
-//    
-//    return name;
-//}
-
-//- (UIView* )tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-//{
-//    KGNoiseView* view = [KGNoiseView new];
-//    
-//    return view;
-//}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"ShaderMenuCell";
-    ShaderMenuCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    UITableViewCell *cell = nil;
+    UIImageView* imageView = nil;
+    UILabel* textLabel = nil;
     
     if (indexPath.section == 0)
     {
         switch (indexPath.row)
         {
             case 0:
-                cell.textLabel.text = @"Newest";
-                cell.imageView.image = [UIImage imageNamed:@"danger-8-icon"];
+                cell = [tableView dequeueReusableCellWithIdentifier:@"MenuBasicCell" forIndexPath:indexPath];
+                cell.userInteractionEnabled = TRUE;
+                imageView = (UIImageView *)[cell viewWithTag:100];
+                textLabel = (UILabel *)[cell viewWithTag:101];
+                
+                imageView.image = [self imageForIndexPath:indexPath selected:TRUE];
+                
+                textLabel.text = @"Newest";
+                textLabel.textColor = [UIColor colorWithRed:0 green:0.6823 blue:1.0 alpha:1.0];
+                
                 break;
                 
             case 1:
-                cell.textLabel.text = @"Popular";
-                cell.imageView.image = [UIImage imageNamed:@"dashboard-5-icon"];
+                cell = [tableView dequeueReusableCellWithIdentifier:@"MenuBasicCell" forIndexPath:indexPath];
+                cell.userInteractionEnabled = TRUE;
+                imageView = (UIImageView *)[cell viewWithTag:100];
+                textLabel = (UILabel *)[cell viewWithTag:101];
+                
+                imageView.image = [self imageForIndexPath:indexPath selected:FALSE];
+                textLabel.text = @"Popular";
+                
                 break;
                 
             case 2:
-                cell.textLabel.text = @"Loved";
-                cell.imageView.image = [UIImage imageNamed:@"favorite-3-icon"];
+                cell = [tableView dequeueReusableCellWithIdentifier:@"MenuBasicCell" forIndexPath:indexPath];
+                cell.userInteractionEnabled = TRUE;
+                imageView = (UIImageView *)[cell viewWithTag:100];
+                textLabel = (UILabel *)[cell viewWithTag:101];
+                
+                imageView.image = [self imageForIndexPath:indexPath selected:FALSE];
+                textLabel.text = @"Loved";
+                
+                break;
+                
+            case 3:
+                cell = [tableView dequeueReusableCellWithIdentifier:@"MenuBasicCell" forIndexPath:indexPath];
+                cell.userInteractionEnabled = FALSE;
+                textLabel = (UILabel *)[cell viewWithTag:101];
+                
+                textLabel.text = @"";
+                
+                break;
+                
+            case 4:
+                cell = [tableView dequeueReusableCellWithIdentifier:@"MenuImageCell" forIndexPath:indexPath];
+                cell.userInteractionEnabled = FALSE;
+                imageView = (UIImageView *)[cell viewWithTag:100];
+                
+                imageView.image = [self imageForIndexPath:indexPath selected:FALSE];
+                
                 break;
                 
             default:
@@ -127,50 +180,9 @@
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-#pragma mark - Table view delegate
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0)
+    if (indexPath.section == 0 && indexPath.row < 3)
     {
         NSString *category = nil;
 
@@ -189,11 +201,22 @@
                 break;
         }
         
+        [self setIndexPath:_previousIndexPath selected:FALSE];
+        [self setIndexPath:indexPath selected:TRUE];
+        
+        _previousIndexPath = indexPath;
+        
         [self.delegate shaderMenu:self choseShaderCategory:category];
     }
     
+    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self.revealViewController revealToggleAnimated:YES];
+}
+
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return (indexPath.row < 3) ? indexPath : nil;
 }
 
 @end

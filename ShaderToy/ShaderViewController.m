@@ -68,7 +68,7 @@
     //[self.view addSubview:_infoViewController.view];
     
     _menuButton = [[UIButton alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 30.0f, 30.0f)];
-    [_menuButton setImage:[UIImage imageNamed:@"list-view-icon.png"] forState:UIControlStateNormal];
+    [_menuButton setImage:[UIImage imageNamed:@"menu.png"] forState:UIControlStateNormal];
     [_menuButton addTarget:self action:@selector(toggleMenu:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_menuButton];
 }

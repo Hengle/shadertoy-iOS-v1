@@ -133,7 +133,7 @@
         for (ShaderRenderPass* renderpass in shader.renderpasses)
         {
             program = [self compileShaderCode:[self prepareRenderPassCode:renderpass]];
-            [self storeShader:program withName:[NSString stringWithFormat:@"%@_%@", shader.ID, renderpass.name]];
+            [self storeShader:program withName:shader.ID];
 
             NSLog(@"Created program %u for shader %@, renderpass %@", program, shader.name, renderpass.name);
         }

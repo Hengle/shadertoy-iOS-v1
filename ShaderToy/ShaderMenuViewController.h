@@ -17,7 +17,10 @@
 @end
 
 @interface ShaderMenuViewController : UITableViewController
+{
+    NSIndexPath* _previousIndexPath;
+}
 
-@property (nonatomic, retain) id<ShaderMenuDelegate> delegate;
+@property (nonatomic, assign) id<ShaderMenuDelegate> delegate;
 
 @end

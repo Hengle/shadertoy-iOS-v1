@@ -10,4 +10,7 @@
 
 @interface ShaderMenuCell : UITableViewCell
 
+@property (strong, nonatomic) IBOutlet UIImageView *icon;
+@property (strong, nonatomic) IBOutlet UILabel *label;
+
 @end
