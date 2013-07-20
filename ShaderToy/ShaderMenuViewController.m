@@ -9,6 +9,9 @@
 #import "ShaderMenuViewController.h"
 #import "ShaderMenuCell.h"
 
+#define NormalColor [UIColor lightGrayColor]
+#define SelectedColor [UIColor colorWithRed:1.0 green:0.502 blue:0.125 alpha:1.0]
+
 @interface ShaderMenuViewController ()
 
 - (void)setIndexPath:(NSIndexPath *)indexPath selected:(BOOL)selected;
@@ -46,11 +49,11 @@
     
     if (selected)
     {
-        textLabel.textColor = [UIColor colorWithRed:0 green:0.6823 blue:1.0 alpha:1.0];
+        textLabel.textColor = SelectedColor;
     }
     else
     {
-        textLabel.textColor = [UIColor lightGrayColor];
+        textLabel.textColor = NormalColor;
     }
     
     imageView.image = [self imageForIndexPath:indexPath selected:selected];
@@ -128,7 +131,7 @@
                 imageView.image = [self imageForIndexPath:indexPath selected:TRUE];
                 
                 textLabel.text = @"Newest";
-                textLabel.textColor = [UIColor colorWithRed:0 green:0.6823 blue:1.0 alpha:1.0];
+                textLabel.textColor = SelectedColor;
                 
                 break;
                 
@@ -140,6 +143,7 @@
                 
                 imageView.image = [self imageForIndexPath:indexPath selected:FALSE];
                 textLabel.text = @"Popular";
+                textLabel.textColor = NormalColor;
                 
                 break;
                 
@@ -151,6 +155,7 @@
                 
                 imageView.image = [self imageForIndexPath:indexPath selected:FALSE];
                 textLabel.text = @"Loved";
+                textLabel.textColor = NormalColor;
                 
                 break;
                 
@@ -160,6 +165,7 @@
                 textLabel = (UILabel *)[cell viewWithTag:101];
                 
                 textLabel.text = @"";
+                textLabel.textColor = NormalColor;
                 
                 break;
                 

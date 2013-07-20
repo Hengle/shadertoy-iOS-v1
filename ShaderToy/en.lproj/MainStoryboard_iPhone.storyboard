@@ -130,7 +130,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nbz-ja-YJx">
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="44" id="A2E-hZ-qao"/>
+                                    <constraint firstAttribute="width" constant="44" id="XlN-go-j13"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                                 <inset key="contentEdgeInsets" minX="0.0" minY="-3" maxX="0.0" maxY="0.0"/>
@@ -147,8 +147,8 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Izc-4r-wnW">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="Ia6-tM-Y5d"/>
-                                    <constraint firstAttribute="width" constant="44" id="g0C-0K-IJ7"/>
+                                    <constraint firstAttribute="height" constant="44" id="MPf-oj-lju"/>
+                                    <constraint firstAttribute="width" constant="44" id="Ved-AK-82h"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <size key="titleShadowOffset" width="1" height="1"/>
@@ -166,16 +166,16 @@
                         <color key="backgroundColor" white="1" alpha="0.5" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Y5c-rK-61M" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="3Uf-7n-i2C"/>
-                            <constraint firstItem="G9l-zd-aJr" firstAttribute="top" secondItem="VXV-Ug-aJL" secondAttribute="top" constant="20" symbolic="YES" type="default" id="F67-od-NSg"/>
+                            <constraint firstItem="Nbz-ja-YJx" firstAttribute="top" secondItem="Izc-4r-wnW" secondAttribute="top" type="default" id="4bk-KX-A8V"/>
+                            <constraint firstItem="G9l-zd-aJr" firstAttribute="top" secondItem="VXV-Ug-aJL" secondAttribute="top" type="default" id="7FH-yE-WeG"/>
                             <constraint firstAttribute="trailing" secondItem="G9l-zd-aJr" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="HqO-yh-sKh"/>
                             <constraint firstItem="Y5c-rK-61M" firstAttribute="leading" secondItem="VXV-Ug-aJL" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="KtP-8r-hTl"/>
-                            <constraint firstItem="Izc-4r-wnW" firstAttribute="top" secondItem="Nbz-ja-YJx" secondAttribute="top" type="default" id="PoX-Lf-VW2"/>
-                            <constraint firstAttribute="bottom" secondItem="Izc-4r-wnW" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="Q1c-3A-e0K"/>
+                            <constraint firstItem="Nbz-ja-YJx" firstAttribute="bottom" secondItem="Izc-4r-wnW" secondAttribute="bottom" type="default" id="LNy-nM-hTc"/>
+                            <constraint firstAttribute="bottom" secondItem="Nbz-ja-YJx" secondAttribute="bottom" constant="11" id="bgs-vD-u9o"/>
                             <constraint firstItem="Izc-4r-wnW" firstAttribute="leading" secondItem="VXV-Ug-aJL" secondAttribute="leading" constant="112" id="ceC-xe-0nv"/>
                             <constraint firstItem="G9l-zd-aJr" firstAttribute="leading" secondItem="VXV-Ug-aJL" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="fcy-7e-EOH"/>
-                            <constraint firstItem="Y5c-rK-61M" firstAttribute="top" secondItem="G9l-zd-aJr" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="ji0-bD-847"/>
-                            <constraint firstAttribute="bottom" secondItem="Nbz-ja-YJx" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="vs4-Sf-N6s"/>
                             <constraint firstItem="Nbz-ja-YJx" firstAttribute="leading" secondItem="Izc-4r-wnW" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="xSz-Vj-XEU"/>
+                            <constraint firstItem="Y5c-rK-61M" firstAttribute="top" secondItem="G9l-zd-aJr" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="zmF-Ha-Hvp"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>

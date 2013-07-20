@@ -72,7 +72,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rlb-Lr-wUu">
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="44" id="lE4-7O-cj6"/>
+                                    <constraint firstAttribute="width" constant="44" id="0ss-aN-Nbw"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                                 <inset key="contentEdgeInsets" minX="0.0" minY="-3" maxX="0.0" maxY="0.0"/>
@@ -89,8 +89,8 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5DQ-9r-kKQ">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="hCT-iV-eam"/>
-                                    <constraint firstAttribute="width" constant="44" id="rTb-Oc-4pb"/>
+                                    <constraint firstAttribute="height" constant="44" id="fQC-2G-dDu"/>
+                                    <constraint firstAttribute="width" constant="44" id="uwf-DW-3fy"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <size key="titleShadowOffset" width="1" height="1"/>
@@ -108,15 +108,15 @@
                         <color key="backgroundColor" white="1" alpha="0.5" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="mhN-2h-Hq7" firstAttribute="trailing" secondItem="iVc-s5-cEQ" secondAttribute="trailing" type="default" id="3re-kr-wKq"/>
-                            <constraint firstItem="5DQ-9r-kKQ" firstAttribute="top" secondItem="Rlb-Lr-wUu" secondAttribute="top" type="default" id="66y-VS-rDG"/>
                             <constraint firstItem="iVc-s5-cEQ" firstAttribute="leading" secondItem="mhN-2h-Hq7" secondAttribute="leading" type="default" id="B0x-v1-Fh9"/>
+                            <constraint firstItem="iVc-s5-cEQ" firstAttribute="top" secondItem="g0P-EU-V7F" secondAttribute="top" type="default" id="Bji-uQ-WaH"/>
                             <constraint firstItem="5DQ-9r-kKQ" firstAttribute="leading" secondItem="g0P-EU-V7F" secondAttribute="leading" constant="336" id="Ikm-wS-ULI"/>
-                            <constraint firstAttribute="bottom" secondItem="Rlb-Lr-wUu" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="KFg-qh-ohf"/>
-                            <constraint firstItem="mhN-2h-Hq7" firstAttribute="top" secondItem="iVc-s5-cEQ" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="KJU-Pe-b1Z"/>
+                            <constraint firstAttribute="bottom" secondItem="5DQ-9r-kKQ" secondAttribute="bottom" constant="11" id="SaG-Ex-WED"/>
+                            <constraint firstItem="5DQ-9r-kKQ" firstAttribute="bottom" secondItem="Rlb-Lr-wUu" secondAttribute="bottom" type="default" id="h3z-nS-MCl"/>
                             <constraint firstItem="Rlb-Lr-wUu" firstAttribute="leading" secondItem="5DQ-9r-kKQ" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="iLp-i8-WUA"/>
-                            <constraint firstAttribute="bottom" secondItem="5DQ-9r-kKQ" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="rAd-Ja-ltK"/>
+                            <constraint firstItem="mhN-2h-Hq7" firstAttribute="top" secondItem="iVc-s5-cEQ" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="kez-vY-0OI"/>
+                            <constraint firstItem="5DQ-9r-kKQ" firstAttribute="top" secondItem="Rlb-Lr-wUu" secondAttribute="top" type="default" id="oD2-yc-3r5"/>
                             <constraint firstItem="mhN-2h-Hq7" firstAttribute="centerX" secondItem="g0P-EU-V7F" secondAttribute="centerX" type="default" id="wDu-CR-0Vo"/>
-                            <constraint firstItem="iVc-s5-cEQ" firstAttribute="top" secondItem="g0P-EU-V7F" secondAttribute="top" constant="19" id="z9g-C1-FUa"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>

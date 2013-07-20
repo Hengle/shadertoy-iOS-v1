@@ -147,6 +147,9 @@
     // Set the shader information to the overlay
     _infoViewController.shaderInfo = self.currentShader;
     
+    // For bookkeeping purposes
+    _renderThread.name = self.currentShader.name;
+    
     if (_planeObject)
     {
         [_planeObject useShader:_currentShader];
