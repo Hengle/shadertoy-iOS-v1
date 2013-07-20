@@ -16,7 +16,6 @@
 }
 
 @property (strong, nonatomic) ShaderInfo* shaderInfo;
-@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIView *overlayView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *authorLabel;

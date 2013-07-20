@@ -64,13 +64,21 @@
     _lastFrameTime = [NSDate date];
     _renderQueue = dispatch_queue_create("com.shadertoy.threadedgcdqueue", NULL);
     
-    //_infoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ShaderInfoOverlay"];
-    //[self.view addSubview:_infoViewController.view];
+    _infoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ShaderInfoOverlay"];
+    _infoViewController.view.frame = CGRectMake(0, self.view.frame.size.height - _infoViewController.view.frame.size.height, self.view.frame.size.width, _infoViewController.view.frame.size.height);
+    _infoViewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    [self.view addSubview:_infoViewController.view];
     
     _menuButton = [[UIButton alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 30.0f, 30.0f)];
     [_menuButton setImage:[UIImage imageNamed:@"menu.png"] forState:UIControlStateNormal];
     [_menuButton addTarget:self action:@selector(toggleMenu:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_menuButton];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    // Set the shader information to the overlay
+    _infoViewController.shaderInfo = self.currentShader;
 }
 
 - (void)dealloc
@@ -135,7 +143,9 @@
 - (void)setShader:(ShaderInfo *)shader
 {
     _currentShader = shader;
-    //_infoViewController.shaderInfo = shader;
+    
+    // Set the shader information to the overlay
+    _infoViewController.shaderInfo = self.currentShader;
     
     if (_planeObject)
     {
@@ -274,26 +284,6 @@
         
         glPopGroupMarkerEXT();
     }
-}
-
-static UIImage *CFIImageFromView(UIView *view)
-{
-	CGSize size = view.bounds.size;
-    
-    CGFloat scale = UIScreen.mainScreen.scale;
-    size.width *= scale;
-    size.height *= scale;
-    
-    UIGraphicsBeginImageContextWithOptions(size, NO, UIScreen.mainScreen.scale);
-    CGContextRef ctx = UIGraphicsGetCurrentContext();
-    CGContextScaleCTM(ctx, scale, scale);
-	
-    [view.layer renderInContext:ctx];
-    
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return image;
 }
 
 - (void)update

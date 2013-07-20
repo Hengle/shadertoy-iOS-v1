@@ -110,128 +110,87 @@
         <!--Shader Info View Controller - ShaderInfo-->
         <scene sceneID="Xh3-pf-7fx">
             <objects>
-                <viewController storyboardIdentifier="ShaderInfoOverlay" title="ShaderInfo" id="Gte-0y-9Xn" customClass="ShaderInfoViewController" sceneMemberID="viewController">
-                    <scrollView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="8No-9d-AIM">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <viewController storyboardIdentifier="ShaderInfoOverlay" autoresizesArchivedViewToFullSize="NO" title="ShaderInfo" id="Gte-0y-9Xn" customClass="ShaderInfoViewController" sceneMemberID="viewController">
+                    <view key="view" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" id="VXV-Ug-aJL" userLabel="Overlay View">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
                         <subviews>
-                            <view opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VXV-Ug-aJL" userLabel="Overlay View">
-                                <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Shader Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="17" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G9l-zd-aJr">
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="34"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                        <color key="shadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                        <size key="shadowOffset" width="1" height="1"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Joe Shader" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="Y5c-rK-61M">
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="24"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                        <color key="shadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                        <size key="shadowOffset" width="1" height="1"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="tags, tags, tags" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="97n-Ci-gTY">
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="rWB-nh-VPu"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                        <color key="shadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                        <size key="shadowOffset" width="1" height="1"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nbz-ja-YJx">
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="44" id="A2E-hZ-qao"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
-                                        <inset key="contentEdgeInsets" minX="0.0" minY="-3" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="2" backgroundImage="love.png">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="share:" destination="Gte-0y-9Xn" eventType="touchUpInside" id="MhQ-Et-EbS"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Izc-4r-wnW">
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="44" id="Ia6-tM-Y5d"/>
-                                            <constraint firstAttribute="width" constant="44" id="g0C-0K-IJ7"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <size key="titleShadowOffset" width="1" height="1"/>
-                                        <state key="normal" backgroundImage="share.png">
-                                            <color key="titleShadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="like:" destination="Gte-0y-9Xn" eventType="touchUpInside" id="CTq-WG-qgX"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Description" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="1Me-Tt-X9K">
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="b9U-RY-oen"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                        <color key="shadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                        <size key="shadowOffset" width="1" height="1"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="0.5" colorSpace="calibratedWhite"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Shader Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="17" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G9l-zd-aJr">
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="34"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <size key="shadowOffset" width="1" height="1"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Joe Shader" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="Y5c-rK-61M">
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="24"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <size key="shadowOffset" width="1" height="1"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nbz-ja-YJx">
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="Y5c-rK-61M" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="3Uf-7n-i2C"/>
-                                    <constraint firstItem="G9l-zd-aJr" firstAttribute="top" secondItem="VXV-Ug-aJL" secondAttribute="top" constant="20" symbolic="YES" type="default" id="Ajb-vA-qxS"/>
-                                    <constraint firstItem="Nbz-ja-YJx" firstAttribute="top" secondItem="97n-Ci-gTY" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="B4f-G9-4bU"/>
-                                    <constraint firstItem="97n-Ci-gTY" firstAttribute="trailing" secondItem="1Me-Tt-X9K" secondAttribute="trailing" type="default" id="FUN-9a-1bn"/>
-                                    <constraint firstItem="Izc-4r-wnW" firstAttribute="top" secondItem="97n-Ci-gTY" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="GjN-e9-cn2"/>
-                                    <constraint firstAttribute="trailing" secondItem="G9l-zd-aJr" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="HqO-yh-sKh"/>
-                                    <constraint firstItem="Y5c-rK-61M" firstAttribute="leading" secondItem="VXV-Ug-aJL" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="KtP-8r-hTl"/>
-                                    <constraint firstAttribute="height" constant="270" id="MeU-f5-zpk"/>
-                                    <constraint firstItem="1Me-Tt-X9K" firstAttribute="top" secondItem="VXV-Ug-aJL" secondAttribute="top" constant="208" id="Ww5-OX-6Of"/>
-                                    <constraint firstItem="Y5c-rK-61M" firstAttribute="top" secondItem="G9l-zd-aJr" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="aqe-53-2NI"/>
-                                    <constraint firstItem="Nbz-ja-YJx" firstAttribute="bottom" secondItem="Izc-4r-wnW" secondAttribute="bottom" type="default" id="bao-NR-fHL"/>
-                                    <constraint firstItem="Izc-4r-wnW" firstAttribute="leading" secondItem="VXV-Ug-aJL" secondAttribute="leading" constant="112" id="ceC-xe-0nv"/>
-                                    <constraint firstItem="G9l-zd-aJr" firstAttribute="leading" secondItem="VXV-Ug-aJL" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="fcy-7e-EOH"/>
-                                    <constraint firstItem="Y5c-rK-61M" firstAttribute="trailing" secondItem="97n-Ci-gTY" secondAttribute="trailing" type="default" id="lL0-05-oA5"/>
-                                    <constraint firstItem="97n-Ci-gTY" firstAttribute="top" secondItem="VXV-Ug-aJL" secondAttribute="top" constant="96" id="mG5-Ix-0GP"/>
-                                    <constraint firstItem="Y5c-rK-61M" firstAttribute="leading" secondItem="97n-Ci-gTY" secondAttribute="leading" type="default" id="t6e-NJ-VWO"/>
-                                    <constraint firstItem="97n-Ci-gTY" firstAttribute="leading" secondItem="1Me-Tt-X9K" secondAttribute="leading" type="default" id="wZ4-au-Xyl"/>
-                                    <constraint firstItem="Nbz-ja-YJx" firstAttribute="leading" secondItem="Izc-4r-wnW" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="xSz-Vj-XEU"/>
+                                    <constraint firstAttribute="width" constant="44" id="A2E-hZ-qao"/>
                                 </constraints>
-                            </view>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                                <inset key="contentEdgeInsets" minX="0.0" minY="-3" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="2" backgroundImage="love.png">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="share:" destination="Gte-0y-9Xn" eventType="touchUpInside" id="MhQ-Et-EbS"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Izc-4r-wnW">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="Ia6-tM-Y5d"/>
+                                    <constraint firstAttribute="width" constant="44" id="g0C-0K-IJ7"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <size key="titleShadowOffset" width="1" height="1"/>
+                                <state key="normal" backgroundImage="share.png">
+                                    <color key="titleShadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="like:" destination="Gte-0y-9Xn" eventType="touchUpInside" id="CTq-WG-qgX"/>
+                                </connections>
+                            </button>
                         </subviews>
+                        <color key="backgroundColor" white="1" alpha="0.5" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="VXV-Ug-aJL" firstAttribute="top" secondItem="8No-9d-AIM" secondAttribute="top" type="default" id="BxW-1O-b4j"/>
-                            <constraint firstItem="VXV-Ug-aJL" firstAttribute="leading" secondItem="8No-9d-AIM" secondAttribute="leading" type="default" id="Zq2-WD-8kB"/>
-                            <constraint firstItem="VXV-Ug-aJL" firstAttribute="centerX" secondItem="8No-9d-AIM" secondAttribute="centerX" type="default" id="gsc-Yt-J6W"/>
-                            <constraint firstAttribute="bottom" secondItem="VXV-Ug-aJL" secondAttribute="bottom" constant="298" id="k9L-to-lVX"/>
-                            <constraint firstItem="VXV-Ug-aJL" firstAttribute="trailing" secondItem="8No-9d-AIM" secondAttribute="trailing" type="default" id="oCk-6c-EeM"/>
+                            <constraint firstAttribute="trailing" secondItem="Y5c-rK-61M" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="3Uf-7n-i2C"/>
+                            <constraint firstItem="G9l-zd-aJr" firstAttribute="top" secondItem="VXV-Ug-aJL" secondAttribute="top" constant="20" symbolic="YES" type="default" id="F67-od-NSg"/>
+                            <constraint firstAttribute="trailing" secondItem="G9l-zd-aJr" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="HqO-yh-sKh"/>
+                            <constraint firstItem="Y5c-rK-61M" firstAttribute="leading" secondItem="VXV-Ug-aJL" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="KtP-8r-hTl"/>
+                            <constraint firstItem="Izc-4r-wnW" firstAttribute="top" secondItem="Nbz-ja-YJx" secondAttribute="top" type="default" id="PoX-Lf-VW2"/>
+                            <constraint firstAttribute="bottom" secondItem="Izc-4r-wnW" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="Q1c-3A-e0K"/>
+                            <constraint firstItem="Izc-4r-wnW" firstAttribute="leading" secondItem="VXV-Ug-aJL" secondAttribute="leading" constant="112" id="ceC-xe-0nv"/>
+                            <constraint firstItem="G9l-zd-aJr" firstAttribute="leading" secondItem="VXV-Ug-aJL" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="fcy-7e-EOH"/>
+                            <constraint firstItem="Y5c-rK-61M" firstAttribute="top" secondItem="G9l-zd-aJr" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="ji0-bD-847"/>
+                            <constraint firstAttribute="bottom" secondItem="Nbz-ja-YJx" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="vs4-Sf-N6s"/>
+                            <constraint firstItem="Nbz-ja-YJx" firstAttribute="leading" secondItem="Izc-4r-wnW" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="xSz-Vj-XEU"/>
                         </constraints>
-                    </scrollView>
+                    </view>
                     <nil key="simulatedStatusBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="authorLabel" destination="Y5c-rK-61M" id="8fa-Vs-Rwt"/>
-                        <outlet property="descriptionLabel" destination="1Me-Tt-X9K" id="J1B-MX-0Xf"/>
                         <outlet property="likeButton" destination="Nbz-ja-YJx" id="wd4-Y3-nJo"/>
                         <outlet property="nameLabel" destination="G9l-zd-aJr" id="V1M-2w-vsd"/>
                         <outlet property="overlayView" destination="VXV-Ug-aJL" id="oNL-iZ-T2z"/>
-                        <outlet property="scrollView" destination="8No-9d-AIM" id="lO6-GE-xQk"/>
                         <outlet property="shareButton" destination="Izc-4r-wnW" id="FIs-GM-p4S"/>
-                        <outlet property="tagsLabel" destination="97n-Ci-gTY" id="Vqw-BK-7mm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6kp-CS-Hc7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1275" y="285"/>
+            <point key="canvasLocation" x="1274" y="285"/>
         </scene>
         <!--Gallery View Controller-->
         <scene sceneID="dvl-tb-0Z8">
@@ -270,16 +229,12 @@
                 <relationship kind="outlet" name="likeButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="nameLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="overlayView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="shareButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="tagsLabel" candidateClass="UILabel"/>
             </relationships>
         </class>
         <class className="ShaderMenuViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ShaderMenuViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="menuDelegate"/>
-            </relationships>
         </class>
         <class className="ShaderView" superclassName="UIView">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ShaderView.h"/>

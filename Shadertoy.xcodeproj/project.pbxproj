@@ -34,8 +34,6 @@
 		AE933D6317370EE0009EAF41 /* cellbg.png in Resources */ = {isa = PBXBuildFile; fileRef = AE933D6217370EE0009EAF41 /* cellbg.png */; };
 		AE933D6F173A3AE6009EAF41 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE933D6E173A3AE6009EAF41 /* QuartzCore.framework */; };
 		AE933D71173A4B6E009EAF41 /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = AE933D581736F601009EAF41 /* Shader.vsh */; };
-		AE970B6C178F22B500DD17F3 /* DKLiveBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE970B6B178F22B500DD17F3 /* DKLiveBlurView.m */; };
-		AE970B6F178F250500DD17F3 /* DKMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE970B6E178F250500DD17F3 /* DKMainViewController.m */; };
 		AE970B71178F258C00DD17F3 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE970B70178F258C00DD17F3 /* Accelerate.framework */; };
 		AEA3B5401730E6C700786DA2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEA3B53F1730E6C700786DA2 /* UIKit.framework */; };
 		AEA3B5421730E6C700786DA2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEA3B5411730E6C700786DA2 /* Foundation.framework */; };
@@ -99,10 +97,6 @@
 		AE933D601736F731009EAF41 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		AE933D6217370EE0009EAF41 /* cellbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cellbg.png; sourceTree = "<group>"; };
 		AE933D6E173A3AE6009EAF41 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		AE970B6A178F22B500DD17F3 /* DKLiveBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKLiveBlurView.h; sourceTree = "<group>"; };
-		AE970B6B178F22B500DD17F3 /* DKLiveBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKLiveBlurView.m; sourceTree = "<group>"; };
-		AE970B6D178F250500DD17F3 /* DKMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKMainViewController.h; sourceTree = "<group>"; };
-		AE970B6E178F250500DD17F3 /* DKMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKMainViewController.m; sourceTree = "<group>"; };
 		AE970B70178F258C00DD17F3 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		AEA3B53C1730E6C700786DA2 /* Shadertoy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shadertoy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEA3B53F1730E6C700786DA2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -200,17 +194,6 @@
 				AE85EAC817933DEE0090DC1F /* ShaderInfoViewController.m */,
 			);
 			name = Overlay;
-			sourceTree = "<group>";
-		};
-		AE970B69178F227F00DD17F3 /* DKLiveBlur */ = {
-			isa = PBXGroup;
-			children = (
-				AE970B6A178F22B500DD17F3 /* DKLiveBlurView.h */,
-				AE970B6B178F22B500DD17F3 /* DKLiveBlurView.m */,
-				AE970B6D178F250500DD17F3 /* DKMainViewController.h */,
-				AE970B6E178F250500DD17F3 /* DKMainViewController.m */,
-			);
-			name = DKLiveBlur;
 			sourceTree = "<group>";
 		};
 		AEA3B5331730E6C700786DA2 = {
@@ -311,7 +294,6 @@
 		AEA3B58B1736E7C500786DA2 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				AE970B69178F227F00DD17F3 /* DKLiveBlur */,
 				AEBC4157177305D40024D73C /* SWRevealViewController */,
 			);
 			name = Components;
@@ -473,8 +455,6 @@
 				AEAE17F5174B637000764D5B /* Plane.m in Sources */,
 				AEB028281753F26100757AF8 /* ShaderView.m in Sources */,
 				AEBF32B4176457EB00DEEF71 /* ShaderManager.m in Sources */,
-				AE970B6C178F22B500DD17F3 /* DKLiveBlurView.m in Sources */,
-				AE970B6F178F250500DD17F3 /* DKMainViewController.m in Sources */,
 				AE85EACA17933DEE0090DC1F /* ShaderInfoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

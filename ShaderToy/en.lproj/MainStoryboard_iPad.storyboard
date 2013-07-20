@@ -45,6 +45,94 @@
             </objects>
             <point key="canvasLocation" x="2350" y="707"/>
         </scene>
+        <!--Shader Info View Controller - ShaderInfoOverlay-->
+        <scene sceneID="P55-ar-xpT">
+            <objects>
+                <viewController storyboardIdentifier="ShaderInfoOverlay" autoresizesArchivedViewToFullSize="NO" title="ShaderInfoOverlay" id="ZWY-Bt-baC" customClass="ShaderInfoViewController" sceneMemberID="viewController">
+                    <view key="view" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" id="g0P-EU-V7F">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="180"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Shader Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="17" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iVc-s5-cEQ">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="280" id="o4J-si-xJl"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="34"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <size key="shadowOffset" width="1" height="1"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Joe Shader" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="mhN-2h-Hq7">
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="24"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <size key="shadowOffset" width="1" height="1"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rlb-Lr-wUu">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="lE4-7O-cj6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                                <inset key="contentEdgeInsets" minX="0.0" minY="-3" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="2" backgroundImage="love.png">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="like:" destination="ZWY-Bt-baC" eventType="touchUpInside" id="i0E-lJ-sTQ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5DQ-9r-kKQ">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="hCT-iV-eam"/>
+                                    <constraint firstAttribute="width" constant="44" id="rTb-Oc-4pb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <size key="titleShadowOffset" width="1" height="1"/>
+                                <state key="normal" backgroundImage="share.png">
+                                    <color key="titleShadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="share:" destination="ZWY-Bt-baC" eventType="touchUpInside" id="gJP-ZT-VaP"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="0.5" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="mhN-2h-Hq7" firstAttribute="trailing" secondItem="iVc-s5-cEQ" secondAttribute="trailing" type="default" id="3re-kr-wKq"/>
+                            <constraint firstItem="5DQ-9r-kKQ" firstAttribute="top" secondItem="Rlb-Lr-wUu" secondAttribute="top" type="default" id="66y-VS-rDG"/>
+                            <constraint firstItem="iVc-s5-cEQ" firstAttribute="leading" secondItem="mhN-2h-Hq7" secondAttribute="leading" type="default" id="B0x-v1-Fh9"/>
+                            <constraint firstItem="5DQ-9r-kKQ" firstAttribute="leading" secondItem="g0P-EU-V7F" secondAttribute="leading" constant="336" id="Ikm-wS-ULI"/>
+                            <constraint firstAttribute="bottom" secondItem="Rlb-Lr-wUu" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="KFg-qh-ohf"/>
+                            <constraint firstItem="mhN-2h-Hq7" firstAttribute="top" secondItem="iVc-s5-cEQ" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="KJU-Pe-b1Z"/>
+                            <constraint firstItem="Rlb-Lr-wUu" firstAttribute="leading" secondItem="5DQ-9r-kKQ" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="iLp-i8-WUA"/>
+                            <constraint firstAttribute="bottom" secondItem="5DQ-9r-kKQ" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="rAd-Ja-ltK"/>
+                            <constraint firstItem="mhN-2h-Hq7" firstAttribute="centerX" secondItem="g0P-EU-V7F" secondAttribute="centerX" type="default" id="wDu-CR-0Vo"/>
+                            <constraint firstItem="iVc-s5-cEQ" firstAttribute="top" secondItem="g0P-EU-V7F" secondAttribute="top" constant="19" id="z9g-C1-FUa"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="authorLabel" destination="mhN-2h-Hq7" id="wVh-Qz-yK2"/>
+                        <outlet property="likeButton" destination="Rlb-Lr-wUu" id="4kh-Ss-taA"/>
+                        <outlet property="nameLabel" destination="iVc-s5-cEQ" id="aY9-v9-RJe"/>
+                        <outlet property="overlayView" destination="g0P-EU-V7F" id="6Ve-n1-7yj"/>
+                        <outlet property="shareButton" destination="5DQ-9r-kKQ" id="hjj-hB-aFh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0QU-1w-xhw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3296" y="707"/>
+        </scene>
         <!--Shader Menu View Controller-->
         <scene sceneID="2z8-E5-uPk">
             <objects>
@@ -120,6 +208,10 @@
             <point key="canvasLocation" x="1085" y="-657"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="love.png" width="88" height="88"/>
+        <image name="share.png" width="88" height="88"/>
+    </resources>
     <classes>
         <class className="GalleryViewController" superclassName="UIPageViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GalleryViewController.h"/>
@@ -129,6 +221,20 @@
         </class>
         <class className="SWRevealViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SWRevealViewController.h"/>
+        </class>
+        <class className="ShaderInfoViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ShaderInfoViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="like:"/>
+                <relationship kind="action" name="share:"/>
+                <relationship kind="outlet" name="authorLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="descriptionLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="likeButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="nameLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="overlayView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="shareButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="tagsLabel" candidateClass="UILabel"/>
+            </relationships>
         </class>
         <class className="ShaderMenuViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ShaderMenuViewController.h"/>

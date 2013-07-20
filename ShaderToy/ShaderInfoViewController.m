@@ -17,16 +17,6 @@
 
 @implementation ShaderInfoViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self)
-    {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -46,7 +36,6 @@
     //self.tableView.contentInset = UIEdgeInsetsMake(kDKTableViewDefaultContentInset, 0, 0, 0);
     //self.scrollView.contentOffset = CGPointMake(0.0f, -300.0f);
     //self.scrollView.contentInset = UIEdgeInsetsMake(100.0f, 0.0f, 0.0f, 0.0f);
-    [self.scrollView setContentOffset:CGPointMake(0.0f, self.scrollView.contentSize.height - self.scrollView.bounds.size.height)];
     
     //[self.view addSubview: self.tableView];
 }
