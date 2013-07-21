@@ -122,6 +122,10 @@
                 {
                     glActiveTexture(GL_TEXTURE0 + i);
                     glBindTexture(GL_TEXTURE_2D, params.channelInfo[i]);
+                    
+                    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+                    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+                    
                     glUniform1i(_channelUniform[i], i);
                     
                     //NSLog(@"Binding texture %d to slot %d, uniform %d to unit %d", params.channelInfo[i], GL_TEXTURE0 + i, _channelUniform[i], i);
