@@ -28,6 +28,7 @@
 		AE5CABBC17992900000924C3 /* menu_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = AE5CABB617992900000924C3 /* menu_selected.png */; };
 		AE5CABBD17992900000924C3 /* share_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = AE5CABB717992900000924C3 /* share_selected.png */; };
 		AE5CABBE17992900000924C3 /* time_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = AE5CABB817992900000924C3 /* time_selected.png */; };
+		AE5CABC9179BD925000924C3 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5CABC8179BD925000924C3 /* SWRevealViewController.m */; };
 		AE85EACA17933DEE0090DC1F /* ShaderInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85EAC817933DEE0090DC1F /* ShaderInfoViewController.m */; };
 		AE933D5F1736F725009EAF41 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE933D5E1736F725009EAF41 /* OpenGLES.framework */; };
 		AE933D611736F731009EAF41 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE933D601736F731009EAF41 /* GLKit.framework */; };
@@ -51,7 +52,6 @@
 		AEAEEA6817422B1D003F74D3 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEAEEA6717422B1D003F74D3 /* Social.framework */; };
 		AEB028281753F26100757AF8 /* ShaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB028271753F26100757AF8 /* ShaderView.m */; };
 		AEBC414F1771B3B40024D73C /* ShaderInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1EF6081771923000A1251C /* ShaderInfo.m */; };
-		AEBC415A177305D40024D73C /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBC4159177305D40024D73C /* SWRevealViewController.m */; };
 		AEBC415D177444AF0024D73C /* ChannelResourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBC415C177444AF0024D73C /* ChannelResourceManager.m */; };
 		AEBC415F1776D2F80024D73C /* logo.json in Resources */ = {isa = PBXBuildFile; fileRef = AEBC415E1776D2F80024D73C /* logo.json */; };
 		AEBC41621777FE290024D73C /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = AEBC41601777FE290024D73C /* background.png */; };
@@ -90,6 +90,8 @@
 		AE5CABB617992900000924C3 /* menu_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = menu_selected.png; path = Art/Icons/menu_selected.png; sourceTree = SOURCE_ROOT; };
 		AE5CABB717992900000924C3 /* share_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = share_selected.png; path = Art/Icons/share_selected.png; sourceTree = SOURCE_ROOT; };
 		AE5CABB817992900000924C3 /* time_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = time_selected.png; path = Art/Icons/time_selected.png; sourceTree = SOURCE_ROOT; };
+		AE5CABC7179BD925000924C3 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
+		AE5CABC8179BD925000924C3 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		AE85EAC717933DEE0090DC1F /* ShaderInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ShaderInfoViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		AE85EAC817933DEE0090DC1F /* ShaderInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ShaderInfoViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		AE933D581736F601009EAF41 /* Shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.vsh; sourceTree = "<group>"; };
@@ -126,8 +128,6 @@
 		AEAEEA6717422B1D003F74D3 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		AEB028261753F26100757AF8 /* ShaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ShaderView.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		AEB028271753F26100757AF8 /* ShaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ShaderView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		AEBC4158177305D40024D73C /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
-		AEBC4159177305D40024D73C /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		AEBC415B177444AF0024D73C /* ChannelResourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ChannelResourceManager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		AEBC415C177444AF0024D73C /* ChannelResourceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ChannelResourceManager.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		AEBC415E1776D2F80024D73C /* logo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; lineEnding = 0; path = logo.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.javascript; };
@@ -186,6 +186,16 @@
 			);
 			path = "App Icons [Squared]";
 			sourceTree = "<group>";
+		};
+		AE5CABC6179BD925000924C3 /* SWRevealViewController */ = {
+			isa = PBXGroup;
+			children = (
+				AE5CABC7179BD925000924C3 /* SWRevealViewController.h */,
+				AE5CABC8179BD925000924C3 /* SWRevealViewController.m */,
+			);
+			name = SWRevealViewController;
+			path = Shadertoy/SWRevealViewController/SWRevealViewController;
+			sourceTree = SOURCE_ROOT;
 		};
 		AE85EAC617933D950090DC1F /* Overlay */ = {
 			isa = PBXGroup;
@@ -294,7 +304,7 @@
 		AEA3B58B1736E7C500786DA2 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				AEBC4157177305D40024D73C /* SWRevealViewController */,
+				AE5CABC6179BD925000924C3 /* SWRevealViewController */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -330,15 +340,6 @@
 				AEAE17F4174B637000764D5B /* Plane.m */,
 			);
 			name = Rendering;
-			sourceTree = "<group>";
-		};
-		AEBC4157177305D40024D73C /* SWRevealViewController */ = {
-			isa = PBXGroup;
-			children = (
-				AEBC4158177305D40024D73C /* SWRevealViewController.h */,
-				AEBC4159177305D40024D73C /* SWRevealViewController.m */,
-			);
-			path = SWRevealViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -443,7 +444,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AEBC415A177305D40024D73C /* SWRevealViewController.m in Sources */,
 				AEBC415D177444AF0024D73C /* ChannelResourceManager.m in Sources */,
 				AEBC414F1771B3B40024D73C /* ShaderInfo.m in Sources */,
 				AEA3B54C1730E6C700786DA2 /* main.m in Sources */,
@@ -456,6 +456,7 @@
 				AEB028281753F26100757AF8 /* ShaderView.m in Sources */,
 				AEBF32B4176457EB00DEEF71 /* ShaderManager.m in Sources */,
 				AE85EACA17933DEE0090DC1F /* ShaderInfoViewController.m in Sources */,
+				AE5CABC9179BD925000924C3 /* SWRevealViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
