@@ -20,36 +20,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    
-    //self.title = NSLocalizedString(@"Blur", nil);
-    //self.navigationItem.title = self.title;
-    //self.navigationController.navigationBar.translucent = YES;
-    
-    //DKLiveBlurView *backgroundView = [[DKLiveBlurView alloc] initWithFrame: self.view.bounds];
-    
-    //backgroundView.originalImage = [UIImage imageNamed:@"bg1.jpg"];
-    //backgroundView.scrollView = self.tableView;
-    //backgroundView.isGlassEffectOn = YES;
-    
-    //self.tableView.backgroundView = backgroundView;
-    //self.tableView.contentInset = UIEdgeInsetsMake(kDKTableViewDefaultContentInset, 0, 0, 0);
-    //self.scrollView.contentOffset = CGPointMake(0.0f, -300.0f);
-    //self.scrollView.contentInset = UIEdgeInsetsMake(100.0f, 0.0f, 0.0f, 0.0f);
-    
-    //[self.view addSubview: self.tableView];
 }
-
-//- (void)viewWillLayoutSubviews
-//{
-//    NSLog(@"viewWillLayoutSubviews");
-//    
-//}
-//
-//- (void)viewDidLayoutSubviews
-//{
-//    NSLog(@"viewDidLayoutSubviews");
-//}
 
 - (void)didReceiveMemoryWarning
 {
@@ -57,36 +28,40 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)setShaderInfo:(ShaderInfo *)shaderInfo
+- (void)setShaderInfo:(ShaderInfo *)info
 {
+    _shaderInfo = info;
     dispatch_async(dispatch_get_main_queue(),
                    ^{
-                       _nameLabel.text = shaderInfo.name;
-                       _authorLabel.text = shaderInfo.username;
-                       _descriptionLabel.text = shaderInfo.description;
+                       _nameLabel.text = _shaderInfo.name;
+                       _authorLabel.text = _shaderInfo.username;
+                       _descriptionLabel.text = _shaderInfo.description;
                        
                        NSMutableString* tags = [NSMutableString new];
-                       for (int i = 0; i < shaderInfo.tags.count; i++)
+                       for (int i = 0; i < _shaderInfo.tags.count; i++)
                        {
-                           if (i < shaderInfo.tags.count - 1)
+                           if (i < _shaderInfo.tags.count - 1)
                            {
-                               [tags appendFormat:@"%@, ", shaderInfo.tags[i]];
+                               [tags appendFormat:@"%@, ", _shaderInfo.tags[i]];
                            }
                            else
                            {
-                               [tags appendString:shaderInfo.tags[i]];
+                               [tags appendString:_shaderInfo.tags[i]];
                            }
                        }
                        
                        _tagsLabel.text = tags;
                        
-                       [_likeButton setTitle:[NSString stringWithFormat:@"%d", shaderInfo.likes] forState:UIControlStateNormal];
-                       [_viewsButton setTitle:[NSString stringWithFormat:@"%d", shaderInfo.viewed] forState:UIControlStateNormal];
+                       [_likeButton setTitle:[NSString stringWithFormat:@"%d", _shaderInfo.likes] forState:UIControlStateNormal];
+                       [_viewsButton setTitle:[NSString stringWithFormat:@"%d", _shaderInfo.viewed] forState:UIControlStateNormal];
                    });
 }
 
 - (IBAction)share:(id)sender
 {
+//    UIActivityViewController* activityController = [[UIActivityViewController alloc] initWithActivityItems:@[@"Check out this shader in Shadertoy!", [NSString stringWithFormat:@"http://www.shadertoy.com/view/%@", _shaderInfo.ID]] applicationActivities:nil];
+//    
+//    [self presentViewController:activityController animated:YES completion:nil];
 }
 
 - (IBAction)like:(id)sender

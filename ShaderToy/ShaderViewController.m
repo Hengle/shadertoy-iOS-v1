@@ -92,6 +92,15 @@
     _infoViewController.view.center = CGPointMake(_infoViewController.view.center.x, self.view.frame.size.height);
 }
 
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:duration];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+    _infoViewController.view.center = CGPointMake(_infoViewController.view.center.x, self.view.frame.size.height);
+    [UIView commitAnimations];
+}
+
 - (void)dealloc
 {
     [self tearDown];
@@ -421,13 +430,11 @@
         firstY = recognizer.view.center.y;
     }
     
-    if (firstY + translatedPoint.y > finalViewCenter)
+    translatedPoint = CGPointMake(firstX, firstY + translatedPoint.y);
+    
+    if (translatedPoint.y < finalViewCenter)
     {
-        translatedPoint = CGPointMake(firstX, firstY + translatedPoint.y);
-    }
-    else
-    {
-        float delta = finalViewCenter - (firstY + translatedPoint.y);
+        float delta = finalViewCenter - translatedPoint.y;
         translatedPoint = CGPointMake(firstX, finalViewCenter);
     }
     
