@@ -33,6 +33,8 @@
     dispatch_queue_t _renderQueue;
     
     UITouch* _touchLocation;
+    
+    float firstX, firstY;
 }
 
 @property (strong, nonatomic) ShaderView* view;

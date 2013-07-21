@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *tagsLabel;
 @property (weak, nonatomic) IBOutlet UIButton *shareButton;
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
+@property (weak, nonatomic) IBOutlet UIButton *viewsButton;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 
 - (IBAction)share:(id)sender;

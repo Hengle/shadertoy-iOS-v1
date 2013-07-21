@@ -29,6 +29,8 @@
 		AE5CABBD17992900000924C3 /* share_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = AE5CABB717992900000924C3 /* share_selected.png */; };
 		AE5CABBE17992900000924C3 /* time_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = AE5CABB817992900000924C3 /* time_selected.png */; };
 		AE5CABC9179BD925000924C3 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5CABC8179BD925000924C3 /* SWRevealViewController.m */; };
+		AE5CABCC179C8570000924C3 /* eye_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = AE5CABCA179C8570000924C3 /* eye_selected.png */; };
+		AE5CABCD179C8570000924C3 /* eye.png in Resources */ = {isa = PBXBuildFile; fileRef = AE5CABCB179C8570000924C3 /* eye.png */; };
 		AE85EACA17933DEE0090DC1F /* ShaderInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85EAC817933DEE0090DC1F /* ShaderInfoViewController.m */; };
 		AE933D5F1736F725009EAF41 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE933D5E1736F725009EAF41 /* OpenGLES.framework */; };
 		AE933D611736F731009EAF41 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE933D601736F731009EAF41 /* GLKit.framework */; };
@@ -92,6 +94,8 @@
 		AE5CABB817992900000924C3 /* time_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = time_selected.png; path = Art/Icons/time_selected.png; sourceTree = SOURCE_ROOT; };
 		AE5CABC7179BD925000924C3 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		AE5CABC8179BD925000924C3 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
+		AE5CABCA179C8570000924C3 /* eye_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = eye_selected.png; path = Art/Icons/eye_selected.png; sourceTree = SOURCE_ROOT; };
+		AE5CABCB179C8570000924C3 /* eye.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = eye.png; path = Art/Icons/eye.png; sourceTree = SOURCE_ROOT; };
 		AE85EAC717933DEE0090DC1F /* ShaderInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ShaderInfoViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		AE85EAC817933DEE0090DC1F /* ShaderInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ShaderInfoViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		AE933D581736F601009EAF41 /* Shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.vsh; sourceTree = "<group>"; };
@@ -312,6 +316,7 @@
 		AEA3B5931736EE9100786DA2 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				AE5CABCA179C8570000924C3 /* eye_selected.png */,
 				AE5CABB317992900000924C3 /* fire_selected.png */,
 				AE5CABB417992900000924C3 /* love_hollow_selected.png */,
 				AE5CABB517992900000924C3 /* love_selected.png */,
@@ -319,6 +324,7 @@
 				AE5CABB717992900000924C3 /* share_selected.png */,
 				AE5CABB817992900000924C3 /* time_selected.png */,
 				AE5CABB11798FF35000924C3 /* logo-toolbar.png */,
+				AE5CABCB179C8570000924C3 /* eye.png */,
 				AE5CABAD1798FBEC000924C3 /* fire.png */,
 				AE5CABA51798F843000924C3 /* love.png */,
 				AE5CABAF1798FCA9000924C3 /* love_hollow.png */,
@@ -434,6 +440,8 @@
 				AE5CABBC17992900000924C3 /* menu_selected.png in Resources */,
 				AE5CABBD17992900000924C3 /* share_selected.png in Resources */,
 				AE5CABBE17992900000924C3 /* time_selected.png in Resources */,
+				AE5CABCC179C8570000924C3 /* eye_selected.png in Resources */,
+				AE5CABCD179C8570000924C3 /* eye.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -55,7 +55,7 @@
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Shader Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="17" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iVc-s5-cEQ">
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="280" id="o4J-si-xJl"/>
+                                    <constraint firstAttribute="width" constant="477" id="3Nw-CU-Qrc"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="34"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -65,6 +65,17 @@
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Joe Shader" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="mhN-2h-Hq7">
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="24"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <size key="shadowOffset" width="1" height="1"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="10" preferredMaxLayoutWidth="728" translatesAutoresizingMaskIntoConstraints="NO" id="b5e-0a-9w9">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="XT7-hf-Grz"/>
+                                </constraints>
+                                <string key="text">Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</string>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                                 <color key="shadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -80,7 +91,7 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="highlighted">
+                                <state key="highlighted" backgroundImage="love_selected.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -97,36 +108,58 @@
                                 <state key="normal" backgroundImage="share.png">
                                     <color key="titleShadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="highlighted">
+                                <state key="highlighted" backgroundImage="share_selected.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="share:" destination="ZWY-Bt-baC" eventType="touchUpInside" id="gJP-ZT-VaP"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lLZ-RA-XZW">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="Fgj-QK-G4e"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                                <inset key="contentEdgeInsets" minX="2" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="2" backgroundImage="eye.png">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" backgroundImage="eye_selected.png">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="0.5" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="mhN-2h-Hq7" firstAttribute="trailing" secondItem="iVc-s5-cEQ" secondAttribute="trailing" type="default" id="3re-kr-wKq"/>
-                            <constraint firstItem="iVc-s5-cEQ" firstAttribute="leading" secondItem="mhN-2h-Hq7" secondAttribute="leading" type="default" id="B0x-v1-Fh9"/>
+                            <constraint firstItem="lLZ-RA-XZW" firstAttribute="top" secondItem="g0P-EU-V7F" secondAttribute="top" constant="20" symbolic="YES" type="default" id="2vA-zn-gA6"/>
+                            <constraint firstItem="b5e-0a-9w9" firstAttribute="leading" secondItem="g0P-EU-V7F" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="4zz-th-b0s"/>
+                            <constraint firstItem="lLZ-RA-XZW" firstAttribute="leading" secondItem="Rlb-Lr-wUu" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="AVw-wK-fSS"/>
+                            <constraint firstAttribute="trailing" secondItem="b5e-0a-9w9" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="BIe-7j-0A3"/>
+                            <constraint firstItem="5DQ-9r-kKQ" firstAttribute="leading" secondItem="mhN-2h-Hq7" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="Bbo-br-EMA"/>
                             <constraint firstItem="iVc-s5-cEQ" firstAttribute="top" secondItem="g0P-EU-V7F" secondAttribute="top" type="default" id="Bji-uQ-WaH"/>
-                            <constraint firstItem="5DQ-9r-kKQ" firstAttribute="leading" secondItem="g0P-EU-V7F" secondAttribute="leading" constant="336" id="Ikm-wS-ULI"/>
-                            <constraint firstAttribute="bottom" secondItem="5DQ-9r-kKQ" secondAttribute="bottom" constant="11" id="SaG-Ex-WED"/>
+                            <constraint firstItem="lLZ-RA-XZW" firstAttribute="bottom" secondItem="Rlb-Lr-wUu" secondAttribute="bottom" type="default" id="GX0-7B-QI8"/>
+                            <constraint firstItem="mhN-2h-Hq7" firstAttribute="leading" secondItem="g0P-EU-V7F" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="HTv-nf-kKW"/>
+                            <constraint firstItem="b5e-0a-9w9" firstAttribute="top" secondItem="mhN-2h-Hq7" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="TZU-Vu-PAA"/>
                             <constraint firstItem="5DQ-9r-kKQ" firstAttribute="bottom" secondItem="Rlb-Lr-wUu" secondAttribute="bottom" type="default" id="h3z-nS-MCl"/>
                             <constraint firstItem="Rlb-Lr-wUu" firstAttribute="leading" secondItem="5DQ-9r-kKQ" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="iLp-i8-WUA"/>
                             <constraint firstItem="mhN-2h-Hq7" firstAttribute="top" secondItem="iVc-s5-cEQ" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="kez-vY-0OI"/>
-                            <constraint firstItem="5DQ-9r-kKQ" firstAttribute="top" secondItem="Rlb-Lr-wUu" secondAttribute="top" type="default" id="oD2-yc-3r5"/>
-                            <constraint firstItem="mhN-2h-Hq7" firstAttribute="centerX" secondItem="g0P-EU-V7F" secondAttribute="centerX" type="default" id="wDu-CR-0Vo"/>
+                            <constraint firstItem="5DQ-9r-kKQ" firstAttribute="top" secondItem="g0P-EU-V7F" secondAttribute="top" constant="20" symbolic="YES" type="default" id="l4b-I3-UKn"/>
+                            <constraint firstItem="Rlb-Lr-wUu" firstAttribute="top" secondItem="g0P-EU-V7F" secondAttribute="top" constant="20" symbolic="YES" type="default" id="lrd-Br-X8g"/>
+                            <constraint firstAttribute="trailing" secondItem="lLZ-RA-XZW" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="olA-uc-nfo"/>
+                            <constraint firstItem="iVc-s5-cEQ" firstAttribute="leading" secondItem="g0P-EU-V7F" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="y6P-U5-FyT"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="authorLabel" destination="mhN-2h-Hq7" id="wVh-Qz-yK2"/>
+                        <outlet property="descriptionLabel" destination="b5e-0a-9w9" id="cHd-aR-gg2"/>
                         <outlet property="likeButton" destination="Rlb-Lr-wUu" id="4kh-Ss-taA"/>
                         <outlet property="nameLabel" destination="iVc-s5-cEQ" id="aY9-v9-RJe"/>
                         <outlet property="overlayView" destination="g0P-EU-V7F" id="6Ve-n1-7yj"/>
                         <outlet property="shareButton" destination="5DQ-9r-kKQ" id="hjj-hB-aFh"/>
+                        <outlet property="viewsButton" destination="lLZ-RA-XZW" id="q3Q-ZT-zSs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0QU-1w-xhw" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -209,8 +242,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="eye.png" width="88" height="88"/>
+        <image name="eye_selected.png" width="88" height="88"/>
         <image name="love.png" width="88" height="88"/>
+        <image name="love_selected.png" width="88" height="88"/>
         <image name="share.png" width="88" height="88"/>
+        <image name="share_selected.png" width="88" height="88"/>
     </resources>
     <classes>
         <class className="GalleryViewController" superclassName="UIPageViewController">
@@ -234,6 +271,7 @@
                 <relationship kind="outlet" name="overlayView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="shareButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="tagsLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="viewsButton" candidateClass="UIButton"/>
             </relationships>
         </class>
         <class className="ShaderMenuViewController" superclassName="UITableViewController">

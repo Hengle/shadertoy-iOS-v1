@@ -81,6 +81,7 @@
                        _tagsLabel.text = tags;
                        
                        [_likeButton setTitle:[NSString stringWithFormat:@"%d", shaderInfo.likes] forState:UIControlStateNormal];
+                       [_viewsButton setTitle:[NSString stringWithFormat:@"%d", shaderInfo.viewed] forState:UIControlStateNormal];
                    });
 }
 

@@ -138,12 +138,26 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="highlighted">
+                                <state key="highlighted" backgroundImage="love_selected.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="share:" destination="Gte-0y-9Xn" eventType="touchUpInside" id="MhQ-Et-EbS"/>
+                                    <action selector="like:" destination="Gte-0y-9Xn" eventType="touchUpInside" id="EBu-OY-dvZ"/>
                                 </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EVB-OV-dXk">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="U5E-jM-ZRA"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                                <inset key="contentEdgeInsets" minX="2" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="2" backgroundImage="eye.png">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" backgroundImage="eye_selected.png">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Izc-4r-wnW">
                                 <constraints>
@@ -155,26 +169,29 @@
                                 <state key="normal" backgroundImage="share.png">
                                     <color key="titleShadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="highlighted">
+                                <state key="highlighted" backgroundImage="share_selected.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="like:" destination="Gte-0y-9Xn" eventType="touchUpInside" id="CTq-WG-qgX"/>
+                                    <action selector="share:" destination="Gte-0y-9Xn" eventType="touchUpInside" id="tZx-JT-PbO"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="0.5" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Y5c-rK-61M" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="3Uf-7n-i2C"/>
                             <constraint firstItem="Nbz-ja-YJx" firstAttribute="top" secondItem="Izc-4r-wnW" secondAttribute="top" type="default" id="4bk-KX-A8V"/>
                             <constraint firstItem="G9l-zd-aJr" firstAttribute="top" secondItem="VXV-Ug-aJL" secondAttribute="top" type="default" id="7FH-yE-WeG"/>
+                            <constraint firstAttribute="bottom" secondItem="Izc-4r-wnW" secondAttribute="bottom" constant="10" id="HoQ-wB-vKy"/>
                             <constraint firstAttribute="trailing" secondItem="G9l-zd-aJr" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="HqO-yh-sKh"/>
                             <constraint firstItem="Y5c-rK-61M" firstAttribute="leading" secondItem="VXV-Ug-aJL" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="KtP-8r-hTl"/>
                             <constraint firstItem="Nbz-ja-YJx" firstAttribute="bottom" secondItem="Izc-4r-wnW" secondAttribute="bottom" type="default" id="LNy-nM-hTc"/>
-                            <constraint firstAttribute="bottom" secondItem="Nbz-ja-YJx" secondAttribute="bottom" constant="11" id="bgs-vD-u9o"/>
-                            <constraint firstItem="Izc-4r-wnW" firstAttribute="leading" secondItem="VXV-Ug-aJL" secondAttribute="leading" constant="112" id="ceC-xe-0nv"/>
+                            <constraint firstItem="EVB-OV-dXk" firstAttribute="leading" secondItem="Nbz-ja-YJx" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="U7k-7R-6xs"/>
+                            <constraint firstItem="EVB-OV-dXk" firstAttribute="bottom" secondItem="Nbz-ja-YJx" secondAttribute="bottom" type="default" id="cQl-V1-h1h"/>
                             <constraint firstItem="G9l-zd-aJr" firstAttribute="leading" secondItem="VXV-Ug-aJL" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="fcy-7e-EOH"/>
+                            <constraint firstItem="Nbz-ja-YJx" firstAttribute="centerX" secondItem="Y5c-rK-61M" secondAttribute="centerX" type="default" id="mXs-oB-P9z"/>
                             <constraint firstItem="Nbz-ja-YJx" firstAttribute="leading" secondItem="Izc-4r-wnW" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="xSz-Vj-XEU"/>
+                            <constraint firstItem="EVB-OV-dXk" firstAttribute="top" secondItem="Nbz-ja-YJx" secondAttribute="top" type="default" id="zhv-Bc-wAV"/>
                             <constraint firstItem="Y5c-rK-61M" firstAttribute="top" secondItem="G9l-zd-aJr" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="zmF-Ha-Hvp"/>
                         </constraints>
                     </view>
@@ -186,6 +203,7 @@
                         <outlet property="nameLabel" destination="G9l-zd-aJr" id="V1M-2w-vsd"/>
                         <outlet property="overlayView" destination="VXV-Ug-aJL" id="oNL-iZ-T2z"/>
                         <outlet property="shareButton" destination="Izc-4r-wnW" id="FIs-GM-p4S"/>
+                        <outlet property="viewsButton" destination="EVB-OV-dXk" id="vgG-zL-yUT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6kp-CS-Hc7" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -206,8 +224,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="eye.png" width="88" height="88"/>
+        <image name="eye_selected.png" width="88" height="88"/>
         <image name="love.png" width="88" height="88"/>
+        <image name="love_selected.png" width="88" height="88"/>
         <image name="share.png" width="88" height="88"/>
+        <image name="share_selected.png" width="88" height="88"/>
     </resources>
     <classes>
         <class className="GalleryViewController" superclassName="UIPageViewController">
@@ -231,6 +253,7 @@
                 <relationship kind="outlet" name="overlayView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="shareButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="tagsLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="viewsButton" candidateClass="UIButton"/>
             </relationships>
         </class>
         <class className="ShaderMenuViewController" superclassName="UITableViewController">

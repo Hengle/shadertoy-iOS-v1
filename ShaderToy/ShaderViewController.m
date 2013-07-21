@@ -14,6 +14,8 @@
 #import "ChannelResourceManager.h"
 #import "ShaderInfoViewController.h"
 
+#import "SWRevealViewController.h"
+
 #import <QuartzCore/QuartzCore.h>
 
 
@@ -67,7 +69,13 @@
     _infoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ShaderInfoOverlay"];
     _infoViewController.view.frame = CGRectMake(0, self.view.frame.size.height - _infoViewController.view.frame.size.height, self.view.frame.size.width, _infoViewController.view.frame.size.height);
     _infoViewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    
+    UIPanGestureRecognizer* panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+    [_infoViewController.view addGestureRecognizer:panGesture];
+    
     [self.view addSubview:_infoViewController.view];
+    
+    _infoViewController.view.center = CGPointMake(_infoViewController.view.center.x, self.view.frame.size.height);
     
     _menuButton = [[UIButton alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 30.0f, 30.0f)];
     [_menuButton setImage:[UIImage imageNamed:@"menu.png"] forState:UIControlStateNormal];
@@ -79,6 +87,9 @@
 {
     // Set the shader information to the overlay
     _infoViewController.shaderInfo = self.currentShader;
+    
+    // Reset the overlay position
+    _infoViewController.view.center = CGPointMake(_infoViewController.view.center.x, self.view.frame.size.height);
 }
 
 - (void)dealloc
@@ -391,6 +402,59 @@
 - (IBAction)toggleMenu:(id)sender
 {
     [self.revealViewController revealToggleAnimated:YES];
+}
+
+
+#pragma mark - Gestures
+
+- (void)handlePan:(UIPanGestureRecognizer *)recognizer
+{
+    float parentViewHeight = self.view.frame.size.height;
+    float viewHeight = recognizer.view.frame.size.height;
+    float finalViewCenter = parentViewHeight - (viewHeight/2);
+    
+    CGPoint translatedPoint = [recognizer translationInView:self.view];
+    
+    if (recognizer.state == UIGestureRecognizerStateBegan)
+    {
+        firstX = recognizer.view.center.x;
+        firstY = recognizer.view.center.y;
+    }
+    
+    if (firstY + translatedPoint.y > finalViewCenter)
+    {
+        translatedPoint = CGPointMake(firstX, firstY + translatedPoint.y);
+    }
+    else
+    {
+        float delta = finalViewCenter - (firstY + translatedPoint.y);
+        translatedPoint = CGPointMake(firstX, finalViewCenter);
+    }
+    
+    [recognizer.view setCenter:translatedPoint];
+    
+    if (recognizer.state == UIGestureRecognizerStateEnded)
+    {
+        CGPoint velocity = [recognizer velocityInView:self.view];
+        float finalY = translatedPoint.y + (0.35 * velocity.y);
+        
+        if (finalY < finalViewCenter)
+        {
+            finalY = finalViewCenter;
+        }
+        else if (finalY > parentViewHeight)
+        {
+            finalY = parentViewHeight;
+        }
+        
+        float duration = (ABS(velocity.y) * 0.0004);
+        
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:duration];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+        [recognizer.view setCenter:CGPointMake(firstX, finalY)];
+        [UIView commitAnimations];
+    }
 }
 
 @end
