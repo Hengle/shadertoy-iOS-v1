@@ -38,6 +38,7 @@
 @interface ChannelResourceManager ()
 
 - (NSData *)loadDataFromURL:(NSURL *)path;
+- (GLKTextureInfo *)loadTextureFromURL:(NSURL *)path;
 
 @end
 
@@ -85,7 +86,13 @@
             {
                 if ([info.type isEqualToString:@"texture"] || [info.type isEqualToString:@"cubemap"])
                 {
-                    [self loadDataFromURL:info.path];
+                    GLKTextureInfo* resource = [self loadTextureFromURL:info.path];
+                    [self storeResource:resource withName:info.path.absoluteString];
+                }
+                else
+                {
+                    NSData* resource = [self loadDataFromURL:info.path];
+                    [self storeResource:resource withName:info.path.absoluteString];
                 }
             }
         }
@@ -102,28 +109,49 @@
 - (NSData *)getResourceWithName:(NSURL *)name
 {
     NSData* resource = [_resourceDictionary objectForKey:name.absoluteString];
-    
     if (resource == nil)
     {
         resource = [self loadDataFromURL:name];
+        [self storeResource:resource withName:name.absoluteString];
     }
     
     return resource;
 }
 
+- (GLuint)getTextureWithName:(NSURL *)name
+{
+    GLKTextureInfo* resource = [_resourceDictionary objectForKey:name.absoluteString];
+    if (resource == nil)
+    {
+        resource = [self loadTextureFromURL:name];
+        [self storeResource:resource withName:name.absoluteString];
+    }
+    
+    return resource.name;
+}
+
 - (NSData *)loadDataFromURL:(NSURL *)path
 {
     NSData* resource = [NSData dataWithContentsOfURL:path];
-    if (resource != nil)
+    if (resource == nil)
     {
-        [self storeResource:resource withName:path.absoluteString];
-    }
-    else
-    {
-        NSLog(@"Couldn't get resource for path %@", path.absoluteString);
+        NSLog(@"Couldn't load resource for path %@", path.absoluteString);
     }
     
     return resource;
+}
+
+- (GLKTextureInfo *)loadTextureFromURL:(NSURL *)path
+{
+    NSError* error = nil;
+    GLKTextureInfo* info = [GLKTextureLoader textureWithContentsOfURL:path options:@{GLKTextureLoaderOriginBottomLeft: @YES} error:&error];
+    
+    if (error != nil)
+    {
+        NSLog(@"Couldn't load texture for path %@", path.absoluteString);
+    }
+    
+    return info;
 }
 
 @end

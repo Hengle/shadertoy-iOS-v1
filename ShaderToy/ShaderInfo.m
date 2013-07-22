@@ -38,8 +38,6 @@
 
 - (void)clearChannels
 {
-    glDeleteTextures(4, _channelInfo);
-    
     for (int i = 0; i < 4; i++)
     {
         _channelInfo[i] = 0;

@@ -193,22 +193,18 @@
         {
             [_params clearChannels];
             
-            // Inputs are only set only on initialization, no need to re-set them
+            // Inputs are set only on initialization, no need to re-set them
             for (ShaderInput* input in renderpass.inputs)
             {
                 if ([input.type isEqual: @"texture"])
                 {
-                    NSData* imageData = [[ChannelResourceManager sharedInstance] getResourceWithName:input.source];
+                    GLuint textureID = [[ChannelResourceManager sharedInstance] getTextureWithName:input.source];
                     
-                    if (imageData != nil)
+                    if (textureID > 0)
                     {
-                        NSError* error = nil;
-                        GLKTextureInfo* info = [GLKTextureLoader textureWithContentsOfData:imageData options:@{GLKTextureLoaderOriginBottomLeft: @YES} error:&error];
+                        _params.channelInfo[input.channel] = textureID;
                         
-                        if (error == nil)
-                        {
-                            _params.channelInfo[input.channel] = info.name;
-                        }
+                        NSLog(@"Setting input channel %d to texture %d", input.channel, _params.channelInfo[input.channel]);
                     }
                 }
             }
@@ -250,27 +246,22 @@
         {
             _params = [[ShaderParameters alloc] init];
             
-            // Inputs are only set only on initialization, no need to re-set them
+            // Inputs are set only on initialization, no need to re-set them
             for (ShaderInput* input in renderpass.inputs)
             {
                 if ([input.type isEqual: @"texture"])
                 {
-                    NSData* imageData = [[ChannelResourceManager sharedInstance] getResourceWithName:input.source];
+                    GLuint textureID = [[ChannelResourceManager sharedInstance] getTextureWithName:input.source];
                     
-                    if (imageData != nil)
+                    if (textureID > 0)
                     {
-                        NSError* error = nil;
-                        GLKTextureInfo* info = [GLKTextureLoader textureWithContentsOfData:imageData options:@{GLKTextureLoaderOriginBottomLeft: @YES} error:&error];
+                        _params.channelInfo[input.channel] = textureID;
                         
-                        if (error == nil)
-                        {
-                            _params.channelInfo[input.channel] = info.name;
-                            
-                            NSLog(@"Setting input channel %d to texture %d", input.channel, _params.channelInfo[input.channel]);
-                        }
+                        NSLog(@"Setting input channel %d to texture %d", input.channel, _params.channelInfo[input.channel]);
                     }
                 }
             }
+
         }
     }
 }

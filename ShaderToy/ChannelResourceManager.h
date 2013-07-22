@@ -22,5 +22,6 @@
 
 - (void)storeResource:(NSObject *)resource withName:(NSString *)name;
 - (NSData *)getResourceWithName:(NSURL *)name;
+- (GLuint)getTextureWithName:(NSURL *)name;
 
 @end
