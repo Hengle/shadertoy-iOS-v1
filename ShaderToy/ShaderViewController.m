@@ -19,6 +19,10 @@
 #import <QuartzCore/QuartzCore.h>
 
 
+#define OverlayMinAlpha 0.2f
+#define OverlayMaxAlpha 0.5f
+#define OverlayAnimationSpeed 0.35f
+
 @interface ShaderViewController ()
 {
     ShaderInfoViewController* _infoViewController;
@@ -67,6 +71,7 @@
     _renderQueue = dispatch_queue_create("com.shadertoy.threadedgcdqueue", NULL);
     
     _infoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ShaderInfoOverlay"];
+    _infoViewController.shaderViewController = self;
     _infoViewController.view.frame = CGRectMake(0, self.view.frame.size.height - _infoViewController.view.frame.size.height, self.view.frame.size.width, _infoViewController.view.frame.size.height);
     _infoViewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     
@@ -75,7 +80,9 @@
     
     [self.view addSubview:_infoViewController.view];
     
+    // Reset the overlay position
     _infoViewController.view.center = CGPointMake(_infoViewController.view.center.x, self.view.frame.size.height);
+    _infoViewController.view.backgroundColor = [_infoViewController.view.backgroundColor colorWithAlphaComponent:0.0f];
     
     _menuButton = [[UIButton alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 30.0f, 30.0f)];
     [_menuButton setImage:[UIImage imageNamed:@"menu.png"] forState:UIControlStateNormal];
@@ -90,14 +97,17 @@
     
     // Reset the overlay position
     _infoViewController.view.center = CGPointMake(_infoViewController.view.center.x, self.view.frame.size.height);
+    _infoViewController.view.backgroundColor = [_infoViewController.view.backgroundColor colorWithAlphaComponent:0.0f];
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
+    // Reset the overlay position
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:duration];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
     _infoViewController.view.center = CGPointMake(_infoViewController.view.center.x, self.view.frame.size.height);
+    _infoViewController.view.backgroundColor = [_infoViewController.view.backgroundColor colorWithAlphaComponent:0.0f];
     [UIView commitAnimations];
 }
 
@@ -424,26 +434,35 @@
     
     CGPoint translatedPoint = [recognizer translationInView:self.view];
     
+    // Store the initial coordinate of the view
     if (recognizer.state == UIGestureRecognizerStateBegan)
     {
         firstX = recognizer.view.center.x;
         firstY = recognizer.view.center.y;
     }
     
+    // Translate the view by usingt the pan gesture
+    // (Pan Gesture translatedPoint is absolute, not a delta)
     translatedPoint = CGPointMake(firstX, firstY + translatedPoint.y);
     
+    // Limit the maximum height that the overlay can reach (lower Y is higher up)
     if (translatedPoint.y < finalViewCenter)
     {
         float delta = finalViewCenter - translatedPoint.y;
         translatedPoint = CGPointMake(firstX, finalViewCenter);
     }
     
+    // Calculate the overlay alpha
+    float percent = ((translatedPoint.y - parentViewHeight)/(finalViewCenter - parentViewHeight));
+    float alpha = MAX(OverlayMinAlpha, OverlayMaxAlpha * percent);
+    
     [recognizer.view setCenter:translatedPoint];
+    recognizer.view.backgroundColor = [recognizer.view.backgroundColor colorWithAlphaComponent:alpha];
     
     if (recognizer.state == UIGestureRecognizerStateEnded)
     {
         CGPoint velocity = [recognizer velocityInView:self.view];
-        float finalY = translatedPoint.y + (0.35 * velocity.y);
+        float finalY = translatedPoint.y + (OverlayAnimationSpeed * velocity.y);
         
         if (finalY < finalViewCenter)
         {
@@ -455,13 +474,18 @@
         }
         
         float duration = (ABS(velocity.y) * 0.0004);
+        percent = ((finalY - parentViewHeight)/(finalViewCenter - parentViewHeight));
+        alpha = MAX(OverlayMinAlpha, OverlayMaxAlpha * percent);
         
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:duration];
         [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
         [recognizer.view setCenter:CGPointMake(firstX, finalY)];
+        recognizer.view.backgroundColor = [recognizer.view.backgroundColor colorWithAlphaComponent:alpha];
         [UIView commitAnimations];
     }
+    
+    NSLog(@"Alpha: %f - Percent: %f", alpha, percent);
 }
 
 @end

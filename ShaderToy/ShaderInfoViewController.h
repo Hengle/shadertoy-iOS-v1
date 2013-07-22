@@ -9,12 +9,14 @@
 #import <UIKit/UIKit.h>
 
 @class ShaderInfo;
+@class ShaderViewController;
 
 @interface ShaderInfoViewController : UIViewController
 {
     ShaderInfo* _shaderInfo;
 }
 
+@property (strong, nonatomic) ShaderViewController* shaderViewController;
 @property (strong, nonatomic) ShaderInfo* shaderInfo;
 @property (weak, nonatomic) IBOutlet UIView *overlayView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;

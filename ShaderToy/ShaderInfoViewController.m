@@ -8,6 +8,7 @@
 
 #import "ShaderInfoViewController.h"
 #import "ShaderInfo.h"
+#import "ShaderViewController.h"
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -59,9 +60,9 @@
 
 - (IBAction)share:(id)sender
 {
-//    UIActivityViewController* activityController = [[UIActivityViewController alloc] initWithActivityItems:@[@"Check out this shader in Shadertoy!", [NSString stringWithFormat:@"http://www.shadertoy.com/view/%@", _shaderInfo.ID]] applicationActivities:nil];
-//    
-//    [self presentViewController:activityController animated:YES completion:nil];
+    UIActivityViewController* activityController = [[UIActivityViewController alloc] initWithActivityItems:@[@"Check out this shader in Shadertoy!", [NSString stringWithFormat:@"http://www.shadertoy.com/view/%@", _shaderInfo.ID]] applicationActivities:nil];
+    
+    [_shaderViewController presentViewController:activityController animated:YES completion:nil];
 }
 
 - (IBAction)like:(id)sender
