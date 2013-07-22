@@ -14,8 +14,6 @@
 #import "ChannelResourceManager.h"
 #import "ShaderInfoViewController.h"
 
-#import "SWRevealViewController.h"
-
 #import <QuartzCore/QuartzCore.h>
 
 
