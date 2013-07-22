@@ -13,6 +13,8 @@
 
 @protocol ShaderManagerDelegate <NSObject>
 
+@optional
+- (void)shaderManagerDidStartCompiling:(ShaderManager *)manager;
 - (void)shaderManagerDidFinishCompiling:(ShaderManager *)manager;
 
 @end
