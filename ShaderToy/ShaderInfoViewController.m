@@ -60,7 +60,8 @@
 
 - (IBAction)share:(id)sender
 {
-    UIActivityViewController* activityController = [[UIActivityViewController alloc] initWithActivityItems:@[@"Check out this shader in Shadertoy!", [NSString stringWithFormat:@"http://www.shadertoy.com/view/%@", _shaderInfo.ID]] applicationActivities:nil];
+    UIActivityViewController* activityController = [[UIActivityViewController alloc] initWithActivityItems:@[[NSString stringWithFormat:@"Check out %@ in Shadertoy!", _shaderInfo.name], [NSString stringWithFormat:@"http://www.shadertoy.com/view/%@", _shaderInfo.ID]] applicationActivities:nil];
+    
     
     [_shaderViewController presentViewController:activityController animated:YES completion:nil];
 }

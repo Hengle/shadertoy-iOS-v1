@@ -100,6 +100,13 @@
     _infoViewController.view.backgroundColor = [_infoViewController.view.backgroundColor colorWithAlphaComponent:OverlayMinAlpha];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    // Reset the overlay position
+    _infoViewController.view.center = CGPointMake(_infoViewController.view.center.x, self.view.frame.size.height);
+    _infoViewController.view.backgroundColor = [_infoViewController.view.backgroundColor colorWithAlphaComponent:OverlayMinAlpha];
+}
+
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     // Reset the overlay position
@@ -484,8 +491,6 @@
         recognizer.view.backgroundColor = [recognizer.view.backgroundColor colorWithAlphaComponent:alpha];
         [UIView commitAnimations];
     }
-    
-    NSLog(@"Alpha: %f - Percent: %f", alpha, percent);
 }
 
 @end
