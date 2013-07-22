@@ -112,7 +112,7 @@
             <objects>
                 <viewController storyboardIdentifier="ShaderInfoOverlay" autoresizesArchivedViewToFullSize="NO" title="ShaderInfo" id="Gte-0y-9Xn" customClass="ShaderInfoViewController" sceneMemberID="viewController">
                     <view key="view" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" id="VXV-Ug-aJL" userLabel="Overlay View">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Shader Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="17" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G9l-zd-aJr">
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="34"/>
@@ -128,9 +128,26 @@
                                 <color key="shadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <size key="shadowOffset" width="1" height="1"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nbz-ja-YJx">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Izc-4r-wnW" userLabel="Share Button">
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="44" id="XlN-go-j13"/>
+                                    <constraint firstAttribute="height" constant="40" id="lXl-4J-AEa"/>
+                                    <constraint firstAttribute="width" constant="40" id="sLL-rd-i84"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <size key="titleShadowOffset" width="1" height="1"/>
+                                <state key="normal" backgroundImage="share.png">
+                                    <color key="titleShadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" backgroundImage="share_selected.png">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="share:" destination="Gte-0y-9Xn" eventType="touchUpInside" id="tZx-JT-PbO"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nbz-ja-YJx" userLabel="Likes Button">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="k5b-zd-TB6"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                                 <inset key="contentEdgeInsets" minX="0.0" minY="-3" maxX="0.0" maxY="0.0"/>
@@ -145,9 +162,9 @@
                                     <action selector="like:" destination="Gte-0y-9Xn" eventType="touchUpInside" id="EBu-OY-dvZ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EVB-OV-dXk">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EVB-OV-dXk" userLabel="View Button">
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="44" id="U5E-jM-ZRA"/>
+                                    <constraint firstAttribute="width" constant="40" id="8h9-V7-GAu"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                                 <inset key="contentEdgeInsets" minX="2" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -160,46 +177,45 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Izc-4r-wnW">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="2Wa-Es-kLC">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="MPf-oj-lju"/>
-                                    <constraint firstAttribute="width" constant="44" id="Ved-AK-82h"/>
+                                    <constraint firstAttribute="height" constant="45" id="2Zp-dW-6qp"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <size key="titleShadowOffset" width="1" height="1"/>
-                                <state key="normal" backgroundImage="share.png">
-                                    <color key="titleShadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted" backgroundImage="share_selected.png">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="share:" destination="Gte-0y-9Xn" eventType="touchUpInside" id="tZx-JT-PbO"/>
-                                </connections>
-                            </button>
+                                <string key="text">Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</string>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <size key="shadowOffset" width="1" height="1"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="2Wa-Es-kLC" firstAttribute="top" secondItem="Izc-4r-wnW" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="0qg-CR-qHl"/>
                             <constraint firstAttribute="trailing" secondItem="Y5c-rK-61M" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="3Uf-7n-i2C"/>
-                            <constraint firstItem="Nbz-ja-YJx" firstAttribute="top" secondItem="Izc-4r-wnW" secondAttribute="top" type="default" id="4bk-KX-A8V"/>
-                            <constraint firstItem="G9l-zd-aJr" firstAttribute="top" secondItem="VXV-Ug-aJL" secondAttribute="top" type="default" id="7FH-yE-WeG"/>
-                            <constraint firstItem="Nbz-ja-YJx" firstAttribute="bottom" secondItem="EVB-OV-dXk" secondAttribute="bottom" type="default" id="8v6-Zk-o7W"/>
+                            <constraint firstItem="Nbz-ja-YJx" firstAttribute="baseline" secondItem="EVB-OV-dXk" secondAttribute="baseline" type="default" id="55Y-gW-saR"/>
+                            <constraint firstItem="Nbz-ja-YJx" firstAttribute="top" secondItem="EVB-OV-dXk" secondAttribute="top" type="default" id="5Dn-3P-WQT"/>
+                            <constraint firstItem="2Wa-Es-kLC" firstAttribute="top" secondItem="EVB-OV-dXk" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="5K0-Co-Lx2"/>
+                            <constraint firstItem="G9l-zd-aJr" firstAttribute="top" secondItem="VXV-Ug-aJL" secondAttribute="top" constant="7" id="8RP-cg-PcQ"/>
+                            <constraint firstItem="Nbz-ja-YJx" firstAttribute="centerX" secondItem="Y5c-rK-61M" secondAttribute="centerX" type="default" id="Aol-Us-Bgh"/>
                             <constraint firstAttribute="trailing" secondItem="G9l-zd-aJr" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="HqO-yh-sKh"/>
+                            <constraint firstItem="Nbz-ja-YJx" firstAttribute="leading" secondItem="Izc-4r-wnW" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="Iy4-ov-Na2"/>
                             <constraint firstItem="Y5c-rK-61M" firstAttribute="leading" secondItem="VXV-Ug-aJL" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="KtP-8r-hTl"/>
-                            <constraint firstItem="Nbz-ja-YJx" firstAttribute="bottom" secondItem="Izc-4r-wnW" secondAttribute="bottom" type="default" id="LNy-nM-hTc"/>
-                            <constraint firstItem="EVB-OV-dXk" firstAttribute="leading" secondItem="Nbz-ja-YJx" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="U7k-7R-6xs"/>
-                            <constraint firstAttribute="bottom" secondItem="Izc-4r-wnW" secondAttribute="bottom" constant="10" id="XvA-z7-0rF"/>
+                            <constraint firstItem="Nbz-ja-YJx" firstAttribute="top" secondItem="Izc-4r-wnW" secondAttribute="top" type="default" id="VND-pl-I0T"/>
+                            <constraint firstAttribute="bottom" secondItem="2Wa-Es-kLC" secondAttribute="bottom" constant="7" id="Xwk-sC-XRG"/>
+                            <constraint firstItem="EVB-OV-dXk" firstAttribute="leading" secondItem="Nbz-ja-YJx" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="b0a-Aa-QEG"/>
+                            <constraint firstItem="2Wa-Es-kLC" firstAttribute="top" secondItem="Nbz-ja-YJx" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="dBN-G7-pbg"/>
                             <constraint firstItem="G9l-zd-aJr" firstAttribute="leading" secondItem="VXV-Ug-aJL" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="fcy-7e-EOH"/>
-                            <constraint firstItem="Nbz-ja-YJx" firstAttribute="centerX" secondItem="Y5c-rK-61M" secondAttribute="centerX" type="default" id="mXs-oB-P9z"/>
-                            <constraint firstItem="Nbz-ja-YJx" firstAttribute="leading" secondItem="Izc-4r-wnW" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="xSz-Vj-XEU"/>
-                            <constraint firstItem="EVB-OV-dXk" firstAttribute="top" secondItem="Nbz-ja-YJx" secondAttribute="top" type="default" id="zhv-Bc-wAV"/>
-                            <constraint firstItem="Y5c-rK-61M" firstAttribute="top" secondItem="G9l-zd-aJr" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="zmF-Ha-Hvp"/>
+                            <constraint firstItem="2Wa-Es-kLC" firstAttribute="leading" secondItem="VXV-Ug-aJL" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="hGy-iT-ysz"/>
+                            <constraint firstItem="Y5c-rK-61M" firstAttribute="top" secondItem="G9l-zd-aJr" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="rxt-fO-GZq"/>
+                            <constraint firstAttribute="trailing" secondItem="2Wa-Es-kLC" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="s4c-e6-znt"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="authorLabel" destination="Y5c-rK-61M" id="8fa-Vs-Rwt"/>
+                        <outlet property="descriptionLabel" destination="2Wa-Es-kLC" id="3Ff-Ex-rad"/>
                         <outlet property="likeButton" destination="Nbz-ja-YJx" id="wd4-Y3-nJo"/>
                         <outlet property="nameLabel" destination="G9l-zd-aJr" id="V1M-2w-vsd"/>
                         <outlet property="overlayView" destination="VXV-Ug-aJL" id="oNL-iZ-T2z"/>
