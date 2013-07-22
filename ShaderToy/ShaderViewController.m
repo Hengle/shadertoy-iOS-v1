@@ -17,8 +17,8 @@
 #import <QuartzCore/QuartzCore.h>
 
 
-#define OverlayMinAlpha 0.2f
-#define OverlayMaxAlpha 0.5f
+#define OverlayMinAlpha 0.5f
+#define OverlayMaxAlpha 0.7f
 #define OverlayAnimationSpeed 0.35f
 
 @interface ShaderViewController ()
