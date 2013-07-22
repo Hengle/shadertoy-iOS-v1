@@ -82,7 +82,7 @@
     
     // Reset the overlay position
     _infoViewController.view.center = CGPointMake(_infoViewController.view.center.x, self.view.frame.size.height);
-    _infoViewController.view.backgroundColor = [_infoViewController.view.backgroundColor colorWithAlphaComponent:0.0f];
+    _infoViewController.view.backgroundColor = [_infoViewController.view.backgroundColor colorWithAlphaComponent:OverlayMinAlpha];
     
     _menuButton = [[UIButton alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 30.0f, 30.0f)];
     [_menuButton setImage:[UIImage imageNamed:@"menu.png"] forState:UIControlStateNormal];
@@ -97,7 +97,7 @@
     
     // Reset the overlay position
     _infoViewController.view.center = CGPointMake(_infoViewController.view.center.x, self.view.frame.size.height);
-    _infoViewController.view.backgroundColor = [_infoViewController.view.backgroundColor colorWithAlphaComponent:0.0f];
+    _infoViewController.view.backgroundColor = [_infoViewController.view.backgroundColor colorWithAlphaComponent:OverlayMinAlpha];
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
@@ -107,7 +107,7 @@
     [UIView setAnimationDuration:duration];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
     _infoViewController.view.center = CGPointMake(_infoViewController.view.center.x, self.view.frame.size.height);
-    _infoViewController.view.backgroundColor = [_infoViewController.view.backgroundColor colorWithAlphaComponent:0.0f];
+    _infoViewController.view.backgroundColor = [_infoViewController.view.backgroundColor colorWithAlphaComponent:OverlayMinAlpha];
     [UIView commitAnimations];
 }
 
