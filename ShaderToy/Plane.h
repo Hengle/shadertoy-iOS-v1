@@ -28,6 +28,7 @@ typedef struct
     GLint _resolutionUniform;
     GLint _timeUniform;
     GLint _channelTimeUniform;
+    GLint _channelResolutionUniform;
     GLint _mouseUniform;
     GLint _channelUniform[4];
     GLint _dateUniform;

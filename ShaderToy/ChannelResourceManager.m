@@ -120,14 +120,26 @@
 
 - (GLuint)getTextureWithName:(NSURL *)name
 {
-    GLKTextureInfo* resource = [_resourceDictionary objectForKey:name.absoluteString];
-    if (resource == nil)
+    GLKTextureInfo* texture = [_resourceDictionary objectForKey:name.absoluteString];
+    if (texture == nil)
     {
-        resource = [self loadTextureFromURL:name];
-        [self storeResource:resource withName:name.absoluteString];
+        texture = [self loadTextureFromURL:name];
+        [self storeResource:texture withName:name.absoluteString];
     }
     
-    return resource.name;
+    return texture.name;
+}
+
+- (GLKVector3)getTextureResolution:(NSURL *)name
+{
+    GLKTextureInfo* texture = [_resourceDictionary objectForKey:name.absoluteString];
+    if (texture == nil)
+    {
+        texture = [self loadTextureFromURL:name];
+        [self storeResource:texture withName:name.absoluteString];
+    }
+    
+    return GLKVector3Make(texture.width, texture.height, 1.0);
 }
 
 - (NSData *)loadDataFromURL:(NSURL *)path

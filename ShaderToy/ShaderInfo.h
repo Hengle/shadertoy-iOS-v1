@@ -14,11 +14,13 @@
 @property (nonatomic, assign) GLKVector3 resolution;
 @property (nonatomic, assign) float time;
 @property (nonatomic, assign) float *channelTime;
+@property (nonatomic, readonly) float *channelResolution;
 @property (nonatomic, assign) GLKVector4 mouseCoordinates;
 @property (nonatomic, assign) GLuint *channelInfo;
 @property (nonatomic, readonly) GLKVector4 date;
 
 - (void)clearChannels;
+- (void)setChannel:(int)channel resolution:(GLKVector3)resolution;
 
 @end
 
@@ -67,6 +69,7 @@
 @property (nonatomic, assign) bool published;
 @property (nonatomic, assign) int viewed;
 @property (nonatomic, assign) bool hasliked;
+@property (nonatomic, assign) bool removeoverlay;
 
 - (id)initWithJSONDictionary:(NSDictionary*)json;
 

@@ -50,7 +50,7 @@
     [viewController startAnimation];
     
     NSURL* shadersURL = [NSURL URLWithString:@"https://www.shadertoy.com/mobile.htm?sort=newest&from=0&num=12"];
-    [self loadShadersWithURL:shadersURL];
+    //[self loadShadersWithURL:shadersURL];
     
     // Tap gesture recognizer to collapse reveal view controller
     UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];

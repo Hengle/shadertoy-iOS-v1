@@ -23,5 +23,6 @@
 - (void)storeResource:(NSObject *)resource withName:(NSString *)name;
 - (NSData *)getResourceWithName:(NSURL *)name;
 - (GLuint)getTextureWithName:(NSURL *)name;
+- (GLKVector3)getTextureResolution:(NSURL *)name;
 
 @end

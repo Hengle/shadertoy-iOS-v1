@@ -66,6 +66,7 @@
 		AEBF32AF1757507500DEEF71 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = AEBF32AE1757507500DEEF71 /* Default-Landscape@2x~ipad.png */; };
 		AEBF32B4176457EB00DEEF71 /* ShaderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBF32B3176457EB00DEEF71 /* ShaderManager.m */; };
 		AEC8A5D0179905BA0040AAEF /* logo-text.png in Resources */ = {isa = PBXBuildFile; fileRef = AEC8A5CF179905BA0040AAEF /* logo-text.png */; };
+		AED8869217D085DD00093573 /* loading.png in Resources */ = {isa = PBXBuildFile; fileRef = AED8869117D085DD00093573 /* loading.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -146,6 +147,7 @@
 		AEBF32B2176457EB00DEEF71 /* ShaderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ShaderManager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		AEBF32B3176457EB00DEEF71 /* ShaderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ShaderManager.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		AEC8A5CF179905BA0040AAEF /* logo-text.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "logo-text.png"; path = "Art/logo-text.png"; sourceTree = SOURCE_ROOT; };
+		AED8869117D085DD00093573 /* loading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loading.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -297,6 +299,7 @@
 				AE933D6217370EE0009EAF41 /* cellbg.png */,
 				AEBC41601777FE290024D73C /* background.png */,
 				AEC8A5CF179905BA0040AAEF /* logo-text.png */,
+				AED8869117D085DD00093573 /* loading.png */,
 				AE5CAB841797B838000924C3 /* App Icons [Squared] */,
 				AEA3B5931736EE9100786DA2 /* Icons */,
 				AE933D581736F601009EAF41 /* Shader.vsh */,
@@ -382,7 +385,7 @@
 					};
 				};
 			};
-			buildConfigurationList = AEA3B5371730E6C700786DA2 /* Build configuration list for PBXProject "Shadertoy" */;
+			buildConfigurationList = AEA3B5371730E6C700786DA2 /* Build configuration list for PBXProject "ShaderToy" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -442,6 +445,7 @@
 				AE5CABBE17992900000924C3 /* time_selected.png in Resources */,
 				AE5CABCC179C8570000924C3 /* eye_selected.png in Resources */,
 				AE5CABCD179C8570000924C3 /* eye.png in Resources */,
+				AED8869217D085DD00093573 /* loading.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -583,7 +587,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		AEA3B5371730E6C700786DA2 /* Build configuration list for PBXProject "Shadertoy" */ = {
+		AEA3B5371730E6C700786DA2 /* Build configuration list for PBXProject "ShaderToy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AEA3B5601730E6C700786DA2 /* Debug */,
