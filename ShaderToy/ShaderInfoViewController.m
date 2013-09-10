@@ -34,6 +34,8 @@
     _shaderInfo = info;
     dispatch_async(dispatch_get_main_queue(),
                    ^{
+                       self.view.hidden = _shaderInfo.removeoverlay;
+                       
                        _nameLabel.text = _shaderInfo.name;
                        _authorLabel.text = _shaderInfo.username;
                        _descriptionLabel.text = _shaderInfo.description;

@@ -107,6 +107,9 @@
         if (_channelTimeUniform != -1)
             glUniform1fv(_channelTimeUniform, 4, params.channelTime);
         
+        if (_channelResolutionUniform != -1)
+            glUniform3fv(_channelResolutionUniform, 4, params.channelResolution);
+        
         if (_mouseUniform != -1)
             glUniform4fv(_mouseUniform, 1, params.mouseCoordinates.v);
         
@@ -170,6 +173,7 @@
         _resolutionUniform = glGetUniformLocation(_program, "iResolution");
         _timeUniform = glGetUniformLocation(_program, "iGlobalTime");
         _channelTimeUniform = glGetUniformLocation(_program, "iChannelTime");
+        _channelResolutionUniform = glGetUniformLocation(_program, "iChannelResolution");
         _mouseUniform = glGetUniformLocation(_program, "iMouse");
         _dateUniform = glGetUniformLocation(_program, "iDate");
     
@@ -177,7 +181,8 @@
         for (ShaderInput* input in renderpass.inputs)
         {
             NSString* channel = [NSString stringWithFormat:@"iChannel%d", input.channel];
-            _channelUniform[input.channel] = glGetUniformLocation(_program, channel.UTF8String);
+            GLuint uniform = glGetUniformLocation(_program, channel.UTF8String);
+            _channelUniform[input.channel] = uniform;
         }
         
         glPopGroupMarkerEXT();

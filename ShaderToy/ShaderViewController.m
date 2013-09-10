@@ -202,9 +202,12 @@
                     
                     if (textureID > 0)
                     {
-                        _params.channelInfo[input.channel] = textureID;
+                        GLKVector3 resolution = [[ChannelResourceManager sharedInstance] getTextureResolution:input.source];
                         
-                        NSLog(@"Setting input channel %d to texture %d", input.channel, _params.channelInfo[input.channel]);
+                        _params.channelInfo[input.channel] = textureID;
+                        [_params setChannel:input.channel resolution:resolution];
+                        
+                        NSLog(@"Setting input channel %d to texture %d, resolution %f x %f", input.channel, _params.channelInfo[input.channel], _params.channelResolution[input.channel + 0], _params.channelResolution[input.channel + 1]);
                     }
                 }
             }
@@ -255,9 +258,12 @@
                     
                     if (textureID > 0)
                     {
-                        _params.channelInfo[input.channel] = textureID;
+                        GLKVector3 resolution = [[ChannelResourceManager sharedInstance] getTextureResolution:input.source];
                         
-                        NSLog(@"Setting input channel %d to texture %d", input.channel, _params.channelInfo[input.channel]);
+                        _params.channelInfo[input.channel] = textureID;
+                        [_params setChannel:input.channel resolution:resolution];
+                        
+                        NSLog(@"Setting input channel %d to texture %d, resolution %f x %f", input.channel, _params.channelInfo[input.channel], _params.channelResolution[input.channel + 0], _params.channelResolution[input.channel + 1]);
                     }
                 }
             }

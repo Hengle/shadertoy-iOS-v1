@@ -150,6 +150,7 @@
     [codeString appendString:@"uniform vec3     iResolution;\n"];
     [codeString appendString:@"uniform float    iGlobalTime;\n"];
     [codeString appendString:@"uniform float    iChannelTime[4];\n"];
+    [codeString appendString:@"uniform vec3     iChannelResolution[4];\n"];
     [codeString appendString:@"uniform vec4     iMouse;\n\n"];
     [codeString appendString:@"uniform vec4     iDate;\n"];
     [codeString appendString:@"varying vec2     texCoords;\n\n"];
@@ -163,7 +164,7 @@
         }
         else //if ([input.type isEqualToString:@"texture"] || [input.type isEqualToString:@"music"] || [input.type isEqualToString:@"video"])
         {
-            [codeString appendFormat:@"uniform lowp sampler2D iChannel%d;\n", input.channel];
+            [codeString appendFormat:@"uniform sampler2D iChannel%d;\n", input.channel];
         }
         
         [[ChannelResourceManager sharedInstance] addResource:input.source ofType:input.type];

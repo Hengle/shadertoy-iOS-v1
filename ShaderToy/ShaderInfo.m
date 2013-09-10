@@ -17,15 +17,19 @@
     {
         _channelInfo = malloc(sizeof(GLuint) * 4);
         _channelTime = malloc(sizeof(float) * 4);
+        _channelResolution = malloc(sizeof(float) * 12);
         
-        for (int i = 0; i < 4; i++)
-        {
-            _channelInfo[i] = 0;
-            _channelTime[i] = 0.0f;
-        }
+        [self clearChannels];
     }
     
     return self;
+}
+
+- (void)dealloc
+{
+    free(_channelInfo);
+    free(_channelTime);
+    free(_channelResolution);
 }
 
 - (GLKVector4)date
@@ -42,7 +46,19 @@
     {
         _channelInfo[i] = 0;
         _channelTime[i] = 0.0f;
+        
+        for (int j = 0; j < 3; j++)
+        {
+            _channelResolution[i * j] = 0.0f;
+        }
     }
+}
+
+- (void)setChannel:(int)channel resolution:(GLKVector3)resolution
+{
+    _channelResolution[channel + 0] = resolution.x;
+    _channelResolution[channel + 1] = resolution.y;
+    _channelResolution[channel + 2] = resolution.z;
 }
 
 @end
@@ -65,7 +81,7 @@
             _source = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.shadertoy.com%@", source]];
         }
         _type = inputData[@"ctype"];
-        _channel = ((NSNumber*)inputData[@"channel"]).integerValue;
+        _channel = ((NSNumber *)inputData[@"channel"]).integerValue;
     }
     
     return self;
@@ -144,6 +160,7 @@
         
         _tags = info[@"tags"];
         _hasliked = info[@"hasliked"];
+        _removeoverlay = info[@"removeoverlay"];
         
         // Parse render pass
         NSArray* renderpasses = json[@"renderpass"];

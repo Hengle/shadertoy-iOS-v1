@@ -66,6 +66,7 @@
 		AEBF32AF1757507500DEEF71 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = AEBF32AE1757507500DEEF71 /* Default-Landscape@2x~ipad.png */; };
 		AEBF32B4176457EB00DEEF71 /* ShaderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBF32B3176457EB00DEEF71 /* ShaderManager.m */; };
 		AEC8A5D0179905BA0040AAEF /* logo-text.png in Resources */ = {isa = PBXBuildFile; fileRef = AEC8A5CF179905BA0040AAEF /* logo-text.png */; };
+		AED8869217D085DD00093573 /* loading.png in Resources */ = {isa = PBXBuildFile; fileRef = AED8869117D085DD00093573 /* loading.png */; };
 		E297418517D0807500D39049 /* AudioController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E297418417D0807500D39049 /* AudioController.mm */; };
 		E297418717D0809F00D39049 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E297418617D0809F00D39049 /* AudioToolbox.framework */; };
 		E297418A17D08DAD00D39049 /* FFTBufferManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E297418817D08DAD00D39049 /* FFTBufferManager.cpp */; };
@@ -154,6 +155,7 @@
 		E297418617D0809F00D39049 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		E297418817D08DAD00D39049 /* FFTBufferManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FFTBufferManager.cpp; sourceTree = "<group>"; };
 		E297418917D08DAD00D39049 /* FFTBufferManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FFTBufferManager.hpp; sourceTree = "<group>"; };
+		AED8869117D085DD00093573 /* loading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loading.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -308,6 +310,7 @@
 				AE933D6217370EE0009EAF41 /* cellbg.png */,
 				AEBC41601777FE290024D73C /* background.png */,
 				AEC8A5CF179905BA0040AAEF /* logo-text.png */,
+				AED8869117D085DD00093573 /* loading.png */,
 				AE5CAB841797B838000924C3 /* App Icons [Squared] */,
 				AEA3B5931736EE9100786DA2 /* Icons */,
 				AE933D581736F601009EAF41 /* Shader.vsh */,
@@ -464,6 +467,7 @@
 				AE5CABBE17992900000924C3 /* time_selected.png in Resources */,
 				AE5CABCC179C8570000924C3 /* eye_selected.png in Resources */,
 				AE5CABCD179C8570000924C3 /* eye.png in Resources */,
+				AED8869217D085DD00093573 /* loading.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
