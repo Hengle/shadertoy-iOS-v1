@@ -46,7 +46,7 @@
 		AEA3B5501730E6C700786DA2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B54F1730E6C700786DA2 /* AppDelegate.m */; };
 		AEA3B5591730E6C700786DA2 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEA3B5571730E6C700786DA2 /* MainStoryboard_iPhone.storyboard */; };
 		AEA3B55C1730E6C700786DA2 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEA3B55A1730E6C700786DA2 /* MainStoryboard_iPad.storyboard */; };
-		AEA3B55F1730E6C700786DA2 /* GalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B55E1730E6C700786DA2 /* GalleryViewController.m */; };
+		AEA3B55F1730E6C700786DA2 /* GalleryViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B55E1730E6C700786DA2 /* GalleryViewController.mm */; };
 		AEA3B57B1732327200786DA2 /* ShaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B5791732327200786DA2 /* ShaderViewController.m */; };
 		AEA3B58617360BBA00786DA2 /* ShaderMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B58517360BBA00786DA2 /* ShaderMenuViewController.m */; };
 		AEA3B58E1736E82A00786DA2 /* ShaderMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B58D1736E82A00786DA2 /* ShaderMenuCell.m */; };
@@ -66,6 +66,9 @@
 		AEBF32AF1757507500DEEF71 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = AEBF32AE1757507500DEEF71 /* Default-Landscape@2x~ipad.png */; };
 		AEBF32B4176457EB00DEEF71 /* ShaderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBF32B3176457EB00DEEF71 /* ShaderManager.m */; };
 		AEC8A5D0179905BA0040AAEF /* logo-text.png in Resources */ = {isa = PBXBuildFile; fileRef = AEC8A5CF179905BA0040AAEF /* logo-text.png */; };
+		E297418517D0807500D39049 /* AudioController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E297418417D0807500D39049 /* AudioController.mm */; };
+		E297418717D0809F00D39049 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E297418617D0809F00D39049 /* AudioToolbox.framework */; };
+		E297418A17D08DAD00D39049 /* FFTBufferManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E297418817D08DAD00D39049 /* FFTBufferManager.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -119,8 +122,8 @@
 		AEA3B5551730E6C700786DA2 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		AEA3B5581730E6C700786DA2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		AEA3B55B1730E6C700786DA2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
-		AEA3B55D1730E6C700786DA2 /* GalleryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = GalleryViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		AEA3B55E1730E6C700786DA2 /* GalleryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = GalleryViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		AEA3B55D1730E6C700786DA2 /* GalleryViewController.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; lineEnding = 0; path = GalleryViewController.hpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		AEA3B55E1730E6C700786DA2 /* GalleryViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = GalleryViewController.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		AEA3B5781732327200786DA2 /* ShaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ShaderViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		AEA3B5791732327200786DA2 /* ShaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ShaderViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		AEA3B58417360BBA00786DA2 /* ShaderMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ShaderMenuViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -146,6 +149,11 @@
 		AEBF32B2176457EB00DEEF71 /* ShaderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ShaderManager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		AEBF32B3176457EB00DEEF71 /* ShaderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ShaderManager.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		AEC8A5CF179905BA0040AAEF /* logo-text.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "logo-text.png"; path = "Art/logo-text.png"; sourceTree = SOURCE_ROOT; };
+		E297418317D0807500D39049 /* AudioController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AudioController.hpp; sourceTree = "<group>"; };
+		E297418417D0807500D39049 /* AudioController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioController.mm; sourceTree = "<group>"; };
+		E297418617D0809F00D39049 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		E297418817D08DAD00D39049 /* FFTBufferManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FFTBufferManager.cpp; sourceTree = "<group>"; };
+		E297418917D08DAD00D39049 /* FFTBufferManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FFTBufferManager.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +161,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E297418717D0809F00D39049 /* AudioToolbox.framework in Frameworks */,
 				AE970B71178F258C00DD17F3 /* Accelerate.framework in Frameworks */,
 				AEAEEA6817422B1D003F74D3 /* Social.framework in Frameworks */,
 				AE933D6F173A3AE6009EAF41 /* QuartzCore.framework in Frameworks */,
@@ -213,6 +222,7 @@
 		AEA3B5331730E6C700786DA2 = {
 			isa = PBXGroup;
 			children = (
+				E297418617D0809F00D39049 /* AudioToolbox.framework */,
 				AEA3B5451730E6C700786DA2 /* Shadertoy */,
 				AEA3B53E1730E6C700786DA2 /* Frameworks */,
 				AEA3B53D1730E6C700786DA2 /* Products */,
@@ -245,14 +255,15 @@
 		AEA3B5451730E6C700786DA2 /* Shadertoy */ = {
 			isa = PBXGroup;
 			children = (
+				E297418217D0806700D39049 /* Audio */,
 				AEA3B58B1736E7C500786DA2 /* Components */,
 				AEAE17F2174B635600764D5B /* Rendering */,
 				AE1EF6061771921000A1251C /* Data */,
 				AE85EAC617933D950090DC1F /* Overlay */,
 				AEA3B54E1730E6C700786DA2 /* AppDelegate.h */,
 				AEA3B54F1730E6C700786DA2 /* AppDelegate.m */,
-				AEA3B55D1730E6C700786DA2 /* GalleryViewController.h */,
-				AEA3B55E1730E6C700786DA2 /* GalleryViewController.m */,
+				AEA3B55D1730E6C700786DA2 /* GalleryViewController.hpp */,
+				AEA3B55E1730E6C700786DA2 /* GalleryViewController.mm */,
 				AEA3B58C1736E82A00786DA2 /* ShaderMenuCell.h */,
 				AEA3B58D1736E82A00786DA2 /* ShaderMenuCell.m */,
 				AEA3B58417360BBA00786DA2 /* ShaderMenuViewController.h */,
@@ -348,6 +359,17 @@
 			name = Rendering;
 			sourceTree = "<group>";
 		};
+		E297418217D0806700D39049 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				E297418817D08DAD00D39049 /* FFTBufferManager.cpp */,
+				E297418917D08DAD00D39049 /* FFTBufferManager.hpp */,
+				E297418317D0807500D39049 /* AudioController.hpp */,
+				E297418417D0807500D39049 /* AudioController.mm */,
+			);
+			name = Audio;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -382,7 +404,7 @@
 					};
 				};
 			};
-			buildConfigurationList = AEA3B5371730E6C700786DA2 /* Build configuration list for PBXProject "Shadertoy" */;
+			buildConfigurationList = AEA3B5371730E6C700786DA2 /* Build configuration list for PBXProject "ShaderToy" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -456,7 +478,7 @@
 				AEBC414F1771B3B40024D73C /* ShaderInfo.m in Sources */,
 				AEA3B54C1730E6C700786DA2 /* main.m in Sources */,
 				AEA3B5501730E6C700786DA2 /* AppDelegate.m in Sources */,
-				AEA3B55F1730E6C700786DA2 /* GalleryViewController.m in Sources */,
+				AEA3B55F1730E6C700786DA2 /* GalleryViewController.mm in Sources */,
 				AEA3B57B1732327200786DA2 /* ShaderViewController.m in Sources */,
 				AEA3B58617360BBA00786DA2 /* ShaderMenuViewController.m in Sources */,
 				AEA3B58E1736E82A00786DA2 /* ShaderMenuCell.m in Sources */,
@@ -465,6 +487,8 @@
 				AEBF32B4176457EB00DEEF71 /* ShaderManager.m in Sources */,
 				AE85EACA17933DEE0090DC1F /* ShaderInfoViewController.m in Sources */,
 				AE5CABC9179BD925000924C3 /* SWRevealViewController.m in Sources */,
+				E297418517D0807500D39049 /* AudioController.mm in Sources */,
+				E297418A17D08DAD00D39049 /* FFTBufferManager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -583,7 +607,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		AEA3B5371730E6C700786DA2 /* Build configuration list for PBXProject "Shadertoy" */ = {
+		AEA3B5371730E6C700786DA2 /* Build configuration list for PBXProject "ShaderToy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AEA3B5601730E6C700786DA2 /* Debug */,

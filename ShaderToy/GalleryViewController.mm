@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Ricardo Chavarria. All rights reserved.
 //
 
-#import "GalleryViewController.h"
+#import "GalleryViewController.hpp"
 #import "ShaderViewController.h"
 #import "ShaderInfo.h"
 
@@ -25,6 +25,11 @@
 {
     [super viewDidLoad];
     
+    // Initialize Audio
+    _audioManager = [AudioController sharedAudioManager];
+    _audioManager.delegate = self;
+    
+    // Others
     self.dataSource = self;
     self.delegate = self;
     
@@ -347,6 +352,28 @@
      }];
     
     [self loadShadersWithURL:shadersURL];
+}
+
+#pragma mark - Audio stuff
+
+- (void) receivedWaveSamples:(SInt32 *)samples length:(int)len
+{
+    int average = 0;
+    for(int i = 0 ; i < len ; i ++)
+    {
+        average += samples[i];
+    }
+    //NSLog(@"Wave %d", average / len);
+}
+
+- (void) receivedFreqSamples:(int32_t*) samples length:(int) len;
+{
+    int average = 0;
+    for(int i = 0 ; i < len ; i ++)
+    {
+        average += samples[i];
+    }
+    //NSLog(@"FFT %d", average / len);
 }
 
 @end
