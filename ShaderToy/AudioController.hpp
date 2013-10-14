@@ -1,9 +1,11 @@
 #import "FFTBufferManager.hpp"
 
 @protocol AudioControllerDelegate
+
 @required
 - (void) receivedWaveSamples:(SInt32*) samples length:(int) len;
 - (void) receivedFreqSamples:(int32_t*) samples length:(int) len;
+
 @end
 
 @interface AudioController : NSObject 
@@ -19,7 +21,6 @@
 
 + (AudioController*) sharedAudioManager;
 - (void) startAudio;
-
 
 @end
 

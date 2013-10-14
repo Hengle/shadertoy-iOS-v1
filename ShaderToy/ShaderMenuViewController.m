@@ -190,22 +190,7 @@
 {
     if (indexPath.section == 0 && indexPath.row < 3)
     {
-        NSString *category = nil;
-
-        switch (indexPath.row)
-        {
-            case 0:
-                category = @"newest";
-                break;
-                
-            case 1:
-                category = @"popular";
-                break;
-                
-            case 2:
-                category = @"love";
-                break;
-        }
+        EShaderCategory category = ((EShaderCategory)indexPath.row);
         
         [self setIndexPath:_previousIndexPath selected:FALSE];
         [self setIndexPath:indexPath selected:TRUE];

@@ -50,6 +50,7 @@
 		AEA3B57B1732327200786DA2 /* ShaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B5791732327200786DA2 /* ShaderViewController.m */; };
 		AEA3B58617360BBA00786DA2 /* ShaderMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B58517360BBA00786DA2 /* ShaderMenuViewController.m */; };
 		AEA3B58E1736E82A00786DA2 /* ShaderMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B58D1736E82A00786DA2 /* ShaderMenuCell.m */; };
+		AEADD6F61803DB28001C57B5 /* ShaderRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = AEADD6F51803DB28001C57B5 /* ShaderRequest.m */; };
 		AEAE17F5174B637000764D5B /* Plane.m in Sources */ = {isa = PBXBuildFile; fileRef = AEAE17F4174B637000764D5B /* Plane.m */; };
 		AEAEEA6817422B1D003F74D3 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEAEEA6717422B1D003F74D3 /* Social.framework */; };
 		AEB028281753F26100757AF8 /* ShaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB028271753F26100757AF8 /* ShaderView.m */; };
@@ -131,6 +132,9 @@
 		AEA3B58517360BBA00786DA2 /* ShaderMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ShaderMenuViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		AEA3B58C1736E82A00786DA2 /* ShaderMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ShaderMenuCell.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		AEA3B58D1736E82A00786DA2 /* ShaderMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ShaderMenuCell.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		AEADD6F41803DB28001C57B5 /* ShaderRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShaderRequest.h; path = Shadertoy/ShaderRequest.h; sourceTree = SOURCE_ROOT; };
+		AEADD6F51803DB28001C57B5 /* ShaderRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShaderRequest.m; path = Shadertoy/ShaderRequest.m; sourceTree = SOURCE_ROOT; };
+		AEADD6F71803FF89001C57B5 /* ShaderToyDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ShaderToyDefines.h; path = Shadertoy/ShaderToyDefines.h; sourceTree = SOURCE_ROOT; };
 		AEAE17F3174B637000764D5B /* Plane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Plane.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		AEAE17F4174B637000764D5B /* Plane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = Plane.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		AEAEEA6717422B1D003F74D3 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -150,12 +154,13 @@
 		AEBF32B2176457EB00DEEF71 /* ShaderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ShaderManager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		AEBF32B3176457EB00DEEF71 /* ShaderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ShaderManager.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		AEC8A5CF179905BA0040AAEF /* logo-text.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "logo-text.png"; path = "Art/logo-text.png"; sourceTree = SOURCE_ROOT; };
+		AED5F46617FBFB1E003F6B6F /* Shadertoy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = Shadertoy.entitlements; path = Shadertoy/Shadertoy.entitlements; sourceTree = SOURCE_ROOT; };
+		AED8869117D085DD00093573 /* loading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loading.png; sourceTree = "<group>"; };
 		E297418317D0807500D39049 /* AudioController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AudioController.hpp; sourceTree = "<group>"; };
 		E297418417D0807500D39049 /* AudioController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioController.mm; sourceTree = "<group>"; };
 		E297418617D0809F00D39049 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		E297418817D08DAD00D39049 /* FFTBufferManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FFTBufferManager.cpp; sourceTree = "<group>"; };
 		E297418917D08DAD00D39049 /* FFTBufferManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FFTBufferManager.hpp; sourceTree = "<group>"; };
-		AED8869117D085DD00093573 /* loading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loading.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +188,8 @@
 			children = (
 				AE1EF6071771923000A1251C /* ShaderInfo.h */,
 				AE1EF6081771923000A1251C /* ShaderInfo.m */,
+				AEADD6F41803DB28001C57B5 /* ShaderRequest.h */,
+				AEADD6F51803DB28001C57B5 /* ShaderRequest.m */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -224,7 +231,6 @@
 		AEA3B5331730E6C700786DA2 = {
 			isa = PBXGroup;
 			children = (
-				E297418617D0809F00D39049 /* AudioToolbox.framework */,
 				AEA3B5451730E6C700786DA2 /* Shadertoy */,
 				AEA3B53E1730E6C700786DA2 /* Frameworks */,
 				AEA3B53D1730E6C700786DA2 /* Products */,
@@ -242,6 +248,7 @@
 		AEA3B53E1730E6C700786DA2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E297418617D0809F00D39049 /* AudioToolbox.framework */,
 				AE970B70178F258C00DD17F3 /* Accelerate.framework */,
 				AEAEEA6717422B1D003F74D3 /* Social.framework */,
 				AE933D6E173A3AE6009EAF41 /* QuartzCore.framework */,
@@ -257,6 +264,7 @@
 		AEA3B5451730E6C700786DA2 /* Shadertoy */ = {
 			isa = PBXGroup;
 			children = (
+				AED5F46617FBFB1E003F6B6F /* Shadertoy.entitlements */,
 				E297418217D0806700D39049 /* Audio */,
 				AEA3B58B1736E7C500786DA2 /* Components */,
 				AEAE17F2174B635600764D5B /* Rendering */,
@@ -274,6 +282,7 @@
 				AEA3B5791732327200786DA2 /* ShaderViewController.m */,
 				AEB028261753F26100757AF8 /* ShaderView.h */,
 				AEB028271753F26100757AF8 /* ShaderView.m */,
+				AEADD6F71803FF89001C57B5 /* ShaderToyDefines.h */,
 				AEA3B55A1730E6C700786DA2 /* MainStoryboard_iPad.storyboard */,
 				AEA3B5571730E6C700786DA2 /* MainStoryboard_iPhone.storyboard */,
 				AEA3B5691731104A00786DA2 /* Resources */,
@@ -365,8 +374,8 @@
 		E297418217D0806700D39049 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
-				E297418817D08DAD00D39049 /* FFTBufferManager.cpp */,
 				E297418917D08DAD00D39049 /* FFTBufferManager.hpp */,
+				E297418817D08DAD00D39049 /* FFTBufferManager.cpp */,
 				E297418317D0807500D39049 /* AudioController.hpp */,
 				E297418417D0807500D39049 /* AudioController.mm */,
 			);
@@ -407,7 +416,7 @@
 					};
 				};
 			};
-			buildConfigurationList = AEA3B5371730E6C700786DA2 /* Build configuration list for PBXProject "ShaderToy" */;
+			buildConfigurationList = AEA3B5371730E6C700786DA2 /* Build configuration list for PBXProject "Shadertoy" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -488,6 +497,7 @@
 				AEA3B58E1736E82A00786DA2 /* ShaderMenuCell.m in Sources */,
 				AEAE17F5174B637000764D5B /* Plane.m in Sources */,
 				AEB028281753F26100757AF8 /* ShaderView.m in Sources */,
+				AEADD6F61803DB28001C57B5 /* ShaderRequest.m in Sources */,
 				AEBF32B4176457EB00DEEF71 /* ShaderManager.m in Sources */,
 				AE85EACA17933DEE0090DC1F /* ShaderInfoViewController.m in Sources */,
 				AE5CABC9179BD925000924C3 /* SWRevealViewController.m in Sources */,
@@ -587,11 +597,14 @@
 		AEA3B5631730E6C700786DA2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Shadertoy/Shadertoy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ShaderToy/Shadertoy-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/ShaderToy/Shadertoy-Info.plist";
 				PRODUCT_NAME = Shadertoy;
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -599,11 +612,14 @@
 		AEA3B5641730E6C700786DA2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Shadertoy/Shadertoy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ShaderToy/Shadertoy-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/ShaderToy/Shadertoy-Info.plist";
 				PRODUCT_NAME = Shadertoy;
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -611,7 +627,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		AEA3B5371730E6C700786DA2 /* Build configuration list for PBXProject "ShaderToy" */ = {
+		AEA3B5371730E6C700786DA2 /* Build configuration list for PBXProject "Shadertoy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AEA3B5601730E6C700786DA2 /* Debug */,

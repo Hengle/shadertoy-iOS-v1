@@ -21,8 +21,8 @@
 
 @interface ShaderManager : NSObject
 {
-    NSMutableArray* pendingShaders;
-    NSMutableDictionary* shaderDictionary;
+    NSMutableArray* _pendingShaders;
+    NSMutableDictionary* _shaderDictionary;
     
     ShaderInfo* _defaultShader;
 }

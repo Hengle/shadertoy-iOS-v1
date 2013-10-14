@@ -47,6 +47,7 @@
  
  */
 
+#include <stdio.h>
 #include <AudioToolbox/AudioToolbox.h>
 #include <libkern/OSAtomic.h>
 #include <Accelerate/Accelerate.h>

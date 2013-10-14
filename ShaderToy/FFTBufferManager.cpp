@@ -129,7 +129,9 @@ Boolean	FFTBufferManager::ComputeFFT(int32_t *outFFTData)
 		return true;
 	}
 	else if (mNeedsAudioData == 0)
+    {
 		OSAtomicIncrement32Barrier(&mNeedsAudioData);
+    }
 	
 	return false;
 }

@@ -3,6 +3,12 @@
 #define kOutputBus 0
 #define kInputBus 1
 
+@interface AudioController ()
+
+void checkStatus(OSStatus status);
+
+@end
+
 @implementation AudioController
 @synthesize rioUnit, audioFormat, delegate;
 
@@ -12,7 +18,8 @@
     
     @synchronized(self)
     {
-        if (!sharedAudioManager) {
+        if (!sharedAudioManager)
+        {
             sharedAudioManager = [[AudioController alloc] init];
             [sharedAudioManager startAudio];
         }
@@ -20,10 +27,12 @@
     }
 }
 
-void checkStatus(OSStatus status);
-void checkStatus(OSStatus status) {
-    if(status!=0)
+void checkStatus(OSStatus status)
+{
+    if (status != 0)
+    {
         printf("Error: %ld\n", status);
+    }
 }
 
 #pragma mark init
@@ -135,7 +144,8 @@ static OSStatus recordingCallback(void *inRefCon,
                                   const AudioTimeStamp *inTimeStamp, 
                                   UInt32 inBusNumber, 
                                   UInt32 inNumberFrames, 
-                                  AudioBufferList *ioData) {
+                                  AudioBufferList *ioData)
+{
     
     AudioController *THIS = (__bridge AudioController*) inRefCon;
     
@@ -165,21 +175,23 @@ static OSStatus recordingCallback(void *inRefCon,
         if (THIS->_fft->ComputeFFT(THIS->_fftData))
         {
             // call the delegate when fft is ready
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [THIS.delegate  receivedFreqSamples:(int32_t*)THIS->_fftData length:512];
+            dispatch_async(dispatch_get_main_queue(), ^
+            {
+                [THIS.delegate receivedFreqSamples:(int32_t*)THIS->_fftData length:512];
             });
         }
     }
     
     // Received correctly wave information
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [THIS.delegate  receivedWaveSamples:(SInt32*)THIS->bufferList.mBuffers[0].mData length:inNumberFrames];
+    dispatch_async(dispatch_get_main_queue(), ^
+    {
+        [THIS.delegate receivedWaveSamples:(SInt32*)THIS->bufferList.mBuffers[0].mData length:inNumberFrames];
     }); 
     
     return noErr;
 }
 
--(void) startAudio
+- (void) startAudio
 {
     OSStatus status = AudioOutputUnitStart(rioUnit);
     checkStatus(status);

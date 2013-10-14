@@ -12,7 +12,7 @@
 
 @protocol ShaderMenuDelegate <NSObject>
 
-- (void)shaderMenu:(ShaderMenuViewController *)shaderMenu choseShaderCategory:(NSString *)category;
+- (void)shaderMenu:(ShaderMenuViewController *)shaderMenu choseShaderCategory:(EShaderCategory)category;
 
 @end
 

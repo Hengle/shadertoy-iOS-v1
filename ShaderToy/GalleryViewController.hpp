@@ -7,15 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ShaderManager.h"
-#import "ShaderMenuViewController.h"
 
-// Audio stuff
+#import "ShaderRequest.h"
+#import "ShaderMenuViewController.h"
 #import "AudioController.hpp"
 
 @class ShaderViewController;
 
-@interface GalleryViewController : UIPageViewController <UIPageViewControllerDelegate, UIPageViewControllerDataSource, SWRevealViewControllerDelegate, ShaderManagerDelegate, ShaderMenuDelegate, AudioControllerDelegate>
+@interface GalleryViewController : UIPageViewController <UIPageViewControllerDelegate, UIPageViewControllerDataSource, SWRevealViewControllerDelegate, ShaderRequestDelegate, ShaderMenuDelegate, AudioControllerDelegate>
 {
     bool _revealControllerShowing;
     bool _loadingShaders;

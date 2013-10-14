@@ -42,8 +42,8 @@
     
     if (self)
     {
-        pendingShaders = [NSMutableArray new];
-        shaderDictionary = [NSMutableDictionary new];
+        _pendingShaders = [NSMutableArray new];
+        _shaderDictionary = [NSMutableDictionary new];
     }
     
     return self;
@@ -54,9 +54,9 @@
     @synchronized(self)
     {
         // Compile any available shaders
-        for (ShaderInfo* shader in pendingShaders)
+        for (ShaderInfo* shader in _pendingShaders)
         {
-            if ([shaderDictionary objectForKey:shader.ID] == nil)
+            if ([_shaderDictionary objectForKey:shader.ID] == nil)
             {
                 for (ShaderRenderPass* renderpass in shader.renderpasses)
                 {
@@ -73,9 +73,9 @@
         }
         
         // If we compiled shaders, remove them and notify our delegate
-        if (pendingShaders.count > 0)
+        if (_pendingShaders.count > 0)
         {
-            [pendingShaders removeAllObjects];
+            [_pendingShaders removeAllObjects];
             [_delegate shaderManagerDidFinishCompiling:self];
         }
     }
@@ -100,27 +100,29 @@
 
 - (void)addShader:(ShaderInfo *)shader
 {
-    [pendingShaders addObject:shader];
+    [_pendingShaders addObject:shader];
 }
 
 - (void)addShaders:(NSArray *)shaders
 {
-    [pendingShaders addObjectsFromArray:shaders];
+    [_pendingShaders addObjectsFromArray:shaders];
 }
 
 - (void)storeShader:(GLuint)program withName:(NSString *)name
 {
-    [shaderDictionary setObject:[NSNumber numberWithUnsignedInt:program] forKey:name];
+    [_shaderDictionary setObject:[NSNumber numberWithUnsignedInt:program] forKey:name];
 }
 
 - (BOOL)shaderExists:(ShaderInfo *)shader
 {
-    return ([shaderDictionary objectForKey:shader.ID] == nil);
+    NSNumber* program = [_shaderDictionary objectForKey:shader.ID];
+    
+    return (program != nil);
 }
 
 - (GLuint)getShader:(ShaderInfo *)shader
 {
-    NSNumber* programObject = [shaderDictionary objectForKey:shader.ID];
+    NSNumber* programObject = [_shaderDictionary objectForKey:shader.ID];
     GLuint program = 0;
     
     if (programObject != nil)
@@ -167,7 +169,10 @@
             [codeString appendFormat:@"uniform sampler2D iChannel%d;\n", input.channel];
         }
         
-        [[ChannelResourceManager sharedInstance] addResource:input.source ofType:input.type];
+        if (![input.type isEqualToString:@"keyboard"])
+        {
+            [[ChannelResourceManager sharedInstance] addResource:input.source ofType:input.type];
+        }
     }
     
     [codeString appendString:@"\n// Shader code follows\n\n"];
