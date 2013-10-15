@@ -12,6 +12,7 @@
 
 @interface ShaderRequest ()
 
+- (void)doneWithRequest;
 - (NSString *)categoryStringForCategory:(EShaderCategory)category;
 
 @end
@@ -104,8 +105,7 @@
                                    }
                                    else
                                    {
-                                       [self.delegate shaderRequest:self hasShadersReady:_newShaders];
-                                       _activeRequest = false;
+                                       [self doneWithRequest];
                                    }
                                }
                                else
@@ -114,15 +114,19 @@
                                }
                            }
                        });
-        
-        _currentIndex += 12;
     }
 }
 
 - (void)shaderManagerDidFinishCompiling:(ShaderManager *)manager
 {
+    [self doneWithRequest];
+}
+
+- (void)doneWithRequest
+{
     [self.delegate shaderRequest:self hasShadersReady:_newShaders];
     _activeRequest = false;
+    _currentIndex += 12;
 }
 
 - (NSString *)categoryStringForCategory:(EShaderCategory)category

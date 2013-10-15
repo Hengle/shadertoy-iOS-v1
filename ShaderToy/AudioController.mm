@@ -31,7 +31,7 @@ void checkStatus(OSStatus status)
 {
     if (status != 0)
     {
-        printf("Error: %ld\n", status);
+        printf("Error: %d\n", (int)status);
     }
 }
 

@@ -35,9 +35,9 @@
 - (GLKVector4)date
 {
     NSDate* date = [NSDate date];
-    NSDateComponents *components = [[NSCalendar currentCalendar] components:kCFCalendarUnitYear | kCFCalendarUnitMonth | kCFCalendarUnitDay | kCFCalendarUnitMinute | kCFCalendarUnitSecond fromDate:date];
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:kCFCalendarUnitYear | kCFCalendarUnitMonth | kCFCalendarUnitDay | kCFCalendarUnitHour | kCFCalendarUnitMinute | kCFCalendarUnitSecond fromDate:date];
     
-    return GLKVector4Make(components.year, components.month, components.day, (components.minute * 60) + components.second);
+    return GLKVector4Make(components.year, components.month, components.day, (components.hour * 60 * 60) + (components.minute * 60) + components.second);
 }
 
 - (void)clearChannels
@@ -70,7 +70,7 @@
     self = [super init];
     if (self)
     {
-        _ID = ((NSNumber*)inputData[@"id"]).integerValue;
+        _ID = ((NSNumber *)inputData[@"id"]).intValue;
         
         // If the file is available locally, use the local file
         // otherwise download it
@@ -81,7 +81,7 @@
             _source = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.shadertoy.com%@", source]];
         }
         _type = inputData[@"ctype"];
-        _channel = ((NSNumber *)inputData[@"channel"]).integerValue;
+        _channel = ((NSNumber *)inputData[@"channel"]).intValue;
     }
     
     return self;
@@ -151,11 +151,11 @@
         NSDictionary* info = json[@"info"];
         
         _ID = info[@"id"];
-        _viewed = ((NSNumber*)info[@"viewed"]).integerValue;
+        _viewed = ((NSNumber*)info[@"viewed"]).intValue;
         _name = info[@"name"];
         _username = info[@"username"];
         _description = info[@"description"];
-        _likes = ((NSNumber*)info[@"likes"]).integerValue;
+        _likes = ((NSNumber*)info[@"likes"]).intValue;
         _published = info[@"published"];
         
         _tags = info[@"tags"];

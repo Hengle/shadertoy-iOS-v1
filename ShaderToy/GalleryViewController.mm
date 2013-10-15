@@ -98,13 +98,13 @@
     }
     
     // If this is the last shader we have, put a request in for more shaders
-    int shaderIndex = [_shaders indexOfObject:next.currentShader];
+    NSUInteger shaderIndex = [_shaders indexOfObject:next.currentShader];
     if (shaderIndex >= (_shaders.count - 1))
     {
         [_shaderRequest requestNewShaders];
     }
     
-    NSLog(@"Pending controller %d", _pendingControllers.count);
+    NSLog(@"Pending controller %u", _pendingControllers.count);
     NSLog(@"Started Animation for next controller %@", next);
 }
 
@@ -149,18 +149,16 @@
 {
     ShaderViewController* newController = nil;
     
-    int shaderIndex = [_shaders indexOfObject:viewController.currentShader];
+    NSUInteger shaderIndex = [_shaders indexOfObject:viewController.currentShader];
     if (shaderIndex != NSNotFound)
     {
         shaderIndex--;
-        if (shaderIndex >= 0)
-        {
-            newController = _viewControllers[shaderIndex % _viewControllers.count];
-            ShaderInfo* shader = _shaders[shaderIndex];
-            [newController setShader:shader];
-            
-            NSLog(@"Setting VC %d to shader %@", shaderIndex % _viewControllers.count, shader.name);
-        }
+        
+        newController = _viewControllers[shaderIndex % _viewControllers.count];
+        ShaderInfo* shader = _shaders[shaderIndex];
+        [newController setShader:shader];
+        
+        NSLog(@"Setting VC %u to shader %@", shaderIndex % _viewControllers.count, shader.name);
     }
     
     return newController;
@@ -170,7 +168,7 @@
 {
     ShaderViewController* newController = nil;
     
-    int shaderIndex = [_shaders indexOfObject:viewController.currentShader];
+    NSUInteger shaderIndex = [_shaders indexOfObject:viewController.currentShader];
     if (shaderIndex != NSNotFound)
     {
         shaderIndex++;
@@ -182,7 +180,7 @@
             ShaderInfo* shader = _shaders[shaderIndex];
             [newController setShader:shader];
             
-            NSLog(@"Setting VC %d to shader %@", shaderIndex % _viewControllers.count, shader.name);
+            NSLog(@"Setting VC %u to shader %@", (shaderIndex % _viewControllers.count), shader.name);
         }
     }
     

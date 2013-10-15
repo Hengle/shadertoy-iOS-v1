@@ -450,7 +450,6 @@
     // Limit the maximum height that the overlay can reach (lower Y is higher up)
     if (translatedPoint.y < finalViewCenter)
     {
-        float delta = finalViewCenter - translatedPoint.y;
         translatedPoint = CGPointMake(firstX, finalViewCenter);
     }
     
