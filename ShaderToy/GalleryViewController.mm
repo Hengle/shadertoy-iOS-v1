@@ -149,16 +149,19 @@
 {
     ShaderViewController* newController = nil;
     
-    NSUInteger shaderIndex = [_shaders indexOfObject:viewController.currentShader];
+    NSInteger shaderIndex = [_shaders indexOfObject:viewController.currentShader];
     if (shaderIndex != NSNotFound)
     {
         shaderIndex--;
         
-        newController = _viewControllers[shaderIndex % _viewControllers.count];
-        ShaderInfo* shader = _shaders[shaderIndex];
-        [newController setShader:shader];
+        if (shaderIndex >= 0)
+        {
+            newController = _viewControllers[shaderIndex % _viewControllers.count];
+            ShaderInfo* shader = _shaders[shaderIndex];
+            [newController setShader:shader];
         
-        NSLog(@"Setting VC %u to shader %@", shaderIndex % _viewControllers.count, shader.name);
+            NSLog(@"Setting VC %u to shader %@", shaderIndex % _viewControllers.count, shader.name);
+        }
     }
     
     return newController;

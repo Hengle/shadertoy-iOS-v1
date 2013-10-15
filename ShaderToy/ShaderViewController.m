@@ -44,12 +44,20 @@
     
     if ([ShaderManager sharedInstance].defaultSharegroup == nil)
     {
-        _context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
+        _context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
+        if (_context == nil)
+        {
+            _context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
+        }
         [ShaderManager sharedInstance].defaultSharegroup = _context.sharegroup;
     }
     else
     {
-        _context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2 sharegroup:[ShaderManager sharedInstance].defaultSharegroup];
+        _context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3 sharegroup:[ShaderManager sharedInstance].defaultSharegroup];
+        if (_context == nil)
+        {
+            _context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2 sharegroup:[ShaderManager sharedInstance].defaultSharegroup];
+        }
     }
     
     if (!_context)
