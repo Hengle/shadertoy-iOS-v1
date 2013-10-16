@@ -9,6 +9,9 @@
 #import "MenuViewController.h"
 #import "ColorViewController.h"
 
+@implementation SWUITableViewCell
+@end
+
 @implementation MenuViewController
 
 - (void) prepareForSegue: (UIStoryboardSegue *) segue sender: (id) sender
@@ -17,12 +20,12 @@
     if ( [segue.destinationViewController isKindOfClass: [ColorViewController class]] &&
         [sender isKindOfClass:[UITableViewCell class]] )
     {
-        UITableViewCell* c = sender;
+        SWUITableViewCell* c = (SWUITableViewCell *)sender;
         ColorViewController* cvc = segue.destinationViewController;
         
         [cvc view];
-        cvc.label.textColor = c.textLabel.textColor;
-        cvc.label.text = c.textLabel.text;
+        cvc.label.textColor = c.label.textColor;
+        cvc.label.text = c.label.text;
     }
 
     // configure the segue.
@@ -39,10 +42,12 @@
 
         rvcs.performBlock = ^(SWRevealViewControllerSegue* rvc_segue, UIViewController* svc, UIViewController* dvc) {
 
-            UINavigationController* nc = (UINavigationController*)rvc.frontViewController;
-            [nc setViewControllers: @[ dvc ] animated: YES ];
+//            UINavigationController* nc = (UINavigationController*)rvc.frontViewController;
+//            [nc setViewControllers: @[ dvc ] animated: NO ];
+//            [rvc setFrontViewPosition: FrontViewPositionLeft animated: YES];
             
-            [rvc setFrontViewPosition: FrontViewPositionLeft animated: YES];
+            UINavigationController* nc = [[UINavigationController alloc] initWithRootViewController:dvc];
+            [rvc setFrontViewController:nc animated:YES];
         };
     }
 }
