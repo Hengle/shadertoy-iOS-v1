@@ -5,11 +5,13 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>627C85BB-7E8F-4003-B5FE-756F1B264DB6</string>
+	<string>E37885DD-5E7C-455F-8F09-8DA9BFBB403E</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Shadertoy</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>6DFC0332-AC9E-4FC4-9E8B-3E78A8FCC7E2</key>
+		<string>https://github.com/John-Lluch/SWRevealViewController.git</string>
 		<key>94A5811C-CB44-4DAB-9B79-71239895A67B</key>
 		<string>https://bitbucket.org/beautypi/shadertoy-ios.git</string>
 	</dict>
@@ -17,6 +19,8 @@
 	<string>Shadertoy.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
+		<key>6DFC0332-AC9E-4FC4-9E8B-3E78A8FCC7E2</key>
+		<string>../../SWRevealViewController</string>
 		<key>94A5811C-CB44-4DAB-9B79-71239895A67B</key>
 		<string>../..</string>
 	</dict>
@@ -35,6 +39,14 @@
 			<string>94A5811C-CB44-4DAB-9B79-71239895A67B</string>
 			<key>IDESourceControlWCCName</key>
 			<string>ShaderToy</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>6DFC0332-AC9E-4FC4-9E8B-3E78A8FCC7E2</string>
+			<key>IDESourceControlWCCName</key>
+			<string>SWRevealViewController</string>
 		</dict>
 	</array>
 </dict>

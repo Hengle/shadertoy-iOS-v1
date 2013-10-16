@@ -28,9 +28,9 @@
 		AE5CABBC17992900000924C3 /* menu_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = AE5CABB617992900000924C3 /* menu_selected.png */; };
 		AE5CABBD17992900000924C3 /* share_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = AE5CABB717992900000924C3 /* share_selected.png */; };
 		AE5CABBE17992900000924C3 /* time_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = AE5CABB817992900000924C3 /* time_selected.png */; };
-		AE5CABC9179BD925000924C3 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5CABC8179BD925000924C3 /* SWRevealViewController.m */; };
 		AE5CABCC179C8570000924C3 /* eye_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = AE5CABCA179C8570000924C3 /* eye_selected.png */; };
 		AE5CABCD179C8570000924C3 /* eye.png in Resources */ = {isa = PBXBuildFile; fileRef = AE5CABCB179C8570000924C3 /* eye.png */; };
+		AE8489B4180E7ABD00F154F7 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8489B3180E7ABD00F154F7 /* SWRevealViewController.m */; };
 		AE85EACA17933DEE0090DC1F /* ShaderInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85EAC817933DEE0090DC1F /* ShaderInfoViewController.m */; };
 		AE933D5F1736F725009EAF41 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE933D5E1736F725009EAF41 /* OpenGLES.framework */; };
 		AE933D611736F731009EAF41 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE933D601736F731009EAF41 /* GLKit.framework */; };
@@ -97,10 +97,10 @@
 		AE5CABB617992900000924C3 /* menu_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = menu_selected.png; path = Art/Icons/menu_selected.png; sourceTree = SOURCE_ROOT; };
 		AE5CABB717992900000924C3 /* share_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = share_selected.png; path = Art/Icons/share_selected.png; sourceTree = SOURCE_ROOT; };
 		AE5CABB817992900000924C3 /* time_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = time_selected.png; path = Art/Icons/time_selected.png; sourceTree = SOURCE_ROOT; };
-		AE5CABC7179BD925000924C3 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
-		AE5CABC8179BD925000924C3 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		AE5CABCA179C8570000924C3 /* eye_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = eye_selected.png; path = Art/Icons/eye_selected.png; sourceTree = SOURCE_ROOT; };
 		AE5CABCB179C8570000924C3 /* eye.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = eye.png; path = Art/Icons/eye.png; sourceTree = SOURCE_ROOT; };
+		AE8489B2180E7ABD00F154F7 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
+		AE8489B3180E7ABD00F154F7 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		AE85EAC717933DEE0090DC1F /* ShaderInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ShaderInfoViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		AE85EAC817933DEE0090DC1F /* ShaderInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ShaderInfoViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		AE933D581736F601009EAF41 /* Shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.vsh; sourceTree = "<group>"; };
@@ -209,14 +209,14 @@
 			path = "App Icons [Squared]";
 			sourceTree = "<group>";
 		};
-		AE5CABC6179BD925000924C3 /* SWRevealViewController */ = {
+		AE8489B1180E7ABD00F154F7 /* SWRevealViewController */ = {
 			isa = PBXGroup;
 			children = (
-				AE5CABC7179BD925000924C3 /* SWRevealViewController.h */,
-				AE5CABC8179BD925000924C3 /* SWRevealViewController.m */,
+				AE8489B2180E7ABD00F154F7 /* SWRevealViewController.h */,
+				AE8489B3180E7ABD00F154F7 /* SWRevealViewController.m */,
 			);
 			name = SWRevealViewController;
-			path = Shadertoy/SWRevealViewController/SWRevealViewController;
+			path = SWRevealViewController/SWRevealViewController;
 			sourceTree = SOURCE_ROOT;
 		};
 		AE85EAC617933D950090DC1F /* Overlay */ = {
@@ -331,7 +331,7 @@
 		AEA3B58B1736E7C500786DA2 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				AE5CABC6179BD925000924C3 /* SWRevealViewController */,
+				AE8489B1180E7ABD00F154F7 /* SWRevealViewController */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -498,9 +498,9 @@
 				AEAE17F5174B637000764D5B /* Plane.m in Sources */,
 				AEB028281753F26100757AF8 /* ShaderView.m in Sources */,
 				AEADD6F61803DB28001C57B5 /* ShaderRequest.m in Sources */,
+				AE8489B4180E7ABD00F154F7 /* SWRevealViewController.m in Sources */,
 				AEBF32B4176457EB00DEEF71 /* ShaderManager.m in Sources */,
 				AE85EACA17933DEE0090DC1F /* ShaderInfoViewController.m in Sources */,
-				AE5CABC9179BD925000924C3 /* SWRevealViewController.m in Sources */,
 				E297418517D0807500D39049 /* AudioController.mm in Sources */,
 				E297418A17D08DAD00D39049 /* FFTBufferManager.cpp in Sources */,
 			);
