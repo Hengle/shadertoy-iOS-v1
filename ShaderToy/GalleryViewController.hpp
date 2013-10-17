@@ -19,7 +19,7 @@
     bool _revealControllerShowing;
     bool _loadingShaders;
     
-    NSMutableArray* _viewControllers;
+    NSMutableArray* _shaderViewControllers;
     NSMutableArray* _shaders;
     NSMutableArray* _pendingControllers;
     

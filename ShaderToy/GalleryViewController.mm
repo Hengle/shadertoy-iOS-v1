@@ -42,15 +42,15 @@
     
     _pendingControllers = [NSMutableArray new];
     _shaders = [NSMutableArray new];
-    _viewControllers = [NSMutableArray new];
+    _shaderViewControllers = [NSMutableArray new];
     
     // Create the first controller and start the animation
     ShaderViewController* viewController = (ShaderViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"ShaderView"];
     ShaderInfo* shader = [ShaderManager sharedInstance].defaultShader;
     [viewController setShader:shader];
-    [_viewControllers addObject:viewController];
+    [_shaderViewControllers addObject:viewController];
     
-    [self setViewControllers:@[viewController] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+    [self setViewControllers:@[viewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
     [viewController startAnimation];
     
     _shaderRequest = [ShaderRequest new];
@@ -75,7 +75,7 @@
     [_shaders removeAllObjects];
  
     ShaderInfo* shader = [ShaderManager sharedInstance].defaultShader;
-    ShaderViewController* viewController = (ShaderViewController *)self.viewControllers[0];
+    ShaderViewController* viewController = (ShaderViewController *)_shaderViewControllers[0];
     [viewController setShader:shader];
     [self setViewControllers:@[viewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:
      ^(BOOL finished)
@@ -156,11 +156,11 @@
         
         if (shaderIndex >= 0)
         {
-            newController = _viewControllers[shaderIndex % _viewControllers.count];
+            newController = _shaderViewControllers[shaderIndex % _shaderViewControllers.count];
             ShaderInfo* shader = _shaders[shaderIndex];
             [newController setShader:shader];
         
-            NSLog(@"Setting VC %u to shader %@", shaderIndex % _viewControllers.count, shader.name);
+            NSLog(@"Setting VC %u to shader %@", shaderIndex % _shaderViewControllers.count, shader.name);
         }
     }
     
@@ -178,12 +178,12 @@
         
         if (shaderIndex < _shaders.count)
         {
-            newController = _viewControllers[shaderIndex % _viewControllers.count];
+            newController = _shaderViewControllers[shaderIndex % _shaderViewControllers.count];
             
             ShaderInfo* shader = _shaders[shaderIndex];
             [newController setShader:shader];
             
-            NSLog(@"Setting VC %u to shader %@", (shaderIndex % _viewControllers.count), shader.name);
+            NSLog(@"Setting VC %u to shader %@", (shaderIndex % _shaderViewControllers.count), shader.name);
         }
     }
     
@@ -223,9 +223,9 @@
     
     ShaderInfo* defaultShader = [ShaderManager sharedInstance].defaultShader;
     
-    if (_viewControllers.count < MAX_CONTROLLERS)
+    if (_shaderViewControllers.count < MAX_CONTROLLERS)
     {
-        ShaderViewController* viewController = (ShaderViewController *)self.viewControllers[0];
+        ShaderViewController* viewController = (ShaderViewController *)_shaderViewControllers[0];
         if (viewController.currentShader == defaultShader)
         {
             [viewController setShader:_shaders[0]];
@@ -237,14 +237,14 @@
             ShaderViewController* controller = (ShaderViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"ShaderView"];
             [controller setShader:_shaders[i]];
             
-            [_viewControllers addObject:controller];
+            [_shaderViewControllers addObject:controller];
         }
     }
     else if (newCategory)
     {
-        for (int i = 0; i < _viewControllers.count; i++)
+        for (int i = 0; i < _shaderViewControllers.count; i++)
         {
-            ShaderViewController* controller = (ShaderViewController *)_viewControllers[i];
+            ShaderViewController* controller = (ShaderViewController *)_shaderViewControllers[i];
             if (controller.currentShader == defaultShader)
             {
                 [controller setShader:_shaders[i]];
