@@ -91,6 +91,7 @@
     _infoViewController.view.backgroundColor = [_infoViewController.view.backgroundColor colorWithAlphaComponent:OverlayMinAlpha];
     
     _menuButton = [[UIButton alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 30.0f, 30.0f)];
+    _menuButton.accessibilityLabel = @"menu";
     [_menuButton setImage:[UIImage imageNamed:@"menu.png"] forState:UIControlStateNormal];
     [_menuButton addTarget:self action:@selector(toggleMenu:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_menuButton];
@@ -202,27 +203,36 @@
             [_params clearChannels];
             
             // Inputs are set only on initialization, no need to re-set them
-            for (ShaderInput* input in renderpass.inputs)
-            {
-                if ([input.type isEqual: @"texture"])
-                {
-                    GLuint textureID = [[ChannelResourceManager sharedInstance] getTextureWithName:input.source];
-                    
-                    if (textureID > 0)
-                    {
-                        GLKVector3 resolution = [[ChannelResourceManager sharedInstance] getTextureResolution:input.source];
-                        
-                        _params.channelInfo[input.channel] = textureID;
-                        [_params setChannel:input.channel resolution:resolution];
-                        
-                        NSLog(@"Setting input channel %d to texture %d, resolution %f x %f", input.channel, _params.channelInfo[input.channel], _params.channelResolution[input.channel + 0], _params.channelResolution[input.channel + 1]);
-                    }
-                }
-            }
+            [self setShaderInputs:renderpass.inputs onParams:_params];
         }
     }
     
     NSLog(@"Setting shader to %@", shader.name);
+}
+
+- (void)setShaderInputs:(NSArray *)inputs onParams:(ShaderParameters *)params
+{
+    for (ShaderInput *input in inputs)
+    {
+        if ([input.type isEqualToString:@"texture"])
+        {
+            GLuint textureID = [[ChannelResourceManager sharedInstance] getTextureWithName:input.source];
+            
+            if (textureID > 0)
+            {
+                GLKVector3 resolution = [[ChannelResourceManager sharedInstance] getTextureResolution:input.source];
+                
+                params.channelInfo[input.channel] = textureID;
+                [params setChannel:input.channel resolution:resolution];
+                
+                NSLog(@"Setting input channel %d to texture %d, resolution %f x %f", input.channel, params.channelInfo[input.channel], params.channelResolution[input.channel + 0], params.channelResolution[input.channel + 1]);
+            }
+        }
+        else if ([input.type isEqualToString:@"music"])
+        {
+            
+        }
+    }
 }
 
 - (void)tearDown
@@ -258,24 +268,7 @@
             _params = [[ShaderParameters alloc] init];
             
             // Inputs are set only on initialization, no need to re-set them
-            for (ShaderInput* input in renderpass.inputs)
-            {
-                if ([input.type isEqual: @"texture"])
-                {
-                    GLuint textureID = [[ChannelResourceManager sharedInstance] getTextureWithName:input.source];
-                    
-                    if (textureID > 0)
-                    {
-                        GLKVector3 resolution = [[ChannelResourceManager sharedInstance] getTextureResolution:input.source];
-                        
-                        _params.channelInfo[input.channel] = textureID;
-                        [_params setChannel:input.channel resolution:resolution];
-                        
-                        NSLog(@"Setting input channel %d to texture %d, resolution %f x %f", input.channel, _params.channelInfo[input.channel], _params.channelResolution[input.channel + 0], _params.channelResolution[input.channel + 1]);
-                    }
-                }
-            }
-
+            [self setShaderInputs:renderpass.inputs onParams:_params];
         }
     }
 }

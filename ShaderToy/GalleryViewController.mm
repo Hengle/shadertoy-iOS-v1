@@ -225,6 +225,7 @@
     
     if (_shaderViewControllers.count < MAX_CONTROLLERS)
     {
+        // When we are starting out, create the necessary controllers
         ShaderViewController* viewController = (ShaderViewController *)_shaderViewControllers[0];
         if (viewController.currentShader == defaultShader)
         {
@@ -242,6 +243,7 @@
     }
     else if (newCategory)
     {
+        // If this is a new category request, just set the shaders to their appropriate shader
         for (int i = 0; i < _shaderViewControllers.count; i++)
         {
             ShaderViewController* controller = (ShaderViewController *)_shaderViewControllers[i];
@@ -249,6 +251,16 @@
             {
                 [controller setShader:_shaders[i]];
             }
+        }
+    }
+    else
+    {
+        // If we are retrieving more shaders for this category, make sure our datasource is reloaded so scrolling is smooth
+        ShaderViewController* viewController = (ShaderViewController *)self.viewControllers[0];
+        
+        if (viewController != nil)
+        {
+            [self setViewControllers:@[viewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
         }
     }
 }

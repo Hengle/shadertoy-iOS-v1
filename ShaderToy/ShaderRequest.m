@@ -51,6 +51,8 @@
                        ^{
                            NSString* urlString = [NSString stringWithFormat:@"https://www.shadertoy.com/mobile.htm?sort=%@&from=%d&num=12", [self categoryStringForCategory:_currentCategory], _currentIndex];
                            
+                           NSLog(@"ShaderRequest: asking for more shaders with URL %@", urlString);
+                           
                            NSData* shaderListData = [NSData dataWithContentsOfURL:[NSURL URLWithString:urlString]];
                            _newShaders = [NSMutableArray new];
                            
@@ -126,7 +128,9 @@
 {
     [self.delegate shaderRequest:self hasShadersReady:_newShaders];
     _activeRequest = false;
-    _currentIndex += 12;
+    
+    // Increase the shader index by the amount of shaders returned
+    _currentIndex += _newShaders.count;
 }
 
 - (NSString *)categoryStringForCategory:(EShaderCategory)category
