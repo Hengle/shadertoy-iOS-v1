@@ -9,10 +9,19 @@
 #import <Foundation/Foundation.h>
 #import <GLKit/GLKit.h>
 
-@interface ChannelResourceManager : NSObject
+#import "AudioController.hpp"
+
+
+@interface ChannelResourceManager : NSObject <AudioControllerDelegate>
 {
     NSMutableArray* _pendingResources;
     NSMutableDictionary* _resourceDictionary;
+    
+    AudioController *_audioManager;
+    
+    GLuint _audioTextureID;
+    GLubyte* _freqBuffer;
+    GLubyte* _waveBuffer;
 }
 
 + (ChannelResourceManager *)sharedInstance;
@@ -24,5 +33,7 @@
 - (NSData *)getResourceWithName:(NSURL *)name;
 - (GLuint)getTextureWithName:(NSURL *)name;
 - (GLKVector3)getTextureResolution:(NSURL *)name;
+- (GLuint)getAudioTexture;
+- (GLKVector3)getAudioTextureResolution;
 
 @end

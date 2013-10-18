@@ -8,7 +8,7 @@
 
 #import "ShaderRequest.h"
 #import "ShaderInfo.h"
-#import "ShaderManager.h"
+#import "ShaderManager.hpp"
 
 @interface ShaderRequest ()
 

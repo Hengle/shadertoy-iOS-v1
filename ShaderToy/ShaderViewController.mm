@@ -7,12 +7,13 @@
 //
 
 #import "ShaderViewController.h"
-#import "ShaderManager.h"
+#import "ShaderManager.hpp"
 #import "ShaderInfo.h"
 #import "ShaderView.h"
 #import "Plane.h"
-#import "ChannelResourceManager.h"
+#import "ChannelResourceManager.hpp"
 #import "ShaderInfoViewController.h"
+#import "AudioController.hpp"
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -25,6 +26,7 @@
 {
     ShaderInfoViewController* _infoViewController;
     UIButton* _menuButton;
+    UIButton* _soundButton;
 }
 
 - (void)tearDown;
@@ -95,6 +97,12 @@
     [_menuButton setImage:[UIImage imageNamed:@"menu.png"] forState:UIControlStateNormal];
     [_menuButton addTarget:self action:@selector(toggleMenu:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_menuButton];
+    
+    _soundButton = [[UIButton alloc] initWithFrame:CGRectMake(280.0f, 10.0f, 30.0f, 30.0f)];
+    _soundButton.accessibilityLabel = @"sound";
+    [_soundButton setImage:[UIImage imageNamed:@"sound.png"] forState:UIControlStateNormal];
+    [_soundButton addTarget:self action:@selector(toggleSound:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_soundButton];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -230,7 +238,17 @@
         }
         else if ([input.type isEqualToString:@"music"])
         {
+            GLuint textureID = [[ChannelResourceManager sharedInstance] getAudioTexture];
             
+            if (textureID > 0)
+            {
+                GLKVector3 resolution = [[ChannelResourceManager sharedInstance] getAudioTextureResolution];
+                
+                params.channelInfo[input.channel] = textureID;
+                [params setChannel:input.channel resolution:resolution];
+                
+                NSLog(@"Setting input channel %d to audio texture %d, resolution %f x %f", input.channel, params.channelInfo[input.channel], params.channelResolution[input.channel + 0], params.channelResolution[input.channel + 1]);
+            }
         }
     }
 }
@@ -426,6 +444,10 @@
     [self.revealViewController revealToggleAnimated:YES];
 }
 
+- (IBAction)toggleSound:(id)sender
+{
+    [[AudioController sharedAudioManager] startAudio];
+}
 
 #pragma mark - Gestures
 

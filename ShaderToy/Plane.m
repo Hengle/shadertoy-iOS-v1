@@ -7,7 +7,7 @@
 //
 
 #import "Plane.h"
-#import "ShaderManager.h"
+#import "ShaderManager.hpp"
 #import "ShaderInfo.h"
 
 @interface Plane ()

@@ -46,8 +46,8 @@
 		AEA3B5501730E6C700786DA2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B54F1730E6C700786DA2 /* AppDelegate.m */; };
 		AEA3B5591730E6C700786DA2 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEA3B5571730E6C700786DA2 /* MainStoryboard_iPhone.storyboard */; };
 		AEA3B55C1730E6C700786DA2 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEA3B55A1730E6C700786DA2 /* MainStoryboard_iPad.storyboard */; };
-		AEA3B55F1730E6C700786DA2 /* GalleryViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B55E1730E6C700786DA2 /* GalleryViewController.mm */; };
-		AEA3B57B1732327200786DA2 /* ShaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B5791732327200786DA2 /* ShaderViewController.m */; };
+		AEA3B55F1730E6C700786DA2 /* GalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B55E1730E6C700786DA2 /* GalleryViewController.m */; };
+		AEA3B57B1732327200786DA2 /* ShaderViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B5791732327200786DA2 /* ShaderViewController.mm */; };
 		AEA3B58617360BBA00786DA2 /* ShaderMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B58517360BBA00786DA2 /* ShaderMenuViewController.m */; };
 		AEA3B58E1736E82A00786DA2 /* ShaderMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B58D1736E82A00786DA2 /* ShaderMenuCell.m */; };
 		AEADD6F61803DB28001C57B5 /* ShaderRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = AEADD6F51803DB28001C57B5 /* ShaderRequest.m */; };
@@ -55,7 +55,7 @@
 		AEAEEA6817422B1D003F74D3 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEAEEA6717422B1D003F74D3 /* Social.framework */; };
 		AEB028281753F26100757AF8 /* ShaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB028271753F26100757AF8 /* ShaderView.m */; };
 		AEBC414F1771B3B40024D73C /* ShaderInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1EF6081771923000A1251C /* ShaderInfo.m */; };
-		AEBC415D177444AF0024D73C /* ChannelResourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBC415C177444AF0024D73C /* ChannelResourceManager.m */; };
+		AEBC415D177444AF0024D73C /* ChannelResourceManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEBC415C177444AF0024D73C /* ChannelResourceManager.mm */; };
 		AEBC415F1776D2F80024D73C /* logo.json in Resources */ = {isa = PBXBuildFile; fileRef = AEBC415E1776D2F80024D73C /* logo.json */; };
 		AEBC41621777FE290024D73C /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = AEBC41601777FE290024D73C /* background.png */; };
 		AEBF32A31757503A00DEEF71 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AEBF32A21757503A00DEEF71 /* Default@2x.png */; };
@@ -65,7 +65,8 @@
 		AEBF32AB1757506D00DEEF71 /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = AEBF32AA1757506D00DEEF71 /* Default-Portrait@2x~ipad.png */; };
 		AEBF32AD1757507300DEEF71 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = AEBF32AC1757507300DEEF71 /* Default-Landscape~ipad.png */; };
 		AEBF32AF1757507500DEEF71 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = AEBF32AE1757507500DEEF71 /* Default-Landscape@2x~ipad.png */; };
-		AEBF32B4176457EB00DEEF71 /* ShaderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBF32B3176457EB00DEEF71 /* ShaderManager.m */; };
+		AEBF32B4176457EB00DEEF71 /* ShaderManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEBF32B3176457EB00DEEF71 /* ShaderManager.mm */; };
+		AEC3A07B181128970056C9DC /* sound.png in Resources */ = {isa = PBXBuildFile; fileRef = AEC3A07A181128970056C9DC /* sound.png */; };
 		AEC8A5D0179905BA0040AAEF /* logo-text.png in Resources */ = {isa = PBXBuildFile; fileRef = AEC8A5CF179905BA0040AAEF /* logo-text.png */; };
 		AED8869217D085DD00093573 /* loading.png in Resources */ = {isa = PBXBuildFile; fileRef = AED8869117D085DD00093573 /* loading.png */; };
 		E297418517D0807500D39049 /* AudioController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E297418417D0807500D39049 /* AudioController.mm */; };
@@ -124,10 +125,10 @@
 		AEA3B5551730E6C700786DA2 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		AEA3B5581730E6C700786DA2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		AEA3B55B1730E6C700786DA2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
-		AEA3B55D1730E6C700786DA2 /* GalleryViewController.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; lineEnding = 0; path = GalleryViewController.hpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		AEA3B55E1730E6C700786DA2 /* GalleryViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = GalleryViewController.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		AEA3B55D1730E6C700786DA2 /* GalleryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = GalleryViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		AEA3B55E1730E6C700786DA2 /* GalleryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = GalleryViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		AEA3B5781732327200786DA2 /* ShaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ShaderViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		AEA3B5791732327200786DA2 /* ShaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ShaderViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		AEA3B5791732327200786DA2 /* ShaderViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = ShaderViewController.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		AEA3B58417360BBA00786DA2 /* ShaderMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ShaderMenuViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		AEA3B58517360BBA00786DA2 /* ShaderMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ShaderMenuViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		AEA3B58C1736E82A00786DA2 /* ShaderMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ShaderMenuCell.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -140,8 +141,8 @@
 		AEAEEA6717422B1D003F74D3 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		AEB028261753F26100757AF8 /* ShaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ShaderView.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		AEB028271753F26100757AF8 /* ShaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ShaderView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		AEBC415B177444AF0024D73C /* ChannelResourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ChannelResourceManager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		AEBC415C177444AF0024D73C /* ChannelResourceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ChannelResourceManager.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		AEBC415B177444AF0024D73C /* ChannelResourceManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; lineEnding = 0; path = ChannelResourceManager.hpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		AEBC415C177444AF0024D73C /* ChannelResourceManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = ChannelResourceManager.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		AEBC415E1776D2F80024D73C /* logo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; lineEnding = 0; path = logo.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.javascript; };
 		AEBC41601777FE290024D73C /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 		AEBF32A21757503A00DEEF71 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
@@ -151,8 +152,9 @@
 		AEBF32AA1757506D00DEEF71 /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait@2x~ipad.png"; path = "../Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
 		AEBF32AC1757507300DEEF71 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape~ipad.png"; path = "../Default-Landscape~ipad.png"; sourceTree = "<group>"; };
 		AEBF32AE1757507500DEEF71 /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape@2x~ipad.png"; path = "../Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
-		AEBF32B2176457EB00DEEF71 /* ShaderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ShaderManager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		AEBF32B3176457EB00DEEF71 /* ShaderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ShaderManager.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		AEBF32B2176457EB00DEEF71 /* ShaderManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; lineEnding = 0; path = ShaderManager.hpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		AEBF32B3176457EB00DEEF71 /* ShaderManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = ShaderManager.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		AEC3A07A181128970056C9DC /* sound.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sound.png; path = Art/Icons/sound.png; sourceTree = SOURCE_ROOT; };
 		AEC8A5CF179905BA0040AAEF /* logo-text.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "logo-text.png"; path = "Art/logo-text.png"; sourceTree = SOURCE_ROOT; };
 		AED5F46617FBFB1E003F6B6F /* Shadertoy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = Shadertoy.entitlements; path = Shadertoy/Shadertoy.entitlements; sourceTree = SOURCE_ROOT; };
 		AED8869117D085DD00093573 /* loading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loading.png; sourceTree = "<group>"; };
@@ -271,14 +273,14 @@
 				AE85EAC617933D950090DC1F /* Overlay */,
 				AEA3B54E1730E6C700786DA2 /* AppDelegate.h */,
 				AEA3B54F1730E6C700786DA2 /* AppDelegate.m */,
-				AEA3B55D1730E6C700786DA2 /* GalleryViewController.hpp */,
-				AEA3B55E1730E6C700786DA2 /* GalleryViewController.mm */,
+				AEA3B55D1730E6C700786DA2 /* GalleryViewController.h */,
+				AEA3B55E1730E6C700786DA2 /* GalleryViewController.m */,
 				AEA3B58C1736E82A00786DA2 /* ShaderMenuCell.h */,
 				AEA3B58D1736E82A00786DA2 /* ShaderMenuCell.m */,
 				AEA3B58417360BBA00786DA2 /* ShaderMenuViewController.h */,
 				AEA3B58517360BBA00786DA2 /* ShaderMenuViewController.m */,
 				AEA3B5781732327200786DA2 /* ShaderViewController.h */,
-				AEA3B5791732327200786DA2 /* ShaderViewController.m */,
+				AEA3B5791732327200786DA2 /* ShaderViewController.mm */,
 				AEB028261753F26100757AF8 /* ShaderView.h */,
 				AEB028271753F26100757AF8 /* ShaderView.m */,
 				AEADD6F71803FF89001C57B5 /* ShaderToyDefines.h */,
@@ -353,6 +355,7 @@
 				AE5CABAF1798FCA9000924C3 /* love_hollow.png */,
 				AE5CABA61798F843000924C3 /* menu.png */,
 				AE5CABA71798F843000924C3 /* share.png */,
+				AEC3A07A181128970056C9DC /* sound.png */,
 				AE5CABA81798F843000924C3 /* time.png */,
 			);
 			name = Icons;
@@ -361,10 +364,10 @@
 		AEAE17F2174B635600764D5B /* Rendering */ = {
 			isa = PBXGroup;
 			children = (
-				AEBF32B2176457EB00DEEF71 /* ShaderManager.h */,
-				AEBF32B3176457EB00DEEF71 /* ShaderManager.m */,
-				AEBC415B177444AF0024D73C /* ChannelResourceManager.h */,
-				AEBC415C177444AF0024D73C /* ChannelResourceManager.m */,
+				AEBF32B2176457EB00DEEF71 /* ShaderManager.hpp */,
+				AEBF32B3176457EB00DEEF71 /* ShaderManager.mm */,
+				AEBC415B177444AF0024D73C /* ChannelResourceManager.hpp */,
+				AEBC415C177444AF0024D73C /* ChannelResourceManager.mm */,
 				AEAE17F3174B637000764D5B /* Plane.h */,
 				AEAE17F4174B637000764D5B /* Plane.m */,
 			);
@@ -467,6 +470,7 @@
 				AE5CABAC1798F843000924C3 /* time.png in Resources */,
 				AE5CABAE1798FBEC000924C3 /* fire.png in Resources */,
 				AE5CABB01798FCA9000924C3 /* love_hollow.png in Resources */,
+				AEC3A07B181128970056C9DC /* sound.png in Resources */,
 				AE5CABB21798FF35000924C3 /* logo-toolbar.png in Resources */,
 				AE5CABB917992900000924C3 /* fire_selected.png in Resources */,
 				AE5CABBA17992900000924C3 /* love_hollow_selected.png in Resources */,
@@ -487,19 +491,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AEBC415D177444AF0024D73C /* ChannelResourceManager.m in Sources */,
+				AEBC415D177444AF0024D73C /* ChannelResourceManager.mm in Sources */,
 				AEBC414F1771B3B40024D73C /* ShaderInfo.m in Sources */,
 				AEA3B54C1730E6C700786DA2 /* main.m in Sources */,
 				AEA3B5501730E6C700786DA2 /* AppDelegate.m in Sources */,
-				AEA3B55F1730E6C700786DA2 /* GalleryViewController.mm in Sources */,
-				AEA3B57B1732327200786DA2 /* ShaderViewController.m in Sources */,
+				AEA3B55F1730E6C700786DA2 /* GalleryViewController.m in Sources */,
+				AEA3B57B1732327200786DA2 /* ShaderViewController.mm in Sources */,
 				AEA3B58617360BBA00786DA2 /* ShaderMenuViewController.m in Sources */,
 				AEA3B58E1736E82A00786DA2 /* ShaderMenuCell.m in Sources */,
 				AEAE17F5174B637000764D5B /* Plane.m in Sources */,
 				AEB028281753F26100757AF8 /* ShaderView.m in Sources */,
 				AEADD6F61803DB28001C57B5 /* ShaderRequest.m in Sources */,
 				AE8489B4180E7ABD00F154F7 /* SWRevealViewController.m in Sources */,
-				AEBF32B4176457EB00DEEF71 /* ShaderManager.m in Sources */,
+				AEBF32B4176457EB00DEEF71 /* ShaderManager.mm in Sources */,
 				AE85EACA17933DEE0090DC1F /* ShaderInfoViewController.m in Sources */,
 				E297418517D0807500D39049 /* AudioController.mm in Sources */,
 				E297418A17D08DAD00D39049 /* FFTBufferManager.cpp in Sources */,

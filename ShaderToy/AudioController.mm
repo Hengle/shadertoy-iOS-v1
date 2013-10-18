@@ -21,7 +21,6 @@ void checkStatus(OSStatus status);
         if (!sharedAudioManager)
         {
             sharedAudioManager = [[AudioController alloc] init];
-            [sharedAudioManager startAudio];
         }
         return sharedAudioManager;
     }
@@ -195,7 +194,7 @@ static OSStatus recordingCallback(void *inRefCon,
 {
     OSStatus status = AudioOutputUnitStart(rioUnit);
     checkStatus(status);
-    //printf("Audio Initialized - sampleRate: %f\n", audioFormat.mSampleRate);
+    NSLog(@"Audio Initialized - sampleRate: %f.", audioFormat.mSampleRate);
 }
 
 @end

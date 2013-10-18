@@ -6,10 +6,10 @@
 //  Copyright (c) 2013 Ricardo Chavarria. All rights reserved.
 //
 
-#import "GalleryViewController.hpp"
+#import "GalleryViewController.h"
 #import "ShaderViewController.h"
 #import "ShaderInfo.h"
-#import "ShaderManager.h"
+#import "ShaderManager.hpp"
 
 #define MAX_CONTROLLERS 4
 
@@ -26,10 +26,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    // Initialize Audio
-    _audioManager = [AudioController sharedAudioManager];
-    _audioManager.delegate = self;
     
     // Others
     self.dataSource = self;
@@ -273,28 +269,6 @@
     [self clearViewsForSectionChange];
     
     [_shaderRequest requestCategory:category];
-}
-
-#pragma mark - Audio stuff
-
-- (void) receivedWaveSamples:(SInt32 *)samples length:(int)len
-{
-    int average = 0;
-    for(int i = 0 ; i < len ; i ++)
-    {
-        average += samples[i];
-    }
-    //NSLog(@"Wave %d", average / len);
-}
-
-- (void) receivedFreqSamples:(int32_t*) samples length:(int) len;
-{
-    int average = 0;
-    for(int i = 0 ; i < len ; i ++)
-    {
-        average += samples[i];
-    }
-    //NSLog(@"FFT %d", average / len);
 }
 
 @end

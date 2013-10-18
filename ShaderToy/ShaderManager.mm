@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Ricardo Chavarria. All rights reserved.
 //
 
-#import "ShaderManager.h"
+#import "ShaderManager.hpp"
 #import "ShaderInfo.h"
-#import "ChannelResourceManager.h"
+#import "ChannelResourceManager.hpp"
 
 @interface ShaderManager ()
 

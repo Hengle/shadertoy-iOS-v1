@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 Ricardo Chavarria. All rights reserved.
 //
 
-#import "ChannelResourceManager.h"
-#import "ShaderManager.h"
+#import "ChannelResourceManager.hpp"
+#import "ShaderManager.hpp"
 
 @interface ResourceInfo : NSObject
 
@@ -65,9 +65,23 @@
     {
         _pendingResources = [NSMutableArray new];
         _resourceDictionary = [NSMutableDictionary new];
+        
+        // Initialize Audio
+        _audioManager = [AudioController sharedAudioManager];
+        _audioManager.delegate = self;
+        
+        _audioTextureID = 0;
+        _freqBuffer = (GLubyte *)malloc(sizeof(GLubyte) * 512);
+        _waveBuffer = (GLubyte *)malloc(sizeof(GLubyte) * 512);
     }
     
     return self;
+}
+
+- (void)dealloc
+{
+    free(_freqBuffer);
+    free(_waveBuffer);
 }
 
 - (void)addResource:(NSURL *)path ofType:(NSString *)type;
@@ -98,6 +112,26 @@
         }
         
         [_pendingResources removeAllObjects];
+        
+        if (_audioTextureID == 0)
+        {
+            glGenTextures(1, &_audioTextureID);
+            glBindTexture(GL_TEXTURE_2D, _audioTextureID);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+            
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, 512, 2, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, NULL);
+            
+            glBindTexture(GL_TEXTURE_2D, NULL);
+        }
+        else
+        {
+            glBindTexture(GL_TEXTURE_2D, _audioTextureID);
+            glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 512, 1, GL_LUMINANCE, GL_UNSIGNED_BYTE, _freqBuffer);
+            glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 1, 512, 1, GL_LUMINANCE, GL_UNSIGNED_BYTE, _waveBuffer);
+        }
     }
 }
 
@@ -142,6 +176,16 @@
     return GLKVector3Make(texture.width, texture.height, 1.0);
 }
 
+- (GLuint)getAudioTexture
+{
+    return _audioTextureID;
+}
+
+- (GLKVector3)getAudioTextureResolution
+{
+    return GLKVector3Make(512.0, 2.0, 1.0);
+}
+
 - (NSData *)loadDataFromURL:(NSURL *)path
 {
     NSData* resource = [NSData dataWithContentsOfURL:path];
@@ -164,6 +208,31 @@
     }
     
     return info;
+}
+
+
+#pragma mark - Audio stuff
+
+- (void) receivedWaveSamples:(SInt32 *)samples length:(int)len
+{
+    int average = 0;
+    for (int i = 0 ; i < len/2; i++)
+    {
+        _waveBuffer[i] = samples[i];
+        average += samples[i];
+    }
+    //NSLog(@"Wave %d", average / len);
+}
+
+- (void) receivedFreqSamples:(int32_t *)samples length:(int)len;
+{
+    int average = 0;
+    for (int i = 0 ; i < len; i++)
+    {
+        _freqBuffer[i] = samples[i];
+        average += samples[i];
+    }
+    NSLog(@"FFT %d", average / len);
 }
 
 @end

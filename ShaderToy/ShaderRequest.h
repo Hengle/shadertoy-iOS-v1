@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "ShaderManager.h"
+#import "ShaderManager.hpp"
 
 @class ShaderRequest;
 
