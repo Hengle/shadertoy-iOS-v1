@@ -73,6 +73,12 @@
         _audioTextureID = 0;
         _freqBuffer = (GLubyte *)malloc(sizeof(GLubyte) * 512);
         _waveBuffer = (GLubyte *)malloc(sizeof(GLubyte) * 512);
+        
+        for (int i = 0; i < 512; i++)
+        {
+            _freqBuffer[i] = 0;
+            _waveBuffer[i] = 0;
+        }
     }
     
     return self;
@@ -113,8 +119,10 @@
         
         [_pendingResources removeAllObjects];
         
+        // This is guaranteed to be called when the OpenGL context is valid
         if (_audioTextureID == 0)
         {
+            // Create the new audio texture
             glGenTextures(1, &_audioTextureID);
             glBindTexture(GL_TEXTURE_2D, _audioTextureID);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -128,6 +136,7 @@
         }
         else
         {
+            // Update the audio texture
             glBindTexture(GL_TEXTURE_2D, _audioTextureID);
             glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 512, 1, GL_LUMINANCE, GL_UNSIGNED_BYTE, _freqBuffer);
             glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 1, 512, 1, GL_LUMINANCE, GL_UNSIGNED_BYTE, _waveBuffer);
@@ -213,10 +222,10 @@
 
 #pragma mark - Audio stuff
 
-- (void) receivedWaveSamples:(SInt32 *)samples length:(int)len
+- (void)receivedWaveSamples:(SInt32 *)samples length:(int)len
 {
     int average = 0;
-    for (int i = 0 ; i < len/2; i++)
+    for (int i = 0 ; i < MIN(512, len); i++)
     {
         _waveBuffer[i] = samples[i];
         average += samples[i];
@@ -224,7 +233,7 @@
     //NSLog(@"Wave %d", average / len);
 }
 
-- (void) receivedFreqSamples:(int32_t *)samples length:(int)len;
+- (void)receivedFreqSamples:(int32_t *)samples length:(int)len;
 {
     int average = 0;
     for (int i = 0 ; i < len; i++)
@@ -232,7 +241,7 @@
         _freqBuffer[i] = samples[i];
         average += samples[i];
     }
-    NSLog(@"FFT %d", average / len);
+    //NSLog(@"FFT %d", average / len);
 }
 
 @end
