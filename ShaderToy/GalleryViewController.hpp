@@ -10,11 +10,10 @@
 
 #import "ShaderRequest.h"
 #import "ShaderMenuViewController.h"
-#import "AudioController.hpp"
 
 @class ShaderViewController;
 
-@interface GalleryViewController : UIPageViewController <UIPageViewControllerDelegate, UIPageViewControllerDataSource, SWRevealViewControllerDelegate, ShaderRequestDelegate, ShaderMenuDelegate, AudioControllerDelegate>
+@interface GalleryViewController : UIPageViewController <UIPageViewControllerDelegate, UIPageViewControllerDataSource, SWRevealViewControllerDelegate, ShaderRequestDelegate, ShaderMenuDelegate>
 {
     bool _revealControllerShowing;
     bool _loadingShaders;
@@ -22,9 +21,6 @@
     NSMutableArray* _shaderViewControllers;
     NSMutableArray* _shaders;
     NSMutableArray* _pendingControllers;
-    
-    // Audio stuff
-    AudioController *_audioManager;
 }
 
 @end

@@ -8,6 +8,7 @@
 
 #import "ShaderMenuViewController.h"
 #import "ShaderMenuCell.h"
+#import "UIWebViewController.h"
 
 #define NormalColor [UIColor lightGrayColor]
 #define SelectedColor [UIColor colorWithRed:1.0 green:0.502 blue:0.125 alpha:1.0]
@@ -171,7 +172,7 @@
                 
             case 4:
                 cell = [tableView dequeueReusableCellWithIdentifier:@"MenuImageCell" forIndexPath:indexPath];
-                cell.userInteractionEnabled = FALSE;
+                //cell.userInteractionEnabled = FALSE;
                 imageView = (UIImageView *)[cell viewWithTag:100];
                 
                 imageView.image = [self imageForIndexPath:indexPath selected:FALSE];
@@ -188,7 +189,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0 && indexPath.row < 3)
+    if (indexPath.row < 3)
     {
         EShaderCategory category = ((EShaderCategory)indexPath.row);
         
@@ -198,16 +199,24 @@
         _previousIndexPath = indexPath;
         
         [self.delegate shaderMenu:self choseShaderCategory:category];
+        
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        [self.revealViewController revealToggleAnimated:YES];
     }
-    
-    
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [self.revealViewController revealToggleAnimated:YES];
+    else if (indexPath.row == 4)
+    {
+        UIWebViewController* aboutView = (UIWebViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"AboutController"];
+        [self presentViewController:aboutView animated:YES completion:
+         ^{
+             [tableView deselectRowAtIndexPath:indexPath animated:YES];
+             [self.revealViewController revealToggleAnimated:YES];
+         }];
+    }
 }
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return (indexPath.row < 3) ? indexPath : nil;
+    return (indexPath.row != 3) ? indexPath : nil;
 }
 
 @end
