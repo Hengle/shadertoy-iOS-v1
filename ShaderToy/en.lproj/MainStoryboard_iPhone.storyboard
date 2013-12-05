@@ -106,27 +106,16 @@
         <scene sceneID="tDD-A0-GpY">
             <objects>
                 <viewController storyboardIdentifier="AboutController" id="Pft-TQ-8cq" customClass="UIWebViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="xHM-lU-Rev"/>
-                        <viewControllerLayoutGuide type="bottom" id="uqY-v0-Til"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="d87-FL-T85">
+                    <webView key="view" contentMode="scaleToFill" scalesPageToFit="YES" mediaPlaybackAllowsAirPlay="NO" keyboardDisplayRequiresUserAction="NO" id="hfk-im-EEA">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <webView contentMode="scaleToFill" fixedFrame="YES" scalesPageToFit="YES" mediaPlaybackAllowsAirPlay="NO" keyboardDisplayRequiresUserAction="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hfk-im-EEA">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES"/>
-                            </webView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES"/>
+                    </webView>
                     <keyCommands/>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
-                        <outlet property="webViewController" destination="hfk-im-EEA" id="qCo-d5-fk7"/>
+                        <outlet property="webView" destination="hfk-im-EEA" id="hxY-Dv-gwn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f0w-F7-jHT" userLabel="First Responder" sceneMemberID="firstResponder"/>

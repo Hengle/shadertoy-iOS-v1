@@ -32,7 +32,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     NSURLRequest* request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:@"https://www.shadertoy.com"]];
-    [self.webViewController loadRequest:request];
+    [self.webView loadRequest:request];
 }
 
 - (NSUInteger)supportedInterfaceOrientations
