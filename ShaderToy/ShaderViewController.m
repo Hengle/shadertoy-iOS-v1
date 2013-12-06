@@ -228,9 +228,10 @@
                 NSLog(@"Setting input channel %d to texture %d, resolution %f x %f", input.channel, params.channelInfo[input.channel], params.channelResolution[input.channel + 0], params.channelResolution[input.channel + 1]);
             }
         }
-        else if ([input.type isEqualToString:@"music"])
+        else
         {
-            
+            params.channelInfo[input.channel] = 0;
+            [params setChannel:input.channel resolution:GLKVector3Make(0.0f, 0.0f, 1.0f)];
         }
     }
 }

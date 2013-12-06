@@ -40,25 +40,35 @@
     _shaders = [NSMutableArray new];
     _shaderViewControllers = [NSMutableArray new];
     
-    // Create the first controller and start the animation
-    ShaderViewController* viewController = (ShaderViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"ShaderView"];
+    // Cache the default shader
     ShaderInfo* shader = [ShaderManager sharedInstance].defaultShader;
-    [viewController setShader:shader];
-    [_shaderViewControllers addObject:viewController];
     
+    // Create the controllers
+    for (int i = 0; i < MAX_CONTROLLERS; i++)
+    {
+        ShaderViewController* controller = (ShaderViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"ShaderView"];
+        [controller setShader:shader];
+        
+        [_shaderViewControllers addObject:controller];
+    }
+    
+    ShaderViewController* viewController = (ShaderViewController *)[_shaderViewControllers firstObject];
     [self setViewControllers:@[viewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
     [viewController startAnimation];
     
     _shaderRequest = [ShaderRequest new];
     _shaderRequest.delegate = self;
     
-    [_shaderRequest requestCategory:Newest];
-    
     // Tap gesture recognizer to collapse reveal view controller
     UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     tapGesture.numberOfTapsRequired = 1;
     
     [self.view addGestureRecognizer:tapGesture];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [_shaderRequest requestCategory:Newest];
 }
 
 - (void)didReceiveMemoryWarning
@@ -100,8 +110,8 @@
         [_shaderRequest requestNewShaders];
     }
     
-    NSLog(@"Pending controller %u", _pendingControllers.count);
-    NSLog(@"Started Animation for next controller %@", next);
+    NSLog(@"Pending controllers %u", _pendingControllers.count);
+    NSLog(@"Started Animation for next controller %@ with shader %@", next, next.currentShader.name);
 }
 
 - (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed
@@ -150,10 +160,11 @@
         if (shaderIndex >= 0)
         {
             newController = _shaderViewControllers[shaderIndex % _shaderViewControllers.count];
+            
             ShaderInfo* shader = _shaders[shaderIndex];
             [newController setShader:shader];
         
-            NSLog(@"Setting VC %u to shader %@", shaderIndex % _shaderViewControllers.count, shader.name);
+            NSLog(@"Setting Before VC %u to shader %@", shaderIndex % _shaderViewControllers.count, shader.name);
         }
     }
     
@@ -176,7 +187,7 @@
             ShaderInfo* shader = _shaders[shaderIndex];
             [newController setShader:shader];
             
-            NSLog(@"Setting VC %u to shader %@", (shaderIndex % _shaderViewControllers.count), shader.name);
+            NSLog(@"Setting After VC %u to shader %@", (shaderIndex % _shaderViewControllers.count), shader.name);
         }
     }
     
@@ -216,25 +227,7 @@
     
     ShaderInfo* defaultShader = [ShaderManager sharedInstance].defaultShader;
     
-    if (_shaderViewControllers.count < MAX_CONTROLLERS)
-    {
-        // When we are starting out, create the necessary controllers
-        ShaderViewController* viewController = (ShaderViewController *)_shaderViewControllers[0];
-        if (viewController.currentShader == defaultShader)
-        {
-            [viewController setShader:_shaders[0]];
-        }
-        
-        // Create the controllers
-        for (int i = 1; i < MAX_CONTROLLERS; i++)
-        {
-            ShaderViewController* controller = (ShaderViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"ShaderView"];
-            [controller setShader:_shaders[i]];
-            
-            [_shaderViewControllers addObject:controller];
-        }
-    }
-    else if (newCategory)
+    if (newCategory)
     {
         // If this is a new category request, just set the shaders to their appropriate shader
         for (int i = 0; i < _shaderViewControllers.count; i++)
