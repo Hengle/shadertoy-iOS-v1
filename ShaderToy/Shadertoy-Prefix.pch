@@ -13,5 +13,8 @@
     #import <Foundation/Foundation.h>
 
     #import "SWRevealViewController.h"
+    #import "SVProgressHUD.h"
+    #import "UIDevice+Hardware.h"
+
     #import "ShaderToyDefines.h"
 #endif

@@ -45,11 +45,13 @@
 {
     if (!_activeRequest)
     {
+        [SVProgressHUD showWithStatus:@"Loading Shaders" maskType:SVProgressHUDMaskTypeClear];
+        
         _activeRequest = true;
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
                        ^{
-                           NSString* urlString = [NSString stringWithFormat:@"https://www.shadertoy.com/mobile.htm?sort=%@&from=%d&num=12", [self categoryStringForCategory:_currentCategory], _currentIndex];
+                           NSString* urlString = [NSString stringWithFormat:@"https://www.shadertoy.com/mobile.htm?sort=%@&from=%d&num=12&device=%@", [self categoryStringForCategory:_currentCategory], _currentIndex, [UIDevice currentDevice].hardwareString];
                            
                            NSLog(@"ShaderRequest: asking for more shaders with URL %@", urlString);
                            
@@ -126,11 +128,15 @@
 
 - (void)doneWithRequest
 {
-    [self.delegate shaderRequest:self hasShadersReady:_newShaders];
     _activeRequest = false;
-    
     // Increase the shader index by the amount of shaders returned
     _currentIndex += _newShaders.count;
+    
+    dispatch_async(dispatch_get_main_queue(),
+                   ^{
+                       [SVProgressHUD dismiss];
+                       [self.delegate shaderRequest:self hasShadersReady:_newShaders];
+                   });
 }
 
 - (NSString *)categoryStringForCategory:(EShaderCategory)category
