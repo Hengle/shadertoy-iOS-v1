@@ -6,4 +6,4 @@
 	url = https://github.com/samvermette/SVProgressHUD.git
 [submodule "UIDevice-Hardware"]
 	path = UIDevice-Hardware
-	url = https://github.com/InderKumarRathore/UIDevice-Hardware.git
+url=https://github.com/skumancer/UIDevice-Hardware.git

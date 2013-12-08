@@ -51,7 +51,11 @@
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
                        ^{
-                           NSString* urlString = [NSString stringWithFormat:@"https://www.shadertoy.com/mobile.htm?sort=%@&from=%d&num=12&device=%@", [self categoryStringForCategory:_currentCategory], _currentIndex, [UIDevice currentDevice].hardwareString];
+                           NSString* hardwareString = [[UIDevice currentDevice].hardwareSimpleDescription stringByReplacingOccurrencesOfString:@" " withString:@""];
+                           [hardwareString stringByReplacingOccurrencesOfString:@"(" withString:@""];
+                           [hardwareString stringByReplacingOccurrencesOfString:@")" withString:@""];
+                           
+                           NSString* urlString = [NSString stringWithFormat:@"https://www.shadertoy.com/mobile.htm?sort=%@&from=%d&num=12&device=%@", [self categoryStringForCategory:_currentCategory], _currentIndex, hardwareString];
                            
                            NSLog(@"ShaderRequest: asking for more shaders with URL %@", urlString);
                            

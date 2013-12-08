@@ -49,6 +49,23 @@
             </objects>
             <point key="canvasLocation" x="2350" y="707"/>
         </scene>
+        <!--Web View Controller-->
+        <scene sceneID="bCC-jO-KnG">
+            <objects>
+                <viewController storyboardIdentifier="AboutController" id="DBU-Mw-FsE" customClass="UIWebViewController" sceneMemberID="viewController">
+                    <webView key="view" contentMode="scaleToFill" id="EVa-vH-LQM">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </webView>
+                    <connections>
+                        <outlet property="webView" destination="EVa-vH-LQM" id="RIa-Rb-6gR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jaV-1A-4Sy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2350" y="-743"/>
+        </scene>
         <!--Shader Info View Controller - ShaderInfoOverlay-->
         <scene sceneID="P55-ar-xpT">
             <objects>

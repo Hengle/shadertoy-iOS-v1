@@ -10,6 +10,7 @@
 #import "ShaderMenuCell.h"
 #import "UIWebViewController.h"
 
+#define BackgroundColor [UIColor colorWithWhite:0.2f alpha:1.0f]
 #define NormalColor [UIColor lightGrayColor]
 #define SelectedColor [UIColor colorWithRed:1.0 green:0.502 blue:0.125 alpha:1.0]
 
@@ -22,22 +23,12 @@
 
 @implementation ShaderMenuViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self)
-    {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor colorWithWhite:0.2f alpha:1.0f];
-    self.tableView.backgroundColor = [UIColor colorWithWhite:0.2f alpha:1.0f];
+    self.view.backgroundColor = BackgroundColor;
+    self.tableView.backgroundColor = BackgroundColor;
     
     _previousIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
 }
@@ -126,6 +117,7 @@
             case 0:
                 cell = [tableView dequeueReusableCellWithIdentifier:@"MenuBasicCell" forIndexPath:indexPath];
                 cell.userInteractionEnabled = TRUE;
+                
                 imageView = (UIImageView *)[cell viewWithTag:100];
                 textLabel = (UILabel *)[cell viewWithTag:101];
                 
@@ -139,6 +131,7 @@
             case 1:
                 cell = [tableView dequeueReusableCellWithIdentifier:@"MenuBasicCell" forIndexPath:indexPath];
                 cell.userInteractionEnabled = TRUE;
+                
                 imageView = (UIImageView *)[cell viewWithTag:100];
                 textLabel = (UILabel *)[cell viewWithTag:101];
                 
@@ -151,6 +144,7 @@
             case 2:
                 cell = [tableView dequeueReusableCellWithIdentifier:@"MenuBasicCell" forIndexPath:indexPath];
                 cell.userInteractionEnabled = TRUE;
+                
                 imageView = (UIImageView *)[cell viewWithTag:100];
                 textLabel = (UILabel *)[cell viewWithTag:101];
                 
@@ -163,6 +157,7 @@
             case 3:
                 cell = [tableView dequeueReusableCellWithIdentifier:@"MenuBasicCell" forIndexPath:indexPath];
                 cell.userInteractionEnabled = FALSE;
+                
                 textLabel = (UILabel *)[cell viewWithTag:101];
                 
                 textLabel.text = @"";
@@ -172,7 +167,7 @@
                 
             case 4:
                 cell = [tableView dequeueReusableCellWithIdentifier:@"MenuImageCell" forIndexPath:indexPath];
-                //cell.userInteractionEnabled = FALSE;
+
                 imageView = (UIImageView *)[cell viewWithTag:100];
                 
                 imageView.image = [self imageForIndexPath:indexPath selected:FALSE];
@@ -183,6 +178,8 @@
                 break;
         }
     }
+    
+    cell.backgroundColor = [UIColor clearColor]; // Hack, on iOS 7 iPad the cell background doesn't inherit color properly
     
     return cell;
 }
