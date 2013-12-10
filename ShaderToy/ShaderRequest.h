@@ -20,9 +20,10 @@
 
 @interface ShaderRequest : NSObject <ShaderManagerDelegate>
 {
+    bool _pendingRequest;
+    bool _activeRequest;
     int _currentIndex;
     EShaderCategory _currentCategory;
-    bool _activeRequest;
     NSMutableArray* _newShaders;
 }
 

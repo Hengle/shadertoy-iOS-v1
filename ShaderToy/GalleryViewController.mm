@@ -40,22 +40,17 @@
     _shaders = [NSMutableArray new];
     _shaderViewControllers = [NSMutableArray new];
     
-    // Cache the default shader
-    ShaderInfo* shader = [ShaderManager sharedInstance].defaultShader;
-    
     // Create the controllers
     for (int i = 0; i < MAX_CONTROLLERS; i++)
     {
         ShaderViewController* controller = (ShaderViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"ShaderView"];
-        [controller setShader:shader];
-        
         [_shaderViewControllers addObject:controller];
     }
     
-    ShaderViewController* viewController = (ShaderViewController *)[_shaderViewControllers firstObject];
-    [self setViewControllers:@[viewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
-    [viewController startAnimation];
+    // Initial section setup, we are good to go
+    [self clearViewsForSectionChange];
     
+    // Make a new shader request now that the views are set
     _shaderRequest = [ShaderRequest new];
     _shaderRequest.delegate = self;
     
@@ -80,13 +75,18 @@
 {
     [_shaders removeAllObjects];
  
-    ShaderInfo* shader = [ShaderManager sharedInstance].defaultShader;
-    ShaderViewController* viewController = (ShaderViewController *)_shaderViewControllers[0];
-    [viewController setShader:shader];
-    [self setViewControllers:@[viewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:
+    ShaderInfo* defaultShader = [ShaderManager sharedInstance].defaultShader;
+    for (int i = 0; i < _shaderViewControllers.count; i++)
+    {
+        ShaderViewController* controller = (ShaderViewController *)_shaderViewControllers[i];
+        [controller setShader:defaultShader];
+    }
+    
+    ShaderViewController* firstController = (ShaderViewController *)_shaderViewControllers[0];
+    [self setViewControllers:@[firstController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:
      ^(BOOL finished)
      {
-         [viewController startAnimation];
+         [firstController startAnimation];
      }];
 }
 
@@ -225,10 +225,11 @@
     bool newCategory = (_shaders.count <= 0);
     [_shaders addObjectsFromArray:shaderList];
     
-    ShaderInfo* defaultShader = [ShaderManager sharedInstance].defaultShader;
-    
+
     if (newCategory)
     {
+        ShaderInfo* defaultShader = [ShaderManager sharedInstance].defaultShader;
+        
         // If this is a new category request, just set the shaders to their appropriate shader
         for (int i = 0; i < _shaderViewControllers.count; i++)
         {
@@ -239,15 +240,13 @@
             }
         }
     }
-    else
+    
+    // If we are retrieving more shaders for this category, make sure our datasource is reloaded so scrolling is smooth
+    ShaderViewController* viewController = (ShaderViewController *)self.viewControllers[0];
+    
+    if (viewController != nil)
     {
-        // If we are retrieving more shaders for this category, make sure our datasource is reloaded so scrolling is smooth
-        ShaderViewController* viewController = (ShaderViewController *)self.viewControllers[0];
-        
-        if (viewController != nil)
-        {
-            [self setViewControllers:@[viewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
-        }
+        [self setViewControllers:@[viewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
     }
 }
 

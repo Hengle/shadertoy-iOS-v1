@@ -289,7 +289,6 @@
     </scenes>
     <resources>
         <image name="eye.png" width="88" height="88"/>
-        <image name="eye.png" width="88" height="88"/>
         <image name="eye_selected.png" width="88" height="88"/>
         <image name="love.png" width="88" height="88"/>
         <image name="love_selected.png" width="88" height="88"/>

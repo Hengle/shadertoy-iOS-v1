@@ -10,6 +10,9 @@
 #import "ShaderMenuCell.h"
 #import "UIWebViewController.h"
 
+#import "SVProgressHUD.h"
+#import "Reachability.h"
+
 #define BackgroundColor [UIColor colorWithWhite:0.2f alpha:1.0f]
 #define NormalColor [UIColor lightGrayColor]
 #define SelectedColor [UIColor colorWithRed:1.0 green:0.502 blue:0.125 alpha:1.0]
@@ -167,7 +170,7 @@
                 
             case 4:
                 cell = [tableView dequeueReusableCellWithIdentifier:@"MenuImageCell" forIndexPath:indexPath];
-
+                
                 imageView = (UIImageView *)[cell viewWithTag:100];
                 
                 imageView.image = [self imageForIndexPath:indexPath selected:FALSE];
@@ -202,12 +205,21 @@
     }
     else if (indexPath.row == 4)
     {
-        UIWebViewController* aboutView = (UIWebViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"AboutController"];
-        [self presentViewController:aboutView animated:YES completion:
-         ^{
-             [tableView deselectRowAtIndexPath:indexPath animated:YES];
-             [self.revealViewController revealToggleAnimated:YES];
-         }];
+        Reachability* _reachability = [Reachability reachabilityForInternetConnection];
+        
+        if (_reachability.currentReachabilityStatus == NotReachable)
+        {
+            [SVProgressHUD showErrorWithStatus:@"No Internet Connection"];
+        }
+        else
+        {
+            UIWebViewController* aboutView = (UIWebViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"AboutController"];
+            [self presentViewController:aboutView animated:YES completion:
+             ^{
+                 [tableView deselectRowAtIndexPath:indexPath animated:YES];
+                 [self.revealViewController revealToggleAnimated:YES];
+             }];
+        }
     }
 }
 

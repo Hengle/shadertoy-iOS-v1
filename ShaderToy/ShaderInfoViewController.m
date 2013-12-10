@@ -36,9 +36,9 @@
                    ^{
                        self.view.hidden = _shaderInfo.removeoverlay;
                        
-                       _nameLabel.text = _shaderInfo.name;
-                       _authorLabel.text = _shaderInfo.username;
-                       _descriptionLabel.text = _shaderInfo.description;
+                       _nameLabel.text = [_shaderInfo.name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                       _authorLabel.text = [_shaderInfo.username stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                       _descriptionLabel.text = [_shaderInfo.description stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
                        
                        NSMutableString* tags = [NSMutableString new];
                        for (int i = 0; i < _shaderInfo.tags.count; i++)
