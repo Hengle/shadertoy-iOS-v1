@@ -119,11 +119,13 @@
         // Go through our uniform channel params and set the ones we need
         for (int i = 0; i < 4; i++)
         {
+            glActiveTexture(GL_TEXTURE0 + i);
+            glBindTexture(GL_TEXTURE_2D, 0);
+            
             if (_channelUniform[i] != -1)
             {
                 if (params.channelInfo[i] > 0)
                 {
-                    glActiveTexture(GL_TEXTURE0 + i);
                     glBindTexture(GL_TEXTURE_2D, params.channelInfo[i]);
                     
                     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
