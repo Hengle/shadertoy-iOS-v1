@@ -157,10 +157,11 @@
 
 - (void)startAnimation
 {
-    _startTime = [NSDate date];
-    
     if (!_animating)
     {
+        NSLog(@"ShaderViewController: Starting animation");
+        
+        _startTime = [NSDate date];
         _animating = true;
         _renderThread = [[NSThread alloc] initWithTarget:self selector:@selector(threadMainLoop) object:nil];
         
@@ -172,6 +173,8 @@
 {
     if (_animating)
     {
+        NSLog(@"ShaderViewController: Stopping animation");
+        
         _animating = false;
         
         CFRunLoopStop([_renderLoop getCFRunLoop]);
