@@ -61,9 +61,26 @@
     [self.view addGestureRecognizer:tapGesture];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    ShaderViewController* firstController = (ShaderViewController *)_shaderViewControllers[0];
+    [firstController startAnimation];
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
-    [_shaderRequest requestCategory:Newest];
+    static dispatch_once_t initialRequest;
+    dispatch_once(&initialRequest,
+                  ^{
+                      [_shaderRequest requestCategory:Newest];
+                  });
+}
+
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    ShaderViewController* firstController = (ShaderViewController *)_shaderViewControllers[0];
+    [firstController stopAnimation];
 }
 
 - (void)didReceiveMemoryWarning
