@@ -31,5 +31,6 @@
 
 - (void)requestCategory:(EShaderCategory)category;
 - (void)requestNewShaders;
+- (NSString*)encodeString:(NSString *)s;
 
 @end

@@ -73,6 +73,30 @@
     }
 }
 
+- (NSString*)encodeString:(NSString *)s
+{
+    int len = [s length];
+    
+    NSString* dic = @"cDfN3WX4dms7twlM";
+    NSString* res = @"";
+    
+    int r = 3876781;
+    for( int i=0; i < len; i++ )
+    {
+        // random number
+        r = (r * 0x343fd + 0x269ec3) & 0xffffffff;
+        int n = (r >> 20) & 0xff;
+        
+        // xor with random number
+        int asciicode = [s characterAtIndex:i];
+        int c = asciicode ^ n;
+        
+        // base256 to base16
+        res = [NSString stringWithFormat:@"%@%c%c", res, [dic characterAtIndex:(c>>4)&0xf], [dic characterAtIndex:c&0xf]];
+    }
+    return res;
+}
+
 - (void)requestNewShaders
 {
     if (!_activeRequest)
@@ -97,10 +121,15 @@
                                [hardwareString stringByReplacingOccurrencesOfString:@"(" withString:@""];
                                [hardwareString stringByReplacingOccurrencesOfString:@")" withString:@""];
                                
-                               NSString* urlString = [NSString stringWithFormat:@"https://www.shadertoy.com/mobile.htm?sort=%@&from=%d&num=12&device=%@", [self categoryStringForCategory:_currentCategory], _currentIndex, hardwareString];
+                               //
+                               // Begin enconding
+                               //
+                               NSString* s = [NSString stringWithFormat:@"sort=%@&from=%d&num=12&device=%@", [self categoryStringForCategory:_currentCategory], _currentIndex, hardwareString];
+                               NSString* res = [self encodeString:s];
                                
+                               NSString* urlString = [NSString stringWithFormat:@"https://www.shadertoy.com/mobile.htm?a=%@", res];
                                NSLog(@"ShaderRequest: Asking for shaders with URL %@", urlString);
-                               
+
                                NSData* shaderListData = [NSData dataWithContentsOfURL:[NSURL URLWithString:urlString]];
                                _newShaders = [NSMutableArray new];
                                
@@ -113,7 +142,9 @@
                                    {
                                        for (NSString* shaderID in shaderList)
                                        {
-                                           NSData* shaderDetailsData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://www.shadertoy.com/mobile.htm?s=%@", shaderID]]];
+                                           NSString * res2 = [self encodeString:[NSString stringWithFormat:@"s=%@",shaderID]];
+                                           
+                                           NSData* shaderDetailsData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://www.shadertoy.com/mobile.htm?a=%@", res2]]];
                                            
                                            if (shaderDetailsData != nil)
                                            {
