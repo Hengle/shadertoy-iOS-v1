@@ -205,8 +205,18 @@
         {
             [_params clearChannels];
             
-            // Inputs are set only on initialization, no need to re-set them
-            [self setShaderInputs:renderpass.inputs onParams:_params];
+            // Make sure we are executing the shader parameter in the correct thread
+            dispatch_async(_renderQueue, ^
+            {
+                // Set the context
+                [EAGLContext setCurrentContext:_context];
+                
+                // Inputs are set only on shader initialization, no need to re-set them
+                [self setShaderInputs:renderpass.inputs onParams:_params];
+                
+                // Clear the context
+                [EAGLContext setCurrentContext:nil];
+            });
         }
     }
     

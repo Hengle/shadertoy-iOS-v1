@@ -103,7 +103,10 @@
 
 - (void)storeResource:(NSObject *)resource withName:(NSString *)name;
 {
-    [_resourceDictionary setObject:resource forKey:name];
+    if ((name != nil) && (resource != nil) && [_resourceDictionary objectForKey:name] == nil)
+    {
+        [_resourceDictionary setObject:resource forKey:name];
+    }
 }
 
 - (NSData *)getResourceWithName:(NSURL *)name
@@ -120,14 +123,23 @@
 
 - (GLuint)getTextureWithName:(NSURL *)name
 {
+    GLuint textureID = 0;
     GLKTextureInfo* texture = [_resourceDictionary objectForKey:name.absoluteString];
     if (texture == nil)
     {
         texture = [self loadTextureFromURL:name];
-        [self storeResource:texture withName:name.absoluteString];
+        if (texture != nil)
+        {
+            [self storeResource:texture withName:name.absoluteString];
+            textureID = texture.name;
+        }
+    }
+    else
+    {
+        textureID = texture.name;
     }
     
-    return texture.name;
+    return textureID;
 }
 
 - (GLKVector3)getTextureResolution:(NSURL *)name
@@ -147,7 +159,7 @@
     NSData* resource = [NSData dataWithContentsOfURL:path];
     if (resource == nil)
     {
-        NSLog(@"Couldn't load resource for path %@", path.absoluteString);
+        NSLog(@"ChannelResourceManager: Couldn't load resource for path %@", path.absoluteString);
     }
     
     return resource;
@@ -160,7 +172,7 @@
     
     if (error != nil)
     {
-        NSLog(@"Couldn't load texture for path %@", path.absoluteString);
+        NSLog(@"ChannelResourceManager: Couldn't load texture for path %@ - Error: %@", path.absoluteString, error.userInfo[GLKTextureLoaderErrorKey]);
     }
     
     return info;
