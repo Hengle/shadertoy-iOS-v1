@@ -31,7 +31,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    NSURLRequest* request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:@"https://www.shadertoy.com"]];
+    NSURLRequest* request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:@"https://www.shadertoy.com/aboutios"]];
     [self.webView loadRequest:request];
 }
 

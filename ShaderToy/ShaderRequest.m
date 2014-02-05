@@ -124,10 +124,13 @@
                                //
                                // Begin enconding
                                //
-                               NSString* s = [NSString stringWithFormat:@"sort=%@&from=%d&num=12&device=%@", [self categoryStringForCategory:_currentCategory], _currentIndex, hardwareString];
+                               
+                               NSInteger Seconds = ([[NSDate date] timeIntervalSince1970] + [[NSTimeZone defaultTimeZone] secondsFromGMT]);
+                               
+                               NSString* s = [NSString stringWithFormat:@"sort=%@&from=%d&num=12&device=%@&time=%d", [self categoryStringForCategory:_currentCategory], _currentIndex, hardwareString, Seconds];
                                NSString* res = [self encodeString:s];
                                
-                               NSString* urlString = [NSString stringWithFormat:@"https://www.shadertoy.com/mobile.htm?a=%@", res];
+                               NSString* urlString = [NSString stringWithFormat:@"https://www.shadertoy.com/mobile/%@", res];
                                NSLog(@"ShaderRequest: Asking for shaders with URL %@", urlString);
 
                                NSData* shaderListData = [NSData dataWithContentsOfURL:[NSURL URLWithString:urlString]];
@@ -142,9 +145,10 @@
                                    {
                                        for (NSString* shaderID in shaderList)
                                        {
-                                           NSString * res2 = [self encodeString:[NSString stringWithFormat:@"s=%@",shaderID]];
+                                           NSInteger Seconds2 = ([[NSDate date] timeIntervalSince1970] + [[NSTimeZone defaultTimeZone] secondsFromGMT]);
+                                           NSString * res2 = [self encodeString:[NSString stringWithFormat:@"s=%@time=%d",shaderID, Seconds2]];
                                            
-                                           NSData* shaderDetailsData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://www.shadertoy.com/mobile.htm?a=%@", res2]]];
+                                           NSData* shaderDetailsData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://www.shadertoy.com/mobile/%@", res2]]];
                                            
                                            if (shaderDetailsData != nil)
                                            {
