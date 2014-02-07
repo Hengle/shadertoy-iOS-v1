@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2539FEDD18A22AE0003C9B1C /* Icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = 2539FEDA18A22AE0003C9B1C /* Icon-76.png */; };
+		2539FEDE18A22AE0003C9B1C /* Icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 2539FEDB18A22AE0003C9B1C /* Icon-120.png */; };
+		2539FEDF18A22AE0003C9B1C /* Icon-152.png in Resources */ = {isa = PBXBuildFile; fileRef = 2539FEDC18A22AE0003C9B1C /* Icon-152.png */; };
 		AE23BC8F184DD33A009F4531 /* UIWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE23BC8E184DD33A009F4531 /* UIWebViewController.m */; };
 		AE23BC91184DDFBC009F4531 /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = AE23BC90184DDFBC009F4531 /* close.png */; };
 		AE5CAB911797B838000924C3 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = AE5CAB871797B838000924C3 /* Icon-Small-50.png */; };
@@ -81,6 +84,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2539FEDA18A22AE0003C9B1C /* Icon-76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-76.png"; sourceTree = "<group>"; };
+		2539FEDB18A22AE0003C9B1C /* Icon-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-120.png"; sourceTree = "<group>"; };
+		2539FEDC18A22AE0003C9B1C /* Icon-152.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-152.png"; sourceTree = "<group>"; };
 		AE1EF6071771923000A1251C /* ShaderInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ShaderInfo.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		AE1EF6081771923000A1251C /* ShaderInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ShaderInfo.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		AE23BC8D184DD33A009F4531 /* UIWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIWebViewController.h; path = Shadertoy/UIWebViewController.h; sourceTree = SOURCE_ROOT; };
@@ -217,6 +223,9 @@
 		AE5CAB841797B838000924C3 /* App Icons [Squared] */ = {
 			isa = PBXGroup;
 			children = (
+				2539FEDA18A22AE0003C9B1C /* Icon-76.png */,
+				2539FEDB18A22AE0003C9B1C /* Icon-120.png */,
+				2539FEDC18A22AE0003C9B1C /* Icon-152.png */,
 				AE5CAB9F1797B873000924C3 /* Icon-72@2x.png */,
 				AE5CAB9D1797B870000924C3 /* Icon-72.png */,
 				AE5CAB9B1797B85A000924C3 /* Icon@2x.png */,
@@ -469,7 +478,7 @@
 				ORGANIZATIONNAME = "Ricardo Chavarria";
 				TargetAttributes = {
 					AEA3B53B1730E6C700786DA2 = {
-						DevelopmentTeam = S6BWLQXDC7;
+						DevelopmentTeam = GJCCB5F6G9;
 					};
 				};
 			};
@@ -512,6 +521,7 @@
 				AEBF32AB1757506D00DEEF71 /* Default-Portrait@2x~ipad.png in Resources */,
 				AEBF32AD1757507300DEEF71 /* Default-Landscape~ipad.png in Resources */,
 				AEBF32AF1757507500DEEF71 /* Default-Landscape@2x~ipad.png in Resources */,
+				2539FEDD18A22AE0003C9B1C /* Icon-76.png in Resources */,
 				AE5CAB911797B838000924C3 /* Icon-Small-50.png in Resources */,
 				AE5CAB921797B838000924C3 /* Icon-Small-50@2x.png in Resources */,
 				AE5CAB931797B838000924C3 /* Icon-Small.png in Resources */,
@@ -525,6 +535,7 @@
 				AE5CABAB1798F843000924C3 /* share.png in Resources */,
 				AE5CABAC1798F843000924C3 /* time.png in Resources */,
 				AE5CABAE1798FBEC000924C3 /* fire.png in Resources */,
+				2539FEDE18A22AE0003C9B1C /* Icon-120.png in Resources */,
 				AE5CABB01798FCA9000924C3 /* love_hollow.png in Resources */,
 				AE5CABB21798FF35000924C3 /* logo-toolbar.png in Resources */,
 				AE5CABB917992900000924C3 /* fire_selected.png in Resources */,
@@ -534,6 +545,7 @@
 				AE5CABBD17992900000924C3 /* share_selected.png in Resources */,
 				AE5CABBE17992900000924C3 /* time_selected.png in Resources */,
 				AE5CABCC179C8570000924C3 /* eye_selected.png in Resources */,
+				2539FEDF18A22AE0003C9B1C /* Icon-152.png in Resources */,
 				AE5CABCD179C8570000924C3 /* eye.png in Resources */,
 				AED8869217D085DD00093573 /* loading.png in Resources */,
 			);
