@@ -20,7 +20,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
     
     _closeButton = [[UIButton alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 30.0f, 30.0f)];
     _closeButton.accessibilityLabel = @"close";
@@ -46,11 +45,26 @@
     return YES;
 }
 
+
 #pragma mark - Actions
 
 - (IBAction)closeView:(id)sender
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+#pragma mark - UIWebViewDelegate
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    BOOL isShadertoyLink = [request.URL.host isEqualToString:@"www.shadertoy.com"];
+    if (navigationType == UIWebViewNavigationTypeLinkClicked && !isShadertoyLink)
+    {
+        [[UIApplication sharedApplication] openURL:request.URL];
+    }
+    
+    return isShadertoyLink;
 }
 
 @end
