@@ -125,7 +125,7 @@
                                // Begin enconding
                                //
                                
-                               NSInteger Seconds = ([[NSDate date] timeIntervalSince1970] + [[NSTimeZone defaultTimeZone] secondsFromGMT]);
+                               NSInteger Seconds = ([[NSDate date] timeIntervalSince1970]);
                                
                                NSString* s = [NSString stringWithFormat:@"sort=%@&from=%d&num=12&device=%@&time=%d", [self categoryStringForCategory:_currentCategory], _currentIndex, hardwareString, Seconds];
                                NSString* res = [self encodeString:s];
@@ -145,7 +145,7 @@
                                    {
                                        for (NSString* shaderID in shaderList)
                                        {
-                                           NSInteger Seconds2 = ([[NSDate date] timeIntervalSince1970] + [[NSTimeZone defaultTimeZone] secondsFromGMT]);
+                                           NSInteger Seconds2 = ([[NSDate date] timeIntervalSince1970]);
                                            NSString * res2 = [self encodeString:[NSString stringWithFormat:@"s=%@time=%d",shaderID, Seconds2]];
                                            
                                            NSData* shaderDetailsData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://www.shadertoy.com/mobile/%@", res2]]];
