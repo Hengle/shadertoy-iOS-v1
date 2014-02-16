@@ -30,6 +30,7 @@
 - (void)tearDown;
 - (void)initialize;
 - (void)drawFrame;
+- (void)calculateFPS;
 - (void)checkForErrors;
 - (void)triggerDrawFrame;
 - (void)threadMainLoop;
@@ -73,7 +74,9 @@
     _running = false;
     _initialized = false;
     _frameDropCounter = 0;
+    _frameCounter = 0;
     _lastFrameTime = [NSDate date];
+    _lastFPSTime = [NSDate date];
     _renderQueue = dispatch_queue_create("com.shadertoy.threadedgcdqueue", NULL);
     
     _infoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ShaderInfoOverlay"];
@@ -162,6 +165,9 @@
         NSLog(@"ShaderViewController: Starting animation");
         
         _startTime = [NSDate date];
+        _lastFrameTime = [NSDate date];
+        _lastFPSTime = [NSDate date];
+        
         _animating = true;
         _renderThread = [[NSThread alloc] initWithTarget:self selector:@selector(threadMainLoop) object:nil];
         
@@ -300,7 +306,7 @@
         float height = self.view.backingHeight;
         
         // Calculate the time since since rendering start
-        float time = [[NSDate date] timeIntervalSinceDate:_startTime];
+        float time = ABS([_startTime timeIntervalSinceNow]);
         
         // Clear the context
         glClearColor(0.65f, 0.65f, 0.65f, 1.0f);
@@ -338,14 +344,32 @@
 
 - (void)update
 {
-    float time = [[NSDate date] timeIntervalSinceDate:_lastFrameTime];
+    float time = ABS([_lastFrameTime timeIntervalSinceNow]);
     
     [[ShaderManager sharedInstance] deferCompilation];
     [[ChannelResourceManager sharedInstance] deferLoading];
     
     [_planeObject update:time];
     
+    [self calculateFPS];
+    
     _lastFrameTime = [NSDate date];
+}
+
+- (void)calculateFPS
+{
+    _frameCounter++;
+    float fpsInterval = ABS([_lastFPSTime timeIntervalSinceNow]);
+    
+    if (fpsInterval > 0.5f)
+    {
+        float fps = _frameCounter / fpsInterval;
+        
+        [_infoViewController setFPS:fps];
+        
+        _frameCounter = 0;
+        _lastFPSTime = [NSDate date];
+    }
 }
 
 - (void)checkForErrors

@@ -60,6 +60,14 @@
                    });
 }
 
+- (void)setFPS:(float)fps
+{
+    dispatch_async(dispatch_get_main_queue(),
+                   ^{
+                       _fpsLabel.text = [NSString stringWithFormat:@"%2.f FPS", fps];
+                   });
+}
+
 - (IBAction)share:(id)sender
 {
     UIActivityViewController* activityController = [[UIActivityViewController alloc] initWithActivityItems:@[[NSString stringWithFormat:@"Check out %@ by %@ in Shadertoy!", _shaderInfo.name, _shaderInfo.username], [NSString stringWithFormat:@"https://www.shadertoy.com/view/%@", _shaderInfo.ID]] applicationActivities:nil];

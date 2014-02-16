@@ -20,12 +20,14 @@
     bool _animating;
     bool _initialized;
     unsigned long _frameDropCounter;
+    unsigned long _frameCounter;
     
     Plane* _planeObject;
     ShaderParameters* _params;
     
     NSDate* _startTime;
     NSDate* _lastFrameTime;
+    NSDate* _lastFPSTime;
     
     // Multithreading support
     NSThread* _renderThread;

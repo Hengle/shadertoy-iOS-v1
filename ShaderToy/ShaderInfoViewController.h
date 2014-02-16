@@ -26,8 +26,11 @@
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
 @property (weak, nonatomic) IBOutlet UIButton *viewsButton;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *fpsLabel;
 
 - (IBAction)share:(id)sender;
 - (IBAction)like:(id)sender;
+
+- (void)setFPS:(float)fps;
 
 @end
