@@ -47,7 +47,7 @@
 @interface ShaderRenderPass : NSObject
 
 @property (strong, nonatomic) NSString* name;
-@property (strong, nonatomic) NSString* description;
+@property (strong, nonatomic) NSString* descriptionString;
 @property (strong, nonatomic) NSMutableArray* inputs;
 @property (strong, nonatomic) NSMutableArray* outputs;
 @property (strong, nonatomic) NSString* code;
@@ -62,7 +62,7 @@
 @property (strong, nonatomic) NSString* ID;
 @property (strong, nonatomic) NSString* name;
 @property (strong, nonatomic) NSString* username;
-@property (strong, nonatomic) NSString* description;
+@property (strong, nonatomic) NSString* descriptionString;
 @property (strong, nonatomic) NSArray* tags;
 @property (strong, nonatomic) NSMutableArray* renderpasses;
 @property (nonatomic, assign) int likes;

@@ -131,7 +131,7 @@
         }
         
         _name = renderpassData[@"name"];
-        _description = renderpassData[@"description"];
+        _descriptionString = renderpassData[@"description"];
         _code = renderpassData[@"code"];
     }
     
@@ -154,7 +154,7 @@
         _viewed = ((NSNumber*)info[@"viewed"]).intValue;
         _name = info[@"name"];
         _username = info[@"username"];
-        _description = info[@"description"];
+        _descriptionString = info[@"description"];
         _likes = ((NSNumber*)info[@"likes"]).intValue;
         _published = info[@"published"];
         

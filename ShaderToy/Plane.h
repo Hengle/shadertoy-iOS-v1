@@ -33,7 +33,7 @@ typedef struct
     GLint _channelUniform[4];
     GLint _dateUniform;
     
-    int indicesToDraw;
+    int _indicesToDraw;
     
     ShaderInfo * _pendingShader;
 }

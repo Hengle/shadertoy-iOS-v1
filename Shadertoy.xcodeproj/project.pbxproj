@@ -12,6 +12,8 @@
 		2539FEDF18A22AE0003C9B1C /* Icon-152.png in Resources */ = {isa = PBXBuildFile; fileRef = 2539FEDC18A22AE0003C9B1C /* Icon-152.png */; };
 		AE23BC8F184DD33A009F4531 /* UIWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE23BC8E184DD33A009F4531 /* UIWebViewController.m */; };
 		AE23BC91184DDFBC009F4531 /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = AE23BC90184DDFBC009F4531 /* close.png */; };
+		AE36204019D6B6A600801D1D /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE36203E19D6B6A600801D1D /* Launch Screen.xib */; };
+		AE4C59E01A08D8F7009E0E40 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE4C59DF1A08D8F7009E0E40 /* AudioToolbox.framework */; };
 		AE5CAB911797B838000924C3 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = AE5CAB871797B838000924C3 /* Icon-Small-50.png */; };
 		AE5CAB921797B838000924C3 /* Icon-Small-50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE5CAB881797B838000924C3 /* Icon-Small-50@2x.png */; };
 		AE5CAB931797B838000924C3 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = AE5CAB891797B838000924C3 /* Icon-Small.png */; };
@@ -79,7 +81,6 @@
 		AEE8B9DB1855C74800BB39B4 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE8B9DA1855C74800BB39B4 /* Reachability.m */; };
 		AEE8B9DD1855C8AC00BB39B4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEE8B9DC1855C8AC00BB39B4 /* SystemConfiguration.framework */; };
 		E297418517D0807500D39049 /* AudioController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E297418417D0807500D39049 /* AudioController.mm */; };
-		E297418717D0809F00D39049 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E297418617D0809F00D39049 /* AudioToolbox.framework */; };
 		E297418A17D08DAD00D39049 /* FFTBufferManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E297418817D08DAD00D39049 /* FFTBufferManager.cpp */; };
 /* End PBXBuildFile section */
 
@@ -92,6 +93,8 @@
 		AE23BC8D184DD33A009F4531 /* UIWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIWebViewController.h; path = Shadertoy/UIWebViewController.h; sourceTree = SOURCE_ROOT; };
 		AE23BC8E184DD33A009F4531 /* UIWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIWebViewController.m; path = Shadertoy/UIWebViewController.m; sourceTree = SOURCE_ROOT; };
 		AE23BC90184DDFBC009F4531 /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
+		AE36203F19D6B6A600801D1D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "Shadertoy/en.lproj/Launch Screen.xib"; sourceTree = SOURCE_ROOT; };
+		AE4C59DF1A08D8F7009E0E40 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		AE5CAB871797B838000924C3 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
 		AE5CAB881797B838000924C3 /* Icon-Small-50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50@2x.png"; sourceTree = "<group>"; };
 		AE5CAB891797B838000924C3 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
@@ -180,7 +183,6 @@
 		AEE8B9DC1855C8AC00BB39B4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		E297418317D0807500D39049 /* AudioController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AudioController.hpp; sourceTree = "<group>"; };
 		E297418417D0807500D39049 /* AudioController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioController.mm; sourceTree = "<group>"; };
-		E297418617D0809F00D39049 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		E297418817D08DAD00D39049 /* FFTBufferManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FFTBufferManager.cpp; sourceTree = "<group>"; };
 		E297418917D08DAD00D39049 /* FFTBufferManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FFTBufferManager.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -190,8 +192,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE4C59E01A08D8F7009E0E40 /* AudioToolbox.framework in Frameworks */,
 				AEE8B9DD1855C8AC00BB39B4 /* SystemConfiguration.framework in Frameworks */,
-				E297418717D0809F00D39049 /* AudioToolbox.framework in Frameworks */,
 				AE970B71178F258C00DD17F3 /* Accelerate.framework in Frameworks */,
 				AEAEEA6817422B1D003F74D3 /* Social.framework in Frameworks */,
 				AE933D6F173A3AE6009EAF41 /* QuartzCore.framework in Frameworks */,
@@ -264,8 +266,8 @@
 		AEA3B53E1730E6C700786DA2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AE4C59DF1A08D8F7009E0E40 /* AudioToolbox.framework */,
 				AEE8B9DC1855C8AC00BB39B4 /* SystemConfiguration.framework */,
-				E297418617D0809F00D39049 /* AudioToolbox.framework */,
 				AE970B70178F258C00DD17F3 /* Accelerate.framework */,
 				AEAEEA6717422B1D003F74D3 /* Social.framework */,
 				AE933D6E173A3AE6009EAF41 /* QuartzCore.framework */,
@@ -303,6 +305,7 @@
 				AE23BC8E184DD33A009F4531 /* UIWebViewController.m */,
 				AEA3B55A1730E6C700786DA2 /* MainStoryboard_iPad.storyboard */,
 				AEA3B5571730E6C700786DA2 /* MainStoryboard_iPhone.storyboard */,
+				AE36203E19D6B6A600801D1D /* Launch Screen.xib */,
 				AEA3B5691731104A00786DA2 /* Resources */,
 				AEA3B5461730E6C700786DA2 /* Supporting Files */,
 			);
@@ -472,7 +475,12 @@
 				ORGANIZATIONNAME = "Ricardo Chavarria";
 				TargetAttributes = {
 					AEA3B53B1730E6C700786DA2 = {
-						DevelopmentTeam = GJCCB5F6G9;
+						DevelopmentTeam = S6BWLQXDC7;
+						SystemCapabilities = {
+							com.apple.InterAppAudio = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -527,6 +535,7 @@
 				AE5CABA91798F843000924C3 /* love.png in Resources */,
 				AE5CABAA1798F843000924C3 /* menu.png in Resources */,
 				AE5CABAB1798F843000924C3 /* share.png in Resources */,
+				AE36204019D6B6A600801D1D /* Launch Screen.xib in Resources */,
 				AE5CABAC1798F843000924C3 /* time.png in Resources */,
 				AE5CABAE1798FBEC000924C3 /* fire.png in Resources */,
 				2539FEDE18A22AE0003C9B1C /* Icon-120.png in Resources */,
@@ -578,6 +587,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		AE36203E19D6B6A600801D1D /* Launch Screen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AE36203F19D6B6A600801D1D /* en */,
+			);
+			name = "Launch Screen.xib";
+			sourceTree = "<group>";
+		};
 		AEA3B5481730E6C700786DA2 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -668,12 +685,12 @@
 		AEA3B5631730E6C700786DA2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Shadertoy/Shadertoy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ShaderToy/Shadertoy-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/ShaderToy/Shadertoy-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = Shadertoy;
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -683,12 +700,12 @@
 		AEA3B5641730E6C700786DA2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Shadertoy/Shadertoy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ShaderToy/Shadertoy-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/ShaderToy/Shadertoy-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = Shadertoy;
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;

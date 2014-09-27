@@ -15,6 +15,11 @@
     // Override point for customization after application launch.
     return YES;
 }
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    return YES;
+}
 							
 - (void)applicationWillResignActive:(UIApplication *)application
 {

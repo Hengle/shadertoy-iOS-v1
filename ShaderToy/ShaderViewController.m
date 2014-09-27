@@ -297,8 +297,6 @@
 {
     @synchronized(_context)
     {
-        glPushGroupMarkerEXT(0, "Drawing");
-        
         [self.view setFramebuffer];
         
         // Calculate the width and height of the view
@@ -315,7 +313,7 @@
         glViewport(0, 0, width, height);
         
         // Iterate over renderpasses and send the appropriate values to the shader
-        for (ShaderRenderPass* renderpass in _currentShader.renderpasses)
+        for (int i = 0; i < _currentShader.renderpasses.count; i++)
         {
             // Setup the parameters that are sent to the shader
             _params.resolution = GLKVector3Make(width, height, 1.0f);
@@ -337,8 +335,6 @@
         }
         
         [self.view presentFramebuffer];
-        
-        glPopGroupMarkerEXT();
     }
 }
 

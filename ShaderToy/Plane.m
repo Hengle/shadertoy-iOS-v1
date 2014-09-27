@@ -10,6 +10,8 @@
 #import "ShaderManager.h"
 #import "ShaderInfo.h"
 
+#import <OpenGLES/ES2/glext.h>
+
 @interface Plane ()
 
 - (void)loadShader:(ShaderInfo *)shader;
@@ -23,8 +25,6 @@
     self = [super init];
     if (self)
     {
-        glPushGroupMarkerEXT(0, "Initialization");
-        
         Vertex vertices[] =
         {
             {{1.0f,  -1.0f, 0}},
@@ -39,7 +39,7 @@
             2, 3, 0,
         };
         
-        indicesToDraw = 6;
+        _indicesToDraw = 6;
         
         [self loadShader:shader];
         
@@ -59,8 +59,6 @@
         glVertexAttribPointer(_positionSlot, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const GLvoid*)offsetof(Vertex, position));
 
         glBindVertexArrayOES(0);
-        
-        glPopGroupMarkerEXT();
     }
     
     return self;
@@ -92,8 +90,6 @@
 {
     if (_program)
     {
-        glPushGroupMarkerEXT(0, "Rendering");
-        
         glUseProgram(_program);
         
         // Pixel shader uniforms
@@ -140,9 +136,7 @@
         
         glBindVertexArrayOES(_vertexArray);
         
-        glDrawElements(GL_TRIANGLES, indicesToDraw, GL_UNSIGNED_SHORT, 0);
-        
-        glPopGroupMarkerEXT();
+        glDrawElements(GL_TRIANGLES, _indicesToDraw, GL_UNSIGNED_SHORT, 0);
     }
 }
 
@@ -161,8 +155,6 @@
     
     for (ShaderRenderPass* renderpass in shader.renderpasses)
     {
-        glPushGroupMarkerEXT(0, "Uniform Caching");
-        
         // Retrieve the program from the ShaderManager (and sharegroup by extension)
         GLuint program = [[ShaderManager sharedInstance] getShader:shader];
     
@@ -186,8 +178,6 @@
             GLuint uniform = glGetUniformLocation(_program, channel.UTF8String);
             _channelUniform[input.channel] = uniform;
         }
-        
-        glPopGroupMarkerEXT();
     }
 }
 

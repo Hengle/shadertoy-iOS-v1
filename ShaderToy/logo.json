@@ -1,5 +1,6 @@
 {
-    "info": {
+    "info":
+    {
         "date": "1367053740",
         "description": "Logo in a texture for Shadertoy",
         "hasliked": 0,
@@ -7,21 +8,23 @@
         "likes": 0,
         "name": "Shadertoy Logo",
         "published": 0,
-        "tags": [
+        "tags":
+        [
             "texturing","logo"
         ],
         "username": "Shadertoy",
         "viewed": 0,
         "removeoverlay": 0
     },
-    "renderpass": [
-        {
-                   "code": "void main(void){gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0);}",
-            "description": "",
-            "name": "main",
-            "inputs": [],
-            "outputs": []
-        }
-    ],
+    "renderpass":
+    [
+     {
+        "code": "void main(void){gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0);}",
+     "description": "",
+     "name": "main",
+     "inputs": [],
+     "outputs": []
+     }
+     ],
     "ver": "0.1"
 }
