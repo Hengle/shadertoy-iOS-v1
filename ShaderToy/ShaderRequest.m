@@ -55,7 +55,7 @@
 
 - (void)requestCategory:(EShaderCategory)category
 {
-    NSLog(@"ShaderRequest: Changing cateogory to %d", category);
+    NSLog(@"ShaderRequest: Changing cateogory to %lu", category);
     // Reset the state
     [self resetState];
     
@@ -75,13 +75,13 @@
 
 - (NSString*)encodeString:(NSString *)s
 {
-    int len = [s length];
+    NSUInteger len = [s length];
     
     NSString* dic = @"cDfN3WX4dms7twlM";
     NSString* res = @"";
     
     int r = 3876781;
-    for( int i=0; i < len; i++ )
+    for (int i = 0; i < len; i++)
     {
         // random number
         r = (r * 0x343fd + 0x269ec3) & 0xffffffff;
@@ -94,6 +94,7 @@
         // base256 to base16
         res = [NSString stringWithFormat:@"%@%c%c", res, [dic characterAtIndex:(c>>4)&0xf], [dic characterAtIndex:c&0xf]];
     }
+    
     return res;
 }
 
@@ -115,22 +116,11 @@
             [SVProgressHUD showWithStatus:@"Loading Shaders" maskType:SVProgressHUDMaskTypeClear];
             
             // Dispatch the Request on a background thread to free up the Main Thread
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
-                           ^{
-                               NSString* hardwareString = [[UIDevice currentDevice].hardwareSimpleDescription stringByReplacingOccurrencesOfString:@" " withString:@""];
-                               [hardwareString stringByReplacingOccurrencesOfString:@"(" withString:@""];
-                               [hardwareString stringByReplacingOccurrencesOfString:@")" withString:@""];
-                               
-                               //
-                               // Begin enconding
-                               //
-                               
-                               NSInteger Seconds = ([[NSDate date] timeIntervalSince1970]);
-                               
-                               NSString* s = [NSString stringWithFormat:@"sort=%@&from=%d&num=12&device=%@&time=%d", [self categoryStringForCategory:_currentCategory], _currentIndex, hardwareString, Seconds];
-                               NSString* res = [self encodeString:s];
-                               
-                               NSString* urlString = [NSString stringWithFormat:@"https://www.shadertoy.com/mobile/%@", res];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                
+                               static NSString* apiKey = @"Nt8twr";
+                               NSString* s = [NSString stringWithFormat:@"sort=%@&from=%d&num=12&key=%@", [self categoryStringForCategory:_currentCategory], _currentIndex, apiKey];
+                               NSString* urlString = [NSString stringWithFormat:@"https://www.shadertoy.com/api/v1/shaders?%@", s];
                                NSLog(@"ShaderRequest: Asking for shaders with URL %@", urlString);
 
                                NSData* shaderListData = [NSData dataWithContentsOfURL:[NSURL URLWithString:urlString]];
@@ -139,36 +129,39 @@
                                if (shaderListData != nil)
                                {
                                    NSError* listError = nil;
-                                   NSArray* shaderList = [NSJSONSerialization JSONObjectWithData:shaderListData options:kNilOptions error:&listError];
+                                   NSDictionary* response = [NSJSONSerialization JSONObjectWithData:shaderListData options:kNilOptions error:&listError];
                                    
                                    if (listError == nil)
                                    {
-                                       for (NSString* shaderID in shaderList)
+                                       NSNumber* results = response[@"Shaders"];
+                                       if (results.intValue > 0)
                                        {
-                                           NSInteger Seconds2 = ([[NSDate date] timeIntervalSince1970]);
-                                           NSString * res2 = [self encodeString:[NSString stringWithFormat:@"s=%@&time=%d",shaderID, Seconds2]];
-                                           
-                                           NSData* shaderDetailsData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://www.shadertoy.com/mobile/%@", res2]]];
-                                           
-                                           if (shaderDetailsData != nil)
+                                           for (NSString* shaderID in response[@"Results"])
                                            {
-                                               NSError* detailError = nil;
-                                               NSArray* shaderDetails = [NSJSONSerialization JSONObjectWithData:shaderDetailsData options:kNilOptions error:&detailError];
+                                               NSString* shaderDetailsRequest = [NSString stringWithFormat:@"https://www.shadertoy.com/api/v1/shaders/%@?key=%@", shaderID, apiKey];
+                                               NSData* shaderDetailsData = [NSData dataWithContentsOfURL:[NSURL URLWithString:shaderDetailsRequest]];
                                                
-                                               if (detailError == nil)
+                                               if (shaderDetailsData != nil)
                                                {
-                                                   ShaderInfo* shader = [[ShaderInfo alloc] initWithJSONDictionary:shaderDetails[0]];
+                                                   NSError* detailError = nil;
+                                                   NSDictionary* shaderDetails = [NSJSONSerialization JSONObjectWithData:shaderDetailsData options:kNilOptions error:&detailError];
                                                    
-                                                   [_newShaders addObject:shader];
+                                                   if (detailError == nil)
+                                                   {
+                                                       NSDictionary* details = shaderDetails[@"Shader"][0];
+                                                       ShaderInfo* shader = [[ShaderInfo alloc] initWithJSONDictionary:details];
+                                                       
+                                                       [_newShaders addObject:shader];
+                                                   }
+                                                   else
+                                                   {
+                                                       NSLog(@"ShaderRequest: Error loading shader details %@", detailError.localizedDescription);
+                                                   }
                                                }
                                                else
                                                {
-                                                   NSLog(@"ShaderRequest: Error loading shader details %@", detailError.localizedDescription);
+                                                   NSLog(@"ShaderRequest: Error loading shader details for %@", shaderID);
                                                }
-                                           }
-                                           else
-                                           {
-                                               NSLog(@"ShaderRequest: Error loading shader details for %@", shaderID);
                                            }
                                        }
                                        
@@ -214,7 +207,7 @@
 
 - (void)doneWithRequest
 {
-    NSLog(@"ShaderRequest: Request done, %d shaders!", _newShaders.count);
+    NSLog(@"ShaderRequest: Request done, %lu shaders!", (unsigned long)_newShaders.count);
     
     // Deactivate the current request
     _activeRequest = false;

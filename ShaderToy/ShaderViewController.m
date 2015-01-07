@@ -87,7 +87,6 @@
     UIPanGestureRecognizer* panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
     [_infoViewController.view addGestureRecognizer:panGesture];
     
-    [self.view addSubview:_infoViewController.view];
     
     // Reset the overlay position
     _infoViewController.view.center = CGPointMake(_infoViewController.view.center.x, self.view.frame.size.height);
@@ -97,6 +96,16 @@
     _menuButton.accessibilityLabel = @"menu";
     [_menuButton setImage:[UIImage imageNamed:@"menu.png"] forState:UIControlStateNormal];
     [_menuButton addTarget:self action:@selector(toggleMenu:) forControlEvents:UIControlEventTouchUpInside];
+    
+}
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    
+    [self.view layoutIfNeeded];
+    
+    [self.view addSubview:_infoViewController.view];
     [self.view addSubview:_menuButton];
 }
 

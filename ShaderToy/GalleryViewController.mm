@@ -127,7 +127,7 @@
         [_shaderRequest requestNewShaders];
     }
     
-    NSLog(@"Pending controllers %u", _pendingControllers.count);
+    NSLog(@"Pending controllers %lu", (unsigned long)_pendingControllers.count);
     NSLog(@"Started Animation for next controller %@ with shader %@", next, next.currentShader.name);
 }
 
@@ -181,7 +181,7 @@
             ShaderInfo* shader = _shaders[shaderIndex];
             [newController setShader:shader];
         
-            NSLog(@"Setting Before VC %u to shader %@", shaderIndex % _shaderViewControllers.count, shader.name);
+            NSLog(@"Setting Before VC %lu to shader %@", shaderIndex % _shaderViewControllers.count, shader.name);
         }
     }
     
@@ -204,7 +204,7 @@
             ShaderInfo* shader = _shaders[shaderIndex];
             [newController setShader:shader];
             
-            NSLog(@"Setting After VC %u to shader %@", (shaderIndex % _shaderViewControllers.count), shader.name);
+            NSLog(@"Setting After VC %lu to shader %@", (shaderIndex % _shaderViewControllers.count), shader.name);
         }
     }
     
