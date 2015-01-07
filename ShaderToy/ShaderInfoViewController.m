@@ -38,7 +38,7 @@
                        
                        _nameLabel.text = [_shaderInfo.name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
                        _authorLabel.text = [_shaderInfo.username stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-                       _descriptionLabel.text = [_shaderInfo.description stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                       _descriptionLabel.text = [_shaderInfo.descriptionString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
                        
                        NSMutableString* tags = [NSMutableString new];
                        for (int i = 0; i < _shaderInfo.tags.count; i++)

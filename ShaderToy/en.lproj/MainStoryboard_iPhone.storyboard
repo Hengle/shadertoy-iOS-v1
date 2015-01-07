@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
         <!--Reveal View Controller-->
@@ -11,8 +11,8 @@
                 <viewController id="2" customClass="SWRevealViewController" sceneMemberID="viewController">
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
-                        <segue destination="Rhv-Es-AOn" kind="custom" identifier="sw_front" customClass="SWRevealViewControllerSegue" id="ERZ-XU-dJq"/>
-                        <segue destination="af9-NP-x63" kind="custom" identifier="sw_rear" customClass="SWRevealViewControllerSegue" id="l94-CS-i3k"/>
+                        <segue destination="Rhv-Es-AOn" kind="custom" identifier="sw_front" customClass="SWRevealViewControllerSegueSetController" id="ERZ-XU-dJq"/>
+                        <segue destination="af9-NP-x63" kind="custom" identifier="sw_rear" customClass="SWRevealViewControllerSegueSetController" id="Yvv-ad-jyF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
@@ -196,7 +196,7 @@
                                     <constraint firstAttribute="width" constant="40" id="F69-w7-PVR"/>
                                     <constraint firstAttribute="height" constant="40" id="eXt-AL-Sga"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="10"/>
                                 <inset key="contentEdgeInsets" minX="0.0" minY="-3" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" title="2" backgroundImage="love.png">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -209,13 +209,13 @@
                                     <action selector="like:" destination="Gte-0y-9Xn" eventType="touchUpInside" id="EBu-OY-dvZ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EVB-OV-dXk" userLabel="View Button">
-                                <rect key="frame" x="189" y="100" width="41" height="40"/>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EVB-OV-dXk" userLabel="View Button">
+                                <rect key="frame" x="189" y="100" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="OK6-9b-FXk"/>
                                     <constraint firstAttribute="width" constant="40" id="ZPi-5Y-ZrC"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="10"/>
                                 <inset key="contentEdgeInsets" minX="2" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" title="2" backgroundImage="eye.png">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -227,15 +227,15 @@
                                 </state>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="2Wa-Es-kLC">
-                                <rect key="frame" x="20" y="151" width="280" height="43"/>
+                                <rect key="frame" x="20" y="151" width="280" height="42.5"/>
                                 <string key="text">Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</string>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                                 <size key="shadowOffset" width="1" height="1"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="60 FPS" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ng-D1-xTF">
-                                <rect key="frame" x="250" y="112" width="50" height="17"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="60 FPS" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ng-D1-xTF">
+                                <rect key="frame" x="249" y="112" width="51" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>

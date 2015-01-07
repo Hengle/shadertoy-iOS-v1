@@ -10,6 +10,7 @@
 		2539FEDD18A22AE0003C9B1C /* Icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = 2539FEDA18A22AE0003C9B1C /* Icon-76.png */; };
 		2539FEDE18A22AE0003C9B1C /* Icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 2539FEDB18A22AE0003C9B1C /* Icon-120.png */; };
 		2539FEDF18A22AE0003C9B1C /* Icon-152.png in Resources */ = {isa = PBXBuildFile; fileRef = 2539FEDC18A22AE0003C9B1C /* Icon-152.png */; };
+		AE226B461A5CFA0F0045B845 /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE226B451A5CFA0F0045B845 /* SVIndefiniteAnimatedView.m */; };
 		AE23BC8F184DD33A009F4531 /* UIWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE23BC8E184DD33A009F4531 /* UIWebViewController.m */; };
 		AE23BC91184DDFBC009F4531 /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = AE23BC90184DDFBC009F4531 /* close.png */; };
 		AE36204019D6B6A600801D1D /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE36203E19D6B6A600801D1D /* Launch Screen.xib */; };
@@ -90,6 +91,8 @@
 		2539FEDC18A22AE0003C9B1C /* Icon-152.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-152.png"; sourceTree = "<group>"; };
 		AE1EF6071771923000A1251C /* ShaderInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ShaderInfo.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		AE1EF6081771923000A1251C /* ShaderInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ShaderInfo.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		AE226B441A5CFA0F0045B845 /* SVIndefiniteAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVIndefiniteAnimatedView.h; sourceTree = "<group>"; };
+		AE226B451A5CFA0F0045B845 /* SVIndefiniteAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVIndefiniteAnimatedView.m; sourceTree = "<group>"; };
 		AE23BC8D184DD33A009F4531 /* UIWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIWebViewController.h; path = Shadertoy/UIWebViewController.h; sourceTree = SOURCE_ROOT; };
 		AE23BC8E184DD33A009F4531 /* UIWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIWebViewController.m; path = Shadertoy/UIWebViewController.m; sourceTree = SOURCE_ROOT; };
 		AE23BC90184DDFBC009F4531 /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
@@ -407,6 +410,8 @@
 		AEE8B9C91851BE4C00BB39B4 /* SVProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
+				AE226B441A5CFA0F0045B845 /* SVIndefiniteAnimatedView.h */,
+				AE226B451A5CFA0F0045B845 /* SVIndefiniteAnimatedView.m */,
 				AEE8B9CA1851BE4C00BB39B4 /* SVProgressHUD-Prefix.pch */,
 				AEE8B9CB1851BE4C00BB39B4 /* SVProgressHUD.bundle */,
 				AEE8B9CC1851BE4C00BB39B4 /* SVProgressHUD.h */,
@@ -566,6 +571,7 @@
 				AEE8B9D71851C7F800BB39B4 /* UIDevice+Hardware.m in Sources */,
 				AEA3B54C1730E6C700786DA2 /* main.m in Sources */,
 				AEA3B5501730E6C700786DA2 /* AppDelegate.m in Sources */,
+				AE226B461A5CFA0F0045B845 /* SVIndefiniteAnimatedView.m in Sources */,
 				AEA3B55F1730E6C700786DA2 /* GalleryViewController.mm in Sources */,
 				AEE8B9CF1851BE4C00BB39B4 /* SVProgressHUD.m in Sources */,
 				AEA3B57B1732327200786DA2 /* ShaderViewController.m in Sources */,
