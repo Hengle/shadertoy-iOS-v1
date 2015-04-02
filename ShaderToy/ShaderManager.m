@@ -180,6 +180,9 @@
     // Append the shader code to the header
     [codeString appendString:renderpass.code];
     
+    // Append the header that will call the main function
+    [codeString appendString:@"\nvoid main( void ){vec4 color; mainImage( color, gl_FragCoord.xy ); color.w = 1.0; gl_FragColor = color;}\n"];
+    
     // Replace reserved strings with prefix
     codeString = [self replaceReservedFunctionNames:codeString];
     

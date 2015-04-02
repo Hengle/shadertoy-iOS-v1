@@ -19,7 +19,7 @@
     "renderpass":
     [
      {
-        "code": "void main(void){gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0);}",
+        "code": "void mainImage( out vec4 fragColor, in vec2 fragCoord ){fragColor = vec4(0.0, 0.0, 0.0, 1.0);}",
      "description": "",
      "name": "main",
      "inputs": [],

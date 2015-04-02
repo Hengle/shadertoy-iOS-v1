@@ -148,7 +148,7 @@
                                                    
                                                    if (detailError == nil)
                                                    {
-                                                       NSDictionary* details = shaderDetails[@"Shader"][0];
+                                                       NSDictionary* details = shaderDetails[@"Shader"];
                                                        ShaderInfo* shader = [[ShaderInfo alloc] initWithJSONDictionary:details];
                                                        
                                                        [_newShaders addObject:shader];
