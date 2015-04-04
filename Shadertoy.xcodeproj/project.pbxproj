@@ -13,7 +13,6 @@
 		AE226B461A5CFA0F0045B845 /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE226B451A5CFA0F0045B845 /* SVIndefiniteAnimatedView.m */; };
 		AE23BC8F184DD33A009F4531 /* UIWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE23BC8E184DD33A009F4531 /* UIWebViewController.m */; };
 		AE23BC91184DDFBC009F4531 /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = AE23BC90184DDFBC009F4531 /* close.png */; };
-		AE36204019D6B6A600801D1D /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE36203E19D6B6A600801D1D /* Launch Screen.xib */; };
 		AE4C59E01A08D8F7009E0E40 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE4C59DF1A08D8F7009E0E40 /* AudioToolbox.framework */; };
 		AE5CAB911797B838000924C3 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = AE5CAB871797B838000924C3 /* Icon-Small-50.png */; };
 		AE5CAB921797B838000924C3 /* Icon-Small-50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE5CAB881797B838000924C3 /* Icon-Small-50@2x.png */; };
@@ -96,7 +95,6 @@
 		AE23BC8D184DD33A009F4531 /* UIWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIWebViewController.h; path = Shadertoy/UIWebViewController.h; sourceTree = SOURCE_ROOT; };
 		AE23BC8E184DD33A009F4531 /* UIWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIWebViewController.m; path = Shadertoy/UIWebViewController.m; sourceTree = SOURCE_ROOT; };
 		AE23BC90184DDFBC009F4531 /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
-		AE36203F19D6B6A600801D1D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "Shadertoy/en.lproj/Launch Screen.xib"; sourceTree = SOURCE_ROOT; };
 		AE4C59DF1A08D8F7009E0E40 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		AE5CAB871797B838000924C3 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
 		AE5CAB881797B838000924C3 /* Icon-Small-50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50@2x.png"; sourceTree = "<group>"; };
@@ -308,7 +306,6 @@
 				AE23BC8E184DD33A009F4531 /* UIWebViewController.m */,
 				AEA3B55A1730E6C700786DA2 /* MainStoryboard_iPad.storyboard */,
 				AEA3B5571730E6C700786DA2 /* MainStoryboard_iPhone.storyboard */,
-				AE36203E19D6B6A600801D1D /* Launch Screen.xib */,
 				AEA3B5691731104A00786DA2 /* Resources */,
 				AEA3B5461730E6C700786DA2 /* Supporting Files */,
 			);
@@ -480,7 +477,7 @@
 				ORGANIZATIONNAME = "Ricardo Chavarria";
 				TargetAttributes = {
 					AEA3B53B1730E6C700786DA2 = {
-						DevelopmentTeam = S6BWLQXDC7;
+						DevelopmentTeam = GJCCB5F6G9;
 						SystemCapabilities = {
 							com.apple.InterAppAudio = {
 								enabled = 0;
@@ -540,7 +537,6 @@
 				AE5CABA91798F843000924C3 /* love.png in Resources */,
 				AE5CABAA1798F843000924C3 /* menu.png in Resources */,
 				AE5CABAB1798F843000924C3 /* share.png in Resources */,
-				AE36204019D6B6A600801D1D /* Launch Screen.xib in Resources */,
 				AE5CABAC1798F843000924C3 /* time.png in Resources */,
 				AE5CABAE1798FBEC000924C3 /* fire.png in Resources */,
 				2539FEDE18A22AE0003C9B1C /* Icon-120.png in Resources */,
@@ -593,14 +589,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		AE36203E19D6B6A600801D1D /* Launch Screen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AE36203F19D6B6A600801D1D /* en */,
-			);
-			name = "Launch Screen.xib";
-			sourceTree = "<group>";
-		};
 		AEA3B5481730E6C700786DA2 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -696,7 +684,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ShaderToy/Shadertoy-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/ShaderToy/Shadertoy-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				PRODUCT_NAME = Shadertoy;
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -711,7 +699,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ShaderToy/Shadertoy-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/ShaderToy/Shadertoy-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				PRODUCT_NAME = Shadertoy;
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
