@@ -80,8 +80,6 @@
 		AEE8B9D71851C7F800BB39B4 /* UIDevice+Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE8B9D41851C7F700BB39B4 /* UIDevice+Hardware.m */; };
 		AEE8B9DB1855C74800BB39B4 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE8B9DA1855C74800BB39B4 /* Reachability.m */; };
 		AEE8B9DD1855C8AC00BB39B4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEE8B9DC1855C8AC00BB39B4 /* SystemConfiguration.framework */; };
-		E297418517D0807500D39049 /* AudioController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E297418417D0807500D39049 /* AudioController.mm */; };
-		E297418A17D08DAD00D39049 /* FFTBufferManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E297418817D08DAD00D39049 /* FFTBufferManager.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -182,10 +180,6 @@
 		AEE8B9D81855B1C200BB39B4 /* Reachability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		AEE8B9DA1855C74800BB39B4 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		AEE8B9DC1855C8AC00BB39B4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		E297418317D0807500D39049 /* AudioController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AudioController.hpp; sourceTree = "<group>"; };
-		E297418417D0807500D39049 /* AudioController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioController.mm; sourceTree = "<group>"; };
-		E297418817D08DAD00D39049 /* FFTBufferManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FFTBufferManager.cpp; sourceTree = "<group>"; };
-		E297418917D08DAD00D39049 /* FFTBufferManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FFTBufferManager.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -284,7 +278,6 @@
 		AEA3B5451730E6C700786DA2 /* Shadertoy */ = {
 			isa = PBXGroup;
 			children = (
-				E297418217D0806700D39049 /* Audio */,
 				AEA3B58B1736E7C500786DA2 /* Components */,
 				AEAE17F2174B635600764D5B /* Rendering */,
 				AE1EF6061771921000A1251C /* Data */,
@@ -436,17 +429,6 @@
 			name = Reachability;
 			sourceTree = "<group>";
 		};
-		E297418217D0806700D39049 /* Audio */ = {
-			isa = PBXGroup;
-			children = (
-				E297418917D08DAD00D39049 /* FFTBufferManager.hpp */,
-				E297418817D08DAD00D39049 /* FFTBufferManager.cpp */,
-				E297418317D0807500D39049 /* AudioController.hpp */,
-				E297418417D0807500D39049 /* AudioController.mm */,
-			);
-			name = Audio;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -581,8 +563,6 @@
 				AE23BC8F184DD33A009F4531 /* UIWebViewController.m in Sources */,
 				AEBF32B4176457EB00DEEF71 /* ShaderManager.m in Sources */,
 				AE85EACA17933DEE0090DC1F /* ShaderInfoViewController.m in Sources */,
-				E297418517D0807500D39049 /* AudioController.mm in Sources */,
-				E297418A17D08DAD00D39049 /* FFTBufferManager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -133,6 +133,7 @@
         _name = renderpassData[@"name"];
         _descriptionString = renderpassData[@"description"];
         _code = renderpassData[@"code"];
+        _type = renderpassData[@"type"];
     }
     
     return self;
@@ -168,6 +169,11 @@
         for (NSDictionary* renderpassData in renderpasses)
         {
             ShaderRenderPass* renderpass = [[ShaderRenderPass alloc] initWithJSONDictionary:renderpassData];
+            // Only care about images right now...
+            if( [[renderpass type]  isEqual: @"sound"])
+            {
+                continue;
+            }
             [_renderpasses addObject:renderpass];
         }
     }

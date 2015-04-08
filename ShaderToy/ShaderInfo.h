@@ -51,6 +51,7 @@
 @property (strong, nonatomic) NSMutableArray* inputs;
 @property (strong, nonatomic) NSMutableArray* outputs;
 @property (strong, nonatomic) NSString* code;
+@property (strong, nonatomic) NSString* type;
 
 - (id)initWithJSONDictionary:(NSDictionary*)renderpassData;
 
