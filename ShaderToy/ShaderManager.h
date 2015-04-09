@@ -20,18 +20,12 @@
 @end
 
 @interface ShaderManager : NSObject
-{
-    NSMutableArray* _pendingShaders;
-    NSMutableDictionary* _shaderDictionary;
-    
-    ShaderInfo* _defaultShader;
-}
 
-@property (nonatomic, retain) EAGLSharegroup *defaultSharegroup;
 @property (nonatomic, readonly) ShaderInfo* defaultShader;
 @property (nonatomic, retain) id<ShaderManagerDelegate> delegate;
 
 + (ShaderManager *)sharedInstance;
+- (EAGLContext *)createNewContext;
 
 - (void)addShader:(ShaderInfo *)shader;
 - (void)addShaders:(NSArray *)shaders;

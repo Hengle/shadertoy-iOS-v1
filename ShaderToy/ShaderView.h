@@ -17,6 +17,7 @@
 @property (nonatomic,readonly,retain) CAEAGLLayer *layer;
 @property (strong, nonatomic) EAGLContext *context;
 
+- (BOOL)setup:(BOOL)force;
 - (void)setFramebuffer;
 - (void)presentFramebuffer;
 

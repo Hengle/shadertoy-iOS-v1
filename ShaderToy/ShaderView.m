@@ -16,6 +16,7 @@
 {
     GLuint  frameBuffer;
     GLuint  renderBuffer;
+    bool setup;
 }
 
 - (void)createBuffers;
@@ -35,6 +36,7 @@
     self = [super initWithCoder:aDecoder];
     if (self)
     {
+        setup = false;
         self.layer.opaque = YES;
         self.layer.drawableProperties = @{kEAGLDrawablePropertyRetainedBacking: @NO, kEAGLDrawablePropertyColorFormat: kEAGLColorFormatRGBA8};
     }
@@ -50,6 +52,7 @@
     if (self)
     {
         // Initialization code
+        setup = false;
     }
     
     return self;
@@ -59,7 +62,33 @@
 {
     _context = context;
     
-    [self createBuffers];
+    [self setNeedsLayout];
+}
+
+- (BOOL)setup:(BOOL)force
+{
+    if (_context == nil)
+    {
+        return false;
+    }
+    
+    if (setup && !force)
+    {
+        return false;
+    }
+    
+    @synchronized(_context)
+    {
+        setup = true;
+        [EAGLContext setCurrentContext:_context];
+        
+        [self destroyBuffers];
+        [self createBuffers];
+        
+        [EAGLContext setCurrentContext:nil];
+    }
+    
+    return true;
 }
 
 - (void)createBuffers
@@ -100,6 +129,8 @@
         glDeleteRenderbuffers(1, &renderBuffer);
         renderBuffer = 0;
     }
+    
+    setup = false;
 }
 
 - (void)setFramebuffer
@@ -122,29 +153,7 @@
 {
     [super layoutSubviews];
     
-    if (_context == nil)
-    {
-        return;
-    }
-    
-    @synchronized(_context)
-    {
-        [EAGLContext setCurrentContext:_context];
-        
-        [self destroyBuffers];
-        [self createBuffers];
-        
-        [EAGLContext setCurrentContext:nil];
-    }
+    [self setup:false];
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 @end

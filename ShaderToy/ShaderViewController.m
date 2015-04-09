@@ -43,31 +43,15 @@
 {
     [super viewDidLoad];
     
-    if ([ShaderManager sharedInstance].defaultSharegroup == nil)
-    {
-        _context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
-        if (_context == nil)
-        {
-            _context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
-        }
-        [ShaderManager sharedInstance].defaultSharegroup = _context.sharegroup;
-    }
-    else
-    {
-        _context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3 sharegroup:[ShaderManager sharedInstance].defaultSharegroup];
-        if (_context == nil)
-        {
-            _context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2 sharegroup:[ShaderManager sharedInstance].defaultSharegroup];
-        }
-    }
+    _context = [ShaderManager sharedInstance].createNewContext;
     
-    if (!_context)
+    if (_context == nil)
     {
         NSLog(@"Failed to create ES context");
         exit(0);
     }
     
-    self.view.contentScaleFactor = 1.0f;
+    self.shaderView.contentScaleFactor = 1.0f;
     
     _renderThread = nil;
     _animating = false;
@@ -81,7 +65,7 @@
     
     _infoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ShaderInfoOverlay"];
     _infoViewController.shaderViewController = self;
-    _infoViewController.view.frame = CGRectMake(0, self.view.frame.size.height - _infoViewController.view.frame.size.height, self.view.frame.size.width, _infoViewController.view.frame.size.height);
+    _infoViewController.view.frame = CGRectMake(0, self.shaderView.frame.size.height - _infoViewController.view.frame.size.height, self.shaderView.frame.size.width, _infoViewController.view.frame.size.height);
     _infoViewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     
     UIPanGestureRecognizer* panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
@@ -89,24 +73,24 @@
     
     
     // Reset the overlay position
-    _infoViewController.view.center = CGPointMake(_infoViewController.view.center.x, self.view.frame.size.height);
+    _infoViewController.view.center = CGPointMake(_infoViewController.view.center.x, self.shaderView.frame.size.height);
     _infoViewController.view.backgroundColor = [_infoViewController.view.backgroundColor colorWithAlphaComponent:OverlayMinAlpha];
     
     _menuButton = [[UIButton alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 30.0f, 30.0f)];
     _menuButton.accessibilityLabel = @"menu";
     [_menuButton setImage:[UIImage imageNamed:@"menu.png"] forState:UIControlStateNormal];
     [_menuButton addTarget:self action:@selector(toggleMenu:) forControlEvents:UIControlEventTouchUpInside];
-    
 }
 
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
     
-    [self.view layoutIfNeeded];
+//    [self.shaderView layoutIfNeeded];
+//    [self.shaderView setNeedsLayout];
     
-    [self.view addSubview:_infoViewController.view];
-    [self.view addSubview:_menuButton];
+    [self.shaderView addSubview:_infoViewController.view];
+    [self.shaderView addSubview:_menuButton];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -115,24 +99,29 @@
     _infoViewController.shaderInfo = self.currentShader;
     
     // Reset the overlay position
-    _infoViewController.view.center = CGPointMake(_infoViewController.view.center.x, self.view.frame.size.height);
+    _infoViewController.view.center = CGPointMake(_infoViewController.view.center.x, self.shaderView.frame.size.height);
     _infoViewController.view.backgroundColor = [_infoViewController.view.backgroundColor colorWithAlphaComponent:OverlayMinAlpha];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     // Reset the overlay position
-    _infoViewController.view.center = CGPointMake(_infoViewController.view.center.x, self.view.frame.size.height);
+    _infoViewController.view.center = CGPointMake(_infoViewController.view.center.x, self.shaderView.frame.size.height);
     _infoViewController.view.backgroundColor = [_infoViewController.view.backgroundColor colorWithAlphaComponent:OverlayMinAlpha];
 }
 
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    
+    // Relayout the view, because we are doing an orientation change
+    [self.shaderView setNeedsLayout];
+    
     // Reset the overlay position
     [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:duration];
+    [UIView setAnimationDuration:0.1f];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-    _infoViewController.view.center = CGPointMake(_infoViewController.view.center.x, self.view.frame.size.height);
+    _infoViewController.view.center = CGPointMake(_infoViewController.view.center.x, self.shaderView.frame.size.height);
     _infoViewController.view.backgroundColor = [_infoViewController.view.backgroundColor colorWithAlphaComponent:OverlayMinAlpha];
     [UIView commitAnimations];
 }
@@ -148,7 +137,7 @@
     
     if ([self isViewLoaded] && ([[self view] window] == nil))
     {
-        self.view = nil;
+        self.shaderView = nil;
         
         [self tearDown];
     }
@@ -287,7 +276,7 @@
 {
     if (!_initialized)
     {
-        self.view.context = _context;
+        self.shaderView.context = _context;
         _initialized = true;
         _planeObject = [[Plane alloc] initWithShader:_currentShader];
         
@@ -306,11 +295,11 @@
 {
     @synchronized(_context)
     {
-        [self.view setFramebuffer];
+        [self.shaderView setFramebuffer];
         
         // Calculate the width and height of the view
-        float width = self.view.backingWidth;
-        float height = self.view.backingHeight;
+        float width = self.shaderView.backingWidth;
+        float height = self.shaderView.backingHeight;
         
         // Calculate the time since since rendering start
         float time = ABS([_startTime timeIntervalSinceNow]);
@@ -331,8 +320,8 @@
             // Send touch locations, if valid, otherwise send 0
             if (_touchLocation != nil)
             {
-                CGPoint point = [_touchLocation locationInView:self.view];
-                _params.mouseCoordinates = GLKVector4Make(point.x, self.view.bounds.size.height - point.y, 1.0f, 1.0f);
+                CGPoint point = [_touchLocation locationInView:self.shaderView];
+                _params.mouseCoordinates = GLKVector4Make(point.x, self.shaderView.bounds.size.height - point.y, 1.0f, 1.0f);
             }
             else
             {
@@ -343,7 +332,7 @@
             [_planeObject draw:_params];
         }
         
-        [self.view presentFramebuffer];
+        [self.shaderView presentFramebuffer];
     }
 }
 
@@ -474,11 +463,11 @@
 
 - (void)handlePan:(UIPanGestureRecognizer *)recognizer
 {
-    float parentViewHeight = self.view.frame.size.height;
+    float parentViewHeight = self.shaderView.frame.size.height;
     float viewHeight = recognizer.view.frame.size.height;
     float finalViewCenter = parentViewHeight - (viewHeight/2);
     
-    CGPoint translatedPoint = [recognizer translationInView:self.view];
+    CGPoint translatedPoint = [recognizer translationInView:self.shaderView];
     
     // Store the initial coordinate of the view
     if (recognizer.state == UIGestureRecognizerStateBegan)
@@ -506,7 +495,7 @@
     
     if (recognizer.state == UIGestureRecognizerStateEnded)
     {
-        CGPoint velocity = [recognizer velocityInView:self.view];
+        CGPoint velocity = [recognizer velocityInView:self.shaderView];
         float finalY = translatedPoint.y + (OverlayAnimationSpeed * velocity.y);
         
         if (finalY < finalViewCenter)

@@ -39,7 +39,7 @@
     float firstX, firstY;
 }
 
-@property (strong, nonatomic) ShaderView* view;
+@property (strong, nonatomic) IBOutlet ShaderView* shaderView;
 @property (strong, nonatomic) EAGLContext *context;
 @property (strong, readonly) ShaderInfo* currentShader;
 

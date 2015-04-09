@@ -11,6 +11,12 @@
 #import "ChannelResourceManager.h"
 
 @interface ShaderManager ()
+{
+    NSMutableArray* _pendingShaders;
+    NSMutableDictionary* _shaderDictionary;
+    ShaderInfo* _defaultShader;
+    EAGLSharegroup *defaultSharegroup;
+}
 
 - (NSString *)prepareRenderPassCode:(ShaderRenderPass *)renderpass;
 - (NSMutableString *)replaceReservedFunctionNames:(NSString *)codeString;
@@ -79,6 +85,31 @@
             [_delegate shaderManagerDidFinishCompiling:self];
         }
     }
+}
+
+- (EAGLContext *)createNewContext
+{
+    EAGLContext *context = nil;
+    if (defaultSharegroup == nil)
+    {
+        context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
+        if (context == nil)
+        {
+            context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
+        }
+        
+        defaultSharegroup = context.sharegroup;
+    }
+    else
+    {
+        context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3 sharegroup:defaultSharegroup];
+        if (context == nil)
+        {
+            context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2 sharegroup:defaultSharegroup];
+        }
+    }
+
+    return context;
 }
 
 - (ShaderInfo *)defaultShader
