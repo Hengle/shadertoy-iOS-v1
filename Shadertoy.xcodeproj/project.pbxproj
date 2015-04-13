@@ -50,8 +50,7 @@
 		AEA3B54A1730E6C700786DA2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AEA3B5481730E6C700786DA2 /* InfoPlist.strings */; };
 		AEA3B54C1730E6C700786DA2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B54B1730E6C700786DA2 /* main.m */; };
 		AEA3B5501730E6C700786DA2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B54F1730E6C700786DA2 /* AppDelegate.m */; };
-		AEA3B5591730E6C700786DA2 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEA3B5571730E6C700786DA2 /* MainStoryboard_iPhone.storyboard */; };
-		AEA3B55C1730E6C700786DA2 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEA3B55A1730E6C700786DA2 /* MainStoryboard_iPad.storyboard */; };
+		AEA3B5591730E6C700786DA2 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEA3B5571730E6C700786DA2 /* MainStoryboard.storyboard */; };
 		AEA3B55F1730E6C700786DA2 /* GalleryViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B55E1730E6C700786DA2 /* GalleryViewController.mm */; };
 		AEA3B57B1732327200786DA2 /* ShaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B5791732327200786DA2 /* ShaderViewController.m */; };
 		AEA3B58617360BBA00786DA2 /* ShaderMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B58517360BBA00786DA2 /* ShaderMenuViewController.m */; };
@@ -135,8 +134,7 @@
 		AEA3B54D1730E6C700786DA2 /* Shadertoy-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = "Shadertoy-Prefix.pch"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		AEA3B54E1730E6C700786DA2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AppDelegate.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		AEA3B54F1730E6C700786DA2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		AEA3B5581730E6C700786DA2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
-		AEA3B55B1730E6C700786DA2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		AEA3B5581730E6C700786DA2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		AEA3B55D1730E6C700786DA2 /* GalleryViewController.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; lineEnding = 0; path = GalleryViewController.hpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		AEA3B55E1730E6C700786DA2 /* GalleryViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = GalleryViewController.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		AEA3B5781732327200786DA2 /* ShaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ShaderViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -297,8 +295,7 @@
 				AEADD6F71803FF89001C57B5 /* ShaderToyDefines.h */,
 				AE23BC8D184DD33A009F4531 /* UIWebViewController.h */,
 				AE23BC8E184DD33A009F4531 /* UIWebViewController.m */,
-				AEA3B55A1730E6C700786DA2 /* MainStoryboard_iPad.storyboard */,
-				AEA3B5571730E6C700786DA2 /* MainStoryboard_iPhone.storyboard */,
+				AEA3B5571730E6C700786DA2 /* MainStoryboard.storyboard */,
 				AEA3B5691731104A00786DA2 /* Resources */,
 				AEA3B5461730E6C700786DA2 /* Supporting Files */,
 			);
@@ -492,8 +489,7 @@
 			files = (
 				AEA3B54A1730E6C700786DA2 /* InfoPlist.strings in Resources */,
 				AEBC41621777FE290024D73C /* background.png in Resources */,
-				AEA3B5591730E6C700786DA2 /* MainStoryboard_iPhone.storyboard in Resources */,
-				AEA3B55C1730E6C700786DA2 /* MainStoryboard_iPad.storyboard in Resources */,
+				AEA3B5591730E6C700786DA2 /* MainStoryboard.storyboard in Resources */,
 				AE933D6317370EE0009EAF41 /* cellbg.png in Resources */,
 				AEE8B9CE1851BE4C00BB39B4 /* SVProgressHUD.bundle in Resources */,
 				AEC8A5D0179905BA0040AAEF /* logo-text.png in Resources */,
@@ -577,20 +573,12 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		AEA3B5571730E6C700786DA2 /* MainStoryboard_iPhone.storyboard */ = {
+		AEA3B5571730E6C700786DA2 /* MainStoryboard.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				AEA3B5581730E6C700786DA2 /* en */,
 			);
-			name = MainStoryboard_iPhone.storyboard;
-			sourceTree = "<group>";
-		};
-		AEA3B55A1730E6C700786DA2 /* MainStoryboard_iPad.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AEA3B55B1730E6C700786DA2 /* en */,
-			);
-			name = MainStoryboard_iPad.storyboard;
+			name = MainStoryboard.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

@@ -247,17 +247,15 @@
                        
                        [_likeButton setTitle:[NSString stringWithFormat:@"%d", self.currentShader.likes] forState:UIControlStateNormal];
                        [_viewsButton setTitle:[NSString stringWithFormat:@"%d", self.currentShader.viewed] forState:UIControlStateNormal];
-                   });
-    
-    dispatch_after(5.0f, dispatch_get_main_queue(),
-                   ^{
-                       printf("Yep");
-                       [UIView beginAnimations:nil context:nil];
-                       [UIView setAnimationDuration:1.0f];
-                       [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-                       self.overlayView.alpha = 1.0f;
-//                       self.overlayView.hidden = false;
-                       [UIView commitAnimations];
+                       
+                       dispatch_after(5.0f, dispatch_get_main_queue(),
+                                      ^{
+                                          [UIView beginAnimations:nil context:nil];
+                                          [UIView setAnimationDuration:1.0f];
+                                          [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+                                          self.overlayView.alpha = 1.0f;
+                                          [UIView commitAnimations];
+                                      });
                    });
 }
 
