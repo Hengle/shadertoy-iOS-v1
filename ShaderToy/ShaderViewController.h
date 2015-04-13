@@ -37,11 +37,23 @@
     UITouch* _touchLocation;
     
     float firstX, firstY;
+    
+    // Shader Info
 }
 
+@property (weak, nonatomic) IBOutlet UIView *overlayView;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *authorLabel;
+@property (weak, nonatomic) IBOutlet UILabel *tagsLabel;
+@property (weak, nonatomic) IBOutlet UIButton *shareButton;
+@property (weak, nonatomic) IBOutlet UIButton *likeButton;
+@property (weak, nonatomic) IBOutlet UIButton *viewsButton;
+@property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *fpsLabel;
 @property (strong, nonatomic) IBOutlet ShaderView* shaderView;
 @property (strong, nonatomic) EAGLContext *context;
 @property (strong, readonly) ShaderInfo* currentShader;
+
 
 - (IBAction)toggleMenu:(id)sender;
 

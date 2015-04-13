@@ -459,7 +459,7 @@
 				ORGANIZATIONNAME = "Ricardo Chavarria";
 				TargetAttributes = {
 					AEA3B53B1730E6C700786DA2 = {
-						DevelopmentTeam = GJCCB5F6G9;
+						DevelopmentTeam = S6BWLQXDC7;
 						SystemCapabilities = {
 							com.apple.InterAppAudio = {
 								enabled = 0;

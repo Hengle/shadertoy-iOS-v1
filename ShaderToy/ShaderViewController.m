@@ -23,7 +23,7 @@
 
 @interface ShaderViewController ()
 {
-    ShaderInfoViewController* _infoViewController;
+//    ShaderInfoViewController* _infoViewController;
     UIButton* _menuButton;
 }
 
@@ -63,19 +63,6 @@
     _lastFPSTime = [NSDate date];
     _renderQueue = dispatch_queue_create("com.shadertoy.threadedgcdqueue", NULL);
     
-    _infoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ShaderInfoOverlay"];
-    _infoViewController.shaderViewController = self;
-    _infoViewController.view.frame = CGRectMake(0, self.shaderView.frame.size.height - _infoViewController.view.frame.size.height, self.shaderView.frame.size.width, _infoViewController.view.frame.size.height);
-    _infoViewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    
-    UIPanGestureRecognizer* panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-    [_infoViewController.view addGestureRecognizer:panGesture];
-    
-    
-    // Reset the overlay position
-    _infoViewController.view.center = CGPointMake(_infoViewController.view.center.x, self.shaderView.frame.size.height);
-    _infoViewController.view.backgroundColor = [_infoViewController.view.backgroundColor colorWithAlphaComponent:OverlayMinAlpha];
-    
     _menuButton = [[UIButton alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 30.0f, 30.0f)];
     _menuButton.accessibilityLabel = @"menu";
     [_menuButton setImage:[UIImage imageNamed:@"menu.png"] forState:UIControlStateNormal];
@@ -88,26 +75,16 @@
     
 //    [self.shaderView layoutIfNeeded];
 //    [self.shaderView setNeedsLayout];
-    
-    [self.shaderView addSubview:_infoViewController.view];
-    [self.shaderView addSubview:_menuButton];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    // Set the shader information to the overlay
-    _infoViewController.shaderInfo = self.currentShader;
-    
-    // Reset the overlay position
-    _infoViewController.view.center = CGPointMake(_infoViewController.view.center.x, self.shaderView.frame.size.height);
-    _infoViewController.view.backgroundColor = [_infoViewController.view.backgroundColor colorWithAlphaComponent:OverlayMinAlpha];
+    self.overlayView.alpha = 0.0f;
+//    self.overlayView.hidden = true;
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    // Reset the overlay position
-    _infoViewController.view.center = CGPointMake(_infoViewController.view.center.x, self.shaderView.frame.size.height);
-    _infoViewController.view.backgroundColor = [_infoViewController.view.backgroundColor colorWithAlphaComponent:OverlayMinAlpha];
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
@@ -116,14 +93,6 @@
     
     // Relayout the view, because we are doing an orientation change
     [self.shaderView setNeedsLayout];
-    
-    // Reset the overlay position
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.1f];
-    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-    _infoViewController.view.center = CGPointMake(_infoViewController.view.center.x, self.shaderView.frame.size.height);
-    _infoViewController.view.backgroundColor = [_infoViewController.view.backgroundColor colorWithAlphaComponent:OverlayMinAlpha];
-    [UIView commitAnimations];
 }
 
 - (void)dealloc
@@ -196,7 +165,7 @@
     _currentShader = shader;
     
     // Set the shader information to the overlay
-    _infoViewController.shaderInfo = self.currentShader;
+    [self populateOverlay];
     
     // For bookkeeping purposes
     _renderThread.name = self.currentShader.name;
@@ -252,6 +221,66 @@
         }
     }
 }
+
+- (void)populateOverlay
+{
+    dispatch_async(dispatch_get_main_queue(),
+                   ^{
+                       _nameLabel.text = [self.currentShader.name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                       _authorLabel.text = [self.currentShader.username stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                       _descriptionLabel.text = [self.currentShader.descriptionString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                       
+                       NSMutableString* tags = [NSMutableString new];
+                       for (int i = 0; i < self.currentShader.tags.count; i++)
+                       {
+                           if (i < self.currentShader.tags.count - 1)
+                           {
+                               [tags appendFormat:@"%@, ", self.currentShader.tags[i]];
+                           }
+                           else
+                           {
+                               [tags appendString:self.currentShader.tags[i]];
+                           }
+                       }
+                       
+                       _tagsLabel.text = tags;
+                       
+                       [_likeButton setTitle:[NSString stringWithFormat:@"%d", self.currentShader.likes] forState:UIControlStateNormal];
+                       [_viewsButton setTitle:[NSString stringWithFormat:@"%d", self.currentShader.viewed] forState:UIControlStateNormal];
+                   });
+    
+    dispatch_after(5.0f, dispatch_get_main_queue(),
+                   ^{
+                       printf("Yep");
+                       [UIView beginAnimations:nil context:nil];
+                       [UIView setAnimationDuration:1.0f];
+                       [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+                       self.overlayView.alpha = 1.0f;
+//                       self.overlayView.hidden = false;
+                       [UIView commitAnimations];
+                   });
+}
+
+- (void)setFPS:(float)fps
+{
+    dispatch_async(dispatch_get_main_queue(),
+                   ^{
+                       _fpsLabel.text = [NSString stringWithFormat:@"%2.f FPS", fps];
+                   });
+}
+
+- (IBAction)share:(id)sender
+{
+    UIActivityViewController* activityController = [[UIActivityViewController alloc] initWithActivityItems:@[[NSString stringWithFormat:@"Check out %@ by %@ in Shadertoy!", self.currentShader.name, self.currentShader.username], [NSString stringWithFormat:@"https://www.shadertoy.com/view/%@", self.currentShader.ID]] applicationActivities:nil];
+    
+    
+    [self presentViewController:activityController animated:YES completion:nil];
+}
+
+- (IBAction)like:(id)sender
+{
+}
+
 
 - (void)tearDown
 {
@@ -359,7 +388,7 @@
     {
         float fps = _frameCounter / fpsInterval;
         
-        [_infoViewController setFPS:fps];
+        [self setFPS:fps];
         
         _frameCounter = 0;
         _lastFPSTime = [NSDate date];
