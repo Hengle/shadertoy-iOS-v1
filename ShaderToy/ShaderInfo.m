@@ -139,6 +139,19 @@
     return self;
 }
 
+- (BOOL)hasInputofType:(NSString *)type
+{
+    for (ShaderInput *input in _inputs)
+    {
+        if ([input.type isEqualToString:type])
+        {
+            return true;
+        }
+    }
+    
+    return false;
+}
+
 @end
 
 @implementation ShaderInfo
@@ -179,6 +192,16 @@
     }
     
     return self;
+}
+
+- (BOOL)hasInputofType:(NSString *)type
+{
+    for (ShaderRenderPass *pass in _renderpasses)
+    {
+        return [pass hasInputofType:type];
+    }
+    
+    return false;
 }
 
 @end

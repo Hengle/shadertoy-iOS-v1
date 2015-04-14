@@ -54,6 +54,7 @@
 @property (strong, nonatomic) NSString* type;
 
 - (id)initWithJSONDictionary:(NSDictionary*)renderpassData;
+- (BOOL)hasInputofType:(NSString *)type;
 
 @end
 
@@ -73,5 +74,6 @@
 @property (nonatomic, assign) bool removeoverlay;
 
 - (id)initWithJSONDictionary:(NSDictionary*)json;
+- (BOOL)hasInputofType:(NSString *)type;
 
 @end

@@ -1,9 +1,0 @@
-[submodule "SWRevealViewController"]
-	path = SWRevealViewController
-	url = https://github.com/John-Lluch/SWRevealViewController.git
-[submodule "SVProgressHUD"]
-	path = SVProgressHUD
-	url = https://github.com/samvermette/SVProgressHUD.git
-[submodule "UIDevice-Hardware"]
-	path = UIDevice-Hardware
-url=https://github.com/skumancer/UIDevice-Hardware.git

@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		14A4290B831A2225B4415095 /* libPods-Shadertoy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B11B0A598D9CC678A39E700 /* libPods-Shadertoy.a */; };
 		2539FEDD18A22AE0003C9B1C /* Icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = 2539FEDA18A22AE0003C9B1C /* Icon-76.png */; };
 		2539FEDE18A22AE0003C9B1C /* Icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 2539FEDB18A22AE0003C9B1C /* Icon-120.png */; };
 		2539FEDF18A22AE0003C9B1C /* Icon-152.png in Resources */ = {isa = PBXBuildFile; fileRef = 2539FEDC18A22AE0003C9B1C /* Icon-152.png */; };
-		AE226B461A5CFA0F0045B845 /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE226B451A5CFA0F0045B845 /* SVIndefiniteAnimatedView.m */; };
 		AE23BC8F184DD33A009F4531 /* UIWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE23BC8E184DD33A009F4531 /* UIWebViewController.m */; };
 		AE23BC91184DDFBC009F4531 /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = AE23BC90184DDFBC009F4531 /* close.png */; };
 		AE4C59E01A08D8F7009E0E40 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE4C59DF1A08D8F7009E0E40 /* AudioToolbox.framework */; };
@@ -73,11 +73,6 @@
 		AEBF32B4176457EB00DEEF71 /* ShaderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBF32B3176457EB00DEEF71 /* ShaderManager.m */; };
 		AEC8A5D0179905BA0040AAEF /* logo-text.png in Resources */ = {isa = PBXBuildFile; fileRef = AEC8A5CF179905BA0040AAEF /* logo-text.png */; };
 		AED8869217D085DD00093573 /* loading.png in Resources */ = {isa = PBXBuildFile; fileRef = AED8869117D085DD00093573 /* loading.png */; };
-		AEE8B9C81851BE4500BB39B4 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE8B9C71851BE4500BB39B4 /* SWRevealViewController.m */; };
-		AEE8B9CE1851BE4C00BB39B4 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AEE8B9CB1851BE4C00BB39B4 /* SVProgressHUD.bundle */; };
-		AEE8B9CF1851BE4C00BB39B4 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE8B9CD1851BE4C00BB39B4 /* SVProgressHUD.m */; };
-		AEE8B9D71851C7F800BB39B4 /* UIDevice+Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE8B9D41851C7F700BB39B4 /* UIDevice+Hardware.m */; };
-		AEE8B9DB1855C74800BB39B4 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE8B9DA1855C74800BB39B4 /* Reachability.m */; };
 		AEE8B9DD1855C8AC00BB39B4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEE8B9DC1855C8AC00BB39B4 /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
 
@@ -85,10 +80,11 @@
 		2539FEDA18A22AE0003C9B1C /* Icon-76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-76.png"; sourceTree = "<group>"; };
 		2539FEDB18A22AE0003C9B1C /* Icon-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-120.png"; sourceTree = "<group>"; };
 		2539FEDC18A22AE0003C9B1C /* Icon-152.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-152.png"; sourceTree = "<group>"; };
+		2B7E6DA263432B8631FAC143 /* Pods-Shadertoy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shadertoy.release.xcconfig"; path = "Pods/Target Support Files/Pods-Shadertoy/Pods-Shadertoy.release.xcconfig"; sourceTree = "<group>"; };
+		5B11B0A598D9CC678A39E700 /* libPods-Shadertoy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Shadertoy.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		64CBB0693007A124FA98254F /* Pods-Shadertoy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shadertoy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Shadertoy/Pods-Shadertoy.debug.xcconfig"; sourceTree = "<group>"; };
 		AE1EF6071771923000A1251C /* ShaderInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ShaderInfo.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		AE1EF6081771923000A1251C /* ShaderInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ShaderInfo.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		AE226B441A5CFA0F0045B845 /* SVIndefiniteAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVIndefiniteAnimatedView.h; sourceTree = "<group>"; };
-		AE226B451A5CFA0F0045B845 /* SVIndefiniteAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVIndefiniteAnimatedView.m; sourceTree = "<group>"; };
 		AE23BC8D184DD33A009F4531 /* UIWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIWebViewController.h; path = Shadertoy/UIWebViewController.h; sourceTree = SOURCE_ROOT; };
 		AE23BC8E184DD33A009F4531 /* UIWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIWebViewController.m; path = Shadertoy/UIWebViewController.m; sourceTree = SOURCE_ROOT; };
 		AE23BC90184DDFBC009F4531 /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
@@ -167,16 +163,6 @@
 		AEC8A5CF179905BA0040AAEF /* logo-text.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "logo-text.png"; path = "Art/logo-text.png"; sourceTree = SOURCE_ROOT; };
 		AED5F46617FBFB1E003F6B6F /* Shadertoy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = Shadertoy.entitlements; path = Shadertoy/Shadertoy.entitlements; sourceTree = SOURCE_ROOT; };
 		AED8869117D085DD00093573 /* loading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loading.png; sourceTree = "<group>"; };
-		AEE8B9C61851BE4500BB39B4 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
-		AEE8B9C71851BE4500BB39B4 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
-		AEE8B9CA1851BE4C00BB39B4 /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
-		AEE8B9CB1851BE4C00BB39B4 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
-		AEE8B9CC1851BE4C00BB39B4 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
-		AEE8B9CD1851BE4C00BB39B4 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
-		AEE8B9D31851C7F700BB39B4 /* UIDevice+Hardware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Hardware.h"; sourceTree = "<group>"; };
-		AEE8B9D41851C7F700BB39B4 /* UIDevice+Hardware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Hardware.m"; sourceTree = "<group>"; };
-		AEE8B9D81855B1C200BB39B4 /* Reachability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
-		AEE8B9DA1855C74800BB39B4 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		AEE8B9DC1855C8AC00BB39B4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -195,6 +181,7 @@
 				AEA3B5401730E6C700786DA2 /* UIKit.framework in Frameworks */,
 				AEA3B5421730E6C700786DA2 /* Foundation.framework in Frameworks */,
 				AEA3B5441730E6C700786DA2 /* CoreGraphics.framework in Frameworks */,
+				14A4290B831A2225B4415095 /* libPods-Shadertoy.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,6 +232,7 @@
 				AEA3B5451730E6C700786DA2 /* Shadertoy */,
 				AEA3B53E1730E6C700786DA2 /* Frameworks */,
 				AEA3B53D1730E6C700786DA2 /* Products */,
+				C1991658946DD7E27CAAFF3D /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -269,6 +257,7 @@
 				AE933D601736F731009EAF41 /* GLKit.framework */,
 				AE933D5E1736F725009EAF41 /* OpenGLES.framework */,
 				AEA3B53F1730E6C700786DA2 /* UIKit.framework */,
+				5B11B0A598D9CC678A39E700 /* libPods-Shadertoy.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -276,7 +265,6 @@
 		AEA3B5451730E6C700786DA2 /* Shadertoy */ = {
 			isa = PBXGroup;
 			children = (
-				AEA3B58B1736E7C500786DA2 /* Components */,
 				AEAE17F2174B635600764D5B /* Rendering */,
 				AE1EF6061771921000A1251C /* Data */,
 				AE85EAC617933D950090DC1F /* Overlay */,
@@ -337,17 +325,6 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		AEA3B58B1736E7C500786DA2 /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				AEE8B9D91855C73400BB39B4 /* Reachability */,
-				AEE8B9D01851C7F700BB39B4 /* UIDevice-Hardware */,
-				AEE8B9C91851BE4C00BB39B4 /* SVProgressHUD */,
-				AEE8B9C51851BE4500BB39B4 /* SWRevealViewController */,
-			);
-			name = Components;
-			sourceTree = "<group>";
-		};
 		AEA3B5931736EE9100786DA2 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
@@ -384,46 +361,13 @@
 			name = Rendering;
 			sourceTree = "<group>";
 		};
-		AEE8B9C51851BE4500BB39B4 /* SWRevealViewController */ = {
+		C1991658946DD7E27CAAFF3D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				AEE8B9C61851BE4500BB39B4 /* SWRevealViewController.h */,
-				AEE8B9C71851BE4500BB39B4 /* SWRevealViewController.m */,
+				64CBB0693007A124FA98254F /* Pods-Shadertoy.debug.xcconfig */,
+				2B7E6DA263432B8631FAC143 /* Pods-Shadertoy.release.xcconfig */,
 			);
-			name = SWRevealViewController;
-			path = SWRevealViewController/SWRevealViewController;
-			sourceTree = SOURCE_ROOT;
-		};
-		AEE8B9C91851BE4C00BB39B4 /* SVProgressHUD */ = {
-			isa = PBXGroup;
-			children = (
-				AE226B441A5CFA0F0045B845 /* SVIndefiniteAnimatedView.h */,
-				AE226B451A5CFA0F0045B845 /* SVIndefiniteAnimatedView.m */,
-				AEE8B9CA1851BE4C00BB39B4 /* SVProgressHUD-Prefix.pch */,
-				AEE8B9CB1851BE4C00BB39B4 /* SVProgressHUD.bundle */,
-				AEE8B9CC1851BE4C00BB39B4 /* SVProgressHUD.h */,
-				AEE8B9CD1851BE4C00BB39B4 /* SVProgressHUD.m */,
-			);
-			name = SVProgressHUD;
-			path = SVProgressHUD/SVProgressHUD;
-			sourceTree = SOURCE_ROOT;
-		};
-		AEE8B9D01851C7F700BB39B4 /* UIDevice-Hardware */ = {
-			isa = PBXGroup;
-			children = (
-				AEE8B9D31851C7F700BB39B4 /* UIDevice+Hardware.h */,
-				AEE8B9D41851C7F700BB39B4 /* UIDevice+Hardware.m */,
-			);
-			path = "UIDevice-Hardware";
-			sourceTree = SOURCE_ROOT;
-		};
-		AEE8B9D91855C73400BB39B4 /* Reachability */ = {
-			isa = PBXGroup;
-			children = (
-				AEE8B9D81855B1C200BB39B4 /* Reachability.h */,
-				AEE8B9DA1855C74800BB39B4 /* Reachability.m */,
-			);
-			name = Reachability;
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -433,9 +377,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AEA3B5621730E6C700786DA2 /* Build configuration list for PBXNativeTarget "Shadertoy" */;
 			buildPhases = (
+				3FF2895DC70EB8F7278629C1 /* Check Pods Manifest.lock */,
 				AEA3B5381730E6C700786DA2 /* Sources */,
 				AEA3B5391730E6C700786DA2 /* Frameworks */,
 				AEA3B53A1730E6C700786DA2 /* Resources */,
+				29A6F0FBE80B7C812120CF27 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -491,7 +437,6 @@
 				AEBC41621777FE290024D73C /* background.png in Resources */,
 				AEA3B5591730E6C700786DA2 /* MainStoryboard.storyboard in Resources */,
 				AE933D6317370EE0009EAF41 /* cellbg.png in Resources */,
-				AEE8B9CE1851BE4C00BB39B4 /* SVProgressHUD.bundle in Resources */,
 				AEC8A5D0179905BA0040AAEF /* logo-text.png in Resources */,
 				AEBC415F1776D2F80024D73C /* logo.json in Resources */,
 				AE933D71173A4B6E009EAF41 /* Shader.vsh in Resources */,
@@ -535,6 +480,39 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		29A6F0FBE80B7C812120CF27 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Shadertoy/Pods-Shadertoy-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3FF2895DC70EB8F7278629C1 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		AEA3B5381730E6C700786DA2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -542,20 +520,15 @@
 			files = (
 				AEBC415D177444AF0024D73C /* ChannelResourceManager.m in Sources */,
 				AEBC414F1771B3B40024D73C /* ShaderInfo.m in Sources */,
-				AEE8B9D71851C7F800BB39B4 /* UIDevice+Hardware.m in Sources */,
 				AEA3B54C1730E6C700786DA2 /* main.m in Sources */,
 				AEA3B5501730E6C700786DA2 /* AppDelegate.m in Sources */,
-				AE226B461A5CFA0F0045B845 /* SVIndefiniteAnimatedView.m in Sources */,
 				AEA3B55F1730E6C700786DA2 /* GalleryViewController.mm in Sources */,
-				AEE8B9CF1851BE4C00BB39B4 /* SVProgressHUD.m in Sources */,
 				AEA3B57B1732327200786DA2 /* ShaderViewController.m in Sources */,
 				AEA3B58617360BBA00786DA2 /* ShaderMenuViewController.m in Sources */,
 				AEA3B58E1736E82A00786DA2 /* ShaderMenuCell.m in Sources */,
 				AEAE17F5174B637000764D5B /* Plane.m in Sources */,
 				AEB028281753F26100757AF8 /* ShaderView.m in Sources */,
 				AEADD6F61803DB28001C57B5 /* ShaderRequest.m in Sources */,
-				AEE8B9C81851BE4500BB39B4 /* SWRevealViewController.m in Sources */,
-				AEE8B9DB1855C74800BB39B4 /* Reachability.m in Sources */,
 				AE23BC8F184DD33A009F4531 /* UIWebViewController.m in Sources */,
 				AEBF32B4176457EB00DEEF71 /* ShaderManager.m in Sources */,
 				AE85EACA17933DEE0090DC1F /* ShaderInfoViewController.m in Sources */,
@@ -646,6 +619,7 @@
 		};
 		AEA3B5631730E6C700786DA2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 64CBB0693007A124FA98254F /* Pods-Shadertoy.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -661,6 +635,7 @@
 		};
 		AEA3B5641730E6C700786DA2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2B7E6DA263432B8631FAC143 /* Pods-Shadertoy.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
