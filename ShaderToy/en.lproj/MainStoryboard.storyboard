@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="2">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
@@ -137,6 +138,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f2R-Zy-5IF">
+                                <rect key="frame" x="10" y="10" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="f2R-Zy-5IF" secondAttribute="height" multiplier="1:1" id="0oq-RC-Kz7"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="menu.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="toggleMenu:" destination="HWU-Fu-0g7" eventType="touchUpInside" id="ebH-Cd-9pc"/>
+                                </connections>
+                            </button>
                             <view opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DkK-FL-G6p" userLabel="Overlay View">
                                 <rect key="frame" x="0.0" y="389" width="600" height="211"/>
                                 <subviews>
@@ -180,12 +193,13 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <size key="titleShadowOffset" width="1" height="1"/>
-                                        <state key="normal" backgroundImage="share.png">
-                                            <color key="titleShadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
+                                        <state key="normal" backgroundImage="share.png"/>
                                         <state key="highlighted" backgroundImage="share_selected.png">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="share:" destination="HWU-Fu-0g7" eventType="touchUpInside" id="p4R-5J-DUf"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SPX-cM-w4A" userLabel="Likes Button">
                                         <rect key="frame" x="427" y="122" width="40" height="40"/>
@@ -197,11 +211,8 @@
                                         <inset key="contentEdgeInsets" minX="0.0" minY="-3" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="2" backgroundImage="love.png">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </state>
-                                        <state key="highlighted" backgroundImage="love_selected.png">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
+                                        <state key="highlighted" backgroundImage="love_selected.png"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fgu-gI-Ebr" userLabel="View Button">
                                         <rect key="frame" x="476" y="122" width="40" height="40"/>
@@ -233,9 +244,9 @@
                                     <constraint firstAttribute="trailing" secondItem="9Tp-Za-zvY" secondAttribute="trailing" constant="20" id="ULl-f1-86V"/>
                                     <constraint firstItem="SPX-cM-w4A" firstAttribute="leading" secondItem="mBh-Vg-U2v" secondAttribute="trailing" constant="8" id="VF6-He-8Fy"/>
                                     <constraint firstAttribute="trailing" secondItem="i24-0P-zvc" secondAttribute="trailing" constant="20" id="VjQ-cm-be2"/>
-                                    <constraint firstItem="drC-73-VNL" firstAttribute="top" secondItem="DkK-FL-G6p" secondAttribute="top" constant="7" id="WCe-Hb-2BJ"/>
+                                    <constraint firstItem="drC-73-VNL" firstAttribute="top" secondItem="DkK-FL-G6p" secondAttribute="top" priority="999" constant="7" id="WCe-Hb-2BJ"/>
                                     <constraint firstAttribute="trailing" secondItem="drC-73-VNL" secondAttribute="trailing" constant="20" id="Wt6-6w-WmM"/>
-                                    <constraint firstItem="932-eC-Hjd" firstAttribute="top" secondItem="drC-73-VNL" secondAttribute="bottom" constant="6" id="Y1Y-Lk-LUS"/>
+                                    <constraint firstItem="932-eC-Hjd" firstAttribute="top" secondItem="drC-73-VNL" secondAttribute="bottom" priority="999" constant="6" id="Y1Y-Lk-LUS"/>
                                     <constraint firstItem="i24-0P-zvc" firstAttribute="leading" secondItem="Fgu-gI-Ebr" secondAttribute="trailing" constant="17" id="ZrV-LU-ckG"/>
                                     <constraint firstItem="Fgu-gI-Ebr" firstAttribute="centerY" secondItem="SPX-cM-w4A" secondAttribute="centerY" id="fLO-eh-71j"/>
                                     <constraint firstItem="932-eC-Hjd" firstAttribute="leading" secondItem="DkK-FL-G6p" secondAttribute="leading" constant="20" id="kpT-ka-w2h"/>
@@ -245,12 +256,19 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="f2R-Zy-5IF" firstAttribute="width" secondItem="Tv8-Xd-uyE" secondAttribute="width" multiplier="1:20" id="580-Fk-Shy"/>
                             <constraint firstItem="DkK-FL-G6p" firstAttribute="leading" secondItem="Tv8-Xd-uyE" secondAttribute="leading" id="FoT-Ni-ZxW"/>
+                            <constraint firstItem="f2R-Zy-5IF" firstAttribute="leading" secondItem="Tv8-Xd-uyE" secondAttribute="leading" constant="10" id="Qty-zt-h70"/>
                             <constraint firstAttribute="trailing" secondItem="DkK-FL-G6p" secondAttribute="trailing" id="lUW-07-tQi"/>
+                            <constraint firstItem="f2R-Zy-5IF" firstAttribute="top" secondItem="PDf-4e-e4B" secondAttribute="bottom" constant="10" id="qeo-nJ-vVa"/>
                             <constraint firstItem="n52-Nj-WFf" firstAttribute="top" secondItem="DkK-FL-G6p" secondAttribute="bottom" id="shc-qr-JUZ"/>
                             <constraint firstItem="DkK-FL-G6p" firstAttribute="height" secondItem="Tv8-Xd-uyE" secondAttribute="height" multiplier="200:568" id="yRA-5D-5MT"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="29C-Nx-lFf" appends="YES" id="sM0-GE-Fih"/>
+                        </connections>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
@@ -258,6 +276,7 @@
                         <outlet property="descriptionLabel" destination="9Tp-Za-zvY" id="DDJ-Lj-8cV"/>
                         <outlet property="fpsLabel" destination="i24-0P-zvc" id="FUJ-bO-pcn"/>
                         <outlet property="likeButton" destination="SPX-cM-w4A" id="nKj-Mx-yzr"/>
+                        <outlet property="menuButton" destination="f2R-Zy-5IF" id="BRV-gg-ccI"/>
                         <outlet property="nameLabel" destination="drC-73-VNL" id="IOq-ov-h9r"/>
                         <outlet property="overlayView" destination="DkK-FL-G6p" id="b6w-Yf-oXv"/>
                         <outlet property="shaderView" destination="Tv8-Xd-uyE" id="Wwv-TZ-5XW"/>
@@ -266,6 +285,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B9M-xA-B4s" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer numberOfTapsRequired="2" id="29C-Nx-lFf">
+                    <connections>
+                        <action selector="showOverlay:" destination="HWU-Fu-0g7" id="4lY-gA-vI1"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1646" y="301"/>
         </scene>
@@ -287,6 +311,7 @@
         <image name="eye_selected.png" width="88" height="88"/>
         <image name="love.png" width="88" height="88"/>
         <image name="love_selected.png" width="88" height="88"/>
+        <image name="menu.png" width="88" height="88"/>
         <image name="share.png" width="88" height="88"/>
         <image name="share_selected.png" width="88" height="88"/>
     </resources>

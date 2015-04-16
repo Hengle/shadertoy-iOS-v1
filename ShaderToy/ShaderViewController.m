@@ -22,10 +22,6 @@
 #define OverlayAnimationSpeed 0.35f
 
 @interface ShaderViewController ()
-{
-//    ShaderInfoViewController* _infoViewController;
-    UIButton* _menuButton;
-}
 
 - (void)tearDown;
 - (void)initialize;
@@ -57,30 +53,22 @@
     _animating = false;
     _running = false;
     _initialized = false;
+    _overlayVisible = false;
     _frameDropCounter = 0;
     _frameCounter = 0;
     _lastFrameTime = [NSDate date];
     _lastFPSTime = [NSDate date];
     _renderQueue = dispatch_queue_create("com.shadertoy.threadedgcdqueue", NULL);
-    
-    _menuButton = [[UIButton alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 30.0f, 30.0f)];
-    _menuButton.accessibilityLabel = @"menu";
-    [_menuButton setImage:[UIImage imageNamed:@"menu.png"] forState:UIControlStateNormal];
-    [_menuButton addTarget:self action:@selector(toggleMenu:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    
-//    [self.shaderView layoutIfNeeded];
-//    [self.shaderView setNeedsLayout];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     self.overlayView.alpha = 0.0f;
-//    self.overlayView.hidden = true;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -248,14 +236,7 @@
                        [_likeButton setTitle:[NSString stringWithFormat:@"%d", self.currentShader.likes] forState:UIControlStateNormal];
                        [_viewsButton setTitle:[NSString stringWithFormat:@"%d", self.currentShader.viewed] forState:UIControlStateNormal];
                        
-                       dispatch_after(5.0f, dispatch_get_main_queue(),
-                                      ^{
-                                          [UIView beginAnimations:nil context:nil];
-                                          [UIView setAnimationDuration:1.0f];
-                                          [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-                                          self.overlayView.alpha = 1.0f;
-                                          [UIView commitAnimations];
-                                      });
+                       [self showOverlay:self];
                    });
 }
 
@@ -269,10 +250,18 @@
 
 - (IBAction)share:(id)sender
 {
-    UIActivityViewController* activityController = [[UIActivityViewController alloc] initWithActivityItems:@[[NSString stringWithFormat:@"Check out %@ by %@ in Shadertoy!", self.currentShader.name, self.currentShader.username], [NSString stringWithFormat:@"https://www.shadertoy.com/view/%@", self.currentShader.ID]] applicationActivities:nil];
+    self.overlayView.alpha = 1.0f;
     
+    UIImage* screenshot = nil;//[self.shaderView drawableToCGImage];
     
-    [self presentViewController:activityController animated:YES completion:nil];
+    UIActivityViewController* activityController = [[UIActivityViewController alloc] initWithActivityItems:@[[NSString stringWithFormat:@"Check out %@ by %@ in Shadertoy!", self.currentShader.name, self.currentShader.username], screenshot, [NSString stringWithFormat:@"https://www.shadertoy.com/view/%@", self.currentShader.ID]] applicationActivities:nil];
+    activityController.popoverPresentationController.sourceView = self.shareButton;
+    
+    [self presentViewController:activityController animated:YES completion:^{
+//        [UIView animateWithDuration:0.5f animations:^{
+//            self.overlayView.alpha = 0.0f;
+//        }];
+    }];
 }
 
 - (IBAction)like:(id)sender
@@ -485,6 +474,23 @@
     [self.revealViewController revealToggleAnimated:YES];
 }
 
+- (IBAction)showOverlay:(id)sender
+{
+    if (!self.currentShader.removeoverlay && !_overlayVisible)
+    {
+        _overlayVisible = true;
+        
+        [UIView animateWithDuration:0.5f delay:1.0f options:UIViewAnimationOptionAllowUserInteraction animations:^{
+            self.overlayView.alpha = 1.0f;
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:0.5f delay:5.0f options:UIViewAnimationOptionAllowUserInteraction animations:^{
+                self.overlayView.alpha = 0.0f;
+            } completion:^(BOOL finished) {
+                _overlayVisible = false;
+            }];
+        }];
+    }
+}
 
 #pragma mark - Gestures
 

@@ -19,8 +19,11 @@
     bool _running;
     bool _animating;
     bool _initialized;
+    bool _overlayVisible;
     unsigned long _frameDropCounter;
     unsigned long _frameCounter;
+    
+    float firstX, firstY;
     
     Plane* _planeObject;
     ShaderParameters* _params;
@@ -35,10 +38,6 @@
     dispatch_queue_t _renderQueue;
     
     UITouch* _touchLocation;
-    
-    float firstX, firstY;
-    
-    // Shader Info
 }
 
 @property (weak, nonatomic) IBOutlet UIView *overlayView;
@@ -51,11 +50,15 @@
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *fpsLabel;
 @property (strong, nonatomic) IBOutlet ShaderView* shaderView;
+@property (weak, nonatomic) IBOutlet UIButton *menuButton;
 @property (strong, nonatomic) EAGLContext *context;
 @property (strong, readonly) ShaderInfo* currentShader;
 
 
 - (IBAction)toggleMenu:(id)sender;
+- (IBAction)showOverlay:(id)sender;
+- (IBAction)share:(id)sender;
+- (IBAction)like:(id)sender;
 
 - (void)startAnimation;
 - (void)stopAnimation;
