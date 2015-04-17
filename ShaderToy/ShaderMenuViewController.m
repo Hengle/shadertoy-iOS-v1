@@ -61,19 +61,19 @@
     switch (indexPath.row)
     {
         case 0:
-            image = [UIImage imageNamed:(selected ? @"time_selected.png" : @"time.png")];
+            image = [UIImage imageNamed:(selected ? @"icon_time_selected" : @"icon_time")];
             break;
             
         case 1:
-            image = [UIImage imageNamed:(selected ? @"fire_selected.png" : @"fire.png")];
+            image = [UIImage imageNamed:(selected ? @"icon_fire_selected" : @"icon_fire")];
             break;
             
         case 2:
-            image = [UIImage imageNamed:(selected ? @"love_hollow_selected.png" : @"love_hollow.png")];
+            image = [UIImage imageNamed:(selected ? @"icon_favorite_hollow_selected" : @"icon_favorite_hollow")];
             break;
             
         case 4:
-            image = [UIImage imageNamed:@"logo-text.png"];
+            image = [UIImage imageNamed:@"logo-text"];
             break;
     }
     

@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		14A4290B831A2225B4415095 /* libPods-Shadertoy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B11B0A598D9CC678A39E700 /* libPods-Shadertoy.a */; };
 		AE23BC8F184DD33A009F4531 /* UIWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE23BC8E184DD33A009F4531 /* UIWebViewController.m */; };
-		AE2A5DBD1AE0D069004B68D4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE2A5DBC1AE0D069004B68D4 /* Images.xcassets */; };
 		AE2A5DD61AE0DE07004B68D4 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE2A5DD51AE0DE07004B68D4 /* Launch Screen.xib */; };
+		AE2A5DD81AE16EBF004B68D4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE2A5DD71AE16EBF004B68D4 /* Images.xcassets */; };
 		AE4C59E01A08D8F7009E0E40 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE4C59DF1A08D8F7009E0E40 /* AudioToolbox.framework */; };
 		AE85EACA17933DEE0090DC1F /* ShaderInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85EAC817933DEE0090DC1F /* ShaderInfoViewController.m */; };
 		AE933D5F1736F725009EAF41 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE933D5E1736F725009EAF41 /* OpenGLES.framework */; };
@@ -39,7 +39,6 @@
 		AEBC415F1776D2F80024D73C /* logo.json in Resources */ = {isa = PBXBuildFile; fileRef = AEBC415E1776D2F80024D73C /* logo.json */; };
 		AEBC41621777FE290024D73C /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = AEBC41601777FE290024D73C /* background.png */; };
 		AEBF32B4176457EB00DEEF71 /* ShaderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBF32B3176457EB00DEEF71 /* ShaderManager.m */; };
-		AEC8A5D0179905BA0040AAEF /* logo-text.png in Resources */ = {isa = PBXBuildFile; fileRef = AEC8A5CF179905BA0040AAEF /* logo-text.png */; };
 		AEE8B9DD1855C8AC00BB39B4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEE8B9DC1855C8AC00BB39B4 /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
 
@@ -51,8 +50,8 @@
 		AE1EF6081771923000A1251C /* ShaderInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ShaderInfo.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		AE23BC8D184DD33A009F4531 /* UIWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIWebViewController.h; path = Shadertoy/UIWebViewController.h; sourceTree = SOURCE_ROOT; };
 		AE23BC8E184DD33A009F4531 /* UIWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIWebViewController.m; path = Shadertoy/UIWebViewController.m; sourceTree = SOURCE_ROOT; };
-		AE2A5DBC1AE0D069004B68D4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Shadertoy/Images.xcassets; sourceTree = SOURCE_ROOT; };
 		AE2A5DD51AE0DE07004B68D4 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "Launch Screen.xib"; path = "Shadertoy/Launch Screen.xib"; sourceTree = SOURCE_ROOT; };
+		AE2A5DD71AE16EBF004B68D4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AE4C59DF1A08D8F7009E0E40 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		AE85EAC717933DEE0090DC1F /* ShaderInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ShaderInfoViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		AE85EAC817933DEE0090DC1F /* ShaderInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ShaderInfoViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -95,7 +94,6 @@
 		AEBC41601777FE290024D73C /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 		AEBF32B2176457EB00DEEF71 /* ShaderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ShaderManager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		AEBF32B3176457EB00DEEF71 /* ShaderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ShaderManager.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		AEC8A5CF179905BA0040AAEF /* logo-text.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "logo-text.png"; path = "Art/logo-text.png"; sourceTree = SOURCE_ROOT; };
 		AED5F46617FBFB1E003F6B6F /* Shadertoy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = Shadertoy.entitlements; path = Shadertoy/Shadertoy.entitlements; sourceTree = SOURCE_ROOT; };
 		AEE8B9DC1855C8AC00BB39B4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -201,7 +199,7 @@
 				AE23BC8E184DD33A009F4531 /* UIWebViewController.m */,
 				AEA3B5571730E6C700786DA2 /* MainStoryboard.storyboard */,
 				AE2A5DD51AE0DE07004B68D4 /* Launch Screen.xib */,
-				AE2A5DBC1AE0D069004B68D4 /* Images.xcassets */,
+				AE2A5DD71AE16EBF004B68D4 /* Images.xcassets */,
 				AEA3B5691731104A00786DA2 /* Resources */,
 				AEA3B5461730E6C700786DA2 /* Supporting Files */,
 			);
@@ -226,7 +224,6 @@
 				AED5F46617FBFB1E003F6B6F /* Shadertoy.entitlements */,
 				AE933D6217370EE0009EAF41 /* cellbg.png */,
 				AEBC41601777FE290024D73C /* background.png */,
-				AEC8A5CF179905BA0040AAEF /* logo-text.png */,
 				AE933D581736F601009EAF41 /* Shader.vsh */,
 				AEBC415E1776D2F80024D73C /* logo.json */,
 			);
@@ -318,14 +315,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE2A5DD81AE16EBF004B68D4 /* Images.xcassets in Resources */,
 				AEA3B54A1730E6C700786DA2 /* InfoPlist.strings in Resources */,
 				AEBC41621777FE290024D73C /* background.png in Resources */,
 				AEA3B5591730E6C700786DA2 /* MainStoryboard.storyboard in Resources */,
 				AE933D6317370EE0009EAF41 /* cellbg.png in Resources */,
-				AEC8A5D0179905BA0040AAEF /* logo-text.png in Resources */,
 				AEBC415F1776D2F80024D73C /* logo.json in Resources */,
 				AE933D71173A4B6E009EAF41 /* Shader.vsh in Resources */,
-				AE2A5DBD1AE0D069004B68D4 /* Images.xcassets in Resources */,
 				AE2A5DD61AE0DE07004B68D4 /* Launch Screen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

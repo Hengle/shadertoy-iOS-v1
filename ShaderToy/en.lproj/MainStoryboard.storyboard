@@ -139,13 +139,14 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f2R-Zy-5IF">
-                                <rect key="frame" x="10" y="10" width="30" height="30"/>
+                                <rect key="frame" x="10" y="10" width="33" height="25"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="f2R-Zy-5IF" secondAttribute="height" multiplier="1:1" id="0oq-RC-Kz7"/>
+                                    <constraint firstAttribute="width" secondItem="f2R-Zy-5IF" secondAttribute="height" multiplier="33:25" id="0oq-RC-Kz7"/>
                                 </constraints>
-                                <state key="normal" backgroundImage="menu.png">
+                                <state key="normal" backgroundImage="icon_menu">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <state key="highlighted" backgroundImage="icon_menu_selected"/>
                                 <connections>
                                     <action selector="toggleMenu:" destination="HWU-Fu-0g7" eventType="touchUpInside" id="ebH-Cd-9pc"/>
                                 </connections>
@@ -161,7 +162,7 @@
                                         <size key="shadowOffset" width="1" height="1"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Joe Shader" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="932-eC-Hjd">
-                                        <rect key="frame" x="20" y="54" width="346" height="29"/>
+                                        <rect key="frame" x="20" y="54" width="351" height="29"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="24"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -176,7 +177,7 @@
                                         <size key="shadowOffset" width="1" height="1"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="60 FPS" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i24-0P-zvc">
-                                        <rect key="frame" x="533" y="132" width="47" height="17"/>
+                                        <rect key="frame" x="533" y="134" width="47" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="47" id="OJl-FK-UNO"/>
                                             <constraint firstAttribute="height" constant="17" id="XgF-og-6qx"/>
@@ -186,15 +187,15 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mBh-Vg-U2v" userLabel="Share Button">
-                                        <rect key="frame" x="379" y="122" width="40" height="40"/>
+                                        <rect key="frame" x="384" y="124" width="35" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="54W-xL-cji"/>
+                                            <constraint firstAttribute="width" constant="35" id="54W-xL-cji"/>
                                             <constraint firstAttribute="height" constant="40" id="Qv4-dC-C72"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <size key="titleShadowOffset" width="1" height="1"/>
-                                        <state key="normal" backgroundImage="share.png"/>
-                                        <state key="highlighted" backgroundImage="share_selected.png">
+                                        <state key="normal" backgroundImage="icon_share"/>
+                                        <state key="highlighted" backgroundImage="icon_share_selected">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -202,32 +203,32 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SPX-cM-w4A" userLabel="Likes Button">
-                                        <rect key="frame" x="427" y="122" width="40" height="40"/>
+                                        <rect key="frame" x="427" y="125" width="40" height="37"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="Sru-FW-0ah"/>
-                                            <constraint firstAttribute="height" constant="40" id="hyd-6F-oiZ"/>
+                                            <constraint firstAttribute="height" constant="37" id="hyd-6F-oiZ"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="10"/>
                                         <inset key="contentEdgeInsets" minX="0.0" minY="-3" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="2" backgroundImage="love.png">
+                                        <state key="normal" title="2" backgroundImage="icon_favorite">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <state key="highlighted" backgroundImage="love_selected.png"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fgu-gI-Ebr" userLabel="View Button">
-                                        <rect key="frame" x="476" y="122" width="40" height="40"/>
+                                        <rect key="frame" x="476" y="124" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="7nJ-TV-jFA"/>
                                             <constraint firstAttribute="width" constant="40" id="rqK-T2-uah"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="10"/>
                                         <inset key="contentEdgeInsets" minX="2" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="2" backgroundImage="eye.png">
+                                        <state key="normal" title="2" backgroundImage="icon_eye">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </state>
                                         <state key="disabled" backgroundImage="eye.png"/>
-                                        <state key="highlighted" backgroundImage="eye_selected.png">
+                                        <state key="highlighted" backgroundImage="icon_eye_selected">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
@@ -258,7 +259,7 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="f2R-Zy-5IF" firstAttribute="width" secondItem="Tv8-Xd-uyE" secondAttribute="width" multiplier="1:20" id="580-Fk-Shy"/>
+                            <constraint firstItem="f2R-Zy-5IF" firstAttribute="width" secondItem="Tv8-Xd-uyE" secondAttribute="width" multiplier="1:18" id="580-Fk-Shy"/>
                             <constraint firstItem="DkK-FL-G6p" firstAttribute="leading" secondItem="Tv8-Xd-uyE" secondAttribute="leading" id="FoT-Ni-ZxW"/>
                             <constraint firstItem="f2R-Zy-5IF" firstAttribute="leading" secondItem="Tv8-Xd-uyE" secondAttribute="leading" constant="10" id="Qty-zt-h70"/>
                             <constraint firstAttribute="trailing" secondItem="DkK-FL-G6p" secondAttribute="trailing" id="lUW-07-tQi"/>
@@ -308,11 +309,13 @@
     </scenes>
     <resources>
         <image name="eye.png" width="88" height="88"/>
-        <image name="eye_selected.png" width="88" height="88"/>
-        <image name="love.png" width="88" height="88"/>
+        <image name="icon_eye" width="417" height="233"/>
+        <image name="icon_eye_selected" width="417" height="233"/>
+        <image name="icon_favorite" width="417" height="389"/>
+        <image name="icon_menu" width="417" height="319"/>
+        <image name="icon_menu_selected" width="417" height="320"/>
+        <image name="icon_share" width="375" height="416"/>
+        <image name="icon_share_selected" width="375" height="416"/>
         <image name="love_selected.png" width="88" height="88"/>
-        <image name="menu.png" width="88" height="88"/>
-        <image name="share.png" width="88" height="88"/>
-        <image name="share_selected.png" width="88" height="88"/>
     </resources>
 </document>

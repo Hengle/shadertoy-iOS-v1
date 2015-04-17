@@ -281,14 +281,8 @@
 
 - (IBAction)share:(id)sender
 {
-//    UIImage* screenshot = self.shaderView drawableToCGImage];
-    
     UIActivityViewController* activityController = [[UIActivityViewController alloc] initWithActivityItems:@[[NSString stringWithFormat:@"Check out %@ by %@ in Shadertoy!", self.currentShader.name, self.currentShader.username], [NSString stringWithFormat:@"https://www.shadertoy.com/view/%@", self.currentShader.ID]] applicationActivities:nil];
     activityController.popoverPresentationController.sourceView = self.shareButton;
-    activityController.completionWithItemsHandler = ^(NSString *activityType, BOOL completed, NSArray *returnedItems, NSError *activityError)
-    {
-        NSLog(@"HERE");
-    };
     
     [self presentViewController:activityController animated:YES completion:nil];
 }
@@ -296,7 +290,6 @@
 - (IBAction)like:(id)sender
 {
 }
-
 
 - (void)tearDown
 {
