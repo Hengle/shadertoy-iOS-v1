@@ -236,7 +236,7 @@
                        [_likeButton setTitle:[NSString stringWithFormat:@"%d", self.currentShader.likes] forState:UIControlStateNormal];
                        [_viewsButton setTitle:[NSString stringWithFormat:@"%d", self.currentShader.viewed] forState:UIControlStateNormal];
                        
-                       [self showOverlay:self];
+                       [self flashOverlay:self];
                    });
 }
 
@@ -248,20 +248,49 @@
                    });
 }
 
+- (IBAction)toggleOverlay:(id)sender
+{
+    bool enabled = !_overlayVisible;
+    if (!self.currentShader.removeoverlay)
+    {
+        [UIView animateWithDuration:0.5f delay:1.0f options:UIViewAnimationOptionAllowUserInteraction animations:^{
+            self.overlayView.alpha = (enabled ? 1.0f : 0.0f);
+        } completion:^(BOOL finished) {
+            _overlayVisible = enabled;
+        }];
+    }
+}
+
+- (IBAction)flashOverlay:(id)sender
+{
+    if (!self.currentShader.removeoverlay && !_overlayVisible)
+    {
+        _overlayVisible = true;
+        
+        [UIView animateWithDuration:0.5f delay:1.0f options:UIViewAnimationOptionAllowUserInteraction animations:^{
+            self.overlayView.alpha = 1.0f;
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:0.5f delay:5.0f options:UIViewAnimationOptionAllowUserInteraction animations:^{
+                self.overlayView.alpha = 0.0f;
+            } completion:^(BOOL finished) {
+                _overlayVisible = false;
+            }];
+        }];
+    }
+}
+
 - (IBAction)share:(id)sender
 {
-    self.overlayView.alpha = 1.0f;
+//    UIImage* screenshot = self.shaderView drawableToCGImage];
     
-    UIImage* screenshot = nil;//[self.shaderView drawableToCGImage];
-    
-    UIActivityViewController* activityController = [[UIActivityViewController alloc] initWithActivityItems:@[[NSString stringWithFormat:@"Check out %@ by %@ in Shadertoy!", self.currentShader.name, self.currentShader.username], screenshot, [NSString stringWithFormat:@"https://www.shadertoy.com/view/%@", self.currentShader.ID]] applicationActivities:nil];
+    UIActivityViewController* activityController = [[UIActivityViewController alloc] initWithActivityItems:@[[NSString stringWithFormat:@"Check out %@ by %@ in Shadertoy!", self.currentShader.name, self.currentShader.username], [NSString stringWithFormat:@"https://www.shadertoy.com/view/%@", self.currentShader.ID]] applicationActivities:nil];
     activityController.popoverPresentationController.sourceView = self.shareButton;
+    activityController.completionWithItemsHandler = ^(NSString *activityType, BOOL completed, NSArray *returnedItems, NSError *activityError)
+    {
+        NSLog(@"HERE");
+    };
     
-    [self presentViewController:activityController animated:YES completion:^{
-//        [UIView animateWithDuration:0.5f animations:^{
-//            self.overlayView.alpha = 0.0f;
-//        }];
-    }];
+    [self presentViewController:activityController animated:YES completion:nil];
 }
 
 - (IBAction)like:(id)sender
@@ -472,24 +501,6 @@
 - (IBAction)toggleMenu:(id)sender
 {
     [self.revealViewController revealToggleAnimated:YES];
-}
-
-- (IBAction)showOverlay:(id)sender
-{
-    if (!self.currentShader.removeoverlay && !_overlayVisible)
-    {
-        _overlayVisible = true;
-        
-        [UIView animateWithDuration:0.5f delay:1.0f options:UIViewAnimationOptionAllowUserInteraction animations:^{
-            self.overlayView.alpha = 1.0f;
-        } completion:^(BOOL finished) {
-            [UIView animateWithDuration:0.5f delay:5.0f options:UIViewAnimationOptionAllowUserInteraction animations:^{
-                self.overlayView.alpha = 0.0f;
-            } completion:^(BOOL finished) {
-                _overlayVisible = false;
-            }];
-        }];
-    }
 }
 
 #pragma mark - Gestures

@@ -287,7 +287,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B9M-xA-B4s" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer numberOfTapsRequired="2" id="29C-Nx-lFf">
                     <connections>
-                        <action selector="showOverlay:" destination="HWU-Fu-0g7" id="4lY-gA-vI1"/>
+                        <action selector="toggleOverlay:" destination="HWU-Fu-0g7" id="CLF-sf-cXj"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>

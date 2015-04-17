@@ -56,7 +56,8 @@
 
 
 - (IBAction)toggleMenu:(id)sender;
-- (IBAction)showOverlay:(id)sender;
+- (IBAction)toggleOverlay:(id)sender;
+- (IBAction)flashOverlay:(id)sender;
 - (IBAction)share:(id)sender;
 - (IBAction)like:(id)sender;
 
