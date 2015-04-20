@@ -66,13 +66,14 @@
     [super viewDidLayoutSubviews];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    self.overlayView.alpha = 0.0f;
-}
-
 - (void)viewDidAppear:(BOOL)animated
 {
+    [self flashOverlay:self];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [self setOverlayVisible:false];
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
@@ -184,6 +185,12 @@
     NSLog(@"Setting shader to %@", shader.name);
 }
 
+- (void)setOverlayVisible:(BOOL)visible
+{
+    self.overlayView.alpha = (visible ? 1.0f : 0.0f);
+    _overlayVisible = visible;
+}
+
 - (void)setShaderInputs:(NSArray *)inputs onParams:(ShaderParameters *)params
 {
     for (ShaderInput *input in inputs)
@@ -265,14 +272,16 @@
 {
     if (!self.currentShader.removeoverlay && !_overlayVisible)
     {
-        _overlayVisible = true;
-        
+        // Animate the overlay
         [UIView animateWithDuration:0.5f delay:1.0f options:UIViewAnimationOptionAllowUserInteraction animations:^{
             self.overlayView.alpha = 1.0f;
         } completion:^(BOOL finished) {
+            // When alpha is 1.0, set it to visible
+            _overlayVisible = true;
             [UIView animateWithDuration:0.5f delay:5.0f options:UIViewAnimationOptionAllowUserInteraction animations:^{
                 self.overlayView.alpha = 0.0f;
             } completion:^(BOOL finished) {
+                // When alpha is 0.0, set it to invisible
                 _overlayVisible = false;
             }];
         }];

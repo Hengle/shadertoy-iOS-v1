@@ -64,5 +64,6 @@
 - (void)startAnimation;
 - (void)stopAnimation;
 - (void)setShader:(ShaderInfo *)shader;
+- (void)setOverlayVisible:(BOOL)visible;
 
 @end

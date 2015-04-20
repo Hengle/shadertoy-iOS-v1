@@ -7,30 +7,18 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>10ECD9FD-617D-4D78-8198-C54819FA4FB9</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>Shadertoy</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>01529694042D8C98B30DC19F4D4370A306884FE4</key>
-		<string>https://github.com/John-Lluch/SWRevealViewController.git</string>
-		<key>84CC68555B5087A060898F15822E6C95EC0BBC0E</key>
-		<string>https://github.com/skumancer/UIDevice-Hardware.git</string>
 		<key>93712AFC7118AD9C32964D72A34DEF1ECBAA89E7</key>
 		<string>https://bitbucket.org/beautypi/shadertoy-ios.git</string>
-		<key>9E1ECC80773D1F4F22D03CB4DEA298B3CB57FAF5</key>
-		<string>https://github.com/samvermette/SVProgressHUD.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Shadertoy.xcodeproj/project.xcworkspace</string>
+	<string>Shadertoy.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>01529694042D8C98B30DC19F4D4370A306884FE4</key>
-		<string>../..SWRevealViewController/</string>
-		<key>84CC68555B5087A060898F15822E6C95EC0BBC0E</key>
-		<string>../..UIDevice-Hardware/</string>
 		<key>93712AFC7118AD9C32964D72A34DEF1ECBAA89E7</key>
 		<string>../..</string>
-		<key>9E1ECC80773D1F4F22D03CB4DEA298B3CB57FAF5</key>
-		<string>../..SVProgressHUD/</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://bitbucket.org/beautypi/shadertoy-ios.git</string>
@@ -47,30 +35,6 @@
 			<string>93712AFC7118AD9C32964D72A34DEF1ECBAA89E7</string>
 			<key>IDESourceControlWCCName</key>
 			<string>Shadertoy</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>9E1ECC80773D1F4F22D03CB4DEA298B3CB57FAF5</string>
-			<key>IDESourceControlWCCName</key>
-			<string>SVProgressHUD</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>01529694042D8C98B30DC19F4D4370A306884FE4</string>
-			<key>IDESourceControlWCCName</key>
-			<string>SWRevealViewController</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>84CC68555B5087A060898F15822E6C95EC0BBC0E</string>
-			<key>IDESourceControlWCCName</key>
-			<string>UIDevice-Hardware</string>
 		</dict>
 	</array>
 </dict>
