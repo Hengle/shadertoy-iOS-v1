@@ -110,6 +110,25 @@
     }];
 }
 
+- (void)setUserInteractionState:(bool)enable
+{
+    if (enable)
+    {
+        if (disabledDataSource != nil)
+        {
+            self.dataSource = disabledDataSource;
+            disabledDataSource = nil;
+        }
+    }
+    else
+    {
+        if (disabledDataSource == nil)
+        {
+            disabledDataSource = self.dataSource;
+            self.dataSource = nil;
+        }
+    }
+}
 
 #pragma mark - UIPageViewControllerDelegate
 

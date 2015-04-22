@@ -13,7 +13,7 @@
 #import "Plane.h"
 #import "ChannelResourceManager.h"
 #import "ShaderInfoViewController.h"
-
+#import "GalleryViewController.hpp"
 #import <QuartzCore/QuartzCore.h>
 
 @interface ShaderViewController ()
@@ -40,7 +40,7 @@
     if (_context == nil)
     {
         NSLog(@"[ShaderViewController] Failed to create ES context");
-        exit(0);
+        exit(EXIT_FAILURE);
     }
     
     self.shaderView.contentScaleFactor = 1.0f;
@@ -88,7 +88,7 @@
 {
     [super didReceiveMemoryWarning];
     
-    if ([self isViewLoaded] && ([[self view] window] == nil))
+    if (self.isViewLoaded && (self.view.window == nil))
     {
         self.shaderView = nil;
         
@@ -152,6 +152,11 @@
 {
     _currentShader = shader;
     
+    _pendingScreenshot = false;
+    _interactionEnabled = false;
+    
+    self.interactionButton.hidden = true;
+    
     // Set the shader information to the overlay
     [self populateOverlay];
     
@@ -167,6 +172,8 @@
         for (ShaderRenderPass* renderpass in _currentShader.renderpasses)
         {
             [_params clearChannels];
+            
+            self.interactionButton.hidden = !renderpass.mouseUsed;
             
             // Make sure we are executing the shader parameter in the correct thread
             dispatch_async(_renderQueue, ^
@@ -283,10 +290,25 @@
 
 - (IBAction)share:(id)sender
 {
-    UIActivityViewController* activityController = [[UIActivityViewController alloc] initWithActivityItems:@[[NSString stringWithFormat:@"Check out %@ by %@ in Shadertoy!", self.currentShader.name, self.currentShader.username], [NSString stringWithFormat:@"https://www.shadertoy.com/view/%@", self.currentShader.ID]] applicationActivities:nil];
-    activityController.popoverPresentationController.sourceView = self.shareButton;
-    
-    [self presentViewController:activityController animated:YES completion:nil];
+    _pendingScreenshot = true;
+}
+
+- (void)presentSharingPanelWithImage:(UIImage *)image
+{
+    dispatch_async(dispatch_get_main_queue(),
+                   ^{
+                       NSMutableArray *items = [[NSMutableArray alloc] initWithArray:@[[NSString stringWithFormat:@"Check out %@ by %@ in Shadertoy!", self.currentShader.name, self.currentShader.username], [NSString stringWithFormat:@"https://www.shadertoy.com/view/%@", self.currentShader.ID]]];
+                       
+                       if (items != nil)
+                       {
+                           [items addObject:image];
+                       }
+                       
+                       UIActivityViewController* activityController = [[UIActivityViewController alloc] initWithActivityItems:items applicationActivities:nil];
+                       activityController.popoverPresentationController.sourceView = self.shareButton;
+                       
+                       [self presentViewController:activityController animated:YES completion:nil];
+                   });
 }
 
 - (IBAction)like:(id)sender
@@ -369,6 +391,16 @@
         }
         
         [self.shaderView presentFramebuffer:_context];
+        
+        // Take an image of the framebuffer, we defer this until now because otherwise the
+        // framebuffer could be empty/cleared
+        if (_pendingScreenshot)
+        {
+            _pendingScreenshot = false;
+            UIImage* shareImage = [self.shaderView captureFramebuffer];
+            
+            [self presentSharingPanelWithImage:shareImage];
+        }
     }
     else
     {
@@ -484,17 +516,26 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    _touchLocation = touches.anyObject;
+    if (_interactionEnabled)
+    {
+        _touchLocation = touches.anyObject;
+    }
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    _touchLocation = touches.anyObject;
+    if (_interactionEnabled)
+    {
+        _touchLocation = touches.anyObject;
+    }
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    _touchLocation = nil;
+    if (_interactionEnabled)
+    {
+        _touchLocation = nil;
+    }
 }
 
 
@@ -503,6 +544,14 @@
 - (IBAction)toggleMenu:(id)sender
 {
     [self.revealViewController revealToggleAnimated:YES];
+}
+
+- (IBAction)toggleInteraction:(id)sender
+{
+    _interactionEnabled = !_interactionEnabled;
+    
+    GalleryViewController* galleryViewController = (GalleryViewController *)self.parentViewController;
+    [galleryViewController setUserInteractionState:!_interactionEnabled];
 }
 
 @end

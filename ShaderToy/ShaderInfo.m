@@ -134,6 +134,8 @@
         _descriptionString = renderpassData[@"description"];
         _code = renderpassData[@"code"];
         _type = renderpassData[@"type"];
+        
+        _mouseUsed = [_code containsString:@"iMouse"];
     }
     
     return self;
@@ -184,7 +186,7 @@
         {
             ShaderRenderPass* renderpass = [[ShaderRenderPass alloc] initWithJSONDictionary:renderpassData];
             // Only care about images right now...
-            if( [[renderpass type]  isEqual: @"sound"])
+            if ( [renderpass.type isEqual: @"sound"])
             {
                 continue;
             }

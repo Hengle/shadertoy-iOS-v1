@@ -18,9 +18,13 @@
     bool _revealControllerShowing;
     bool _loadingShaders;
     
+    id<UIPageViewControllerDataSource> disabledDataSource;
+    
     NSMutableArray* _shaderViewControllers;
     NSMutableArray* _shaders;
     NSMutableArray* _pendingControllers;
 }
+
+- (void)setUserInteractionState:(bool)enable;
 
 @end

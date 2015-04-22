@@ -20,5 +20,6 @@
 - (BOOL)setup:(BOOL)force;
 - (GLenum)setFramebuffer;
 - (void)presentFramebuffer:(EAGLContext *)context;
+- (UIImage *)captureFramebuffer;
 
 @end

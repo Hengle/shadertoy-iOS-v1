@@ -21,6 +21,8 @@
     bool _initialized;
     bool _overlayVisible;
     bool _firstFrame;
+    bool _pendingScreenshot;
+    bool _interactionEnabled;
     unsigned long _frameDropCounter;
     unsigned long _frameCounter;
     
@@ -39,6 +41,8 @@
     dispatch_queue_t _renderQueue;
     
     UITouch* _touchLocation;
+    
+    id<UIPageViewControllerDataSource> temp;
 }
 
 @property (weak, nonatomic) IBOutlet UIView *overlayView;
@@ -52,11 +56,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *fpsLabel;
 @property (strong, nonatomic) IBOutlet ShaderView* shaderView;
 @property (weak, nonatomic) IBOutlet UIButton *menuButton;
+@property (weak, nonatomic) IBOutlet UIButton *interactionButton;
 @property (strong, nonatomic) EAGLContext *context;
 @property (strong, readonly) ShaderInfo* currentShader;
 
 
 - (IBAction)toggleMenu:(id)sender;
+- (IBAction)toggleInteraction:(id)sender;
 - (IBAction)toggleOverlay:(id)sender;
 - (IBAction)share:(id)sender;
 - (IBAction)like:(id)sender;

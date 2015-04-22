@@ -46,6 +46,7 @@
 
 @interface ShaderRenderPass : NSObject
 
+@property (nonatomic, assign) bool mouseUsed;
 @property (strong, nonatomic) NSString* name;
 @property (strong, nonatomic) NSString* descriptionString;
 @property (strong, nonatomic) NSMutableArray* inputs;
