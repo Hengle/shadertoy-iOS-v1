@@ -550,6 +550,8 @@
 {
     _interactionEnabled = !_interactionEnabled;
     
+    [self.interactionButton setSelected:_interactionEnabled];
+    
     GalleryViewController* galleryViewController = (GalleryViewController *)self.parentViewController;
     [galleryViewController setUserInteractionState:!_interactionEnabled];
 }

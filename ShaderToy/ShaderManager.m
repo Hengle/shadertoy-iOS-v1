@@ -15,7 +15,7 @@
     // Multithreading support
     EAGLContext* _context;
     NSThread* _managerThread;
-    
+
     ShaderInfo* _defaultShader;
     NSMutableArray* _pendingShaders;
     NSMutableDictionary* _shaderDictionary;

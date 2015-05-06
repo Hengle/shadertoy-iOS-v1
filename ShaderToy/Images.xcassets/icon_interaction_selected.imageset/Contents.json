@@ -1,8 +1,12 @@
 {
   "images" : [
     {
-      "idiom" : "universal",
+      "idiom" : "iphone",
       "filename" : "icon_interaction_selected.pdf"
+    },
+    {
+      "idiom" : "ipad",
+      "filename" : "icon_interaction_tablet_selected.pdf"
     }
   ],
   "info" : {
