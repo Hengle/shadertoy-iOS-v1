@@ -66,13 +66,24 @@
     [super viewDidLayoutSubviews];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self setOverlayVisible:false];
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
+    
     [self flashOverlay:self];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
+    [super viewDidDisappear:animated];
+    
     [self setOverlayVisible:false];
 }
 
@@ -185,12 +196,6 @@
     NSLog(@"Setting shader to %@", shader.name);
 }
 
-- (void)setOverlayVisible:(BOOL)visible
-{
-    self.overlayView.alpha = (visible ? 1.0f : 0.0f);
-    _overlayVisible = visible;
-}
-
 - (void)setShaderInputs:(NSArray *)inputs onParams:(ShaderParameters *)params
 {
     for (ShaderInput *input in inputs)
@@ -215,6 +220,14 @@
             [params setChannel:input.channel resolution:GLKVector3Make(0.0f, 0.0f, 1.0f)];
         }
     }
+}
+
+- (void)setFPS:(float)fps
+{
+    dispatch_async(dispatch_get_main_queue(),
+                   ^{
+                       _fpsLabel.text = [NSString stringWithFormat:@"%2.f FPS", fps];
+                   });
 }
 
 - (void)populateOverlay
@@ -242,17 +255,15 @@
                        
                        [_likeButton setTitle:[NSString stringWithFormat:@"%d", self.currentShader.likes] forState:UIControlStateNormal];
                        [_viewsButton setTitle:[NSString stringWithFormat:@"%d", self.currentShader.viewed] forState:UIControlStateNormal];
-                       
-                       [self flashOverlay:self];
                    });
 }
 
-- (void)setFPS:(float)fps
+- (void)setOverlayVisible:(BOOL)visible
 {
-    dispatch_async(dispatch_get_main_queue(),
-                   ^{
-                       _fpsLabel.text = [NSString stringWithFormat:@"%2.f FPS", fps];
-                   });
+    NSLog(@"[Set - %@] Overlay %@", self.currentShader.name, visible ? @"visible" : @"hidden");
+    
+    self.overlayView.alpha = (visible ? 1.0f : 0.0f);
+    _overlayVisible = visible;
 }
 
 - (IBAction)toggleOverlay:(id)sender
@@ -260,6 +271,8 @@
     bool enabled = !_overlayVisible;
     if (!self.currentShader.removeoverlay)
     {
+        NSLog(@"[Toggle - %@] Overlay %@", self.currentShader.name, enabled ? @"visible" : @"hidden");
+        
         [UIView animateWithDuration:0.5f delay:1.0f options:UIViewAnimationOptionAllowUserInteraction animations:^{
             self.overlayView.alpha = (enabled ? 1.0f : 0.0f);
         } completion:^(BOOL finished) {
@@ -272,17 +285,21 @@
 {
     if (!self.currentShader.removeoverlay && !_overlayVisible)
     {
+        NSLog(@"[Flash - %@] Overlay %@", self.currentShader.name, _overlayVisible ? @"visible" : @"hidden");
+        
         // Animate the overlay
         [UIView animateWithDuration:0.5f delay:1.0f options:UIViewAnimationOptionAllowUserInteraction animations:^{
             self.overlayView.alpha = 1.0f;
         } completion:^(BOOL finished) {
             // When alpha is 1.0, set it to visible
             _overlayVisible = true;
+            NSLog(@"[Flash - %@] Overlay %@", self.currentShader.name, _overlayVisible ? @"visible" : @"hidden");
             [UIView animateWithDuration:0.5f delay:5.0f options:UIViewAnimationOptionAllowUserInteraction animations:^{
                 self.overlayView.alpha = 0.0f;
             } completion:^(BOOL finished) {
                 // When alpha is 0.0, set it to invisible
                 _overlayVisible = false;
+                NSLog(@"[Flash - %@] Overlay %@", self.currentShader.name, _overlayVisible ? @"visible" : @"hidden");
             }];
         }];
     }
