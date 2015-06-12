@@ -11,7 +11,7 @@
 #import "ShaderInfo.h"
 #import "ShaderManager.h"
 
-#define MAX_CONTROLLERS 4
+#define MAX_CONTROLLERS 3
 
 @interface GalleryViewController ()
 {
@@ -70,10 +70,9 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     static dispatch_once_t initialRequest;
-    dispatch_once(&initialRequest,
-                  ^{
-                      [_shaderRequest requestCategory:Newest];
-                  });
+    dispatch_once(&initialRequest, ^{
+        [_shaderRequest requestCategory:Newest];
+    });
 }
 
 
@@ -100,11 +99,9 @@
     }
     
     ShaderViewController* firstController = (ShaderViewController *)_shaderViewControllers[0];
-    [self setViewControllers:@[firstController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:
-     ^(BOOL finished)
-     {
-         [firstController startAnimation];
-     }];
+    [self setViewControllers:@[firstController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:^(BOOL finished) {
+        [firstController startAnimation];
+    }];
 }
 
 
@@ -113,7 +110,7 @@
 - (void)pageViewController:(UIPageViewController *)pageViewController willTransitionToViewControllers:(NSArray *)pendingViewControllers
 {
     ShaderViewController* next = (ShaderViewController *)pendingViewControllers[0];
-    [next startAnimation];
+    //[next startAnimation];
     
     if (![_pendingControllers containsObject:next])
     {
@@ -141,13 +138,14 @@
         NSLog(@"Stopped Animation for previews controller with shader %@.", previous.currentShader.name);
         
         ShaderViewController* current = (ShaderViewController *)pageViewController.viewControllers[0];
+        [current startAnimation];
         
         if ([_pendingControllers containsObject:current])
         {
             [_pendingControllers removeObject:current];
         }
         
-        // Pre-warm the controller, get the next shader in
+        // TODO: Pre-warm the controller, get the next shader in
         // the list and set the next free controller to use it
     }
     
@@ -167,7 +165,7 @@
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(ShaderViewController *)viewController
 {
-    ShaderViewController* newController = nil;
+    ShaderViewController* previousController = nil;
     
     NSInteger shaderIndex = [_shaders indexOfObject:viewController.currentShader];
     if (shaderIndex != NSNotFound)
@@ -176,21 +174,21 @@
         
         if (shaderIndex >= 0)
         {
-            newController = _shaderViewControllers[shaderIndex % _shaderViewControllers.count];
+            previousController = _shaderViewControllers[shaderIndex % _shaderViewControllers.count];
             
             ShaderInfo* shader = _shaders[shaderIndex];
-            [newController setShader:shader];
+            [previousController setShader:shader];
         
             NSLog(@"Setting Before VC %lu to shader %@", shaderIndex % _shaderViewControllers.count, shader.name);
         }
     }
     
-    return newController;
+    return previousController;
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(ShaderViewController *)viewController
 {
-    ShaderViewController* newController = nil;
+    ShaderViewController* nextController = nil;
     
     NSUInteger shaderIndex = [_shaders indexOfObject:viewController.currentShader];
     if (shaderIndex != NSNotFound)
@@ -199,16 +197,16 @@
         
         if (shaderIndex < _shaders.count)
         {
-            newController = _shaderViewControllers[shaderIndex % _shaderViewControllers.count];
+            nextController = _shaderViewControllers[shaderIndex % _shaderViewControllers.count];
             
             ShaderInfo* shader = _shaders[shaderIndex];
-            [newController setShader:shader];
+            [nextController setShader:shader];
             
             NSLog(@"Setting After VC %lu to shader %@", (shaderIndex % _shaderViewControllers.count), shader.name);
         }
     }
     
-    return newController;
+    return nextController;
 }
 
 

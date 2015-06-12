@@ -16,10 +16,12 @@
 
 @interface ShaderViewController : UIViewController
 {
+    bool _oneFrame;
     bool _running;
     bool _animating;
     bool _initialized;
     bool _overlayVisible;
+    bool _firstFrame;
     unsigned long _frameDropCounter;
     unsigned long _frameCounter;
     
@@ -61,6 +63,7 @@
 - (IBAction)share:(id)sender;
 - (IBAction)like:(id)sender;
 
+- (void)drawPreviewFrame;
 - (void)startAnimation;
 - (void)stopAnimation;
 - (void)setShader:(ShaderInfo *)shader;

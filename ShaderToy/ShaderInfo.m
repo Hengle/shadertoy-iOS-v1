@@ -161,14 +161,15 @@
     self = [super init];
     if (self)
     {
-        _version = json[@"ver"];
         NSDictionary* info = json[@"info"];
+        
+        _version = [json[@"ver"]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         
         _ID = info[@"id"];
         _viewed = ((NSNumber*)info[@"viewed"]).intValue;
-        _name = info[@"name"];
-        _username = info[@"username"];
-        _descriptionString = info[@"description"];
+        _name = [info[@"name"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        _username = [info[@"username"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        _descriptionString = [info[@"description"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         _likes = ((NSNumber*)info[@"likes"]).intValue;
         _published = info[@"published"];
         
@@ -187,6 +188,7 @@
             {
                 continue;
             }
+            
             [_renderpasses addObject:renderpass];
         }
     }

@@ -26,6 +26,8 @@
 
 @implementation ShaderView
 
+@dynamic layer;
+
 + (Class)layerClass
 {
     return [CAEAGLLayer class];

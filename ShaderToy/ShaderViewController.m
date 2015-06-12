@@ -16,11 +16,6 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-
-#define OverlayMinAlpha 0.5f
-#define OverlayMaxAlpha 0.7f
-#define OverlayAnimationSpeed 0.35f
-
 @interface ShaderViewController ()
 
 - (void)tearDown;
@@ -51,6 +46,7 @@
     
     _renderThread = nil;
     _animating = false;
+    _oneFrame = false;
     _running = false;
     _initialized = false;
     _overlayVisible = false;
@@ -70,21 +66,21 @@
 {
     [super viewWillAppear:animated];
     
-    [self setOverlayVisible:false];
+//    [self setOverlayVisible:false];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     
-    [self flashOverlay:self];
+//    [self flashOverlay:self];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
     
-    [self setOverlayVisible:false];
+//    [self setOverlayVisible:false];
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
@@ -125,6 +121,24 @@
     return YES;
 }
 
+- (void)drawPreviewFrame
+{
+    if (!_oneFrame)
+    {
+        NSLog(@"ShaderViewController: Drawing Preview Frame");
+        
+        _startTime = [NSDate date];
+        _lastFrameTime = [NSDate date];
+        _lastFPSTime = [NSDate date];
+        
+        _animating = true;
+        _oneFrame = true;
+        _renderThread = [[NSThread alloc] initWithTarget:self selector:@selector(threadMainLoop) object:nil];
+        
+        [_renderThread start];
+    }
+}
+
 - (void)startAnimation
 {
     if (!_animating)
@@ -149,6 +163,7 @@
         NSLog(@"ShaderViewController: Stopping animation");
         
         _animating = false;
+        _oneFrame = false;
         
         CFRunLoopStop([_renderLoop getCFRunLoop]);
         
@@ -165,7 +180,7 @@
     _currentShader = shader;
     
     // Set the shader information to the overlay
-    [self populateOverlay];
+//    [self populateOverlay];
     
     // For bookkeeping purposes
     _renderThread.name = self.currentShader.name;
@@ -423,7 +438,23 @@
     {
         float fps = _frameCounter / fpsInterval;
         
-        [self setFPS:fps];
+        if (_oneFrame)
+        {
+            if (_frameCounter > 1)
+            {
+                [self stopAnimation];
+            }
+        }
+        else
+        {
+            if (_frameCounter > 1 && fps < 10.0f)
+            {
+                [self stopAnimation];
+                NSLog(@"Paused");
+            }
+            
+            [self setFPS:fps];
+        }
         
         _frameCounter = 0;
         _lastFPSTime = [NSDate date];
@@ -520,67 +551,6 @@
 - (IBAction)toggleMenu:(id)sender
 {
     [self.revealViewController revealToggleAnimated:YES];
-}
-
-#pragma mark - Gestures
-
-- (void)handlePan:(UIPanGestureRecognizer *)recognizer
-{
-    float parentViewHeight = self.shaderView.frame.size.height;
-    float viewHeight = recognizer.view.frame.size.height;
-    float finalViewCenter = parentViewHeight - (viewHeight/2);
-    
-    CGPoint translatedPoint = [recognizer translationInView:self.shaderView];
-    
-    // Store the initial coordinate of the view
-    if (recognizer.state == UIGestureRecognizerStateBegan)
-    {
-        firstX = recognizer.view.center.x;
-        firstY = recognizer.view.center.y;
-    }
-    
-    // Translate the view by usingt the pan gesture
-    // (Pan Gesture translatedPoint is absolute, not a delta)
-    translatedPoint = CGPointMake(firstX, firstY + translatedPoint.y);
-    
-    // Limit the maximum height that the overlay can reach (lower Y is higher up)
-    if (translatedPoint.y < finalViewCenter)
-    {
-        translatedPoint = CGPointMake(firstX, finalViewCenter);
-    }
-    
-    // Calculate the overlay alpha
-    float percent = ((translatedPoint.y - parentViewHeight)/(finalViewCenter - parentViewHeight));
-    float alpha = MAX(OverlayMinAlpha, OverlayMaxAlpha * percent);
-    
-    [recognizer.view setCenter:translatedPoint];
-    recognizer.view.backgroundColor = [recognizer.view.backgroundColor colorWithAlphaComponent:alpha];
-    
-    if (recognizer.state == UIGestureRecognizerStateEnded)
-    {
-        CGPoint velocity = [recognizer velocityInView:self.shaderView];
-        float finalY = translatedPoint.y + (OverlayAnimationSpeed * velocity.y);
-        
-        if (finalY < finalViewCenter)
-        {
-            finalY = finalViewCenter;
-        }
-        else if (finalY > parentViewHeight)
-        {
-            finalY = parentViewHeight;
-        }
-        
-        float duration = (ABS(velocity.y) * 0.0004);
-        percent = ((finalY - parentViewHeight)/(finalViewCenter - parentViewHeight));
-        alpha = MAX(OverlayMinAlpha, OverlayMaxAlpha * percent);
-        
-        [UIView beginAnimations:nil context:NULL];
-        [UIView setAnimationDuration:duration];
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-        [recognizer.view setCenter:CGPointMake(firstX, finalY)];
-        recognizer.view.backgroundColor = [recognizer.view.backgroundColor colorWithAlphaComponent:alpha];
-        [UIView commitAnimations];
-    }
 }
 
 @end

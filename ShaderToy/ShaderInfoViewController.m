@@ -32,13 +32,15 @@
 - (void)setShaderInfo:(ShaderInfo *)info
 {
     _shaderInfo = info;
+    
+    // This is UI related, execute in the main thread
     dispatch_async(dispatch_get_main_queue(),
                    ^{
                        self.view.hidden = _shaderInfo.removeoverlay;
                        
-                       _nameLabel.text = [_shaderInfo.name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-                       _authorLabel.text = [_shaderInfo.username stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-                       _descriptionLabel.text = [_shaderInfo.descriptionString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                       _nameLabel.text = _shaderInfo.name;
+                       _authorLabel.text = _shaderInfo.username;
+                       _descriptionLabel.text = _shaderInfo.descriptionString;
                        
                        NSMutableString* tags = [NSMutableString new];
                        for (int i = 0; i < _shaderInfo.tags.count; i++)
@@ -62,6 +64,7 @@
 
 - (void)setFPS:(float)fps
 {
+    // This is UI related, execute in the main thread
     dispatch_async(dispatch_get_main_queue(),
                    ^{
                        _fpsLabel.text = [NSString stringWithFormat:@"%2.f FPS", fps];
@@ -70,14 +73,18 @@
 
 - (IBAction)share:(id)sender
 {
-    UIActivityViewController* activityController = [[UIActivityViewController alloc] initWithActivityItems:@[[NSString stringWithFormat:@"Check out %@ by %@ in Shadertoy!", _shaderInfo.name, _shaderInfo.username], [NSString stringWithFormat:@"https://www.shadertoy.com/view/%@", _shaderInfo.ID]] applicationActivities:nil];
+    NSString* message = [NSString stringWithFormat:@"Check out %@ by %@ in Shadertoy!", _shaderInfo.name, _shaderInfo.username];
+    NSString* link = [NSString stringWithFormat:@"https://www.shadertoy.com/view/%@", _shaderInfo.ID];
+    NSURL *url = [NSURL URLWithString:link];
     
+    UIActivityViewController* activityController = [[UIActivityViewController alloc] initWithActivityItems:@[message, url] applicationActivities:nil];
     
     [_shaderViewController presentViewController:activityController animated:YES completion:nil];
 }
 
 - (IBAction)like:(id)sender
 {
+    // TODO
 }
 
 @end
