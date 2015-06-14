@@ -76,7 +76,7 @@
     [_pendingResources addObject:info];
 }
 
-- (void)deferLoading
+- (void)deferredLoading
 {
     @synchronized(self)
     {
@@ -159,7 +159,7 @@
     NSData* resource = [NSData dataWithContentsOfURL:path];
     if (resource == nil)
     {
-        NSLog(@"ChannelResourceManager: Couldn't load resource for path %@", path.absoluteString);
+        NSLog(@"[ChannelResourceManager] Couldn't load resource for path %@", path.absoluteString);
     }
     
     return resource;
@@ -172,7 +172,7 @@
     
     if (error != nil)
     {
-        NSLog(@"ChannelResourceManager: Couldn't load texture for path %@ - Error: %@", path.absoluteString, error.userInfo[GLKTextureLoaderErrorKey]);
+        NSLog(@"[ChannelResourceManager] Couldn't load texture for path %@ - Error: %@", path.absoluteString, error.userInfo[GLKTextureLoaderErrorKey]);
     }
     
     return info;

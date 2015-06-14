@@ -12,13 +12,13 @@
 
 @interface ShaderView : UIView
 
-@property (readonly) GLint   backingWidth;
-@property (readonly) GLint   backingHeight;
+@property (readonly) BOOL isSetup;
+@property (readonly) GLint backingWidth;
+@property (readonly) GLint backingHeight;
 @property (nonatomic,readonly,retain) CAEAGLLayer *layer;
-@property (strong, nonatomic) EAGLContext *context;
 
 - (BOOL)setup:(BOOL)force;
-- (void)setFramebuffer;
-- (void)presentFramebuffer;
+- (GLenum)setFramebuffer;
+- (void)presentFramebuffer:(EAGLContext *)context;
 
 @end

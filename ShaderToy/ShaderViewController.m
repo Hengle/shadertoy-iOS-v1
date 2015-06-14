@@ -20,8 +20,9 @@
 
 - (void)tearDown;
 - (void)initialize;
-- (void)drawFrame;
-- (void)calculateFPS;
+- (void)update:(float)deltaTime;
+- (void)drawFrame:(float)deltaTime;
+- (void)calculateFPS:(float)deltaTime;
 - (void)checkForErrors;
 - (void)triggerDrawFrame;
 - (void)threadMainLoop;
@@ -34,11 +35,11 @@
 {
     [super viewDidLoad];
     
-    _context = [ShaderManager sharedInstance].createNewContext;
+    _context = [[ShaderManager sharedInstance] createNewContext];
     
     if (_context == nil)
     {
-        NSLog(@"Failed to create ES context");
+        NSLog(@"[ShaderViewController] Failed to create ES context");
         exit(0);
     }
     
@@ -46,7 +47,6 @@
     
     _renderThread = nil;
     _animating = false;
-    _oneFrame = false;
     _running = false;
     _initialized = false;
     _overlayVisible = false;
@@ -54,7 +54,7 @@
     _frameCounter = 0;
     _lastFrameTime = [NSDate date];
     _lastFPSTime = [NSDate date];
-    _renderQueue = dispatch_queue_create("com.shadertoy.threadedgcdqueue", NULL);
+    _renderQueue = dispatch_queue_create("com.shadertoy.threadedgcdqueue", DISPATCH_QUEUE_CONCURRENT);
 }
 
 - (void)viewDidLayoutSubviews
@@ -123,36 +123,33 @@
 
 - (void)drawPreviewFrame
 {
-    if (!_oneFrame)
-    {
-        NSLog(@"ShaderViewController: Drawing Preview Frame");
-        
-        _startTime = [NSDate date];
-        _lastFrameTime = [NSDate date];
-        _lastFPSTime = [NSDate date];
-        
-        _animating = true;
-        _oneFrame = true;
-        _renderThread = [[NSThread alloc] initWithTarget:self selector:@selector(threadMainLoop) object:nil];
-        
-        [_renderThread start];
-    }
+    NSLog(@"[ShaderViewController] Drawing Preview Frame");
+    
+    _startTime = [NSDate date];
+    _lastFrameTime = [NSDate date];
+    _lastFPSTime = [NSDate date];
+    
+    _animating = true;
+    _renderThread = [[NSThread alloc] initWithTarget:self selector:@selector(threadMainLoop) object:nil];
+    
+    [_renderThread start];
 }
 
 - (void)startAnimation
 {
     if (!_animating)
     {
-        NSLog(@"ShaderViewController: Starting animation");
+        NSLog(@"[ShaderViewController] Starting animation");
         
         _startTime = [NSDate date];
         _lastFrameTime = [NSDate date];
         _lastFPSTime = [NSDate date];
         
-        _animating = true;
-        _renderThread = [[NSThread alloc] initWithTarget:self selector:@selector(threadMainLoop) object:nil];
         
+        _renderThread = [[NSThread alloc] initWithTarget:self selector:@selector(threadMainLoop) object:nil];
         [_renderThread start];
+        
+        _animating = true;
     }
 }
 
@@ -160,16 +157,19 @@
 {
     if (_animating)
     {
-        NSLog(@"ShaderViewController: Stopping animation");
+        NSLog(@"[ShaderViewController] Stopping animation");
         
         _animating = false;
-        _oneFrame = false;
         
-        CFRunLoopStop([_renderLoop getCFRunLoop]);
+        if (_renderLoop)
+        {
+            CFRunLoopStop([_renderLoop getCFRunLoop]);
+        }
         
         // Wait for the thread to finish
         @synchronized(_renderThread)
         {
+            [_renderThread cancel];
             _renderThread = nil;
         }
     }
@@ -183,7 +183,7 @@
 //    [self populateOverlay];
     
     // For bookkeeping purposes
-    _renderThread.name = self.currentShader.name;
+    _renderThread.name = _currentShader.name;
     
     if (_planeObject)
     {
@@ -196,19 +196,22 @@
             // Make sure we are executing the shader parameter in the correct thread
             dispatch_async(_renderQueue, ^
             {
-                // Set the context
-                [EAGLContext setCurrentContext:_context];
-                
-                // Inputs are set only on shader initialization, no need to re-set them
-                [self setShaderInputs:renderpass.inputs onParams:_params];
-                
-                // Clear the context
-                [EAGLContext setCurrentContext:nil];
+                @synchronized(_context)
+                {
+                    // Set the context
+                    [EAGLContext setCurrentContext:_context];
+                    
+                    // Inputs are set only on shader initialization, no need to re-set them
+                    [self setShaderInputs:renderpass.inputs onParams:_params];
+                    
+                    // Clear the context
+                    [EAGLContext setCurrentContext:nil];
+                }
             });
         }
     }
     
-    NSLog(@"Setting shader to %@", shader.name);
+    NSLog(@"[ShaderViewController] Setting shader to %@", shader.name);
 }
 
 - (void)setShaderInputs:(NSArray *)inputs onParams:(ShaderParameters *)params
@@ -226,7 +229,7 @@
                 params.channelInfo[input.channel] = textureID;
                 [params setChannel:input.channel resolution:resolution];
                 
-                NSLog(@"Setting input channel %d to texture %d, resolution %f x %f", input.channel, params.channelInfo[input.channel], params.channelResolution[input.channel + 0], params.channelResolution[input.channel + 1]);
+                NSLog(@"[ShaderViewController] Setting input channel %d to texture %d, resolution %f x %f", input.channel, params.channelInfo[input.channel], params.channelResolution[input.channel + 0], params.channelResolution[input.channel + 1]);
             }
         }
         else
@@ -249,9 +252,9 @@
 {
     dispatch_async(dispatch_get_main_queue(),
                    ^{
-                       _nameLabel.text = [self.currentShader.name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-                       _authorLabel.text = [self.currentShader.username stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-                       _descriptionLabel.text = [self.currentShader.descriptionString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                       _nameLabel.text = _currentShader.name;
+                       _authorLabel.text = _currentShader.username;
+                       _descriptionLabel.text = _currentShader.descriptionString;
                        
                        NSMutableString* tags = [NSMutableString new];
                        for (int i = 0; i < self.currentShader.tags.count; i++)
@@ -275,7 +278,7 @@
 
 - (void)setOverlayVisible:(BOOL)visible
 {
-    NSLog(@"[Set - %@] Overlay %@", self.currentShader.name, visible ? @"visible" : @"hidden");
+    NSLog(@"[ShaderViewController] [Set - %@] Overlay %@", self.currentShader.name, visible ? @"visible" : @"hidden");
     
     self.overlayView.alpha = (visible ? 1.0f : 0.0f);
     _overlayVisible = visible;
@@ -286,7 +289,7 @@
     bool enabled = !_overlayVisible;
     if (!self.currentShader.removeoverlay)
     {
-        NSLog(@"[Toggle - %@] Overlay %@", self.currentShader.name, enabled ? @"visible" : @"hidden");
+        NSLog(@"[ShaderViewController] [Toggle - %@] Overlay %@", self.currentShader.name, enabled ? @"visible" : @"hidden");
         
         [UIView animateWithDuration:0.5f delay:1.0f options:UIViewAnimationOptionAllowUserInteraction animations:^{
             self.overlayView.alpha = (enabled ? 1.0f : 0.0f);
@@ -300,7 +303,7 @@
 {
     if (!self.currentShader.removeoverlay && !_overlayVisible)
     {
-        NSLog(@"[Flash - %@] Overlay %@", self.currentShader.name, _overlayVisible ? @"visible" : @"hidden");
+        NSLog(@"[ShaderViewController] [Flash - %@] Overlay %@", self.currentShader.name, _overlayVisible ? @"visible" : @"hidden");
         
         // Animate the overlay
         [UIView animateWithDuration:0.5f delay:1.0f options:UIViewAnimationOptionAllowUserInteraction animations:^{
@@ -308,13 +311,13 @@
         } completion:^(BOOL finished) {
             // When alpha is 1.0, set it to visible
             _overlayVisible = true;
-            NSLog(@"[Flash - %@] Overlay %@", self.currentShader.name, _overlayVisible ? @"visible" : @"hidden");
+            NSLog(@"[ShaderViewController] [Flash - %@] Overlay %@", self.currentShader.name, _overlayVisible ? @"visible" : @"hidden");
             [UIView animateWithDuration:0.5f delay:5.0f options:UIViewAnimationOptionAllowUserInteraction animations:^{
                 self.overlayView.alpha = 0.0f;
             } completion:^(BOOL finished) {
                 // When alpha is 0.0, set it to invisible
                 _overlayVisible = false;
-                NSLog(@"[Flash - %@] Overlay %@", self.currentShader.name, _overlayVisible ? @"visible" : @"hidden");
+                NSLog(@"[ShaderViewController] [Flash - %@] Overlay %@", self.currentShader.name, _overlayVisible ? @"visible" : @"hidden");
             }];
         }];
     }
@@ -355,7 +358,6 @@
 {
     if (!_initialized)
     {
-        self.shaderView.context = _context;
         _initialized = true;
         _planeObject = [[Plane alloc] initWithShader:_currentShader];
         
@@ -370,18 +372,15 @@
     }
 }
 
-- (void)drawFrame
+- (void)drawFrame:(float)deltaTime
 {
-    @synchronized(_context)
+    GLenum frameBufferStatus = [self.shaderView setFramebuffer];
+    
+    if (frameBufferStatus == GL_FRAMEBUFFER_COMPLETE)
     {
-        [self.shaderView setFramebuffer];
-        
         // Calculate the width and height of the view
         float width = self.shaderView.backingWidth;
         float height = self.shaderView.backingHeight;
-        
-        // Calculate the time since since rendering start
-        float time = ABS([_startTime timeIntervalSinceNow]);
         
         // Clear the context
         glClearColor(0.65f, 0.65f, 0.65f, 1.0f);
@@ -394,7 +393,7 @@
         {
             // Setup the parameters that are sent to the shader
             _params.resolution = GLKVector3Make(width, height, 1.0f);
-            _params.time = time;
+            _params.time = deltaTime;
             
             // Send touch locations, if valid, otherwise send 0
             if (_touchLocation != nil)
@@ -411,50 +410,40 @@
             [_planeObject draw:_params];
         }
         
-        [self.shaderView presentFramebuffer];
+        [self.shaderView presentFramebuffer:_context];
+    }
+    else
+    {
+        NSLog(@"[ShaderViewController] Framebuffer is not ready, skipping draw!");
     }
 }
 
-- (void)update
+- (void)update:(float)deltaTime
 {
-    float time = ABS([_lastFrameTime timeIntervalSinceNow]);
+    [[ShaderManager sharedInstance] deferredCompilation];
+    [[ChannelResourceManager sharedInstance] deferredLoading];
     
-    [[ShaderManager sharedInstance] deferCompilation];
-    [[ChannelResourceManager sharedInstance] deferLoading];
+    [_planeObject update:deltaTime];
     
-    [_planeObject update:time];
-    
-    [self calculateFPS];
+    [self calculateFPS:deltaTime];
     
     _lastFrameTime = [NSDate date];
 }
 
-- (void)calculateFPS
+- (void)calculateFPS:(float)deltaTime
 {
     _frameCounter++;
-    float fpsInterval = ABS([_lastFPSTime timeIntervalSinceNow]);
     
-    if (fpsInterval > 0.5f)
+    if (deltaTime > 0.5f)
     {
-        float fps = _frameCounter / fpsInterval;
+        float fps = _frameCounter / deltaTime;
+//        if (_frameCounter > 1 && fps < 10.0f)
+//        {
+//            [self stopAnimation];
+//            NSLog(@"[ShaderViewController] Paused");
+//        }
         
-        if (_oneFrame)
-        {
-            if (_frameCounter > 1)
-            {
-                [self stopAnimation];
-            }
-        }
-        else
-        {
-            if (_frameCounter > 1 && fps < 10.0f)
-            {
-                [self stopAnimation];
-                NSLog(@"Paused");
-            }
-            
-            [self setFPS:fps];
-        }
+        [self setFPS:fps];
         
         _frameCounter = 0;
         _lastFPSTime = [NSDate date];
@@ -467,7 +456,7 @@
     GLenum error = glGetError();
     if (error > 0x0)
     {
-        NSLog(@"GL Error = %x", error);
+        NSLog(@"[ShaderViewController] %@ GL Error = %x", self.currentShader.name, error);
     }
 #endif
 }
@@ -479,14 +468,20 @@
         _running = true;
         dispatch_async(_renderQueue, ^
         {
-            // Set the context and framebuffer
-            [EAGLContext setCurrentContext:_context];
-            
-            [self update];
-            [self drawFrame];
-            [self checkForErrors];
-            
-            [EAGLContext setCurrentContext:nil];
+            @synchronized(_context)
+            {
+                // Set the context and framebuffer
+                [EAGLContext setCurrentContext:_context];
+                
+                // Calculate the time since since rendering start
+                float deltaTime = ABS([_startTime timeIntervalSinceNow]);
+                
+                [self update:deltaTime];
+                [self drawFrame:deltaTime];
+                [self checkForErrors];
+                
+                [EAGLContext setCurrentContext:nil];
+            }
             
             _running = false;
         });
@@ -503,14 +498,16 @@
     {
         @autoreleasepool
         {
-            // Set the context and framebuffer
-            [EAGLContext setCurrentContext:_context];
-            
-            // Initialize the controller
-            [self initialize];
-            
-            [EAGLContext setCurrentContext:nil];
-            
+            @synchronized(_context)
+            {
+                // Set the context and framebuffer
+                [EAGLContext setCurrentContext:_context];
+                
+                // Initialize the controller
+                [self initialize];
+                
+                [EAGLContext setCurrentContext:nil];
+            }
             
             // Create the render loop and start it
             _renderLoop = [NSRunLoop currentRunLoop];

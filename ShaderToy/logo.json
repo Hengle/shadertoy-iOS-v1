@@ -2,24 +2,24 @@
     "info":
     {
         "date": "1367053740",
-        "description": "Logo in a texture for Shadertoy",
+        "description": "Loading shader for Shadertoy",
         "hasliked": 0,
         "id": "0427c640",
         "likes": 0,
-        "name": "Shadertoy Logo",
+        "name": "Shadertoy Loading",
         "published": 0,
         "tags":
         [
-            "texturing","logo"
+            "Shadertoy","loading"
         ],
         "username": "Shadertoy",
         "viewed": 0,
-        "removeoverlay": 0
+        "removeoverlay": true
     },
     "renderpass":
     [
      {
-        "code": "void mainImage( out vec4 fragColor, in vec2 fragCoord ){fragColor = vec4(0.0, 0.0, 0.0, 1.0);}",
+        "code": "void mainImage( out vec4 fragColor, in vec2 fragCoord ){fragColor = vec4(1.0, 0.0, 0.0, 1.0);}",
      "description": "",
      "name": "main",
      "inputs": [],

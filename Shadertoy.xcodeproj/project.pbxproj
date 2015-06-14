@@ -28,8 +28,7 @@
 		AEA3B5591730E6C700786DA2 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEA3B5571730E6C700786DA2 /* MainStoryboard.storyboard */; };
 		AEA3B55F1730E6C700786DA2 /* GalleryViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B55E1730E6C700786DA2 /* GalleryViewController.mm */; };
 		AEA3B57B1732327200786DA2 /* ShaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B5791732327200786DA2 /* ShaderViewController.m */; };
-		AEA3B58617360BBA00786DA2 /* ShaderMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B58517360BBA00786DA2 /* ShaderMenuViewController.m */; };
-		AEA3B58E1736E82A00786DA2 /* ShaderMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B58D1736E82A00786DA2 /* ShaderMenuCell.m */; };
+		AEA3B58617360BBA00786DA2 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B58517360BBA00786DA2 /* MenuViewController.m */; };
 		AEADD6F61803DB28001C57B5 /* ShaderRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = AEADD6F51803DB28001C57B5 /* ShaderRequest.m */; };
 		AEAE17F5174B637000764D5B /* Plane.m in Sources */ = {isa = PBXBuildFile; fileRef = AEAE17F4174B637000764D5B /* Plane.m */; };
 		AEAEEA6817422B1D003F74D3 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEAEEA6717422B1D003F74D3 /* Social.framework */; };
@@ -76,10 +75,8 @@
 		AEA3B55E1730E6C700786DA2 /* GalleryViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = GalleryViewController.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		AEA3B5781732327200786DA2 /* ShaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ShaderViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		AEA3B5791732327200786DA2 /* ShaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ShaderViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		AEA3B58417360BBA00786DA2 /* ShaderMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ShaderMenuViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		AEA3B58517360BBA00786DA2 /* ShaderMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ShaderMenuViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		AEA3B58C1736E82A00786DA2 /* ShaderMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ShaderMenuCell.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		AEA3B58D1736E82A00786DA2 /* ShaderMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ShaderMenuCell.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		AEA3B58417360BBA00786DA2 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MenuViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		AEA3B58517360BBA00786DA2 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MenuViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		AEADD6F41803DB28001C57B5 /* ShaderRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShaderRequest.h; path = Shadertoy/ShaderRequest.h; sourceTree = SOURCE_ROOT; };
 		AEADD6F51803DB28001C57B5 /* ShaderRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShaderRequest.m; path = Shadertoy/ShaderRequest.m; sourceTree = SOURCE_ROOT; };
 		AEADD6F71803FF89001C57B5 /* ShaderToyDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ShaderToyDefines.h; path = Shadertoy/ShaderToyDefines.h; sourceTree = SOURCE_ROOT; };
@@ -179,21 +176,13 @@
 		AEA3B5451730E6C700786DA2 /* Shadertoy */ = {
 			isa = PBXGroup;
 			children = (
-				AEAE17F2174B635600764D5B /* Rendering */,
 				AE1EF6061771921000A1251C /* Data */,
+				FEC658691B2CC9BC00DD786B /* Gallerry */,
+				FEC658681B2CC9B300DD786B /* Menu */,
 				AE85EAC617933D950090DC1F /* Overlay */,
+				AEAE17F2174B635600764D5B /* Rendering */,
 				AEA3B54E1730E6C700786DA2 /* AppDelegate.h */,
 				AEA3B54F1730E6C700786DA2 /* AppDelegate.m */,
-				AEA3B55D1730E6C700786DA2 /* GalleryViewController.hpp */,
-				AEA3B55E1730E6C700786DA2 /* GalleryViewController.mm */,
-				AEA3B58C1736E82A00786DA2 /* ShaderMenuCell.h */,
-				AEA3B58D1736E82A00786DA2 /* ShaderMenuCell.m */,
-				AEA3B58417360BBA00786DA2 /* ShaderMenuViewController.h */,
-				AEA3B58517360BBA00786DA2 /* ShaderMenuViewController.m */,
-				AEA3B5781732327200786DA2 /* ShaderViewController.h */,
-				AEA3B5791732327200786DA2 /* ShaderViewController.m */,
-				AEB028261753F26100757AF8 /* ShaderView.h */,
-				AEB028271753F26100757AF8 /* ShaderView.m */,
 				AEADD6F71803FF89001C57B5 /* ShaderToyDefines.h */,
 				AE23BC8D184DD33A009F4531 /* UIWebViewController.h */,
 				AE23BC8E184DD33A009F4531 /* UIWebViewController.m */,
@@ -250,6 +239,28 @@
 				2B7E6DA263432B8631FAC143 /* Pods-Shadertoy.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		FEC658681B2CC9B300DD786B /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				AEA3B58417360BBA00786DA2 /* MenuViewController.h */,
+				AEA3B58517360BBA00786DA2 /* MenuViewController.m */,
+			);
+			name = Menu;
+			sourceTree = "<group>";
+		};
+		FEC658691B2CC9BC00DD786B /* Gallerry */ = {
+			isa = PBXGroup;
+			children = (
+				AEA3B55D1730E6C700786DA2 /* GalleryViewController.hpp */,
+				AEA3B55E1730E6C700786DA2 /* GalleryViewController.mm */,
+				AEA3B5781732327200786DA2 /* ShaderViewController.h */,
+				AEA3B5791732327200786DA2 /* ShaderViewController.m */,
+				AEB028261753F26100757AF8 /* ShaderView.h */,
+				AEB028271753F26100757AF8 /* ShaderView.m */,
+			);
+			name = Gallerry;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -372,8 +383,7 @@
 				AEA3B5501730E6C700786DA2 /* AppDelegate.m in Sources */,
 				AEA3B55F1730E6C700786DA2 /* GalleryViewController.mm in Sources */,
 				AEA3B57B1732327200786DA2 /* ShaderViewController.m in Sources */,
-				AEA3B58617360BBA00786DA2 /* ShaderMenuViewController.m in Sources */,
-				AEA3B58E1736E82A00786DA2 /* ShaderMenuCell.m in Sources */,
+				AEA3B58617360BBA00786DA2 /* MenuViewController.m in Sources */,
 				AEAE17F5174B637000764D5B /* Plane.m in Sources */,
 				AEB028281753F26100757AF8 /* ShaderView.m in Sources */,
 				AEADD6F61803DB28001C57B5 /* ShaderRequest.m in Sources */,

@@ -16,7 +16,6 @@
 
 @interface ShaderViewController : UIViewController
 {
-    bool _oneFrame;
     bool _running;
     bool _animating;
     bool _initialized;

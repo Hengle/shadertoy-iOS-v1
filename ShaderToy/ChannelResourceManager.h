@@ -18,7 +18,7 @@
 + (ChannelResourceManager *)sharedInstance;
 
 - (void)addResource:(NSURL *)path ofType:(NSString *)type;
-- (void)deferLoading;
+- (void)deferredLoading;
 
 - (void)storeResource:(NSObject *)resource withName:(NSString *)name;
 - (NSData *)getResourceWithName:(NSURL *)name;

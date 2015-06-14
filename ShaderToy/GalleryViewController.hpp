@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 
 #import "ShaderRequest.h"
-#import "ShaderMenuViewController.h"
+#import "MenuViewController.h"
 
 @class ShaderViewController;
 
-@interface GalleryViewController : UIPageViewController <UIPageViewControllerDelegate, UIPageViewControllerDataSource, SWRevealViewControllerDelegate, ShaderRequestDelegate, ShaderMenuDelegate>
+@interface GalleryViewController : UIPageViewController <UIPageViewControllerDelegate, UIPageViewControllerDataSource, SWRevealViewControllerDelegate, ShaderRequestDelegate, MenuDelegate>
 {
     bool _revealControllerShowing;
     bool _loadingShaders;

@@ -55,7 +55,7 @@
     return self;
 }
 
-- (void)deferCompilation
+- (void)deferredCompilation
 {
     @synchronized(self)
     {
@@ -72,7 +72,7 @@
                     {
                         [self storeShader:program withName:shader.ID];
                 
-                        NSLog(@"Created program %u for shader %@", program, shader.name);
+                        NSLog(@"[ShaderManager] Created program %u for shader %@", program, shader.name);
                     }
                 }
             }
@@ -159,7 +159,7 @@
     if (programObject != nil)
     {
         program = programObject.unsignedIntValue;
-        NSLog(@"Retrieved program %u for shader %@", program, shader.name);
+        NSLog(@"[ShaderManager] Retrieved program %u for shader %@", program, shader.name);
     }
     else
     {
@@ -168,7 +168,7 @@
             program = [self compileShaderCode:[self prepareRenderPassCode:renderpass]];
             [self storeShader:program withName:shader.ID];
 
-            NSLog(@"Created program %u for shader %@, renderpass %@", program, shader.name, renderpass.name);
+            NSLog(@"[ShaderManager] Created program %u for shader %@, renderpass %@", program, shader.name, renderpass.name);
         }
     }
     
@@ -178,16 +178,7 @@
 - (NSString *)prepareRenderPassCode:(ShaderRenderPass *)renderpass
 {
     // Create the header for this particular shader
-    NSMutableString* codeString = [NSMutableString stringWithString:@"// Auto-generated header to define uniforms\n"];
-    [codeString appendString:@"precision highp float;\n"];
-    [codeString appendString:@"uniform vec3     iResolution;\n"];
-    [codeString appendString:@"uniform float    iGlobalTime;\n"];
-    [codeString appendString:@"uniform float    iChannelTime[4];\n"];
-    [codeString appendFormat:@"uniform float    iSampleRate;\n"];
-    [codeString appendString:@"uniform vec3     iChannelResolution[4];\n"];
-    [codeString appendString:@"uniform vec4     iMouse;\n\n"];
-    [codeString appendString:@"uniform vec4     iDate;\n"];
-    [codeString appendString:@"varying vec2     texCoords;\n\n"];
+    NSMutableString* codeString = [NSMutableString stringWithString:_shaderHeader];
     
     // Create the necessary channels
     for (ShaderInput* input in renderpass.inputs)
@@ -213,7 +204,7 @@
     [codeString appendString:renderpass.code];
     
     // Append the header that will call the main function
-    [codeString appendString:@"\nvoid main( void ){vec4 color; mainImage( color, gl_FragCoord.xy ); color.w = 1.0; gl_FragColor = color;}\n"];
+    [codeString appendString:_shaderMain];
     
     // Replace reserved strings with prefix
     codeString = [self replaceReservedFunctionNames:codeString];
@@ -226,14 +217,14 @@
     NSError *error = NULL;
     
     // Matches patterns like:
-    // noise1(), noise2(a), noise3 ( a, b ) noise4()
+    // noise1(), noise2(a), noise3( a, b ) noise4()
     // and adds a Shadertoy_ suffix to the pattern
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(noise[1-4]*[\\s]*\\()" options:NSRegularExpressionCaseInsensitive error:&error];
     NSString *modifiedString = [regex stringByReplacingMatchesInString:codeString options:0 range:NSMakeRange(0, codeString.length) withTemplate:@"Shadertoy_$1"];
     
     if (error != nil)
     {
-        NSLog(@"Failed to prefix noise functions! %@", error.localizedDescription);
+        NSLog(@"[ShaderManager] Failed to prefix noise functions! %@", error.localizedDescription);
         
         return [codeString mutableCopy];
     }
@@ -250,14 +241,14 @@
     NSString* vertCode = [NSString stringWithContentsOfFile:vertShaderPathname encoding:NSUTF8StringEncoding error:nil];
     if (![self compileShader:&vertShader type:GL_VERTEX_SHADER source:vertCode])
     {
-        NSLog(@"Failed to compile vertex shader");
+        NSLog(@"[ShaderManager] Failed to compile vertex shader");
         return 0;
     }
     
     // Create and compile fragment shader.
     if (![self compileShader:&fragShader type:GL_FRAGMENT_SHADER source:code])
     {
-        NSLog(@"Failed to compile fragment shader");
+        NSLog(@"[ShaderManager] Failed to compile fragment shader");
         return 0;
     }
     
@@ -273,7 +264,7 @@
     // Link program.
     if (![self linkProgram:program])
     {
-        NSLog(@"Failed to link program:%u", program);
+        NSLog(@"[ShaderManager] Failed to link program:%u", program);
         
         if (vertShader)
         {
@@ -318,7 +309,7 @@
     const GLchar* source = (GLchar *)code.UTF8String;
     if (!source)
     {
-        NSLog(@"Failed to load %d shader", type);
+        NSLog(@"[ShaderManager] Failed to load %d shader", type);
         return NO;
     }
     
@@ -333,7 +324,7 @@
     {
         GLchar *log = (GLchar *)malloc(logLength);
         glGetShaderInfoLog(*shader, logLength, &logLength, log);
-        NSLog(@"Shader (%u) compile log:\n%s", *shader, log);
+        NSLog(@"[ShaderManager] Shader (%u) compile log:\n%s", *shader, log);
         free(log);
     }
 #endif
@@ -360,7 +351,7 @@
     {
         GLchar *log = (GLchar *)malloc(logLength);
         glGetProgramInfoLog(prog, logLength, &logLength, log);
-        NSLog(@"Program (%u) link log:\n%s", prog, log);
+        NSLog(@"[ShaderManager] Program (%u) link log:\n%s", prog, log);
         free(log);
     }
 #endif
@@ -384,7 +375,7 @@
     {
         GLchar *log = (GLchar *)malloc(logLength);
         glGetProgramInfoLog(prog, logLength, &logLength, log);
-        NSLog(@"Program validate log:\n%s", log);
+        NSLog(@"[ShaderManager] Program validate log:\n%s", log);
         free(log);
     }
     

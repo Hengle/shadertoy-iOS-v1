@@ -1,13 +1,12 @@
 //
-//  ShaderMenuViewController.m
+//  MenuViewController.m
 //  Shadertoy
 //
 //  Created by Ricardo Chavarria on 5/4/13.
 //  Copyright (c) 2013 Ricardo Chavarria. All rights reserved.
 //
 
-#import "ShaderMenuViewController.h"
-#import "ShaderMenuCell.h"
+#import "MenuViewController.h"
 #import "UIWebViewController.h"
 
 #import "SVProgressHUD.h"
@@ -17,14 +16,14 @@
 #define NormalColor [UIColor lightGrayColor]
 #define SelectedColor [UIColor colorWithRed:1.0 green:0.502 blue:0.125 alpha:1.0]
 
-@interface ShaderMenuViewController ()
+@interface MenuViewController ()
 
 - (void)setIndexPath:(NSIndexPath *)indexPath selected:(BOOL)selected;
 - (UIImage *)imageForIndexPath:(NSIndexPath *)indexPath selected:(BOOL)selected;
 
 @end
 
-@implementation ShaderMenuViewController
+@implementation MenuViewController
 
 - (void)viewDidLoad
 {

@@ -14,12 +14,12 @@
 
 @interface ShaderView ()
 {
+    bool _shouldRecreate;
     GLuint  frameBuffer;
     GLuint  renderBuffer;
-    bool setup;
 }
 
-- (void)createBuffers;
+- (void)createBuffers:(EAGLContext *)context;
 - (void)destroyBuffers;
 
 @end
@@ -38,15 +38,14 @@
     self = [super initWithCoder:aDecoder];
     if (self)
     {
-        setup = false;
+        _isSetup = false;
+        _shouldRecreate = true;
         self.layer.opaque = YES;
-        self.layer.drawableProperties = @{kEAGLDrawablePropertyRetainedBacking: @NO, kEAGLDrawablePropertyColorFormat: kEAGLColorFormatRGBA8};
+        self.layer.drawableProperties = @{kEAGLDrawablePropertyRetainedBacking: @NO, kEAGLDrawablePropertyColorFormat:kEAGLColorFormatRGBA8};
     }
     
     return self;
 }
-
-
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -54,46 +53,32 @@
     if (self)
     {
         // Initialization code
-        setup = false;
+        _isSetup = false;
+        _shouldRecreate = true;
     }
     
     return self;
 }
 
-- (void)setContext:(EAGLContext *)context
-{
-    _context = context;
-    
-    [self setNeedsLayout];
-}
-
 - (BOOL)setup:(BOOL)force
 {
-    if (_context == nil)
+    if (_isSetup && !force)
     {
+        NSLog(@"[ShaderView] Trying to call setup again!");
         return false;
     }
     
-    if (setup && !force)
-    {
-        return false;
-    }
+    EAGLContext* context = [EAGLContext currentContext];
+        
+    [self destroyBuffers];
+    [self createBuffers:context];
     
-    @synchronized(_context)
-    {
-        setup = true;
-        [EAGLContext setCurrentContext:_context];
-        
-        [self destroyBuffers];
-        [self createBuffers];
-        
-        [EAGLContext setCurrentContext:nil];
-    }
+    _isSetup = true;
     
     return true;
 }
 
-- (void)createBuffers
+- (void)createBuffers:(EAGLContext *)context
 {
     // Create Buffers
     glGenFramebuffers(1, &frameBuffer);
@@ -104,7 +89,7 @@
     glBindRenderbuffer(GL_RENDERBUFFER, renderBuffer);
     
     // Create storage
-    [_context renderbufferStorage:GL_RENDERBUFFER fromDrawable:self.layer];
+    [context renderbufferStorage:GL_RENDERBUFFER fromDrawable:self.layer];
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, renderBuffer);
     
     // Get backing width and height from the buffer
@@ -114,7 +99,12 @@
     GLenum frameBufferStatus = glCheckFramebufferStatus(GL_FRAMEBUFFER);
     if (frameBufferStatus != GL_FRAMEBUFFER_COMPLETE)
     {
-        NSLog(@"Failed to make complete framebuffer object %x", frameBufferStatus);
+        NSLog(@"[ShaderView] Failed to make complete framebuffer object %x", frameBufferStatus);
+    }
+    else
+    {
+        glBindRenderbuffer(GL_RENDERBUFFER, 0);
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
 }
 
@@ -132,18 +122,28 @@
         renderBuffer = 0;
     }
     
-    setup = false;
+    _isSetup = false;
 }
 
-- (void)setFramebuffer
+- (GLenum)setFramebuffer
 {
+    if (_shouldRecreate)
+    {
+        [self setup:true];
+        _shouldRecreate = false;
+    }
+    
     glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
+    
+    GLenum frameBufferStatus = glCheckFramebufferStatus(GL_FRAMEBUFFER);
+    
+    return frameBufferStatus;
 }
 
-- (void)presentFramebuffer
+- (void)presentFramebuffer:(EAGLContext *)context
 {
     glBindRenderbuffer(GL_RENDERBUFFER, renderBuffer);
-    BOOL success = [_context presentRenderbuffer:GL_RENDERBUFFER];
+    BOOL success = [context presentRenderbuffer:GL_RENDERBUFFER];
     
     assert(success);
     
@@ -155,7 +155,9 @@
 {
     [super layoutSubviews];
     
-    [self setup:false];
+    _shouldRecreate = true;
+//    _isSetup = false;
+    //[self setup:false];
 }
 
 @end

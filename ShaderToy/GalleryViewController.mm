@@ -33,7 +33,7 @@
     
     self.revealViewController.delegate = self;
     
-    ShaderMenuViewController* menuController = (ShaderMenuViewController *)self.revealViewController.rearViewController;
+    MenuViewController* menuController = (MenuViewController *)self.revealViewController.rearViewController;
     menuController.delegate = self;
     
     _pendingControllers = [NSMutableArray new];
@@ -124,8 +124,8 @@
         [_shaderRequest requestNewShaders];
     }
     
-    NSLog(@"Pending controllers %lu", (unsigned long)_pendingControllers.count);
-    NSLog(@"Started Animation for next controller %@ with shader %@", next, next.currentShader.name);
+    NSLog(@"[GalleryViewController] Pending controllers %lu", (unsigned long)_pendingControllers.count);
+    NSLog(@"[GalleryViewController] Started Animation for next controller %@ with shader %@", next, next.currentShader.name);
 }
 
 - (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed
@@ -135,7 +135,7 @@
         ShaderViewController* previous = (ShaderViewController *)previousViewControllers[0];
         [previous stopAnimation];
         
-        NSLog(@"Stopped Animation for previews controller with shader %@.", previous.currentShader.name);
+        NSLog(@"[GalleryViewController] Stopped Animation for previews controller with shader %@.", previous.currentShader.name);
         
         ShaderViewController* current = (ShaderViewController *)pageViewController.viewControllers[0];
         [current startAnimation];
@@ -153,8 +153,8 @@
     // we need to stop its rendering as the animation failed
     for (ShaderViewController* controller in _pendingControllers)
     {
-        [controller stopAnimation];
-        NSLog(@"Stopped Animation for pending controller with shader %@.", controller.currentShader.name);
+//        [controller stopAnimation];
+        NSLog(@"[GalleryViewController] Stopped Animation for pending controller with shader %@.", controller.currentShader.name);
     }
     
     [_pendingControllers removeAllObjects];
@@ -179,7 +179,7 @@
             ShaderInfo* shader = _shaders[shaderIndex];
             [previousController setShader:shader];
         
-            NSLog(@"Setting Before VC %lu to shader %@", shaderIndex % _shaderViewControllers.count, shader.name);
+            NSLog(@"[GalleryViewController] Setting Before VC %lu to shader %@", shaderIndex % _shaderViewControllers.count, shader.name);
         }
     }
     
@@ -202,7 +202,7 @@
             ShaderInfo* shader = _shaders[shaderIndex];
             [nextController setShader:shader];
             
-            NSLog(@"Setting After VC %lu to shader %@", (shaderIndex % _shaderViewControllers.count), shader.name);
+            NSLog(@"[GalleryViewController] Setting After VC %lu to shader %@", (shaderIndex % _shaderViewControllers.count), shader.name);
         }
     }
     
@@ -239,7 +239,6 @@
 {
     bool newCategory = (_shaders.count <= 0);
     [_shaders addObjectsFromArray:shaderList];
-    
 
     if (newCategory)
     {
@@ -258,7 +257,6 @@
     
     // If we are retrieving more shaders for this category, make sure our datasource is reloaded so scrolling is smooth
     ShaderViewController* viewController = (ShaderViewController *)self.viewControllers[0];
-    
     if (viewController != nil)
     {
         [self setViewControllers:@[viewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
@@ -266,9 +264,9 @@
 }
 
 
-#pragma mark - ShaderMenuDelegate
+#pragma mark - MenuDelegate
 
-- (void)shaderMenu:(ShaderMenuViewController *)shaderMenu choseShaderCategory:(EShaderCategory)category
+- (void)shaderMenu:(MenuViewController *)shaderMenu choseShaderCategory:(EShaderCategory)category
 {
     [self clearViewsForSectionChange];
     

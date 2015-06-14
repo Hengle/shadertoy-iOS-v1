@@ -55,7 +55,7 @@
 
 - (void)requestCategory:(EShaderCategory)category
 {
-    NSLog(@"ShaderRequest: Changing cateogory to %lu", (unsigned long)category);
+    NSLog(@"[ShaderRequest] Changing category to %lu", (unsigned long)category);
     
     // Reset the state
     [self resetState];
@@ -97,7 +97,7 @@
                                static NSString* apiKey = @"Nt8twr";
                                NSString* s = [NSString stringWithFormat:@"sort=%@&from=%d&num=12&key=%@", [self categoryStringForCategory:_currentCategory], _currentIndex, apiKey];
                                NSString* urlString = [NSString stringWithFormat:@"https://www.shadertoy.com/api/v1/shaders?%@", s];
-                               NSLog(@"ShaderRequest: Asking for shaders with URL %@", urlString);
+                               NSLog(@"[ShaderRequest] Asking for shaders with URL %@", urlString);
 
                                NSData* shaderListData = [NSData dataWithContentsOfURL:[NSURL URLWithString:urlString]];
                                _newShaders = [NSMutableArray new];
@@ -109,6 +109,8 @@
                                    
                                    if (listError == nil)
                                    {
+                                       NSLog(@"[ShaderRequest] Processing shader info...");
+                                       
                                        NSNumber* results = response[@"Shaders"];
                                        if (results.intValue > 0)
                                        {
@@ -131,12 +133,12 @@
                                                    }
                                                    else
                                                    {
-                                                       NSLog(@"ShaderRequest: Error loading shader details %@", detailError.localizedDescription);
+                                                       NSLog(@"[ShaderRequest] Error loading shader details %@", detailError.localizedDescription);
                                                    }
                                                }
                                                else
                                                {
-                                                   NSLog(@"ShaderRequest: Error loading shader details for %@", shaderID);
+                                                   NSLog(@"[ShaderRequest] Error loading shader details for %@", shaderID);
                                                }
                                            }
                                        }
@@ -155,6 +157,7 @@
                                        // If there are shaders to compile, do it, otherwise the request is invalidated
                                        if (shadersToCompile.count > 0)
                                        {
+                                           NSLog(@"[ShaderRequest] Compiling %lu shaders...", (unsigned long)shadersToCompile.count);
                                            [[ShaderManager sharedInstance] addShaders:shadersToCompile];
                                        }
                                        else
@@ -164,7 +167,7 @@
                                    }
                                    else
                                    {
-                                       NSLog(@"Error loading shader list %@", listError.localizedDescription);
+                                       NSLog(@"[ShaderRequest] Error loading shader list %@", listError.localizedDescription);
                                    }
                                }
                            });
@@ -183,7 +186,7 @@
 
 - (void)doneWithRequest
 {
-    NSLog(@"ShaderRequest: Request done, %lu shaders!", (unsigned long)_newShaders.count);
+    NSLog(@"[ShaderRequest] Request done, added %lu shaders!", (unsigned long)_newShaders.count);
     
     // Deactivate the current request
     _activeRequest = false;
@@ -192,11 +195,10 @@
     _currentIndex += _newShaders.count;
     
     // Dispatch the delegate and dismiss the loading UI on the Main Thread
-    dispatch_async(dispatch_get_main_queue(),
-                   ^{
-                       [SVProgressHUD dismiss];
-                       [self.delegate shaderRequest:self hasShadersReady:_newShaders];
-                   });
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [SVProgressHUD dismiss];
+        [self.delegate shaderRequest:self hasShadersReady:_newShaders];
+    });
 }
 
 - (NSString *)categoryStringForCategory:(EShaderCategory)category
