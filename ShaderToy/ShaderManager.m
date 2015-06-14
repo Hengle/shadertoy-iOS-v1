@@ -12,9 +12,13 @@
 
 @interface ShaderManager ()
 {
+    // Multithreading support
+    EAGLContext* _context;
+    NSThread* _managerThread;
+    
+    ShaderInfo* _defaultShader;
     NSMutableArray* _pendingShaders;
     NSMutableDictionary* _shaderDictionary;
-    ShaderInfo* _defaultShader;
     EAGLSharegroup *defaultSharegroup;
 }
 
@@ -50,40 +54,72 @@
     {
         _pendingShaders = [NSMutableArray new];
         _shaderDictionary = [NSMutableDictionary new];
+        
+        _context = [self createNewContext];
+        
+        _managerThread = [[NSThread alloc] initWithTarget:self selector:@selector(threadMainLoop) object:nil];
+        [_managerThread start];
     }
     
     return self;
 }
 
+- (void)threadMainLoop
+{
+    NSLog(@"[ShaderManager] Starting manager thread");
+    @synchronized(_managerThread)
+    {
+        @autoreleasepool
+        {
+            while (true)
+            {
+                @synchronized(_context)
+                {
+                    // Set the context and framebuffer
+                    [EAGLContext setCurrentContext:_context];
+                    
+                    // Initialize the controller
+                    [self deferredCompilation];
+                    
+                    glFlush();
+                    
+                    [EAGLContext setCurrentContext:nil];
+                }
+                
+                [NSThread sleepForTimeInterval:1.0f];
+            }
+        }
+    }
+    
+    NSLog(@"[ShaderManager] Finished running thread");
+}
+
 - (void)deferredCompilation
 {
-    @synchronized(self)
+    // Compile any available shaders
+    for (ShaderInfo* shader in _pendingShaders)
     {
-        // Compile any available shaders
-        for (ShaderInfo* shader in _pendingShaders)
+        if ([_shaderDictionary objectForKey:shader.ID] == nil)
         {
-            if ([_shaderDictionary objectForKey:shader.ID] == nil)
+            for (ShaderRenderPass* renderpass in shader.renderpasses)
             {
-                for (ShaderRenderPass* renderpass in shader.renderpasses)
+                GLuint program = [self compileShaderCode:[self prepareRenderPassCode:renderpass]];
+            
+                if (program > 0)
                 {
-                    GLuint program = [self compileShaderCode:[self prepareRenderPassCode:renderpass]];
-                
-                    if (program > 0)
-                    {
-                        [self storeShader:program withName:shader.ID];
-                
-                        NSLog(@"[ShaderManager] Created program %u for shader %@", program, shader.name);
-                    }
+                    [self storeShader:program withName:shader.ID];
+            
+                    NSLog(@"[ShaderManager] Created program %u for shader %@", program, shader.name);
                 }
             }
         }
-        
-        // If we compiled shaders, remove them and notify our delegate
-        if (_pendingShaders.count > 0)
-        {
-            [_pendingShaders removeAllObjects];
-            [_delegate shaderManagerDidFinishCompiling:self];
-        }
+    }
+    
+    // If we compiled shaders, remove them and notify our delegate
+    if (_pendingShaders.count > 0)
+    {
+        [_pendingShaders removeAllObjects];
+        [_delegate shaderManagerDidFinishCompiling:self];
     }
 }
 

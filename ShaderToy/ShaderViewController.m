@@ -145,7 +145,6 @@
         _lastFrameTime = [NSDate date];
         _lastFPSTime = [NSDate date];
         
-        
         _renderThread = [[NSThread alloc] initWithTarget:self selector:@selector(threadMainLoop) object:nil];
         [_renderThread start];
         
@@ -420,9 +419,6 @@
 
 - (void)update:(float)deltaTime
 {
-    [[ShaderManager sharedInstance] deferredCompilation];
-    [[ChannelResourceManager sharedInstance] deferredLoading];
-    
     [_planeObject update:deltaTime];
     
     [self calculateFPS:deltaTime];
@@ -437,11 +433,11 @@
     if (deltaTime > 0.5f)
     {
         float fps = _frameCounter / deltaTime;
-//        if (_frameCounter > 1 && fps < 10.0f)
-//        {
-//            [self stopAnimation];
-//            NSLog(@"[ShaderViewController] Paused");
-//        }
+        if (_frameCounter > 1 && fps < 10.0f)
+        {
+            [self stopAnimation];
+            NSLog(@"[ShaderViewController] Paused");
+        }
         
         [self setFPS:fps];
         

@@ -63,12 +63,16 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+    
     ShaderViewController* firstController = (ShaderViewController *)_shaderViewControllers[0];
     [firstController startAnimation];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
+    
     static dispatch_once_t initialRequest;
     dispatch_once(&initialRequest, ^{
         [_shaderRequest requestCategory:Newest];
@@ -78,6 +82,8 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
+    
     ShaderViewController* firstController = (ShaderViewController *)_shaderViewControllers[0];
     [firstController stopAnimation];
 }
