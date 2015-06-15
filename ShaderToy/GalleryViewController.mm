@@ -116,7 +116,7 @@
 - (void)pageViewController:(UIPageViewController *)pageViewController willTransitionToViewControllers:(NSArray *)pendingViewControllers
 {
     ShaderViewController* next = (ShaderViewController *)pendingViewControllers[0];
-    //[next startAnimation];
+    [next startAnimation];
     
     if (![_pendingControllers containsObject:next])
     {
@@ -144,7 +144,6 @@
         NSLog(@"[GalleryViewController] Stopped Animation for previews controller with shader %@.", previous.currentShader.name);
         
         ShaderViewController* current = (ShaderViewController *)pageViewController.viewControllers[0];
-        [current startAnimation];
         
         if ([_pendingControllers containsObject:current])
         {
@@ -159,7 +158,7 @@
     // we need to stop its rendering as the animation failed
     for (ShaderViewController* controller in _pendingControllers)
     {
-//        [controller stopAnimation];
+        [controller stopAnimation];
         NSLog(@"[GalleryViewController] Stopped Animation for pending controller with shader %@.", controller.currentShader.name);
     }
     

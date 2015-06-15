@@ -22,7 +22,7 @@
 - (void)initialize;
 - (void)update:(float)deltaTime;
 - (void)drawFrame:(float)deltaTime;
-- (void)calculateFPS:(float)deltaTime;
+- (void)calculateFPS;
 - (void)checkForErrors;
 - (void)triggerDrawFrame;
 - (void)threadMainLoop;
@@ -57,39 +57,12 @@
     _renderQueue = dispatch_queue_create("com.shadertoy.threadedgcdqueue", DISPATCH_QUEUE_CONCURRENT);
 }
 
-- (void)viewDidLayoutSubviews
-{
-    [super viewDidLayoutSubviews];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-//    [self setOverlayVisible:false];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-//    [self flashOverlay:self];
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-    
-//    [self setOverlayVisible:false];
-}
-
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
     
-    // Relayout the view, because we are doing an orientation change
+    // Restart the animation in case it was stopped, so we can redraw.
     [self startAnimation];
-    [self.shaderView setNeedsLayout];
 }
 
 - (void)dealloc
@@ -120,20 +93,6 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return YES;
-}
-
-- (void)drawPreviewFrame
-{
-    NSLog(@"[ShaderViewController] Drawing Preview Frame");
-    
-    _startTime = [NSDate date];
-    _lastFrameTime = [NSDate date];
-    _lastFPSTime = [NSDate date];
-    
-    _animating = true;
-    _renderThread = [[NSThread alloc] initWithTarget:self selector:@selector(threadMainLoop) object:nil];
-    
-    [_renderThread start];
 }
 
 - (void)startAnimation
@@ -242,46 +201,36 @@
 
 - (void)setFPS:(float)fps
 {
-    dispatch_async(dispatch_get_main_queue(),
-                   ^{
-                       _fpsLabel.text = [NSString stringWithFormat:@"%2.f FPS", fps];
-                   });
+    dispatch_async(dispatch_get_main_queue(), ^{
+        _fpsLabel.text = [NSString stringWithFormat:@"%2.f FPS", fps];
+    });
 }
 
 - (void)populateOverlay
 {
-    dispatch_async(dispatch_get_main_queue(),
-                   ^{
-                       _nameLabel.text = _currentShader.name;
-                       _authorLabel.text = _currentShader.username;
-                       _descriptionLabel.text = _currentShader.descriptionString;
-                       
-                       NSMutableString* tags = [NSMutableString new];
-                       for (int i = 0; i < self.currentShader.tags.count; i++)
-                       {
-                           if (i < self.currentShader.tags.count - 1)
-                           {
-                               [tags appendFormat:@"%@, ", self.currentShader.tags[i]];
-                           }
-                           else
-                           {
-                               [tags appendString:self.currentShader.tags[i]];
-                           }
-                       }
-                       
-                       _tagsLabel.text = tags;
-                       
-                       [_likeButton setTitle:[NSString stringWithFormat:@"%d", self.currentShader.likes] forState:UIControlStateNormal];
-                       [_viewsButton setTitle:[NSString stringWithFormat:@"%d", self.currentShader.viewed] forState:UIControlStateNormal];
-                   });
-}
-
-- (void)setOverlayVisible:(BOOL)visible
-{
-    NSLog(@"[ShaderViewController] [Set - %@] Overlay %@", self.currentShader.name, visible ? @"visible" : @"hidden");
-    
-    self.overlayView.alpha = (visible ? 1.0f : 0.0f);
-    _overlayVisible = visible;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        _nameLabel.text = _currentShader.name;
+        _authorLabel.text = _currentShader.username;
+        _descriptionLabel.text = _currentShader.descriptionString;
+        
+        NSMutableString* tags = [NSMutableString new];
+        for (int i = 0; i < self.currentShader.tags.count; i++)
+        {
+            if (i < self.currentShader.tags.count - 1)
+            {
+                [tags appendFormat:@"%@, ", self.currentShader.tags[i]];
+            }
+            else
+            {
+                [tags appendString:self.currentShader.tags[i]];
+            }
+        }
+        
+        _tagsLabel.text = tags;
+        
+        [_likeButton setTitle:[NSString stringWithFormat:@"%d", self.currentShader.likes] forState:UIControlStateNormal];
+        [_viewsButton setTitle:[NSString stringWithFormat:@"%d", self.currentShader.viewed] forState:UIControlStateNormal];
+    });
 }
 
 - (IBAction)toggleOverlay:(id)sender
@@ -422,18 +371,18 @@
 {
     [_planeObject update:deltaTime];
     
-    [self calculateFPS:deltaTime];
+    [self calculateFPS];
     
     _lastFrameTime = [NSDate date];
 }
 
-- (void)calculateFPS:(float)deltaTime
+- (void)calculateFPS
 {
     _frameCounter++;
-    
-    if (deltaTime > 0.5f)
+    float fpsInterval = ABS([_lastFPSTime timeIntervalSinceNow]);
+    if (fpsInterval > 0.5f)
     {
-        float fps = _frameCounter / deltaTime;
+        float fps = _frameCounter / fpsInterval;
         if (_frameCounter > 1 && fps < 10.0f)
         {
             [self stopAnimation];

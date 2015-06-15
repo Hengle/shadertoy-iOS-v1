@@ -485,7 +485,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ShaderToy/Shadertoy-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/ShaderToy/Shadertoy-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = Shadertoy;
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -502,7 +502,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ShaderToy/Shadertoy-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/ShaderToy/Shadertoy-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = Shadertoy;
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
