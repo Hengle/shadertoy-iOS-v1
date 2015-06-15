@@ -57,6 +57,13 @@
     _renderQueue = dispatch_queue_create("com.shadertoy.threadedgcdqueue", DISPATCH_QUEUE_CONCURRENT);
 }
 
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    [self setOverlayVisible:true];
+}
+
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
@@ -231,6 +238,12 @@
         [_likeButton setTitle:[NSString stringWithFormat:@"%d", self.currentShader.likes] forState:UIControlStateNormal];
         [_viewsButton setTitle:[NSString stringWithFormat:@"%d", self.currentShader.viewed] forState:UIControlStateNormal];
     });
+}
+
+- (void)setOverlayVisible:(BOOL)visible
+{
+    self.overlayView.alpha = (visible ? 1.0f : 0.0f);
+    _overlayVisible = visible;
 }
 
 - (IBAction)toggleOverlay:(id)sender
