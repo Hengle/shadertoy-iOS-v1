@@ -88,6 +88,7 @@
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
     
     // Relayout the view, because we are doing an orientation change
+    [self startAnimation];
     [self.shaderView setNeedsLayout];
 }
 
@@ -179,7 +180,7 @@
     _currentShader = shader;
     
     // Set the shader information to the overlay
-//    [self populateOverlay];
+    [self populateOverlay];
     
     // For bookkeeping purposes
     _renderThread.name = _currentShader.name;

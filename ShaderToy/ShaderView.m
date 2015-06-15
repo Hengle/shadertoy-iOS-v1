@@ -156,8 +156,6 @@
     [super layoutSubviews];
     
     _shouldRecreate = true;
-//    _isSetup = false;
-    //[self setup:false];
 }
 
 @end
