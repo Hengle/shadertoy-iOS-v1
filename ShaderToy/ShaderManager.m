@@ -67,60 +67,67 @@
 - (void)threadMainLoop
 {
     NSLog(@"[ShaderManager] Starting manager thread");
+    
     @synchronized(_managerThread)
     {
         @autoreleasepool
         {
             while (true)
             {
-                @synchronized(_context)
+                [EAGLContext setCurrentContext:_context];
+                
+                NSArray* newShaders;
+                NSMutableArray* shadersToCompile = [NSMutableArray new];
+                @synchronized(_pendingShaders)
                 {
-                    // Set the context and framebuffer
-                    [EAGLContext setCurrentContext:_context];
+                    newShaders = [_pendingShaders copy];
+                    [_pendingShaders removeAllObjects];
                     
-                    // Initialize the controller
-                    [self deferredCompilation];
-                    
-                    glFlush();
-                    
-                    [EAGLContext setCurrentContext:nil];
+                    // Figure out which shaders need to be compiled and create a new list to send to the shader manager
+                    for (ShaderInfo* shader in newShaders)
+                    {
+                        // Check that the shader does not exist
+                        if (![[ShaderManager sharedInstance] shaderExists:shader])
+                        {
+                            [shadersToCompile addObject:shader];
+                        }
+                    }
                 }
                 
+                // Compile any available shaders
+                for (ShaderInfo* shader in shadersToCompile)
+                {
+                    if ([_shaderDictionary objectForKey:shader.ID] == nil)
+                    {
+                        for (ShaderRenderPass* renderpass in shader.renderpasses)
+                        {
+                            GLuint program = [self compileShaderCode:[self prepareRenderPassCode:renderpass]];
+                            
+                            if (program > 0)
+                            {
+                                [self storeShader:program withName:shader.ID];
+                                
+                                NSLog(@"[ShaderManager] Created program %u for shader %@", program, shader.name);
+                            }
+                        }
+                    }
+                }
+                
+                if (newShaders.count > 0)
+                {
+                    // If we compiled shaders, remove them and notify our delegate
+                    [_delegate shaderManagerDidFinishCompiling:self shaders:newShaders];
+                }
+                
+                glFlush();
+                
+                [EAGLContext setCurrentContext:nil];
                 [NSThread sleepForTimeInterval:1.0f];
             }
         }
     }
     
     NSLog(@"[ShaderManager] Finished running thread");
-}
-
-- (void)deferredCompilation
-{
-    // Compile any available shaders
-    for (ShaderInfo* shader in _pendingShaders)
-    {
-        if ([_shaderDictionary objectForKey:shader.ID] == nil)
-        {
-            for (ShaderRenderPass* renderpass in shader.renderpasses)
-            {
-                GLuint program = [self compileShaderCode:[self prepareRenderPassCode:renderpass]];
-            
-                if (program > 0)
-                {
-                    [self storeShader:program withName:shader.ID];
-            
-                    NSLog(@"[ShaderManager] Created program %u for shader %@", program, shader.name);
-                }
-            }
-        }
-    }
-    
-    // If we compiled shaders, remove them and notify our delegate
-    if (_pendingShaders.count > 0)
-    {
-        [_pendingShaders removeAllObjects];
-        [_delegate shaderManagerDidFinishCompiling:self];
-    }
 }
 
 - (EAGLContext *)createNewContext
@@ -167,12 +174,18 @@
 
 - (void)addShader:(ShaderInfo *)shader
 {
-    [_pendingShaders addObject:shader];
+    @synchronized(_pendingShaders)
+    {
+        [_pendingShaders addObject:shader];
+    }
 }
 
 - (void)addShaders:(NSArray *)shaders
 {
-    [_pendingShaders addObjectsFromArray:shaders];
+    @synchronized(_pendingShaders)
+    {
+        [_pendingShaders addObjectsFromArray:shaders];
+    }
 }
 
 - (void)storeShader:(GLuint)program withName:(NSString *)name

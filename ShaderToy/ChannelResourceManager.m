@@ -84,24 +84,44 @@
 - (void)threadMainLoop
 {
     NSLog(@"[ChannelResourceManager] Starting manager thread");
+    
     @synchronized(_managerThread)
     {
         @autoreleasepool
         {
             while (true)
             {
-                @synchronized(_context)
+                // Lock the pendingResources until we copy out the info and clear it
+                NSArray* resourcesToProcess;
+                @synchronized(_pendingResources)
                 {
-                    // Set the context and framebuffer
-                    [EAGLContext setCurrentContext:_context];
-                    
-                    // Initialize the controller
-                    [self deferredLoading];
-                    
-                    glFlush();
-                    
-                    [EAGLContext setCurrentContext:nil];
+                    resourcesToProcess = [_pendingResources copy];
+                    [_pendingResources removeAllObjects];
                 }
+                
+                [EAGLContext setCurrentContext:_context];
+                
+                // Load any pending resources
+                for (ResourceInfo* info in resourcesToProcess)
+                {
+                    if ([_resourceDictionary objectForKey:info.path.absoluteString] == nil)
+                    {
+                        if ([info.type isEqualToString:@"texture"] || [info.type isEqualToString:@"cubemap"])
+                        {
+                            GLKTextureInfo* resource = [self loadTextureFromURL:info.path];
+                            [self storeResource:resource withName:info.path.absoluteString];
+                        }
+                        else
+                        {
+                            NSData* resource = [self loadDataFromURL:info.path];
+                            [self storeResource:resource withName:info.path.absoluteString];
+                        }
+                    }
+                }
+                
+                glFlush();
+                
+                [EAGLContext setCurrentContext:nil];
                 
                 [NSThread sleepForTimeInterval:1.0f];
             }
@@ -111,32 +131,14 @@
     NSLog(@"[ShadeChannelResourceManagerrManager] Finished running thread");
 }
 
-- (void)deferredLoading
-{
-    for (ResourceInfo* info in _pendingResources)
-    {
-        if ([_resourceDictionary objectForKey:info.path.absoluteString] == nil)
-        {
-            if ([info.type isEqualToString:@"texture"] || [info.type isEqualToString:@"cubemap"])
-            {
-                GLKTextureInfo* resource = [self loadTextureFromURL:info.path];
-                [self storeResource:resource withName:info.path.absoluteString];
-            }
-            else
-            {
-                NSData* resource = [self loadDataFromURL:info.path];
-                [self storeResource:resource withName:info.path.absoluteString];
-            }
-        }
-    }
-    
-    [_pendingResources removeAllObjects];
-}
-
 - (void)addResource:(NSURL *)path ofType:(NSString *)type;
 {
     ResourceInfo* info = [[ResourceInfo alloc] initWithType:type andPath:path];
-    [_pendingResources addObject:info];
+    
+    @synchronized(_pendingResources)
+    {
+        [_pendingResources addObject:info];
+    }
 }
 
 - (void)storeResource:(NSObject *)resource withName:(NSString *)name;

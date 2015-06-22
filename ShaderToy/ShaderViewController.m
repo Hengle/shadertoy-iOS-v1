@@ -57,11 +57,18 @@
     _renderQueue = dispatch_queue_create("com.shadertoy.threadedgcdqueue", DISPATCH_QUEUE_CONCURRENT);
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [self setOverlayVisible:!self.currentShader.removeoverlay animated:false];
+}
+
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
     
-    [self setOverlayVisible:true];
+    [self setOverlayVisible:true animated:false];
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
@@ -147,6 +154,8 @@
     
     // Set the shader information to the overlay
     [self populateOverlay];
+    
+    [self setOverlayVisible:!_currentShader.removeoverlay animated:false];
     
     // For bookkeeping purposes
     _renderThread.name = _currentShader.name;
@@ -240,10 +249,21 @@
     });
 }
 
-- (void)setOverlayVisible:(BOOL)visible
+- (void)setOverlayVisible:(BOOL)visible animated:(BOOL)animated
 {
-    self.overlayView.alpha = (visible ? 1.0f : 0.0f);
-    _overlayVisible = visible;
+    if (animated)
+    {
+        [UIView animateWithDuration:0.5f delay:1.0f options:UIViewAnimationOptionAllowUserInteraction animations:^{
+            self.overlayView.alpha = (visible ? 1.0f : 0.0f);
+        } completion:^(BOOL finished) {
+            _overlayVisible = visible;
+        }];
+    }
+    else
+    {
+        self.overlayView.alpha = (visible ? 1.0f : 0.0f);
+        _overlayVisible = visible;
+    }
 }
 
 - (IBAction)toggleOverlay:(id)sender
@@ -257,30 +277,6 @@
             self.overlayView.alpha = (enabled ? 1.0f : 0.0f);
         } completion:^(BOOL finished) {
             _overlayVisible = enabled;
-        }];
-    }
-}
-
-- (IBAction)flashOverlay:(id)sender
-{
-    if (!self.currentShader.removeoverlay && !_overlayVisible)
-    {
-        NSLog(@"[ShaderViewController] [Flash - %@] Overlay %@", self.currentShader.name, _overlayVisible ? @"visible" : @"hidden");
-        
-        // Animate the overlay
-        [UIView animateWithDuration:0.5f delay:1.0f options:UIViewAnimationOptionAllowUserInteraction animations:^{
-            self.overlayView.alpha = 1.0f;
-        } completion:^(BOOL finished) {
-            // When alpha is 1.0, set it to visible
-            _overlayVisible = true;
-            NSLog(@"[ShaderViewController] [Flash - %@] Overlay %@", self.currentShader.name, _overlayVisible ? @"visible" : @"hidden");
-            [UIView animateWithDuration:0.5f delay:5.0f options:UIViewAnimationOptionAllowUserInteraction animations:^{
-                self.overlayView.alpha = 0.0f;
-            } completion:^(BOOL finished) {
-                // When alpha is 0.0, set it to invisible
-                _overlayVisible = false;
-                NSLog(@"[ShaderViewController] [Flash - %@] Overlay %@", self.currentShader.name, _overlayVisible ? @"visible" : @"hidden");
-            }];
         }];
     }
 }

@@ -143,26 +143,11 @@
                                            }
                                        }
                                        
-                                       // Figure out which shaders need to be compiled and create a new list to send to the shader manager
-                                       NSMutableArray* shadersToCompile = [NSMutableArray new];
-                                       for (ShaderInfo* shader in _newShaders)
-                                       {
-                                           // Check that the shader does not exist
-                                           if (![[ShaderManager sharedInstance] shaderExists:shader])
-                                           {
-                                               [shadersToCompile addObject:shader];
-                                           }
-                                       }
-                                       
                                        // If there are shaders to compile, do it, otherwise the request is invalidated
-                                       if (shadersToCompile.count > 0)
+                                       if (_newShaders.count > 0)
                                        {
-                                           NSLog(@"[ShaderRequest] Compiling %lu shaders...", (unsigned long)shadersToCompile.count);
-                                           [[ShaderManager sharedInstance] addShaders:shadersToCompile];
-                                       }
-                                       else
-                                       {
-                                           [self doneWithRequest];
+                                           NSLog(@"[ShaderRequest] Compiling %lu shaders...", (unsigned long)_newShaders.count);
+                                           [[ShaderManager sharedInstance] addShaders:_newShaders];
                                        }
                                    }
                                    else
@@ -179,25 +164,20 @@
     }
 }
 
-- (void)shaderManagerDidFinishCompiling:(ShaderManager *)manager
+- (void)shaderManagerDidFinishCompiling:(ShaderManager *)manager shaders:(NSArray *)shaders
 {
-    [self doneWithRequest];
-}
-
-- (void)doneWithRequest
-{
-    NSLog(@"[ShaderRequest] Request done, added %lu shaders!", (unsigned long)_newShaders.count);
+    NSLog(@"[ShaderRequest] Request done, added %lu shaders!", (unsigned long)shaders.count);
     
     // Deactivate the current request
     _activeRequest = false;
     
     // Increase the shader index by the amount of shaders returned
-    _currentIndex += _newShaders.count;
+    _currentIndex += shaders.count;
     
     // Dispatch the delegate and dismiss the loading UI on the Main Thread
     dispatch_async(dispatch_get_main_queue(), ^{
         [SVProgressHUD dismiss];
-        [self.delegate shaderRequest:self hasShadersReady:_newShaders];
+        [self.delegate shaderRequest:self hasShadersReady:shaders];
     });
 }
 

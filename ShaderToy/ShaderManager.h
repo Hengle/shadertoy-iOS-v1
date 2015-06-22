@@ -33,7 +33,7 @@ static NSString* _shaderMain = @"\nvoid main( void ){vec4 color; mainImage( colo
 
 @optional
 - (void)shaderManagerDidStartCompiling:(ShaderManager *)manager;
-- (void)shaderManagerDidFinishCompiling:(ShaderManager *)manager;
+- (void)shaderManagerDidFinishCompiling:(ShaderManager *)manager shaders:(NSArray *)shaders;
 
 @end
 
@@ -47,7 +47,6 @@ static NSString* _shaderMain = @"\nvoid main( void ){vec4 color; mainImage( colo
 
 - (void)addShader:(ShaderInfo *)shader;
 - (void)addShaders:(NSArray *)shaders;
-- (void)deferredCompilation;
 
 - (void)storeShader:(GLuint)program withName:(NSString *)name;
 - (BOOL)shaderExists:(ShaderInfo *)shader;
