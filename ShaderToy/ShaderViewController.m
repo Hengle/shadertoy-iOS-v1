@@ -552,6 +552,8 @@
     
     [self.interactionButton setSelected:_interactionEnabled];
     
+    [self setOverlayVisible:!_interactionEnabled animated:YES];
+    
     GalleryViewController* galleryViewController = (GalleryViewController *)self.parentViewController;
     [galleryViewController setUserInteractionState:!_interactionEnabled];
 }
