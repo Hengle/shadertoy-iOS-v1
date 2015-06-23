@@ -18,7 +18,6 @@
 
 - (void)resetState;
 
-- (void)doneWithRequest;
 - (NSString *)categoryStringForCategory:(EShaderCategory)category;
 
 - (BOOL)verifyConnection;
