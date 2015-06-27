@@ -106,7 +106,7 @@
 // Support for earlier than iOS 6.0
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return YES;
+    return true;
 }
 
 - (void)startAnimation
@@ -123,6 +123,13 @@
         [_renderThread start];
         
         _animating = true;
+        
+        // Enable buttons - must be done on the main thread
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.shareButton.enabled = true;
+            self.interactionButton.enabled = true;
+        });
+
     }
 }
 
@@ -133,6 +140,12 @@
         NSLog(@"[ShaderViewController] Stopping animation");
         
         _animating = false;
+        
+        // Disable buttons - must be done on the main thread
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.shareButton.enabled = false;
+            self.interactionButton.enabled = false;
+        });
         
         if (_renderLoop)
         {
@@ -260,7 +273,7 @@
 {
     if (animated)
     {
-        [UIView animateWithDuration:0.5f delay:1.0f options:UIViewAnimationOptionAllowUserInteraction animations:^{
+        [UIView animateWithDuration:0.3f delay:0.5f options:UIViewAnimationOptionAllowUserInteraction animations:^{
             self.overlayView.alpha = (visible ? 1.0f : 0.0f);
         } completion:^(BOOL finished) {
             _overlayVisible = visible;
@@ -280,7 +293,7 @@
     {
         NSLog(@"[ShaderViewController] [Toggle - %@] Overlay %@", self.currentShader.name, enabled ? @"visible" : @"hidden");
         
-        [UIView animateWithDuration:0.5f delay:1.0f options:UIViewAnimationOptionAllowUserInteraction animations:^{
+        [UIView animateWithDuration:0.3f delay:0.5f options:UIViewAnimationOptionAllowUserInteraction animations:^{
             self.overlayView.alpha = (enabled ? 1.0f : 0.0f);
         } completion:^(BOOL finished) {
             _overlayVisible = enabled;
@@ -307,7 +320,7 @@
                        UIActivityViewController* activityController = [[UIActivityViewController alloc] initWithActivityItems:items applicationActivities:nil];
                        activityController.popoverPresentationController.sourceView = self.shareButton;
                        
-                       [self presentViewController:activityController animated:YES completion:nil];
+                       [self presentViewController:activityController animated:true completion:nil];
                    });
 }
 
@@ -426,8 +439,8 @@
         float fps = _frameCounter / fpsInterval;
         if (_frameCounter > 1 && fps < 10.0f)
         {
+            NSLog(@"[ShaderViewController] Stopped because framerate was too low!");
             [self stopAnimation];
-            NSLog(@"[ShaderViewController] Paused");
         }
         
         [self setFPS:fps];
@@ -543,7 +556,7 @@
 
 - (IBAction)toggleMenu:(id)sender
 {
-    [self.revealViewController revealToggleAnimated:YES];
+    [self.revealViewController revealToggleAnimated:true];
 }
 
 - (IBAction)toggleInteraction:(id)sender
@@ -552,7 +565,7 @@
     
     [self.interactionButton setSelected:_interactionEnabled];
     
-    [self setOverlayVisible:!_interactionEnabled animated:YES];
+    [self setOverlayVisible:!_interactionEnabled animated:true];
     
     GalleryViewController* galleryViewController = (GalleryViewController *)self.parentViewController;
     [galleryViewController setUserInteractionState:!_interactionEnabled];

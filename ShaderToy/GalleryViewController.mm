@@ -203,7 +203,7 @@
             ShaderInfo* shader = _shaders[shaderIndex];
             [previousController setShader:shader];
         
-            NSLog(@"[GalleryViewController] Setting Before VC %lu to shader %@", shaderIndex % _shaderViewControllers.count, shader.name);
+            NSLog(@"[GalleryViewController] Setting Before VC %d to shader %@", (int)(shaderIndex % _shaderViewControllers.count), shader.name);
         }
     }
     
@@ -226,7 +226,7 @@
             ShaderInfo* shader = _shaders[shaderIndex];
             [nextController setShader:shader];
             
-            NSLog(@"[GalleryViewController] Setting After VC %lu to shader %@", (shaderIndex % _shaderViewControllers.count), shader.name);
+            NSLog(@"[GalleryViewController] Setting After VC %d to shader %@", (int)(shaderIndex % _shaderViewControllers.count), shader.name);
         }
     }
     
