@@ -12,7 +12,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    // Set default preferences
+    NSUserDefaults* preferences = NSUserDefaults.standardUserDefaults;
+    if ([preferences objectForKey:@"enableOptimizations"] == nil)
+    {
+        [preferences setBool:true forKey:@"enableOptimizations"];
+    }
+    
     return YES;
 }
 

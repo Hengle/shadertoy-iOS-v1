@@ -17,6 +17,9 @@
 #import <QuartzCore/QuartzCore.h>
 
 @interface ShaderViewController ()
+{
+    NSUserDefaults* _preferences;
+}
 
 - (void)tearDown;
 - (void)initialize;
@@ -35,7 +38,10 @@
 {
     [super viewDidLoad];
     
-    _context = [[ShaderManager sharedInstance] createNewContext];
+    // Preferences - for optimizations
+    _preferences = [NSUserDefaults standardUserDefaults];
+    
+    _context = [ShaderManager.sharedInstance createNewContext];
     
     if (_context == nil)
     {
@@ -443,28 +449,46 @@
     if (fpsInterval > 0.5f)
     {
         float fps = _frameCounter / fpsInterval;
-        if (_frameCounter > 1 && fps < 10.0f)
+        if ([_preferences boolForKey:@"enableOptimizations"])
         {
-            // If the shader is performing slowly, drop resolution until the shader runs decently,
-            // otherwise stop the shader
-            if (self.shaderView.contentScaleFactor > 0.5f)
+            if (_frameCounter > 1)
             {
-                self.shaderView.contentScaleFactor = MAX(0.5f, self.shaderView.contentScaleFactor - 0.25f);
-                
-                NSLog(@"[ShaderViewController] Performing slowly, reducing resolution to %f", self.shaderView.contentScaleFactor);
-            }
-            else
-            {
-                // When stopping the controller, stop interaction mode if the user is interacting with the shader,
-                // otherwise the user will be stuck forever
-                if (_interactionEnabled)
+                if (fps < 10.0f)
                 {
-                    [self toggleInteraction:self];
+                    // If the shader is performing slowly, drop resolution until the shader runs decently,
+                    // otherwise stop the shader
+                    if (self.shaderView.contentScaleFactor > 0.5f)
+                    {
+                        self.shaderView.contentScaleFactor = MAX(0.5f, self.shaderView.contentScaleFactor - 0.25f);
+                        
+                        NSLog(@"[ShaderViewController] Performing slowly, reducing resolution to %f", self.shaderView.contentScaleFactor);
+                    }
+                    else
+                    {
+                        // When stopping the controller, stop interaction mode if the user is interacting with the shader,
+                        // otherwise the user will be stuck forever
+                        if (_interactionEnabled)
+                        {
+                            [self toggleInteraction:self];
+                        }
+                        
+                        [self stopAnimation];
+                        
+                        NSLog(@"[ShaderViewController] Stopped because framerate was too low!");
+                    }
                 }
-                
-                [self stopAnimation];
-                
-                NSLog(@"[ShaderViewController] Stopped because framerate was too low!");
+                else if (fps >= 59.0f)
+                {
+                    // If the shader is performing very fast, increase resolution
+                    float screenScale = [UIScreen.mainScreen scale];
+                    if (self.shaderView.contentScaleFactor < screenScale)
+                    {
+                        self.shaderView.contentScaleFactor = MIN(screenScale, self.shaderView.contentScaleFactor + 0.25f);
+                        
+                        NSLog(@"[ShaderViewController] Performing fast, increasing resolution to %f", self.shaderView.contentScaleFactor);
+
+                    }
+                }
             }
         }
         
