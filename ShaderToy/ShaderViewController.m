@@ -43,8 +43,6 @@
         exit(EXIT_FAILURE);
     }
     
-    self.shaderView.contentScaleFactor = 1.0f;
-    
     _renderThread = nil;
     _animating = false;
     _running = false;
@@ -52,9 +50,18 @@
     _overlayVisible = false;
     _frameDropCounter = 0;
     _frameCounter = 0;
-    _lastFrameTime = [NSDate date];
-    _lastFPSTime = [NSDate date];
+    _lastFrameTime = NSDate.date;
+    _lastFPSTime = NSDate.date;
     _renderQueue = dispatch_queue_create("com.shadertoy.threadedgcdqueue", DISPATCH_QUEUE_CONCURRENT);
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    self.shaderView.contentScaleFactor = UIScreen.mainScreen.scale;
+    
+    NSLog(@"[ShaderViewController] Setting view content scale to %f", self.shaderView.contentScaleFactor);
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -115,9 +122,9 @@
     {
         NSLog(@"[ShaderViewController] Starting animation");
         
-        _startTime = [NSDate date];
-        _lastFrameTime = [NSDate date];
-        _lastFPSTime = [NSDate date];
+        _startTime = NSDate.date;
+        _lastFrameTime = NSDate.date;
+        _lastFPSTime = NSDate.date;
         
         _renderThread = [[NSThread alloc] initWithTarget:self selector:@selector(threadMainLoop) object:nil];
         [_renderThread start];
@@ -129,7 +136,6 @@
             self.shareButton.enabled = true;
             self.interactionButton.enabled = true;
         });
-
     }
 }
 
@@ -215,11 +221,11 @@
     {
         if ([input.type isEqualToString:@"texture"])
         {
-            GLuint textureID = [[ChannelResourceManager sharedInstance] getTextureWithName:input.source];
+            GLuint textureID = [ChannelResourceManager.sharedInstance getTextureWithName:input.source];
             
             if (textureID > 0)
             {
-                GLKVector3 resolution = [[ChannelResourceManager sharedInstance] getTextureResolution:input.source];
+                GLKVector3 resolution = [ChannelResourceManager.sharedInstance getTextureResolution:input.source];
                 
                 params.channelInfo[input.channel] = textureID;
                 [params setChannel:input.channel resolution:resolution];
@@ -433,20 +439,39 @@
 - (void)calculateFPS
 {
     _frameCounter++;
-    float fpsInterval = ABS([_lastFPSTime timeIntervalSinceNow]);
+    float fpsInterval = ABS(_lastFPSTime.timeIntervalSinceNow);
     if (fpsInterval > 0.5f)
     {
         float fps = _frameCounter / fpsInterval;
         if (_frameCounter > 1 && fps < 10.0f)
         {
-            NSLog(@"[ShaderViewController] Stopped because framerate was too low!");
-            [self stopAnimation];
+            // If the shader is performing slowly, drop resolution until the shader runs decently,
+            // otherwise stop the shader
+            if (self.shaderView.contentScaleFactor > 0.5f)
+            {
+                self.shaderView.contentScaleFactor = MAX(0.5f, self.shaderView.contentScaleFactor - 0.25f);
+                
+                NSLog(@"[ShaderViewController] Performing slowly, reducing resolution to %f", self.shaderView.contentScaleFactor);
+            }
+            else
+            {
+                // When stopping the controller, stop interaction mode if the user is interacting with the shader,
+                // otherwise the user will be stuck forever
+                if (_interactionEnabled)
+                {
+                    [self toggleInteraction:self];
+                }
+                
+                [self stopAnimation];
+                
+                NSLog(@"[ShaderViewController] Stopped because framerate was too low!");
+            }
         }
         
         [self setFPS:fps];
         
         _frameCounter = 0;
-        _lastFPSTime = [NSDate date];
+        _lastFPSTime = NSDate.date;
     }
 }
 
@@ -474,7 +499,7 @@
                 [EAGLContext setCurrentContext:_context];
                 
                 // Calculate the time since since rendering start
-                float deltaTime = ABS([_startTime timeIntervalSinceNow]);
+                float deltaTime = ABS(_startTime.timeIntervalSinceNow);
                 
                 [self update:deltaTime];
                 [self drawFrame:deltaTime];
@@ -512,7 +537,7 @@
             // Create the render loop and start it
             _renderLoop = [NSRunLoop currentRunLoop];
             
-            CADisplayLink* link = [[UIScreen mainScreen] displayLinkWithTarget:self selector:@selector(triggerDrawFrame)];
+            CADisplayLink* link = [UIScreen.mainScreen displayLinkWithTarget:self selector:@selector(triggerDrawFrame)];
             [link setFrameInterval:1];
             [link addToRunLoop:_renderLoop forMode:NSDefaultRunLoopMode];
             
